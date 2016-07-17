@@ -1,0 +1,443 @@
+# Copyright (C) 2016 BoldGrid Inspirations
+# This file is distributed under the same license as the BoldGrid Inspirations package.
+msgid ""
+msgstr ""
+"Project-Id-Version: BoldGrid Inspirations 1.1.8\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/boldgrid-"
+"inspirations\n"
+"POT-Creation-Date: 2016-07-17 13:35:33+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Takayuki Miyauchi <miya@wpist.me>\n"
+"Language-Team: ja <miya@wpist.me>\n"
+
+#: includes/class-boldgrid-inspirations-attribution.php:761
+msgid "Edit"
+msgstr "編集"
+
+#: includes/class-boldgrid-inspirations-branding.php:267
+msgid "BoldGrid.com"
+msgstr "BoldGrid.com"
+
+#: includes/class-boldgrid-inspirations-branding.php:282
+msgid "Documentation"
+msgstr "ドキュメント"
+
+#: includes/class-boldgrid-inspirations-branding.php:297
+#: includes/class-boldgrid-inspirations-branding.php:386
+msgid "Support Center"
+msgstr "サポートセンター"
+
+#: includes/class-boldgrid-inspirations-branding.php:312
+msgid "Feedback"
+msgstr "フィードバック"
+
+#: includes/class-boldgrid-inspirations-branding.php:401
+msgid "AMP Login"
+msgstr "AMP ログイン"
+
+#: includes/class-boldgrid-inspirations-dashboard.php:126
+#: pages/boldgrid-dashboard-first-time-users.php:21
+#: pages/boldgrid-tutorials.php:55
+msgid "BoldGrid"
+msgstr "BoldGrid"
+
+#: includes/class-boldgrid-inspirations-dashboard.php:138
+#: includes/class-boldgrid-inspirations-dashboard.php:139
+msgid "Install First Inspiration"
+msgstr "はじめての Inspiration をインストール"
+
+#: includes/class-boldgrid-inspirations-dashboard.php:200
+msgid "Comments"
+msgstr "コメント"
+
+#: includes/class-boldgrid-inspirations-dashboard.php:204
+msgid "Change Themes"
+msgstr "テーマを変更"
+
+#: includes/class-boldgrid-inspirations-dashboard.php:225
+#: includes/class-boldgrid-inspirations-dashboard.php:228
+#: includes/class-boldgrid-inspirations-dashboard.php:249
+msgid "Widgets"
+msgstr "ウィジェット"
+
+#: includes/class-boldgrid-inspirations-dashboard.php:295
+#: includes/class-boldgrid-inspirations-dashboard.php:298
+#: includes/class-boldgrid-inspirations-dashboard.php:341
+msgid "Menus"
+msgstr "メニュー"
+
+#: includes/class-boldgrid-inspirations-dashboard.php:347
+msgid "CSS/HTML Editor"
+msgstr "CSS/HTML エディター"
+
+#: includes/class-boldgrid-inspirations-enable-media-replace.php:20
+msgid "You do not have permission to upload files."
+msgstr "ファイルをアップロードする権限がありません。"
+
+#: includes/class-boldgrid-inspirations-enable-media-replace.php:98
+msgid "File type does not meet security guidelines. Try another."
+msgstr "ファイルタイプが許可されていません。他のファイルを試してください。"
+
+#: includes/class-boldgrid-inspirations-enable-media-replace.php:171
+msgid ""
+"The file %1$s can not be deleted by the web server, most likely because the "
+"permissions on the file are wrong."
+msgstr ""
+"%1$s をウェブサーバーが削除できません。多くの場合ファイルの権限とウェブサーバーの権限が一致していません。"
+
+#: includes/class-boldgrid-inspirations-options.php:545
+msgid "Use BoldGrid Admin Menu system"
+msgstr "BoldGrid アドミンメニューシステムを使用"
+
+#: includes/class-boldgrid-inspirations-options.php:564
+msgid "Opt-out of feedback"
+msgstr "フィードバックを送信しない"
+
+#: includes/class-boldgrid-inspirations-options.php:629
+msgid "Save Changes"
+msgstr "変更を保存"
+
+#: includes/class-boldgrid-inspirations-options.php:654
+msgid "Reset Pointers"
+msgstr "ポインターをリセット"
+
+#: includes/class-boldgrid-inspirations-pages-and-posts.php:140
+msgid "%s page moved to the Trash and removed from menus."
+msgid_plural "%s pages moved to the Trash and removed from menus."
+msgstr[0] "%s ページをゴミ箱に移動しメニューから削除します。"
+msgstr[1] "%s ページをゴミ箱に移動しメニューから削除します。"
+
+#: includes/class-boldgrid-inspirations-pages-and-posts.php:146
+msgid "%s page restored from the Trash and added back to menus."
+msgid_plural "%s pages restored from the Trash and added back to menus."
+msgstr[0] "%s ページをゴミ箱から復元しメニューに戻します。"
+msgstr[1] "%s ページをゴミ箱から復元しメニューに戻します。"
+
+#: includes/class-boldgrid-inspirations-update.php:714
+msgid "Update notice"
+msgstr "通知を更新"
+
+#: includes/class-boldgrid-inspirations-update.php:715
+msgid "has been updated to version"
+msgstr ""
+
+#: includes/class-boldgrid-inspirations-update.php:717
+msgid "Please note that as of version 1.0.12, the"
+msgstr ""
+
+#: includes/class-boldgrid-inspirations-update.php:718
+msgid "feature has been removed and replaced with"
+msgstr ""
+
+#: pages/boldgrid-dashboard-advanced-wp-users.php:37
+msgid " Tutorials"
+msgstr "チュートリアル"
+
+#: pages/boldgrid-dashboard-advanced-wp-users.php:50
+msgid " Inspirations"
+msgstr ""
+
+#: pages/boldgrid-dashboard-advanced-wp-users.php:53
+msgid " BoldGrid"
+msgstr ""
+
+#: pages/boldgrid-dashboard-advanced-wp-users.php:93
+msgid "Staging Plugin"
+msgstr ""
+
+#: pages/boldgrid-dashboard-advanced-wp-users.php:136
+msgid "Admin Menu"
+msgstr ""
+
+#: pages/boldgrid-dashboard-advanced-wp-users.php:159
+msgid "here"
+msgstr "ここ"
+
+#: pages/boldgrid-dashboard-advanced-wp-users.php:198
+msgid "Page and Post Editor"
+msgstr "ページ及び投稿エディター"
+
+#: pages/boldgrid-dashboard-advanced-wp-users.php:234
+msgid "Media Searches"
+msgstr ""
+
+#: pages/boldgrid-dashboard-advanced-wp-users.php:272
+msgid "GridBlocks"
+msgstr ""
+
+#: pages/boldgrid-dashboard-advanced-wp-users.php:308
+#: pages/includes/boldgrid-settings/start_over.php:81
+msgid "Start Over"
+msgstr ""
+
+#: pages/boldgrid-dashboard-advanced-wp-users.php:343
+msgid "more"
+msgstr "さらに"
+
+#: pages/boldgrid-dashboard-advanced-wp-users.php:388
+#: pages/boldgrid-dashboard-first-time-users.php:133
+msgid "Learn More"
+msgstr "さらに詳しく"
+
+#: pages/boldgrid-dashboard-first-time-users.php:16
+#: pages/boldgrid-tutorials.php:50
+msgid "Inspirations"
+msgstr ""
+
+#: pages/boldgrid-dashboard-first-time-users.php:30
+#: pages/boldgrid-tutorials.php:92
+msgid "Customize"
+msgstr "カスタマイズ"
+
+#: pages/boldgrid-dashboard-first-time-users.php:48
+msgid "Pages"
+msgstr "ページ"
+
+#: pages/boldgrid-dashboard-first-time-users.php:89
+msgid "Tutorials"
+msgstr "チュートリアル"
+
+#: pages/boldgrid-dashboard-first-time-users.php:143
+msgid "Get Started"
+msgstr ""
+
+#: pages/boldgrid-tutorials.php:14
+msgid " BoldGrid Support"
+msgstr "BoldGrid サポート"
+
+#: pages/boldgrid-tutorials.php:40
+msgid "Dashboard"
+msgstr "ダッシュボード"
+
+#: pages/boldgrid-tutorials.php:110
+msgid "let us know"
+msgstr ""
+
+#: pages/includes/base_website.php:1
+msgid "Step 2: Select a Base Website"
+msgstr "ステップ2: ウェブサイトを選択"
+
+#. #-#-#-#-#  boldgrid-inspirations.pot (BoldGrid Inspirations 1.1.8)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: pages/includes/boldgrid-settings/start_over.php:94
+msgid "BoldGrid Inspirations"
+msgstr ""
+
+#: pages/includes/browse_category.php:9
+msgid "Choose Your Category"
+msgstr "カテゴリーを選択"
+
+#: pages/includes/cart_header.php:34
+msgid "Receipts / Transaction History"
+msgstr "レシピ / 履歴"
+
+#: pages/includes/cart_header.php:36
+msgid "Cart / Checkout"
+msgstr "カート / チェックアウト"
+
+#: pages/includes/cart_header.php:38
+msgid "Purchase Coins"
+msgstr "支払い"
+
+#: pages/includes/inspiration_category_select.php:2
+msgid "Step 1: Choose your Category"
+msgstr "ステップ1: カテゴリーを選択してください。"
+
+#: pages/includes/page_set_selection.php:2
+msgid "ステップ3: ページを選択してください。"
+msgstr ""
+
+#: pages/includes/page_set_selection.php:13
+msgid "It looks like you have not yet selected a theme!"
+msgstr "あなたはまだテーマを選択していないようです！"
+
+#: pages/includes/theme_selection.php:5
+msgid "Themes"
+msgstr "テーマ"
+
+#: pages/inspiration.php:106
+msgid "Monitor"
+msgstr "モニター"
+
+#: pages/inspiration.php:107
+msgid "Tablet"
+msgstr "タブレット"
+
+#: pages/inspiration.php:108
+msgid "Phone"
+msgstr "電話"
+
+#: pages/inspiration.php:110
+msgid "Theme name"
+msgstr "テーマ名"
+
+#: pages/inspiration.php:112
+msgid "Please select a category in step 1."
+msgstr "ステップ1でカテゴリーを選択してください。"
+
+#: pages/inspiration.php:117 pages/inspiration.php:121
+#: pages/inspiration.php:141 pages/inspiration.php:151
+msgid "Go back"
+msgstr "戻る"
+
+#: pages/inspiration.php:118 pages/inspiration.php:122
+#: pages/templates/feedback-notice-1-1.php:19
+#: pages/templates/feedback-notice-1-1.php:70
+msgid "Select"
+msgstr "選択"
+
+#: pages/inspiration.php:136
+msgid "Install your new website!"
+msgstr "新しいサイトをインストール"
+
+#: pages/inspiration.php:137
+msgid ""
+"<strong>Congratulations</strong>, you've completed the first three steps!"
+msgstr "<strong>おめでとうございます</strong>, 最初の3ステップが完了しました！"
+
+#: pages/inspiration.php:138
+msgid ""
+"Before you can add your own personal touches to your <span class='install-"
+"modal-destination'></span> website, we'll first need to install your new "
+"website for you. After installation, you can add your own images, change "
+"text, etc."
+msgstr ""
+"パーソナルタッチをあなたの<span class='install-"
+"modal-destination'></span>サイトにインストールする前に、あなたのサイトをインストールする必要があります。インストールが完了したら画像、テキストなどを挿入できるようになります。"
+
+#: pages/inspiration.php:139
+msgid "Are you ready to install this website?"
+msgstr "このウェブサイトをインストールする準備が整いましたか？"
+
+#: pages/inspiration.php:142
+msgid "Install this website!"
+msgstr "このウェブサイトをインストール！"
+
+#: pages/inspiration.php:147
+msgid "Install your new theme!"
+msgstr "あなたの新しいテーマをインストール！"
+
+#: pages/inspiration.php:148
+msgid ""
+"Before you can add your own personal touches to your new <span "
+"class='install-modal-destination'></span> theme, we'll first need to install "
+"the theme. After installation, you can add your own images, change text, etc."
+msgstr ""
+"パーソナルタッチをあなたの<span class='install-"
+"modal-destination'></span>サイトにインストールする前に、あなたのサイトをインストールする必要があります。インストールが完了したら画像、テキストなどを挿入できるようになります。"
+
+#: pages/inspiration.php:149
+msgid "Are you ready to install this theme?"
+msgstr "このウェブサイトをインストールする準備が整いましたか？"
+
+#: pages/inspiration.php:152
+msgid "Install this theme!"
+msgstr "あなたの新しいテーマをインストール！"
+
+#: pages/templates/feedback-notice-1-1.php:7
+msgid "BoldGrid Feedback Request"
+msgstr "BoldGrid フィードバックリクエスト"
+
+#: pages/templates/feedback-notice-1-1.php:8
+msgid ""
+"We love feedback, both positive and negative.  It helps us build a better "
+"tool."
+msgstr "私たちは、それがポジティブな内容でもネガティブな内容でもみなさんのフィードバックをお待ちしています。それによってよりよい製品となるでしょう。"
+
+#: pages/templates/feedback-notice-1-1.php:9
+msgid "Please take a moment to send us some of your thoughts about BoldGrid."
+msgstr "BoldGrid に関する感想をお伺いするためにほんの少しだけ時間をください。"
+
+#: pages/templates/feedback-notice-1-1.php:15
+msgid "Feedback type"
+msgstr "フィードバックの種類"
+
+#: pages/templates/feedback-notice-1-1.php:20
+msgid "Theme design"
+msgstr "テーマデザイン"
+
+#: pages/templates/feedback-notice-1-1.php:21
+msgid "General usability"
+msgstr "一般的なユーザービリティ"
+
+#: pages/templates/feedback-notice-1-1.php:22
+msgid "Feature suggestion"
+msgstr "新機能の提案"
+
+#: pages/templates/feedback-notice-1-1.php:24
+msgid "Your web hosting provider"
+msgstr "あなたのウェブホスティング会社"
+
+#: pages/templates/feedback-notice-1-1.php:30
+msgid "Bug report"
+msgstr "バグレポート"
+
+#: pages/templates/feedback-notice-1-1.php:31
+msgid "Other"
+msgstr "その他"
+
+#: pages/templates/feedback-notice-1-1.php:35
+msgid "Comment"
+msgstr "コメント"
+
+#: pages/templates/feedback-notice-1-1.php:39
+msgid "Please type your feedback comment here."
+msgstr "ここにフィードバック用のコメントを入力してください。"
+
+#: pages/templates/feedback-notice-1-1.php:45
+msgid "Please contact me about my feedback"
+msgstr "私のフィードバックに対して返信をください。"
+
+#: pages/templates/feedback-notice-1-1.php:48
+msgid "Email address"
+msgstr "Email アドレス"
+
+#: pages/templates/feedback-notice-1-1.php:52
+msgid "Please type your email address here."
+msgstr "Email アドレスを入力してください。"
+
+#: pages/templates/feedback-notice-1-1.php:56
+msgid "Diagnostic report"
+msgstr "診断レポート"
+
+#: pages/templates/feedback-notice-1-1.php:61
+msgid "This area will be populated with diagnostic data to better assist you."
+msgstr "このエリアの診断データはあなたを手助けするための統計として用いられます。"
+
+#: pages/templates/feedback-notice-1-1.php:66
+msgid "Website Experience"
+msgstr "ウェブサイトエクスペリエンス"
+
+#: pages/templates/feedback-notice-1-1.php:71
+msgid "Just Started"
+msgstr "始めたばかり"
+
+#: pages/templates/feedback-notice-1-1.php:72
+msgid "1-2 Years"
+msgstr "1-2 年"
+
+#: pages/templates/feedback-notice-1-1.php:73
+msgid "2-5 Years"
+msgstr "2-5 年"
+
+#: pages/templates/feedback-notice-1-1.php:74
+msgid "6+ Years"
+msgstr "6年以上"
+
+#. #-#-#-#-#  boldgrid-inspirations.pot (BoldGrid Inspirations 1.1.8)  #-#-#-#-#
+#. Plugin URI of the plugin/theme
+#. #-#-#-#-#  boldgrid-inspirations.pot (BoldGrid Inspirations 1.1.8)  #-#-#-#-#
+#. Author URI of the plugin/theme
+msgid "http://www.boldgrid.com"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Be inspired, be custom, be bold!"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "BoldGrid.com <wpb@boldgrid.com>"
+msgstr ""
