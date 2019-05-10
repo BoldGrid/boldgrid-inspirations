@@ -226,6 +226,7 @@ class Boldgrid_Inspirations_Theme_Install {
 		if ( ! $page ) {
 			// Make an API call to grab the theme information.
 			$themes = $this->get_theme_info( null, $args );
+			$themes = $this->prepend_wprepo_themes( $themes );
 		}
 
 		$wp_themes = ! empty( $result->themes ) ? $result->themes : array();
@@ -240,6 +241,20 @@ class Boldgrid_Inspirations_Theme_Install {
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Grab all BoldGrid themes from wordpress API and prepend them to the list of boldgrid themes.
+	 *
+	 * @since X.X.X
+	 *
+	 * @param  array $themes List of themes from the Connect API.
+	 * @return array         New themes merged in.
+	 */
+	public function prepend_wprepo_themes( $themes ) {
+		$wp_theme_data = themes_api( 'query_themes', array( 'author' => 'boldgrid' ) );
+		$wp_theme_data = ! empty( $wp_theme_data->themes ) ? $wp_theme_data->themes : array();
+		return array_merge( $wp_theme_data, $themes );
 	}
 
 	/**
