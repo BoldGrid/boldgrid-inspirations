@@ -26,7 +26,7 @@
   "homepage": "https://github.com/boldgrid/boldgrid-inspirations#readme",
   "devDependencies": {
     "cpx": "^1.5.0",
-    "eslint": "6.6.*",
+    "eslint": "~6.8.0",
     "eslint-config-wordpress": "^2.0.0",
     "eslint-plugin-html": "^6.0.0",
     "prettier-eslint": "^9.0.1",
