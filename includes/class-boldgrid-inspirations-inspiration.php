@@ -223,10 +223,6 @@ class Boldgrid_Inspirations_Inspiration extends Boldgrid_Inspirations {
 			$boldgrid_easy_attachment_preview_size = new Boldgrid_Inspirations_Easy_Attachment_Preview_Size();
 			$boldgrid_easy_attachment_preview_size->add_hooks();
 
-			// Asset Manager.
-			$boldgrid_asset_manager = new Boldgrid_Inspirations_Asset_Manager();
-			$boldgrid_asset_manager->add_hooks();
-
 			// Pages And Posts.
 			$boldgrid_pages_and_posts = new Boldgrid_Inspirations_Pages_And_Posts();
 			$boldgrid_pages_and_posts->add_hooks();
