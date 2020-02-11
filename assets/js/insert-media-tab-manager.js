@@ -146,8 +146,7 @@ IMHWPB.InsertMediaTabManager = function( $ ) {
 		}
 
 		/*
-		 * There are some cases when we don't need to add the tab. For example,
-		 * if we're on "Add GridBlocks", we don't want to add our tab. If we
+		 * There are some cases when we don't need to add the tab. If we
 		 * don't see either the "Upload files" or "Media Library" tabs, then
 		 * abort.
 		 */
@@ -340,7 +339,7 @@ IMHWPB.InsertMediaTabManager = function( $ ) {
 	/**
 	 * @summary Whenever a media button is clicked, remove the "Image Search" tab.
 	 *
-	 * Media button are for example "Add Media" and "Add GridBlock".
+	 * Media button are for example "Add Media".
 	 *
 	 * Normally, when adding 'tabs' to the wp.media, they're added in the left menu. BoldGrid
 	 * Connect Search started off as a left menu item, but for easier accessability, it was added

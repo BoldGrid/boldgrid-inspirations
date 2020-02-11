@@ -11,10 +11,6 @@ IMHWPB.BaseAdmin = function( $ ) {
 	self.$wrap = jQuery( '.wrap' );
 	self.$wrap_header = jQuery( 'h1', self.$wrap );
 
-	self.strings = {
-		add_gridblock_set: 'New From GridBlocks'
-	};
-
 	jQuery( function() {
 
 		// Within Dashboard >> Media >> BoldGrid Connect Search, self.init is
@@ -41,8 +37,6 @@ IMHWPB.BaseAdmin = function( $ ) {
 		if ( 'function' === typeof self.update_customizer_link ) {
 			self.update_customizer_link();
 		}
-
-		self.init_gridblock_sets();
 	};
 
 	/**
@@ -143,25 +137,6 @@ IMHWPB.BaseAdmin = function( $ ) {
 				}
 			} )
 			.appendTo( $tbody );
-	};
-
-	/**
-	 * Init any methods needed pertaining to "Add GridBlock Set".
-	 *
-	 * @since 1.0.10
-	 */
-	this.init_gridblock_sets = function() {
-
-		// If we do not have IMHWPB.configs, such as in the Customizer, abort.
-		if ( 'undefined' === typeof IMHWPB.configs ) {
-			return;
-		}
-
-		// If we're using the BoldGrid Menu System, update the Top Menu > New >
-		// Page link.
-		if ( 1 == IMHWPB.configs.settings.boldgrid_menu_option ) {
-			jQuery( '#wp-admin-bar-new-page a' ).attr( 'href', IMHWPB.gridblock_sets_admin );
-		}
 	};
 
 	/**
