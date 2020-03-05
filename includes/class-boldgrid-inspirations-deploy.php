@@ -71,6 +71,15 @@ class Boldgrid_Inspirations_Deploy {
 	private $custom_pages;
 
 	/**
+	 * Class used to help deploy themes.
+	 *
+	 * @since SINCEVERSION
+	 * @access private
+	 * @var Boldgrid_Inspirations_Deploy_Theme
+	 */
+	private $deploy_theme;
+
+	/**
 	 * An instance of Boldgrid_Inspirations_Installed.
 	 *
 	 * @since 1.7.0
@@ -378,6 +387,9 @@ class Boldgrid_Inspirations_Deploy {
 		$this->installed = new Boldgrid_Inspirations_Installed();
 
 		$this->status = new Boldgrid_Inspirations_Deploy_Status();
+
+		$this->deploy_theme = new Boldgrid_Inspirations_Deploy_Theme();
+		$this->deploy_theme->set_deploy( $this );
 	}
 
 	/**
@@ -788,13 +800,7 @@ class Boldgrid_Inspirations_Deploy {
 				}
 			}
 
-			// Theme Folder name is the same as theme name.
-			$theme_folder_name = $this->theme_details->theme->Name;
-
-			if ( $this->is_preview_server ) {
-				// Use the random filename instead.
-				$theme_folder_name = wp_basename( $this->theme_details->themeAssetFilename, '.zip' );
-			}
+			$theme_folder_name = $this->deploy_theme->get_folder_name();
 
 			$theme = wp_get_theme( $theme_folder_name );
 
@@ -841,18 +847,7 @@ class Boldgrid_Inspirations_Deploy {
 
 			// Check if theme is already installed and the latest version:
 			if ( $install_this_theme ) {
-				$theme_url = $boldgrid_configs['asset_server'] .
-					 $boldgrid_configs['ajax_calls']['get_asset'] . '?id=' .
-					 $this->theme_details->themeRevision->AssetId;
-
-				if ( ! empty( $api_key_hash ) ) {
-					$theme_url .= '&key=' . $api_key_hash;
-				}
-
-				// If this is a user environment, install for repo.boldgrid.com.
-				if ( ! $this->is_preview_server ) {
-					$theme_url = $this->theme_details->repo_download_link;
-				}
+				$theme_url = $this->deploy_theme->get_download_link();
 
 				$theme_installation_done = false;
 				$theme_installation_failed_attemps = 0;

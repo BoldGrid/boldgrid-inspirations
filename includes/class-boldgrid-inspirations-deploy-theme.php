@@ -33,6 +33,96 @@ class Boldgrid_Inspirations_Deploy_Theme {
 	}
 
 	/**
+	 * Our deploy class.
+	 *
+	 * @since SINCEVERSION
+	 * @access private
+	 * @var Boldgrid_Inspirations_Deploy
+	 */
+	private $deploy;
+
+	/**
+	 * Get the url to download a theme.
+	 *
+	 * @since SINCEVERSION
+	 */
+	public function get_download_link() {
+		/*
+		 * The if conditional handles themes with a download url set (originally added with the introduction
+		 * of Crio). The else section implements the original logic (prior to Crio).
+		 */
+		if ( ! empty( $this->deploy->theme_details->theme->DownloadUrl ) ) {
+			$theme_url = $this->deploy->theme_details->theme->DownloadUrl;
+		} else {
+			$boldgrid_configs = $this->deploy->get_configs();
+			$api_key_hash     = $this->deploy->asset_manager->api->get_api_key_hash();
+
+			$theme_url = $boldgrid_configs['asset_server'] .
+				$boldgrid_configs['ajax_calls']['get_asset'] . '?id=' .
+				$this->deploy->theme_details->themeRevision->AssetId;
+
+			if ( ! empty( $api_key_hash ) ) {
+				$theme_url .= '&key=' . $api_key_hash;
+			}
+
+			// If this is a user environment, install from repo.boldgrid.com.
+			if ( ! $this->deploy->is_preview_server ) {
+				$theme_url = $this->deploy->theme_details->repo_download_link;
+			}
+		}
+
+		return $theme_url;
+	}
+
+	/**
+	 * Get the theme folder name.
+	 *
+	 * The theme folder name is the same as the theme name.
+	 *
+	 * @since SINCEVERSION
+	 *
+	 * @return string
+	 */
+	public function get_folder_name() {
+		/*
+		 * When adding Crio to Inspirations, we've began setting a download url. If we have a download
+		 * url, such as: https://downloads.wordpress.org/theme/crio.latest-stable.zip
+		 * Then, convert "crio.latest-stable.zip" to "crio".
+		 *
+		 * The else statement implements the original functionality.
+		 */
+		if ( ! empty( $this->deploy->theme_details->theme->DownloadUrl ) ) {
+			$to_strip = [ '.latest-stable', '.zip' ];
+
+			$theme_folder_name = wp_basename( $this->deploy->theme_details->theme->DownloadUrl );
+
+			foreach ( $to_strip as $strip ) {
+				$theme_folder_name = str_replace( $strip, '', $theme_folder_name );
+			}
+		} else {
+			$theme_folder_name = $this->deploy->theme_details->theme->Name;
+
+			if ( $this->deploy->is_preview_server ) {
+				// Use the random filename instead.
+				$theme_folder_name = wp_basename( $this->deploy->theme_details->themeAssetFilename, '.zip' );
+			}
+		}
+
+		return $theme_folder_name;
+	}
+
+	/**
+	 * Set our deploy class.
+	 *
+	 * @since SINCEVERISON
+	 *
+	 * @param Boldgrid_Inspirations_Deploy $deploy
+	 */
+	public function set_deploy( $deploy ) {
+		$this->deploy = $deploy;
+	}
+
+	/**
 	 * Remove WordPress' _wp_menus_changed action after deployment.
 	 *
 	 * As of WordPress 4.9, WordPress tries to match up your old menu locations
