@@ -112,6 +112,17 @@ class Boldgrid_Inspirations_Deploy_Theme {
 	}
 
 	/**
+	 * Determine whether or not this theme is crio.
+	 *
+	 * @since SINCEVERSION
+	 *
+	 * @return bool
+	 */
+	public function is_crio() {
+		return 'crio' === $this->get_folder_name();
+	}
+
+	/**
 	 * Set our deploy class.
 	 *
 	 * @since SINCEVERISON

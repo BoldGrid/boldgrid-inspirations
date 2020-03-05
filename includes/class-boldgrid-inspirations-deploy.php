@@ -2139,8 +2139,17 @@ class Boldgrid_Inspirations_Deploy {
 			}
 		}
 
-		// Assign this new menu_id to those locations if they're not already set.
-		$locations['primary'] = $menu_id;
+		/*
+		 * Assign this new menu_id to those locations if they're not already set.
+		 *
+		 * # primary Needed for all v1 themes.
+		 * # main    Added to accomdate Crio.
+		 */
+		if ( $this->deploy_theme->is_crio() ) {
+			$locations['main'] = $menu_id;
+		} else {
+			$locations['primary'] = $menu_id;
+		}
 
 		/*
 		 * We've finished updating $locations, it now looks like this:
