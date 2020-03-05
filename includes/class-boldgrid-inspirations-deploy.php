@@ -1300,10 +1300,15 @@ class Boldgrid_Inspirations_Deploy {
 				) );
 			}
 
-			// set homepage
+			// Steps to take if this is the homepage.
 			if ( $page_v->homepage_theme_id ) {
 				update_option( 'show_on_front', 'page' );
 				update_option( 'page_on_front', $post_id );
+
+				if ( $this->deploy_theme->is_crio() ) {
+					// Don't show the page title.
+					add_post_meta( $post_id, 'boldgrid_hide_page_title', 0 );
+				}
 			}
 
 			/*
