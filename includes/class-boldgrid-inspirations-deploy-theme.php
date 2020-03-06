@@ -42,6 +42,19 @@ class Boldgrid_Inspirations_Deploy_Theme {
 	private $deploy;
 
 	/**
+	 * Get an attribute from the theme details.
+	 *
+	 * @since SINCEVERSION
+	 *
+	 * @param  string $key
+	 * @param  mixed  $default
+	 * @return mixed
+	 */
+	public function get_attribute( $key, $default = false ) {
+		return isset( $this->deploy->theme_details->theme->$key ) ? $this->deploy->theme_details->theme->$key : $default;
+	}
+
+	/**
 	 * Get the url to download a theme.
 	 *
 	 * @since SINCEVERSION
@@ -109,6 +122,17 @@ class Boldgrid_Inspirations_Deploy_Theme {
 		}
 
 		return $theme_folder_name;
+	}
+
+	/**
+	 * Get our theme.
+	 *
+	 * @since SINCEVERISON
+	 *
+	 * @return WP_Theme
+	 */
+	public function get_theme() {
+		return wp_get_theme( $this->get_folder_name() );
 	}
 
 	/**

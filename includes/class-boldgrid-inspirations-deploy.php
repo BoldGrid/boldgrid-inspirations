@@ -71,15 +71,6 @@ class Boldgrid_Inspirations_Deploy {
 	private $custom_pages;
 
 	/**
-	 * Class used to help deploy themes.
-	 *
-	 * @since SINCEVERSION
-	 * @access private
-	 * @var Boldgrid_Inspirations_Deploy_Theme
-	 */
-	private $deploy_theme;
-
-	/**
 	 * An instance of Boldgrid_Inspirations_Installed.
 	 *
 	 * @since 1.7.0
@@ -213,6 +204,14 @@ class Boldgrid_Inspirations_Deploy {
 	public $current_build_cost = 0;
 
 	/**
+	 * Class used to help deploy themes.
+	 *
+	 * @since SINCEVERSION
+	 * @var Boldgrid_Inspirations_Deploy_Theme
+	 */
+	public $deploy_theme;
+
+	/**
 	 * Language id.
 	 *
 	 * Used when getting built_photos_search photos.
@@ -308,6 +307,14 @@ class Boldgrid_Inspirations_Deploy {
 	public $start_over = false;
 
 	/**
+	 * An instance of the Starter_Style class.
+	 *
+	 * @since SINCEVERSION
+	 * @var Boldgrid\Inspirations\Deploy\Starter_Style
+	 */
+	public $starter_style;
+
+	/**
 	 * Subcategory ID.
 	 *
 	 * @var int
@@ -390,6 +397,8 @@ class Boldgrid_Inspirations_Deploy {
 
 		$this->deploy_theme = new Boldgrid_Inspirations_Deploy_Theme();
 		$this->deploy_theme->set_deploy( $this );
+
+		$this->starter_style = new Boldgrid\Inspirations\Deploy\Starter_Style( $this );
 	}
 
 	/**
@@ -1040,6 +1049,8 @@ class Boldgrid_Inspirations_Deploy {
 			foreach ( $this->theme_details->theme_mods as $theme_mod ) {
 				set_theme_mod( $theme_mod->name, $theme_mod->value );
 			}
+
+			$this->starter_style->deploy();
 		} // foreach( array ( 'child', 'parent' ) as $entity )
 
 		// Reset the $this->theme_details variable. Refer to loooon comment above as to why.
