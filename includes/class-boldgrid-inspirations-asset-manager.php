@@ -123,37 +123,6 @@ class Boldgrid_Inspirations_Asset_Manager extends Boldgrid_Inspirations {
 	}
 
 	/**
-	 * Add hooks.
-	 *
-	 * @since 0.3
-	 *
-	 * @link https://developer.wordpress.org/reference/functions/is_admin/
-	 *
-	 * @return null
-	 */
-	public function add_hooks() {
-		if ( is_admin() ) {
-			/*
-			 * When inserting a gridblock, download and attach the assets used within. Then replace
-			 * the empty 'url' with the url of the asset.
-			 */
-			add_filter( 'boldgrid_insert_attribute_assets',
-				array (
-					$this,
-					'boldgrid_insert_attribute_assets'
-				) );
-
-			add_filter( 'boldgrid_gridblock_insert_dynamic_images',
-				array (
-					$this,
-					'boldgrid_gridblock_insert_dynamic_images'
-				) );
-
-			add_filter( 'delete_attachment', array( $this, 'delete_attachment' ) );
-		}
-	}
-
-	/**
 	 * Add new asset information to wp_options.
 	 *
 	 * @param string $type
