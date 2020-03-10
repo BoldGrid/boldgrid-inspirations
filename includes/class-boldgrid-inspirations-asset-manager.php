@@ -123,6 +123,21 @@ class Boldgrid_Inspirations_Asset_Manager extends Boldgrid_Inspirations {
 	}
 
 	/**
+	 * Add hooks.
+	 *
+	 * @since 0.3
+	 *
+	 * @link https://developer.wordpress.org/reference/functions/is_admin/
+	 *
+	 * @return null
+	 */
+	public function add_hooks() {
+		if ( is_admin() ) {
+			add_filter( 'delete_attachment', array( $this, 'delete_attachment' ) );
+		}
+	}
+
+	/**
 	 * Add new asset information to wp_options.
 	 *
 	 * @param string $type
