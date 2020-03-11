@@ -378,8 +378,6 @@ msgstr "Wählen Sie Ihre Kategorie"
 
 #: pages/includes/browse_category.php:15
 #: pages/templates/boldgrid-inspirations.php:58
-#: pages/templates/gridblock-sets-admin.php:11
-#: pages/templates/gridblock-sets-admin.php:23
 #: pages/templates/feedback-widget.php:14
 #: pages/templates/feedback-widget.php:48
 #: pages/templates/feedback-notice-1-1.php:18
@@ -634,17 +632,6 @@ msgstr "Besuchen Sie unsere Seite"
 msgid "Continue to your Dashboard"
 msgstr "Weiter zu Ihrem Dashboard"
 
-#: pages/boldgrid-inspirations-add-gridblock-set.php:9
-#: includes/class-boldgrid-inspirations-gridblock-sets-admin.php:397
-#: includes/class-boldgrid-inspirations-gridblock-sets-admin.php:398
-msgid "New From GridBlocks"
-msgstr "Neu von GridBlocks"
-
-#: pages/boldgrid-inspirations-add-gridblock-set.php:13
-#: includes/class-boldgrid-inspirations-gridblock-sets-admin.php:141
-msgid "Loading GridBlock Sets."
-msgstr "GridBlock-Sets werden geladen."
-
 #: pages/image_search.php:16
 msgid "License filter"
 msgstr "Lizenzfilter"
@@ -779,33 +766,6 @@ msgstr "Zusätzliche Funktionalität durch"
 #: pages/templates/boldgrid-inspirations.php:2
 msgid "Categories"
 msgstr "Kategorien"
-
-#: pages/templates/gridblock-sets-admin.php:5
-#: includes/class-boldgrid-inspirations-gridblock-sets-admin.php:142
-msgid "Preview"
-msgstr "Vorschau"
-
-#: pages/templates/gridblock-sets-admin.php:22
-msgid "Blank"
-msgstr "Leer"
-
-#: pages/templates/gridblock-sets-admin.php:30
-msgid ""
-"Whoops! There seemed to be a problem downloading the newest GridBlock Sets."
-msgstr ""
-"Hoppla! Beim Download der aktuellen GridBlock-Sets scheint ein Problem "
-"aufgetreten zu sein."
-
-#: pages/templates/gridblock-sets-admin.php:32
-#: includes/class-boldgrid-inspirations-ajax.php:45
-msgid "Try Again"
-msgstr "Erneut versuchen"
-
-#: pages/templates/gridblock-sets-admin.php:33
-#: includes/class-boldgrid-inspirations-gridblock-sets-admin.php:432
-#: includes/class-boldgrid-inspirations-gridblock-sets-admin.php:433
-msgid "Add Blank"
-msgstr "Leerzeichen hinzufügen"
 
 #: pages/templates/image_search_results.php:5
 msgid "title goes here"
@@ -1820,42 +1780,9 @@ msgid ""
 msgstr ""
 "Wir empfehlen Ihnen die Verwendung eines BoldGrid-Themes. In unseren Themes "
 "gibt es über Inspirations theme-spezifische Inhalte und sie bieten außerdem "
-"mehr Freiheiten für die individuelle Anpassung."
-
-#: includes/class-boldgrid-inspirations-gridblock-sets-admin.php:136
-msgid ""
-"Downloading the newest GridBlock Sets. This may take up to one minute this "
-"first time."
-msgstr ""
-"Die aktuellsten GridBlock-Sets werden heruntergeladen. Dies kann beim ersten"
+"mehr Freiheiten für die individuelle Anpassung."eruntergeladen. Dies kann beim ersten"
 " Mal bis zu einer Minute dauern."
-
-#: includes/class-boldgrid-inspirations-gridblock-sets-admin.php:137
-msgid "Go Back"
-msgstr "Zurückgehen"
-
-#: includes/class-boldgrid-inspirations-gridblock-sets-admin.php:138
-msgid "Installing"
-msgstr "Installiere"
-
-#: includes/class-boldgrid-inspirations-gridblock-sets-admin.php:139
-msgid "Loading"
-msgstr "Wird geladen"
-
-#: includes/class-boldgrid-inspirations-gridblock-sets-admin.php:140
-msgid "Loading preview..."
 msgstr "Vorschau wird geladen ..."
-
-#: includes/class-boldgrid-inspirations-gridblock-sets-admin.php:143
-msgid "Select a GridBlock Set below to use with your new page."
-msgstr ""
-"Wählen Sie unten ein GridBlock-Set aus, das Sie für Ihre neue Seite "
-"verwenden möchten."
-
-#: includes/class-boldgrid-inspirations-gridblock-sets-admin.php:416
-#: includes/class-boldgrid-inspirations-gridblock-sets-admin.php:417
-msgid "Add New"
-msgstr "Neu hinzufügen"
 
 #: includes/class-boldgrid-inspirations-deploy-messages.php:94
 msgid ""

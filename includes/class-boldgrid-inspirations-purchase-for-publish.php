@@ -1370,9 +1370,6 @@ class Boldgrid_Inspirations_Purchase_For_Publish extends Boldgrid_Inspirations {
 		/**
 		 * Add the ability to exclude looking for images in certain pages.
 		 *
-		 * For example, our "Gridblocks Sets Preview Page" may contain copyrighted images. We don't
-		 * want to include this page however in our cart.
-		 *
 		 * @since 1.3.7
 		 *
 		 * @param  array $not_in_page An array of pages not to include in the BoldGrid Cart.

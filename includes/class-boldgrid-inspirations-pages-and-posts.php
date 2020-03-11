@@ -380,11 +380,6 @@ class Boldgrid_Inspirations_Pages_And_Posts {
 		// Determine if this is a new page, or we're editing an exist page.
 		$is_new_page = ( 'post-new.php' == $pagenow ? '1' : '0' );
 
-		// Get this post's 'new_gridblock_set'.
-		// We only need it for this moment, so delete it after we get it.
-		$is_new_gridblock_set = get_post_meta( $post->ID, 'new_gridblock_set', true );
-		delete_post_meta( $post->ID, 'new_gridblock_set' );
-
 		// Grab a list of all menus.
 		// Example $nav_menus: http://pastebin.com/SExeMBT4
 		$nav_menus = get_terms( 'nav_menu', array (
@@ -432,7 +427,7 @@ class Boldgrid_Inspirations_Pages_And_Posts {
 			 * 1. If it is a new page, check the primary menu.
 			 * 2. If it is an existing page, check all menus the page currently belongs to.
 			 */
-			if ( 'post-new.php' == $pagenow || $is_new_gridblock_set ) {
+			if ( 'post-new.php' == $pagenow ) {
 				// If the menu is called "Primary", check it by default.
 				$checked = ( 'primary' == strtolower( $nav_menu->name ) ? 'checked' : '' );
 			} else {

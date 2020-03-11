@@ -224,7 +224,6 @@ class Boldgrid_Inspirations_Start_Over {
 			'boldgrid_installed_page_ids',
 			'boldgrid_installed_pages_metadata',
 			'boldgrid_show_tip_start_editing',
-			// Class: Boldgrid_Inspirations_GridBlock_Sets_Kitchen_Sink.
 			'boldgrid_inspirations_fetching_kitchen_sink_status',
 			'_transient_boldgrid_inspirations_kitchen_sink',
 			'_transient_timeout_boldgrid_inspirations_kitchen_sink'

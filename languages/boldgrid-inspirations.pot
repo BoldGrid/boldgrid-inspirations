@@ -265,8 +265,6 @@ msgstr ""
 
 #: pages/includes/browse_category.php:15
 #: pages/templates/boldgrid-inspirations.php:58
-#: pages/templates/gridblock-sets-admin.php:11
-#: pages/templates/gridblock-sets-admin.php:23
 #: pages/templates/feedback-widget.php:14
 #: pages/templates/feedback-widget.php:48
 #: pages/templates/feedback-notice-1-1.php:18
@@ -457,17 +455,6 @@ msgstr ""
 msgid "Continue to your Dashboard"
 msgstr ""
 
-#: pages/boldgrid-inspirations-add-gridblock-set.php:9
-#: includes/class-boldgrid-inspirations-gridblock-sets-admin.php:397
-#: includes/class-boldgrid-inspirations-gridblock-sets-admin.php:398
-msgid "New From GridBlocks"
-msgstr ""
-
-#: pages/boldgrid-inspirations-add-gridblock-set.php:13
-#: includes/class-boldgrid-inspirations-gridblock-sets-admin.php:141
-msgid "Loading GridBlock Sets."
-msgstr ""
-
 #: pages/image_search.php:16
 msgid "License filter"
 msgstr ""
@@ -545,30 +532,6 @@ msgstr ""
 
 #: pages/templates/boldgrid-inspirations.php:2
 msgid "Categories"
-msgstr ""
-
-#: pages/templates/gridblock-sets-admin.php:5
-#: includes/class-boldgrid-inspirations-gridblock-sets-admin.php:142
-msgid "Preview"
-msgstr ""
-
-#: pages/templates/gridblock-sets-admin.php:22
-msgid "Blank"
-msgstr ""
-
-#: pages/templates/gridblock-sets-admin.php:30
-msgid "Whoops! There seemed to be a problem downloading the newest GridBlock Sets."
-msgstr ""
-
-#: pages/templates/gridblock-sets-admin.php:32
-#: includes/class-boldgrid-inspirations-ajax.php:45
-msgid "Try Again"
-msgstr ""
-
-#: pages/templates/gridblock-sets-admin.php:33
-#: includes/class-boldgrid-inspirations-gridblock-sets-admin.php:432
-#: includes/class-boldgrid-inspirations-gridblock-sets-admin.php:433
-msgid "Add Blank"
 msgstr ""
 
 #: pages/templates/image_search_results.php:5
@@ -1443,35 +1406,6 @@ msgstr ""
 
 #: includes/class-boldgrid-inspirations-theme-install.php:259
 msgid "We recommend choosing a BoldGrid Theme. Our themes have theme specific content available through Inspirations and include more features while customizing."
-msgstr ""
-
-#: includes/class-boldgrid-inspirations-gridblock-sets-admin.php:136
-msgid "Downloading the newest GridBlock Sets. This may take up to one minute this first time."
-msgstr ""
-
-#: includes/class-boldgrid-inspirations-gridblock-sets-admin.php:137
-msgid "Go Back"
-msgstr ""
-
-#: includes/class-boldgrid-inspirations-gridblock-sets-admin.php:138
-msgid "Installing"
-msgstr ""
-
-#: includes/class-boldgrid-inspirations-gridblock-sets-admin.php:139
-msgid "Loading"
-msgstr ""
-
-#: includes/class-boldgrid-inspirations-gridblock-sets-admin.php:140
-msgid "Loading preview..."
-msgstr ""
-
-#: includes/class-boldgrid-inspirations-gridblock-sets-admin.php:143
-msgid "Select a GridBlock Set below to use with your new page."
-msgstr ""
-
-#: includes/class-boldgrid-inspirations-gridblock-sets-admin.php:416
-#: includes/class-boldgrid-inspirations-gridblock-sets-admin.php:417
-msgid "Add New"
 msgstr ""
 
 #: includes/class-boldgrid-inspirations-deploy-messages.php:94
