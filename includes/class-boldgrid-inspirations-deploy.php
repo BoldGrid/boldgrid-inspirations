@@ -1347,6 +1347,14 @@ class Boldgrid_Inspirations_Deploy {
 				$this->asset_manager->download_and_attach_asset( $post_id, true, $page_v->featured_image_asset_id );
 			}
 
+			// If this page has theme mods, set them.
+			if ( ! empty( $page_v->theme_mods ) ) {
+				$theme_mods = json_decode( $page_v->theme_mods, true );
+				foreach ( $theme_mods as $name => $value ) {
+					set_theme_mod( $name, $value );
+				}
+			}
+
 			$pages_created ++;
 
 			// Add the page id so that we can recognize it
