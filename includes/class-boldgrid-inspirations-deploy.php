@@ -299,6 +299,14 @@ class Boldgrid_Inspirations_Deploy {
 	public $plugin_installation_data = array();
 
 	/**
+	 * An instance of Social_Menu.
+	 *
+	 * @since SINCEVERSION
+	 * @var Boldgrid\Inspirations\Deploy\Social_Menu
+	 */
+	public $social_menu;
+
+	/**
 	 * Does the user want to start over before deployment?
 	 *
 	 * @since 1.2.3
@@ -399,6 +407,7 @@ class Boldgrid_Inspirations_Deploy {
 		$this->deploy_theme->set_deploy( $this );
 
 		$this->starter_style = new Boldgrid\Inspirations\Deploy\Starter_Style( $this );
+		$this->social_menu   = new Boldgrid\Inspirations\Deploy\Social_Menu( $this );
 	}
 
 	/**
@@ -1053,6 +1062,10 @@ class Boldgrid_Inspirations_Deploy {
 			$this->starter_style->deploy();
 		} // foreach( array ( 'child', 'parent' ) as $entity )
 
+		if ( $this->deploy_theme->is_crio() ) {
+			$this->social_menu->deploy();
+		}
+
 		// Reset the $this->theme_details variable. Refer to loooon comment above as to why.
 		$this->theme_details = $this->theme_details_original;
 
@@ -1351,6 +1364,13 @@ class Boldgrid_Inspirations_Deploy {
 			if ( ! empty( $page_v->theme_mods ) ) {
 				$theme_mods = json_decode( $page_v->theme_mods, true );
 				foreach ( $theme_mods as $name => $value ) {
+					// Theme mods shouldn't have menu locations. If they do, don't skip them.
+					$skips = [ 'nav_menu_locations' ];
+
+					if ( in_array( $name, $skips, true ) ) {
+						continue;
+					}
+
 					set_theme_mod( $name, $value );
 				}
 			}

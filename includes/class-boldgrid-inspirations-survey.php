@@ -395,6 +395,24 @@ class Boldgrid_Inspirations_Survey {
 	}
 
 	/**
+	 * Get the social data from the survey.
+	 *
+	 * Returns an empty array if user selected do-not-display or didn't submit any social network.
+	 * Otherwise, returns an array of social networks (keys) and urls (values).
+	 *
+	 * @since SINEVERSION
+	 *
+	 * @return array
+	 */
+	public function get_social() {
+		$survey         = $this->get();
+		$social         = ! empty( $survey['social'] ) ? $survey['social'] : [];
+		$do_not_display = ! empty( $social['do-not-display'] );
+
+		return $do_not_display ? [] : $social;
+	}
+
+	/**
 	 * Whether or not the user has taken the survey.
 	 *
 	 * @since 1.3.5
