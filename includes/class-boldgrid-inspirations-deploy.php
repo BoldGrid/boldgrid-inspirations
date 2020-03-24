@@ -820,6 +820,11 @@ class Boldgrid_Inspirations_Deploy {
 
 			$theme_folder_name = $this->deploy_theme->get_folder_name();
 
+			// If Crio, reset the theme. V1 themes are reset via $this->start_over().
+			if ( $this->deploy_theme->is_crio() ) {
+				delete_option( 'theme_mods_' . $theme_folder_name );
+			}
+
 			$theme = wp_get_theme( $theme_folder_name );
 
 			// Get the installed theme version timestamp from wp options:
