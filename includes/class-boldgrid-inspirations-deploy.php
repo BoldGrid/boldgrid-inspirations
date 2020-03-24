@@ -315,14 +315,6 @@ class Boldgrid_Inspirations_Deploy {
 	public $start_over = false;
 
 	/**
-	 * An instance of the Starter_Style class.
-	 *
-	 * @since SINCEVERSION
-	 * @var Boldgrid\Inspirations\Deploy\Starter_Style
-	 */
-	public $starter_style;
-
-	/**
 	 * Subcategory ID.
 	 *
 	 * @var int
@@ -406,7 +398,6 @@ class Boldgrid_Inspirations_Deploy {
 		$this->deploy_theme = new Boldgrid_Inspirations_Deploy_Theme();
 		$this->deploy_theme->set_deploy( $this );
 
-		$this->starter_style = new Boldgrid\Inspirations\Deploy\Starter_Style( $this );
 		$this->social_menu   = new Boldgrid\Inspirations\Deploy\Social_Menu( $this );
 	}
 
@@ -1058,8 +1049,6 @@ class Boldgrid_Inspirations_Deploy {
 			foreach ( $this->theme_details->theme_mods as $theme_mod ) {
 				set_theme_mod( $theme_mod->name, $theme_mod->value );
 			}
-
-			$this->starter_style->deploy();
 		} // foreach( array ( 'child', 'parent' ) as $entity )
 
 		if ( $this->deploy_theme->is_crio() ) {
