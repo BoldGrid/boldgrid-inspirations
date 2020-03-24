@@ -449,7 +449,6 @@ public function include_admin_files() {
 	require_once BOLDGRID_BASE_DIR . '/includes/class-boldgrid-inspirations-feedback.php';
 	require_once BOLDGRID_BASE_DIR . '/includes/class-boldgrid-inspirations-install-backup.php';
 
-	require_once BOLDGRID_BASE_DIR . '/includes/deploy/class-starter-style.php';
 	require_once BOLDGRID_BASE_DIR . '/includes/deploy/class-social-menu.php';
 }
 
