@@ -66,6 +66,8 @@ class Social_Menu {
 	/**
 	 * Create a social media menu based off of survey data and assign to social nav menu location.
 	 *
+	 * This method should only be ran for Crio themes.
+	 *
 	 * This method has been introduced for Crio. Prior, the social media menu was created by filtering
 	 * the bgtfw configs. As of Crio, that code no longer exists, and so we must actually create a menu.
 	 *
@@ -73,7 +75,7 @@ class Social_Menu {
 	 */
 	public function deploy() {
 		// Make sure we have social media data.
-		$socials = $this->deploy->survey->get_social();
+		$socials = $this->get_social();
 		if ( empty( $socials ) ) {
 			return;
 		}
@@ -101,5 +103,28 @@ class Social_Menu {
 		$locations           = get_theme_mod( 'nav_menu_locations' );
 		$locations['social'] = $menu_id;
 		set_theme_mod( 'nav_menu_locations', $locations );
+	}
+
+	/**
+	 * Get our social media data.
+	 *
+	 * Data is gathered from the user via the Inspirations process.
+	 *
+	 * @since SINCEVERSION
+	 *
+	 * @return array Example: https://pastebin.com/ANt5G8uq
+	 */
+	public function get_social() {
+		$social = $this->deploy->survey->get_social();
+
+		// Preview sites should show a social media menu. If preview server, set dummy data.
+		if ( empty( $social ) && $this->deploy->is_preview_server ) {
+			$social = [
+				'facebook' => 'https://facebook.com',
+				'twitter'  => 'https://twitter.com',
+			];
+		}
+
+		return $social;
 	}
 }
