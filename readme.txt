@@ -35,6 +35,12 @@ The second phase is Customization; tools to transform your website into your vis
 
 == Changelog ==
 
+= In progress =
+
+Release date: ?
+
+* Bug fix: Fixed display / position of BoldGrid Connect image search results.
+
 = 2.3.1 =
 
 Release date: March 12th, 2020

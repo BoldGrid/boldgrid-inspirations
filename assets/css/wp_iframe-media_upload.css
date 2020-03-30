@@ -21,7 +21,6 @@
 ul#search_results {
 	position: absolute;
 	padding: 0px 16px;
-	top: 50px;
 	left: 0px;
 	background: #fff;
 	overflow: auto;
