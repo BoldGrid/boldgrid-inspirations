@@ -31,15 +31,6 @@ class Boldgrid_Inspirations_Screen {
 			)
 		);
 
-		// In addition to enquing scripts per screen, we can also enqueue scripts per the
-		// GLOBAL $paegnow variable.
-		add_action( 'admin_enqueue_scripts',
-			array(
-				$this,
-				'enqueue_script_per_pagenow',
-			)
-		);
-
 		// Pointers are registered per screen, which makes it fitting to configure them within
 		// this screen class.
 		add_action( 'current_screen',
@@ -84,37 +75,6 @@ class Boldgrid_Inspirations_Screen {
 		$pointers = new Boldgrid_WP_Help_Pointers();
 
 		$pointers->add_hooks();
-	}
-
-	/**
-	 * In addition to enquing scripts per screen, we can also enqueue scripts per
-	 * the GLOBAL $paegnow variable.
-	 */
-	public function enqueue_script_per_pagenow() {
-		GLOBAL $pagenow;
-
-		$js_per_pagenow = array(
-			'edit.php',
-			'post.php',
-		);
-
-		if ( in_array( $pagenow, $js_per_pagenow, true ) ) {
-			// Setup some vars.
-			$handle = 'pagenow_js' . $this->screen->id;
-
-			$file_path = 'assets/js/pagenow/' . $pagenow . '.js';
-
-			// Enqueue the js
-			wp_enqueue_script(
-				$handle,
-				plugins_url(
-					$file_path, BOLDGRID_BASE_DIR . '/boldgrid-inspirations.php'
-				),
-				array( 'base-admin-js' ),
-				BOLDGRID_INSPIRATIONS_VERSION,
-				true
-			);
-		}
 	}
 
 	/**

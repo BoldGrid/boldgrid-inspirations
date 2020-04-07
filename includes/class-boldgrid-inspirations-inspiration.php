@@ -234,15 +234,8 @@ class Boldgrid_Inspirations_Inspiration extends Boldgrid_Inspirations {
 			// BoldGrid Inspirations Feedback.
 			$boldgrid_inspirations_feedback = new Boldgrid_Inspirations_Feedback();
 
-			// GridBlock Sets - Admin Page.
-			$gridblock_sets_admin = new Boldgrid_Inspirations_GridBlock_Sets_Admin( $this->configs );
-			$gridblock_sets_admin->add_hooks();
-
 			$deploy_cta = new Boldgrid_Inspirations_Deploy_Cta();
 			$deploy_cta->add_hooks();
-
-			$kitchen_sink = new Boldgrid_Inspirations_GridBlock_Sets_Kitchen_Sink( $this->configs );
-			$kitchen_sink->add_hooks();
 
 			$staging = new Boldgrid_Inspirations_Staging();
 			$staging->add_hooks();
@@ -258,17 +251,6 @@ class Boldgrid_Inspirations_Inspiration extends Boldgrid_Inspirations {
 		}
 
 		/* Classes to add_hooks for, regardless of is_admin. */
-
-		// Adding gridblock assets to relevant pages.
-		require_once BOLDGRID_BASE_DIR . '/includes/class-boldgrid-inspirations-gridblock.php';
-		$boldgrid_inspirations_gridblock = new Boldgrid_Inspirations_Gridblock( $this->configs );
-		$boldgrid_inspirations_gridblock->add_hooks();
-
-		// GridBlock Sets - Preview Page.
-		require_once BOLDGRID_BASE_DIR .
-		'/includes/class-boldgrid-inspirations-gridblock-sets-preview-page.php';
-		$gridblock_sets_preview_page = new Boldgrid_Inspirations_GridBlock_Sets_Preview_Page();
-		$gridblock_sets_preview_page->add_hooks();
 
 		$deploy_theme = new Boldgrid_Inspirations_Deploy_Theme();
 		$deploy_theme->add_hooks();
@@ -418,8 +400,6 @@ public function include_admin_files() {
 	require_once BOLDGRID_BASE_DIR . '/includes/class-boldgrid-inspirations-customizer.php';
 	require_once BOLDGRID_BASE_DIR . '/includes/class-boldgrid-inspirations-asset-manager.php';
 	require_once BOLDGRID_BASE_DIR . '/includes/class-boldgrid-inspirations-pages-and-posts.php';
-	require_once BOLDGRID_BASE_DIR . '/includes/class-boldgrid-inspirations-gridblock-sets-admin.php';
-	require_once BOLDGRID_BASE_DIR . '/includes/class-boldgrid-inspirations-gridblock-sets-kitchen-sink.php';
 	require_once BOLDGRID_BASE_DIR . '/includes/class-boldgrid-inspirations-start-over.php';
 
 	require_once BOLDGRID_BASE_DIR . '/includes/class-boldgrid-inspirations-attribution.php';

@@ -69,13 +69,6 @@ class Boldgrid_Inspirations_Feedback {
 			'add_feedback',
 		), 10, 3 );
 
-		// Add an action to record when a page is created using a GridBlock.
-		add_action( 'boldgrid_inspirations_post_gridblock_set_create_page_callback',
-			array(
-				$this,
-				'gridblock_add_page',
-			) );
-
 		// Add an action to check the payload.
 		add_action( 'admin_init', array(
 			$this,
@@ -140,32 +133,6 @@ class Boldgrid_Inspirations_Feedback {
 
 		// Insert new data.
 		self::add_feedback( 'theme_activation', $theme_name );
-	}
-
-	/**
-	 * GridBlock page insertion.
-	 *
-	 * Record when a page is created from a GridBlock.
-	 *
-	 * @since 1.0.12
-	 *
-	 * @param array $args {
-	 *        An argument array passed from do_action().
-	 *
-	 *        @type int $page_id The client WordPress page id.
-	 *        @type int $boldgrid_page_id BoldGrid page id.
-	 *        }
-	 * @return null
-	 */
-	public function gridblock_add_page( $args = null ) {
-		// Get the BoldGrid page id.
-		$boldgrid_page_id = ( isset( $args['boldgrid_page_id'] ) ? $args['boldgrid_page_id'] : null
-		);
-
-		// Insert new data.
-		self::add_feedback( 'gridblock_add_page', $boldgrid_page_id );
-
-		return;
 	}
 
 	/**

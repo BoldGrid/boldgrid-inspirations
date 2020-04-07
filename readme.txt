@@ -2,9 +2,9 @@
 Contributors: boldgrid, imh_brad, joemoto, rramo012, timph
 Tags: inspiration, customization, build, create, design
 Requires at least: 4.4
-Tested up to: 5.3
+Tested up to: 5.4
 Requires PHP: 5.4
-Stable tag: 2.3.0
+Stable tag: 2.3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -34,6 +34,19 @@ The second phase is Customization; tools to transform your website into your vis
 3. You will find the Inspirations menu in your WordPress Dashboard / admin panel.
 
 == Changelog ==
+
+= In progress =
+
+Release date: ?
+
+* Bug fix: Fixed display / position of BoldGrid Connect image search results.
+
+= 2.3.1 =
+
+Release date: March 12th, 2020
+
+* Bug fix: Unable to click button on email confirmation page.
+* Update: Removed "Add new from GridBlocks" feature.
 
 = 2.3.0 =
 

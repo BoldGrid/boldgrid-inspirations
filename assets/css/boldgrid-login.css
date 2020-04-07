@@ -30,7 +30,6 @@ body.login {
 .login .button-primary:active,
 .login .button-primary {
 	border: none !important;
-	float:right;
 	box-shadow: none;
 	background-color:#FF6600 !important;
 	text-shadow: none;
