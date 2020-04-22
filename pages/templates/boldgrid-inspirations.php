@@ -50,8 +50,8 @@
 		<div class="theme-id-container">
 
 			<h2 class="theme-name" >
-				<span class="sub-category-name">{{data.build.SubCategoryName}}</span>
-				<span class="name">- {{data.build.ThemeName}}</span>
+				<span class="sub-category-name">{{data.build.SubCategoryName}} - </span>
+				<span class="name">{{data.build.ThemeName}}</span>
 			</h2>
 
 			<div class="theme-actions">
