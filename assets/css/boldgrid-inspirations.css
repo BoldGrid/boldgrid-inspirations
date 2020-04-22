@@ -132,8 +132,7 @@ input[type="radio"][name="sub-category"] {
 	font-size: 14px;
 }
 
-/* Sub category name */
-.theme-name .sub-category-name,
+.theme-name .name,
 .summary-subheading {
 	color: #aaa;
 	font-size: 12px;
