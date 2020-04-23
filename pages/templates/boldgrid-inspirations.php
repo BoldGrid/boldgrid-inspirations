@@ -22,7 +22,8 @@
 			categoryOrder = data.build.isDefault ? data.build.defaultOrder : data.build.CategoryOrder;
 
 		// Format our theme title.
-		data.build.ThemeName = data.build.ThemeName.replace( 'boldgrid-', '' );
+		data.build.ThemeName = data.build.ThemeRevisionTitle !== undefined ?
+			data.build.ThemeRevisionTitle : data.build.ThemeName.replace( 'boldgrid-', '' );
 		data.key = IMHWPB.configs.api_key;
 		data.build.pde = JSON.stringify( data.build.pde );
 

@@ -125,6 +125,23 @@ class Boldgrid_Inspirations_Deploy_Theme {
 	}
 
 	/**
+	 * Get the url to the theme's screenshot.
+	 *
+	 * @since SINCEVERSION
+	 *
+	 * @return string
+	 */
+	public function get_screenshot_url() {
+		if ( $this->is_repo_theme() ) {
+			$screenshot = $this->get_theme_information()->screenshot_url;
+		} else {
+			$screenshot = unserialize( $this->deploy->theme_details->theme->Meta )['Screenshot'];
+		}
+
+		return $screenshot;
+	}
+
+	/**
 	 * Get our theme.
 	 *
 	 * @since SINCEVERISON
@@ -136,6 +153,25 @@ class Boldgrid_Inspirations_Deploy_Theme {
 	}
 
 	/**
+	 * Get theme info from the WordPress api.
+	 *
+	 * @since SINCEVERSION
+	 *
+	 * @return mixed False on failure, object on success. Example: https://pastebin.com/Z9qt3KFF
+	 */
+	public function get_theme_information() {
+		$request = wp_remote_get( 'https://api.wordpress.org/themes/info/1.1/?action=theme_information&request[slug]=' . $this->get_folder_name() );
+
+		if( is_wp_error( $request ) ) {
+			return false;
+		}
+
+		$body = wp_remote_retrieve_body( $request );
+
+		return json_decode( $body );
+	}
+
+	/**
 	 * Determine whether or not this theme is crio.
 	 *
 	 * @since SINCEVERSION
@@ -144,6 +180,18 @@ class Boldgrid_Inspirations_Deploy_Theme {
 	 */
 	public function is_crio() {
 		return 'crio' === $this->get_folder_name();
+	}
+
+	/**
+	 * Determine whether or not this is a WordPress repo theme.
+	 *
+	 * @since SINCEVERSION
+	 */
+	public function is_repo_theme() {
+		$prefix = 'https://downloads.wordpress.org/theme/';
+
+		return ! empty( $this->deploy->theme_details->theme->DownloadUrl ) &&
+			substr( $this->deploy->theme_details->theme->DownloadUrl, 0, strlen( $prefix ) ) === $prefix;
 	}
 
 	/**

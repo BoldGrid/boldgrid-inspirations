@@ -373,7 +373,7 @@ class Boldgrid_Inspirations_Deploy {
 
 		$this->survey = new Boldgrid_Inspirations_Survey();
 
-		$this->messages = new Boldgrid_Inspirations_Deploy_Messages();
+		$this->messages = new Boldgrid_Inspirations_Deploy_Messages( $this );
 
 		require_once BOLDGRID_BASE_DIR . '/includes/class-boldgrid-inspirations-external-plugin.php';
 		$this->external_plugin = new Boldgrid_Inspirations_External_Plugin();
