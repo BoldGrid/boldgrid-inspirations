@@ -596,6 +596,7 @@ class Boldgrid_Inspirations_Built {
 				'errorFetchingCategories' => __( 'There was an error fetching categories.', 'boldgrid-inspirations' ),
 				'errorFetchingPagesets'   => __( 'There was an error fetching pagesets.', 'boldgrid-inspirations' ),
 				'errorBuildingPreview'    => __( 'There was an error building your custom website preview.', 'boldgrid-inspirations' ),
+				'inspirationsVersion'     => BOLDGRID_INSPIRATIONS_VERSION,
 				'myInspirationUrl'        => Boldgrid_Inspirations_My_Inspiration::get_url( true ),
 				'previewTimeout'          => __( 'Connection timed out when attempting to load custom website preview.', 'boldgrid-inspirations' ),
 				'select'                  => __( 'Select', 'boldgrid-inspirations' ),

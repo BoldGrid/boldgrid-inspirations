@@ -32,6 +32,26 @@ class Boldgrid_Inspirations_Deploy_Messages {
 	public $headings = array();
 
 	/**
+	 * Our Boldgrid_Inspirations_Deploy class.
+	 *
+	 * @since SINCEVERSION
+	 * @access private
+	 * @var Boldgrid_Inspirations_Deploy
+	 */
+	private $deploy;
+
+	/**
+	 * Constructor.
+	 *
+	 * @since SINCEVERSION
+	 *
+	 * @param Boldgrid_Inspirations_Deploy $deploy
+	 */
+	public function __construct( $deploy ) {
+		$this->deploy = $deploy;
+	}
+
+	/**
 	 * Add a plugin to the list of plugins installed.
 	 *
 	 * @since 1.7.0
@@ -246,8 +266,7 @@ class Boldgrid_Inspirations_Deploy_Messages {
 		$this->print_heading( 'theme', esc_html__( 'Installing your theme...', 'boldgrid-inspirations' ) );
 
 		$theme_name = $theme_details->themeRevision->Title;
-		$meta       = unserialize( $theme_details->theme->Meta );
-		$screenshot = $meta['Screenshot'];
+		$screenshot = $this->deploy->deploy_theme->get_screenshot_url();
 
 		echo '
 			<div class="installed-item installed-theme">

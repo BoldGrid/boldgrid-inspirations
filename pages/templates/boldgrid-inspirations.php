@@ -22,7 +22,8 @@
 			categoryOrder = data.build.isDefault ? data.build.defaultOrder : data.build.CategoryOrder;
 
 		// Format our theme title.
-		data.build.ThemeName = data.build.ThemeName.replace( 'boldgrid-', '' );
+		data.build.ThemeName = data.build.ThemeRevisionTitle !== undefined ?
+			data.build.ThemeRevisionTitle : data.build.ThemeName.replace( 'boldgrid-', '' );
 		data.key = IMHWPB.configs.api_key;
 		data.build.pde = JSON.stringify( data.build.pde );
 
@@ -50,8 +51,8 @@
 		<div class="theme-id-container">
 
 			<h2 class="theme-name" >
+				<span class="sub-category-name">{{data.build.SubCategoryName}} - </span>
 				<span class="name">{{data.build.ThemeName}}</span>
-				<span class="sub-category-name">- {{data.build.SubCategoryName}}</span>
 			</h2>
 
 			<div class="theme-actions">

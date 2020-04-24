@@ -204,6 +204,14 @@ class Boldgrid_Inspirations_Deploy {
 	public $current_build_cost = 0;
 
 	/**
+	 * Class used to help deploy themes.
+	 *
+	 * @since SINCEVERSION
+	 * @var Boldgrid_Inspirations_Deploy_Theme
+	 */
+	public $deploy_theme;
+
+	/**
 	 * Language id.
 	 *
 	 * Used when getting built_photos_search photos.
@@ -291,6 +299,14 @@ class Boldgrid_Inspirations_Deploy {
 	public $plugin_installation_data = array();
 
 	/**
+	 * An instance of Social_Menu.
+	 *
+	 * @since SINCEVERSION
+	 * @var Boldgrid\Inspirations\Deploy\Social_Menu
+	 */
+	public $social_menu;
+
+	/**
 	 * Does the user want to start over before deployment?
 	 *
 	 * @since 1.2.3
@@ -357,7 +373,7 @@ class Boldgrid_Inspirations_Deploy {
 
 		$this->survey = new Boldgrid_Inspirations_Survey();
 
-		$this->messages = new Boldgrid_Inspirations_Deploy_Messages();
+		$this->messages = new Boldgrid_Inspirations_Deploy_Messages( $this );
 
 		require_once BOLDGRID_BASE_DIR . '/includes/class-boldgrid-inspirations-external-plugin.php';
 		$this->external_plugin = new Boldgrid_Inspirations_External_Plugin();
@@ -378,6 +394,11 @@ class Boldgrid_Inspirations_Deploy {
 		$this->installed = new Boldgrid_Inspirations_Installed();
 
 		$this->status = new Boldgrid_Inspirations_Deploy_Status();
+
+		$this->deploy_theme = new Boldgrid_Inspirations_Deploy_Theme();
+		$this->deploy_theme->set_deploy( $this );
+
+		$this->social_menu   = new Boldgrid\Inspirations\Deploy\Social_Menu( $this );
 	}
 
 	/**
@@ -788,12 +809,11 @@ class Boldgrid_Inspirations_Deploy {
 				}
 			}
 
-			// Theme Folder name is the same as theme name.
-			$theme_folder_name = $this->theme_details->theme->Name;
+			$theme_folder_name = $this->deploy_theme->get_folder_name();
 
-			if ( $this->is_preview_server ) {
-				// Use the random filename instead.
-				$theme_folder_name = wp_basename( $this->theme_details->themeAssetFilename, '.zip' );
+			// If Crio, reset the theme. V1 themes are reset via $this->start_over().
+			if ( $this->deploy_theme->is_crio() ) {
+				delete_option( 'theme_mods_' . $theme_folder_name );
 			}
 
 			$theme = wp_get_theme( $theme_folder_name );
@@ -841,18 +861,7 @@ class Boldgrid_Inspirations_Deploy {
 
 			// Check if theme is already installed and the latest version:
 			if ( $install_this_theme ) {
-				$theme_url = $boldgrid_configs['asset_server'] .
-					 $boldgrid_configs['ajax_calls']['get_asset'] . '?id=' .
-					 $this->theme_details->themeRevision->AssetId;
-
-				if ( ! empty( $api_key_hash ) ) {
-					$theme_url .= '&key=' . $api_key_hash;
-				}
-
-				// If this is a user environment, install for repo.boldgrid.com.
-				if ( ! $this->is_preview_server ) {
-					$theme_url = $this->theme_details->repo_download_link;
-				}
+				$theme_url = $this->deploy_theme->get_download_link();
 
 				$theme_installation_done = false;
 				$theme_installation_failed_attemps = 0;
@@ -1046,6 +1055,10 @@ class Boldgrid_Inspirations_Deploy {
 				set_theme_mod( $theme_mod->name, $theme_mod->value );
 			}
 		} // foreach( array ( 'child', 'parent' ) as $entity )
+
+		if ( $this->deploy_theme->is_crio() ) {
+			$this->social_menu->deploy();
+		}
 
 		// Reset the $this->theme_details variable. Refer to loooon comment above as to why.
 		$this->theme_details = $this->theme_details_original;
@@ -1305,10 +1318,15 @@ class Boldgrid_Inspirations_Deploy {
 				) );
 			}
 
-			// set homepage
+			// Steps to take if this is the homepage.
 			if ( $page_v->homepage_theme_id ) {
 				update_option( 'show_on_front', 'page' );
 				update_option( 'page_on_front', $post_id );
+
+				if ( $this->deploy_theme->is_crio() ) {
+					// Don't show the page title.
+					add_post_meta( $post_id, 'boldgrid_hide_page_title', 0 );
+				}
 			}
 
 			/*
@@ -1334,6 +1352,21 @@ class Boldgrid_Inspirations_Deploy {
 			// Take action if we have a featured image.
 			if ( $page_v->featured_image_asset_id ) {
 				$this->asset_manager->download_and_attach_asset( $post_id, true, $page_v->featured_image_asset_id );
+			}
+
+			// If this page has theme mods, set them.
+			if ( ! empty( $page_v->theme_mods ) ) {
+				$theme_mods = json_decode( $page_v->theme_mods, true );
+				foreach ( $theme_mods as $name => $value ) {
+					// Theme mods shouldn't have menu locations. If they do, don't skip them.
+					$skips = [ 'nav_menu_locations' ];
+
+					if ( in_array( $name, $skips, true ) ) {
+						continue;
+					}
+
+					set_theme_mod( $name, $value );
+				}
 			}
 
 			$pages_created ++;
@@ -2144,8 +2177,17 @@ class Boldgrid_Inspirations_Deploy {
 			}
 		}
 
-		// Assign this new menu_id to those locations if they're not already set.
-		$locations['primary'] = $menu_id;
+		/*
+		 * Assign this new menu_id to those locations if they're not already set.
+		 *
+		 * # primary Needed for all v1 themes.
+		 * # main    Added to accomdate Crio.
+		 */
+		if ( $this->deploy_theme->is_crio() ) {
+			$locations['main'] = $menu_id;
+		} else {
+			$locations['primary'] = $menu_id;
+		}
 
 		/*
 		 * We've finished updating $locations, it now looks like this:
