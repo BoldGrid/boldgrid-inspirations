@@ -1318,7 +1318,8 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 		var template = wp.template( 'theme' ),
 			data = {
 				site_hash: self.configs.site_hash,
-				theme_release_channel: self.themeReleaseChannel
+				theme_release_channel: self.themeReleaseChannel,
+				inspirations_version: Inspiration.inspirationsVersion
 			},
 			getGenericSuccess,
 			getGenericFail,
