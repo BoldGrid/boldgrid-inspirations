@@ -181,7 +181,7 @@ if ( 'design' === $section ) {
 			 * it below.
 			 */
 			if ( class_exists( '\Boldgrid\Library\Library\Plugin\Plugin' ) ) {
-				$backup_plugin = new Boldgrid\Library\Library\Plugin\Plugin( 'boldgrid-backup' );
+				$backup_plugin = Boldgrid\Library\Library\Plugin\Factory::create( 'boldgrid-backup' );
 			?>
 			<p style="margin-top:50px;">
 				<strong><?php esc_html_e( 'Need to transfer an existing website instead?', 'boldgrid-inspirations' ); ?></strong><br />
