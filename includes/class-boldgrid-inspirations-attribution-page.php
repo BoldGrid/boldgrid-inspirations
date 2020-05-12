@@ -66,6 +66,8 @@ class Boldgrid_Inspirations_Attribution_Page {
 
 		add_filter( 'single_template', array( $this, 'single_template' ) );
 
+		add_filter( 'get_the_excerpt', array( $this, 'get_the_excerpt'), 10, 2 );
+
 		/*
 		 * At this point in the code, we are in the init hook.
 		 *
@@ -140,6 +142,21 @@ class Boldgrid_Inspirations_Attribution_Page {
 
 		// If we have an attribution page return it, otherwise return false.
 		return ( ( null === $attribution_page ) ? false : $attribution_page );
+	}
+
+	/**
+	 * Filter get_the_excerpt and ensure the Attribution page does not show "Read more".
+	 *
+	 * Originally added because Crio was not showing the full Attribution page.
+	 *
+	 * @since SINCEVERSION
+	 *
+	 * @param  string  $post_excerpt The post excerpt.
+	 * @param  WP_Post $post         Post object.
+	 * @return string
+	 */
+	public function get_the_excerpt( $post_excerpt, $post ) {
+		return $this->is_current() ? $post->post_content : $post_excerpt;
 	}
 
 	/**
