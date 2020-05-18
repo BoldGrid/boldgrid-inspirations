@@ -4,7 +4,7 @@ Tags: inspiration, customization, build, create, design
 Requires at least: 4.4
 Tested up to: 5.4
 Requires PHP: 5.4
-Stable tag: 2.3.1
+Stable tag: 2.4.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -35,10 +35,12 @@ The second phase is Customization; tools to transform your website into your vis
 
 == Changelog ==
 
-= In progress =
+= 2.4.0 =
 
-Release date: ?
+Release date: May 18th, 2020
 
+* Update: Changes needed for Crio.
+* Bug fix: Attribution page will not show excpert.
 * Bug fix: Fixed display / position of BoldGrid Connect image search results.
 
 = 2.3.1 =
