@@ -29,7 +29,7 @@
     "eslint": "6.6.*",
     "eslint-config-wordpress": "^2.0.0",
     "eslint-plugin-html": "^6.0.0",
-    "prettier-eslint": "^9.0.1",
+    "prettier-eslint": "^10.0.0",
     "prettier-eslint-cli": "^5.0.0"
   },
   "dependencies": {
