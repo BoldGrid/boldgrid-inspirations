@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/badge/license-GPL--2.0%2B-orange.svg)](https://raw.githubusercontent.com/BoldGrid/boldgrid-inspirations/master/LICENSE)
 [![Build Status](https://travis-ci.org/BoldGrid/boldgrid-backup.svg?branch=master)](https://travis-ci.org/BoldGrid/boldgrid-inspirations)
-[![PHP Version](https://img.shields.io/badge/PHP-5.4%2B-blue.svg)](https://php.net) [![Greenkeeper badge](https://badges.greenkeeper.io/BoldGrid/boldgrid-inspirations.svg)](https://greenkeeper.io/)
+[![PHP Version](https://img.shields.io/badge/PHP-5.4%2B-blue.svg)](https://php.net) 
 
 BoldGrid Inspirations is an inspiration-driven plugin to assist with creating a fresh new website, or to customize an existing website.
 
