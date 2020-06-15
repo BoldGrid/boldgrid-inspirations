@@ -62,16 +62,16 @@
         },
         {
             "name": "boldgrid/boldgrid-inspirations-premium",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/BoldGrid/boldgrid-inspirations-premium.git",
-                "reference": "847d059f6768b04f91aba7def7d1feeaa52bc146"
+                "reference": "9be9c5a0ecca2ac3cd0cc571b1517a7cf58a5635"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BoldGrid/boldgrid-inspirations-premium/zipball/847d059f6768b04f91aba7def7d1feeaa52bc146",
-                "reference": "847d059f6768b04f91aba7def7d1feeaa52bc146",
+                "url": "https://api.github.com/repos/BoldGrid/boldgrid-inspirations-premium/zipball/9be9c5a0ecca2ac3cd0cc571b1517a7cf58a5635",
+                "reference": "9be9c5a0ecca2ac3cd0cc571b1517a7cf58a5635",
                 "shasum": ""
             },
             "require": {
@@ -109,7 +109,7 @@
                 }
             ],
             "description": "Premium BoldGrid Inspirations Features.",
-            "time": "2020-05-18T14:15:47+00:00"
+            "time": "2020-06-15T13:28:50+00:00"
         },
         {
             "name": "boldgrid/library",
