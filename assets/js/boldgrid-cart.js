@@ -72,7 +72,7 @@ IMHWPB.BoldGrid_Cart = function( configs ) {
 					$checkboxes = $( '#purchase_for_publish :checkbox' );
 				( image_price = $checkbox.attr( 'data-coin-cost' ) ),
 					( $container = $checkbox.closest( '.col-md-3' ) ),
-					( checked = $checkbox.attr( 'checked' ) ? true : false ),
+					( checked = $checkbox.prop( 'checked' ) ? true : false ),
 					( $spinner = $( '<span class="spinner inline"></span>' ) ),
 
 					// Data for ajax call.
@@ -297,7 +297,7 @@ IMHWPB.BoldGrid_Cart = function( configs ) {
 					var image_cost = image.data( 'coin-cost' );
 
 					// Is this image selected?
-					if ( image.attr( 'checked' ) ) {
+					if ( image.prop( 'checked' ) ) {
 						total_cost += image_cost;
 						total_page_cost += image_cost;
 					}

@@ -2,7 +2,7 @@
 Contributors: boldgrid, imh_brad, joemoto, rramo012, timph
 Tags: inspiration, customization, build, create, design
 Requires at least: 4.4
-Tested up to: 5.4
+Tested up to: 5.5
 Requires PHP: 5.4
 Stable tag: 2.4.2
 License: GPLv2 or later
@@ -34,6 +34,10 @@ The second phase is Customization; tools to transform your website into your vis
 3. You will find the Inspirations menu in your WordPress Dashboard / admin panel.
 
 == Changelog ==
+
+= 2.4.3 In progress =
+
+* Bug fix: WordPress 5.5 compatibility changes.
 
 = 2.4.2 =
 
