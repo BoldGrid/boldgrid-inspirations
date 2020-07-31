@@ -2,7 +2,7 @@
     "require": {
         "boldgrid/library": "^2.0.0",
         "boldgrid/boldgrid-inspirations-premium": "^1.0.0",
-        "boldgrid/plugin-installer": "^1.0.0",
+        "boldgrid/plugin-installer": "^1.0.7",
         "boldgrid/bgforms": "^1.0.0"
     },
     "scripts": {
