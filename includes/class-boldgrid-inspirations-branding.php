@@ -210,14 +210,14 @@ class Boldgrid_Inspirations_Branding {
 					array( 'a' => array( 'target' => array( 'blank' ), 'href' => array(), ) )
 					),
 				esc_html( $reseller_title ),
-				'<a target="_blank" href="' . esc_url( $reseller_support_url ) . '">',
+				'<a target="_blank" rel="nofollow" href="' . esc_url( $reseller_support_url ) . '">',
 				'</a>'
 			);
 		} else {
 			printf(
 				// translators: 1 The opening anchor tag linking to the BoldGrid support center, 2 its closing anchor tag.
 				__( 'Check out the %1$sBoldGrid Education Channel%2$s!', 'boldgrid-inspirations' ),
-				'<a href="http://www.boldgrid.com/support/" target="_blank">',
+				'<a href="http://www.boldgrid.com/support/" target="_blank" rel="nofollow">',
 				'</a>'
 			);
 		}
