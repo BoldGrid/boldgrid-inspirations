@@ -13,9 +13,19 @@
  */
 class Boldgrid_Inspirations_Purchase_For_Publish extends Boldgrid_Inspirations {
 	/**
+	 * Name of transient that stores total cost to purchase for publish.
+	 *
+	 * @since SINCEVERSION
+	 * @var string
+	 *
+	 * @see self::get_total_cost_to_purchase_for_publishing()
+	 */
+	public static $transient_name_cost = 'bginsp_total_coin_cost';
+
+	/**
 	 * Hooks required for the PurchaseForPublish class
 	 */
-	public function add_hooks() {
+	public function add_admin_hooks() {
 		if ( is_admin() ) {
 			// Load up any css / js we need.
 			add_action( 'admin_enqueue_scripts',
@@ -68,6 +78,28 @@ class Boldgrid_Inspirations_Purchase_For_Publish extends Boldgrid_Inspirations {
 			) );
 
 			add_action( 'boldgrid_post_image_purchased', array( $this, 'post_image_purchased' ), 10, 2 );
+		}
+	}
+
+	/**
+	 * Add hooks, regardless of is_admin.
+	 *
+	 * @since SINCEVERSION
+	 */
+	public function add_hooks_always() {
+		/*
+		 * Delete the "total cost to purchase for publish" value when someone edits a post or they
+		 * modify the boldgrid_asset option (like unchecking an image from cart).
+		 */
+		$actions = array(
+			'save_post',
+			'update_option_boldgrid_asset',
+		);
+
+		foreach ( $actions as $action ) {
+			add_action( $action, function() {
+				delete_transient( self::$transient_name_cost );
+			});
 		}
 	}
 
@@ -136,6 +168,12 @@ class Boldgrid_Inspirations_Purchase_For_Publish extends Boldgrid_Inspirations {
 	 * Return the coin value it costs to purchase for publish
 	 */
 	public function get_total_cost_to_purchase_for_publishing( $args = array() ) {
+		// This can be expensive. Try to get from transient first.
+		$total_coin_cost = get_transient( self::$transient_name_cost );
+		if ( false !== $total_coin_cost ) {
+			return $total_coin_cost;
+		}
+
 		/**
 		 * ********************************************************************
 		 * Configure args and vars
@@ -187,6 +225,8 @@ class Boldgrid_Inspirations_Purchase_For_Publish extends Boldgrid_Inspirations {
 				}
 			}
 		}
+
+		set_transient( self::$transient_name_cost, $total_coin_cost, DAY_IN_SECONDS );
 
 		return $total_coin_cost;
 	}

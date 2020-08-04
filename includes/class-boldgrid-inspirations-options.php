@@ -50,14 +50,6 @@ class Boldgrid_Inspirations_Options {
 					'boldgrid_admin_add_options_submenu',
 				)
 			);
-
-			// Options Page Init.
-			add_action( 'admin_init',
-				array(
-					$this,
-					'boldgrid_admin_init',
-				)
-			);
 		}
 	}
 
@@ -109,6 +101,14 @@ class Boldgrid_Inspirations_Options {
 	 * @see Boldgrid_Inspirations_Options::print_section_to_start_over().
 	 */
 	public function boldgrid_options_page() {
+		/*
+		 * Set our staging_installed value.
+		 *
+		 * Initially, this was set (1) during admin_init on (2) every page load. It has instead been
+		 * moved here because only "print_section_to_start_over() > include start_over.php" uses it.
+		 */
+		$this->set_staging_installed();
+
 		// If the user wants to start over, go ahead and delete everything.
 		if ( $this->user_wants_to_start_over() ) {
 			$this->start_over();
@@ -128,14 +128,6 @@ class Boldgrid_Inspirations_Options {
 		?>
 		</div>
 		<?php
-	}
-
-	/**
-	 * Admin init function for the options page.
-	 */
-	public function boldgrid_admin_init() {
-		// Is the staging plugin installed?
-		$this->set_staging_installed();
 	}
 
 	/**

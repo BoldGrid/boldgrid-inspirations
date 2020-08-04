@@ -201,6 +201,8 @@ class Boldgrid_Inspirations_Inspiration extends Boldgrid_Inspirations {
 			return;
 		}
 
+		$purchase_for_publish = new Boldgrid_Inspirations_Purchase_For_Publish();
+
 		// Add hooks for admin section, or non-admin pages.
 		if ( is_admin() ) {
 			// Allow users to search through stock photos.
@@ -211,9 +213,7 @@ class Boldgrid_Inspirations_Inspiration extends Boldgrid_Inspirations {
 			$boldgrid_receitps = new Boldgrid_Inspirations_Receipts();
 			$boldgrid_receitps->add_hooks();
 
-			// Purchase for publish.
-			$purchase_for_publish = new Boldgrid_Inspirations_Purchase_For_Publish();
-			$purchase_for_publish->add_hooks();
+			$purchase_for_publish->add_admin_hooks();
 
 			// Purchase Coins.
 			$boldgrid_purchase_coins = new Boldgrid_Inspirations_Purchase_Coins();
@@ -254,6 +254,8 @@ class Boldgrid_Inspirations_Inspiration extends Boldgrid_Inspirations {
 
 		$deploy_theme = new Boldgrid_Inspirations_Deploy_Theme();
 		$deploy_theme->add_hooks();
+
+		$purchase_for_publish->add_hooks_always();
 	}
 
 /**
