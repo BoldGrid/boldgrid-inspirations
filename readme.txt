@@ -4,7 +4,7 @@ Tags: inspiration, customization, build, create, design
 Requires at least: 4.4
 Tested up to: 5.5
 Requires PHP: 5.4
-Stable tag: 2.4.2
+Stable tag: 2.4.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -35,9 +35,15 @@ The second phase is Customization; tools to transform your website into your vis
 
 == Changelog ==
 
-= 2.4.3 In progress =
+= 2.4.3 =
+
+Release date: August 11th, 2020
 
 * Bug fix: WordPress 5.5 compatibility changes.
+* Update: Optimized usage of set_staging_installed.
+* Update: Optimized "get total coin cost".
+* Update: Updated links in login footer
+* Update: Updated dependencies.
 
 = 2.4.2 =
 
