@@ -2,7 +2,7 @@
 /**
  * Plugin Name: BoldGrid Inspirations
  * Plugin URI: https://www.boldgrid.com/boldgrid-inspirations/
- * Version: 2.4.3
+ * Version: 2.4.4
  * Author: BoldGrid <support@boldgrid.com>
  * Author URI: https://www.boldgrid.com/
  * Description: Find inspiration, customize, and launch! BoldGrid Inspirations includes FREE WordPress themes and is the easiest way to launch a new WordPress site complete with custom content.
