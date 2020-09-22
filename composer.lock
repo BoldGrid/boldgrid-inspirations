@@ -113,16 +113,16 @@
         },
         {
             "name": "boldgrid/library",
-            "version": "2.13.1",
+            "version": "2.13.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/BoldGrid/library.git",
-                "reference": "976f4356cceec266cc4f0f83371c77d76c2ec42a"
+                "reference": "9c644ed7dfbd00f050451cc39f2717e4618f7f0b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BoldGrid/library/zipball/976f4356cceec266cc4f0f83371c77d76c2ec42a",
-                "reference": "976f4356cceec266cc4f0f83371c77d76c2ec42a",
+                "url": "https://api.github.com/repos/BoldGrid/library/zipball/9c644ed7dfbd00f050451cc39f2717e4618f7f0b",
+                "reference": "9c644ed7dfbd00f050451cc39f2717e4618f7f0b",
                 "shasum": ""
             },
             "type": "library",
@@ -159,20 +159,20 @@
                 }
             ],
             "description": "The BoldGrid Library for shared code used in official BoldGrid plugins and themes.",
-            "time": "2020-07-28T17:20:55+00:00"
+            "time": "2020-08-12T17:47:34+00:00"
         },
         {
             "name": "boldgrid/plugin-installer",
-            "version": "1.0.7",
+            "version": "1.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/BoldGrid/plugin-installer.git",
-                "reference": "382ef724cdecd26867ec3325aa2148af1d7eb97a"
+                "reference": "e7aea70857a21037ed38afe8a3dbc687e047d9ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BoldGrid/plugin-installer/zipball/382ef724cdecd26867ec3325aa2148af1d7eb97a",
-                "reference": "382ef724cdecd26867ec3325aa2148af1d7eb97a",
+                "url": "https://api.github.com/repos/BoldGrid/plugin-installer/zipball/e7aea70857a21037ed38afe8a3dbc687e047d9ff",
+                "reference": "e7aea70857a21037ed38afe8a3dbc687e047d9ff",
                 "shasum": ""
             },
             "type": "library",
@@ -204,7 +204,7 @@
                 }
             ],
             "description": "The BoldGrid plugin installer used for official BoldGrid plugins.",
-            "time": "2020-07-31T18:31:47+00:00"
+            "time": "2020-09-22T17:41:46+00:00"
         }
     ],
     "packages-dev": [],
