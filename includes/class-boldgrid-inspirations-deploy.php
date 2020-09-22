@@ -187,6 +187,16 @@ class Boldgrid_Inspirations_Deploy {
 	public $bgforms;
 
 	/**
+	 * An instance of Deploy Cache.
+	 *
+	 * A class for installing a caching plugin.
+	 *
+	 * @since SINCEVERSION
+	 * @var Boldgrid\Inspirations\Deploy\Cache
+	 */
+	public $cache;
+
+	/**
 	 * Coin budget.
 	 *
 	 * @since 1.7.0
@@ -229,6 +239,34 @@ class Boldgrid_Inspirations_Deploy {
 	 * @var    bool True to install a sample blog.
 	 */
 	public $install_blog = false;
+
+	/**
+	 * Install an invoicing plugin.
+	 *
+	 * @since  SINCEVERSION
+	 * @access public
+	 * @var    bool True to install a sample blog.
+	 */
+	public $install_invoice = false;
+
+	/**
+	 * Install a caching plugin.
+	 *
+	 * @since  SINCEVERSION
+	 * @access public
+	 * @var    bool True to install a sample blog.
+	 */
+	public $install_cache = false;
+
+	/**
+	 * An instance of Deploy Invoice.
+	 *
+	 * A class for helping to install an invoicing plugin.
+	 *
+	 * @since SINCEVERSION
+	 * @var Boldgrid\Inspirations\Deploy\Invoice
+	 */
+	public $invoice;
 
 	/**
 	 * Is author.
@@ -369,7 +407,9 @@ class Boldgrid_Inspirations_Deploy {
 		require_once BOLDGRID_BASE_DIR . '/includes/class-boldgrid-inspirations-asset-manager.php';
 		$this->asset_manager = new Boldgrid_Inspirations_Asset_Manager();
 
-		$this->install_blog = isset( $_REQUEST['install-blog'] ) && 'true' === $_REQUEST['install-blog'];
+		$this->install_blog    = isset( $_REQUEST['install-blog'] ) && 'true' === $_REQUEST['install-blog'];
+		$this->install_invoice = isset( $_REQUEST['install-invoice'] ) && 'true' === $_REQUEST['install-invoice'];
+		$this->install_cache   = isset( $_REQUEST['install-cache'] ) && 'true' === $_REQUEST['install-cache'];
 
 		$this->survey = new Boldgrid_Inspirations_Survey();
 
@@ -398,7 +438,9 @@ class Boldgrid_Inspirations_Deploy {
 		$this->deploy_theme = new Boldgrid_Inspirations_Deploy_Theme();
 		$this->deploy_theme->set_deploy( $this );
 
-		$this->social_menu   = new Boldgrid\Inspirations\Deploy\Social_Menu( $this );
+		$this->social_menu = new Boldgrid\Inspirations\Deploy\Social_Menu( $this );
+		$this->invoice     = new Boldgrid\Inspirations\Deploy\Invoice( $this );
+		$this->cache       = new Boldgrid\Inspirations\Deploy\Cache( $this );
 	}
 
 	/**
@@ -541,6 +583,8 @@ class Boldgrid_Inspirations_Deploy {
 			'build_profile_id'      => intval( $this->boldgrid_build_profile_id ),
 			'custom_pages'          => $this->custom_pages,
 			'install_blog'          => $this->install_blog,
+			'install_invoice'       => $this->install_invoice,
+			'install_cache'         => $this->install_cache,
 			'install_timestamp'     => time(),
 		);
 
@@ -1683,6 +1727,10 @@ class Boldgrid_Inspirations_Deploy {
 
 				$this->download_and_install_plugin( $plugin_list_v->plugin_zip_url, $plugin_list_v->plugin_activate_path, $plugin_list_v->version, $plugin_list_v );
 			}
+		}
+
+		if ( $this->install_cache ) {
+			$this->cache->install();
 		}
 	}
 

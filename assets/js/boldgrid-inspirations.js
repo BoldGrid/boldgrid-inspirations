@@ -1251,6 +1251,36 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 			} )
 			.find( '.toggle-on' )
 			.addClass( 'blue' );
+
+		$( '#invoice-toggle' )
+			.toggles( {
+				checkbox: $( '[name="install-invoice"]' ),
+				click: false,
+				drag: false,
+				text: {
+					on: '',
+					off: ''
+				},
+				height: 15,
+				width: 40
+			} )
+			.find( '.toggle-on' )
+			.addClass( 'blue' );
+
+		$( '#cache-toggle' )
+			.toggles( {
+				checkbox: $( '[name="install-cache"]' ),
+				click: false,
+				drag: false,
+				text: {
+					on: '',
+					off: ''
+				},
+				height: 15,
+				width: 40
+			} )
+			.find( '.toggle-on' )
+			.addClass( 'blue' );
 	};
 
 	/**
@@ -1424,7 +1454,9 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 
 			// Should our request for a build be for a generic build?
 			requestGeneric = false,
-			hasBlog = $( '[name="install-blog"]' ).is( ':checked' );
+			hasBlog = $( '[name="install-blog"]' ).is( ':checked' ),
+			hasInvoice = $( '[name="install-invoice"]' ).is( ':checked' ),
+			hasCache = $( '[name="install-cache"]' ).is( ':checked' );
 
 		/*
 		 * By default, we will not request a generic build. The only time we will request a generic
@@ -1501,7 +1533,10 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 			site_hash: self.configs.site_hash,
 			inspirations_mode: 'standard',
 			is_generic: requestGeneric,
-			has_blog: hasBlog
+
+			has_blog: hasBlog,
+			has_invoice: hasInvoice,
+			has_cache: hasCache
 		};
 
 		// Set form.

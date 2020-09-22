@@ -335,6 +335,14 @@ if ( $show_content_warning ) {
 					<input type="checkbox" name="install-blog" value=true /> <?php echo $lang['Blog']; ?>
 					<div id="blog-toggle" class="toggle toggle-light"></div>
 				</div>
+				<div class="feature-option">
+					<input type="checkbox" name="install-invoice" value=true /> <?php esc_html_e( 'Invoice', 'boldgrid-inspirations' ); ?>
+					<div id="invoice-toggle" class="toggle toggle-light"></div>
+				</div>
+				<div class="feature-option">
+					<input type="checkbox" name="install-cache" value=true /> <?php esc_html_e( 'Cache', 'boldgrid-inspirations' ); ?>
+					<div id="cache-toggle" class="toggle toggle-light"></div>
+				</div>
 			</div>
 		</div>
 
