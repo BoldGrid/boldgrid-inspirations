@@ -24,7 +24,7 @@ class Utility {
 	 * @return object
 	 */
 	public static function get_latest_form() {
-		$forms_manager = new WeForms_Form_Manager();
+		$forms_manager = new \WeForms_Form_Manager();
 
 		return $forms_manager->all()['forms'][0];
 	}
@@ -41,6 +41,6 @@ class Utility {
 			require_once WP_PLUGIN_DIR . '/weforms/includes/admin/class-admin-tools.php';
 		}
 
-		return WeForms_Admin_Tools::import_json_file( $filepath );
+		return \WeForms_Admin_Tools::import_json_file( $filepath );
 	}
 }

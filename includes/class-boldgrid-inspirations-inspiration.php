@@ -434,6 +434,8 @@ public function include_admin_files() {
 	require_once BOLDGRID_BASE_DIR . '/includes/deploy/class-social-menu.php';
 	require_once BOLDGRID_BASE_DIR . '/includes/deploy/class-invoice.php';
 	require_once BOLDGRID_BASE_DIR . '/includes/deploy/class-cache.php';
+
+	require_once BOLDGRID_BASE_DIR . '/includes/weforms/class-utility.php';
 }
 
 /**
