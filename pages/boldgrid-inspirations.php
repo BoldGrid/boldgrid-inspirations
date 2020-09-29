@@ -338,10 +338,12 @@ if ( $show_content_warning ) {
 				<div class="feature-option">
 					<input type="checkbox" name="install-invoice" value=true /> <?php esc_html_e( 'Invoice', 'boldgrid-inspirations' ); ?>
 					<div id="invoice-toggle" class="toggle toggle-light"></div>
+					<img style="width: calc(100% - 10px); background: linear-gradient(#fff, #b9e4eb); padding: 0 5px; border-bottom: 1px solid #bbb;" src="<?php echo esc_url( BOLDGRID_BASE_URL . '/assets/images/inspirations/invoice/sprout-invoices.png' ); ?>" />
 				</div>
 				<div class="feature-option">
 					<input type="checkbox" name="install-cache" value=true /> <?php esc_html_e( 'Cache', 'boldgrid-inspirations' ); ?>
 					<div id="cache-toggle" class="toggle toggle-light"></div>
+					<img style="width: calc(100% - 20px); margin: 5px 10px 0 10px;" src="<?php echo esc_url( BOLDGRID_BASE_URL . '/assets/images/inspirations/cache/w3-total-cache.png' ); ?>" />
 				</div>
 			</div>
 		</div>

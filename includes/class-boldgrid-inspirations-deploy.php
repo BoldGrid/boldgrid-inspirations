@@ -1431,6 +1431,11 @@ class Boldgrid_Inspirations_Deploy {
 		if ( isset( $this->theme_details->homepage ) ) {
 			$this->set_custom_homepage();
 		}
+
+		// If we're installing the "Invoice" feature, do all the things now.
+		if ( $this->install_invoice ) {
+			$this->invoice->deploy( array( 'menu_id' => $menu_id ) );
+		}
 	}
 
 	/**
