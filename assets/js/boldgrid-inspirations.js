@@ -509,7 +509,7 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 			$( this ).after( '<span class="spinner inline spinner-left"></span>' );
 
 			// Uncomment for testing, deploy to new tab to quickly test deploy several times.
-			$( '#post_deploy' ).attr( 'target', '_blank' ); self.allActions( 'enable' );
+			// $( '#post_deploy' ).attr( 'target', '_blank' ); self.allActions( 'enable' );
 
 			$( '#post_deploy' ).submit();
 		} );
@@ -573,8 +573,8 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 	 */
 	this.onResize = function() {
 		/*
-		 * Pointers don't always do well when the window is resized. Elements my shift around on the
-		 * page and the points become "broken". If the user does resize the page while a pointer is
+		 * Pointers don't always do well when the window is resized. Elements may shift around on the
+		 * page and the pointers become "broken". If the user does resize the page while a pointer is
 		 * shown, just hide the pointer.
 		 */
 		self.closePointers();

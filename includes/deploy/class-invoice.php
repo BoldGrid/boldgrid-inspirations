@@ -37,7 +37,11 @@ class Invoice {
 	}
 
 	/**
+	 * Run the deployment of our invoicing plugin.
 	 *
+	 * @since SINCEVERSION
+	 *
+	 * @param array $args An array of arguments.
 	 */
 	public function deploy( $args = array() ) {
 		$this->install();
@@ -49,7 +53,7 @@ class Invoice {
 			return false;
 		}
 
-		// Insert our "Get a Quote" page. $form_id is used in get-a-quote.php below.
+		// Insert our "Get a Quote" page. $form->id is used in get-a-quote.php below.
 		$post = include 'invoice/posts/get-a-quote.php';
 		$post_id = wp_insert_post( $post );
 

@@ -245,7 +245,7 @@ class Boldgrid_Inspirations_Deploy {
 	 *
 	 * @since  SINCEVERSION
 	 * @access public
-	 * @var    bool True to install a sample blog.
+	 * @var    bool True to install an invoicing plugin.
 	 */
 	public $install_invoice = false;
 
@@ -254,7 +254,7 @@ class Boldgrid_Inspirations_Deploy {
 	 *
 	 * @since  SINCEVERSION
 	 * @access public
-	 * @var    bool True to install a sample blog.
+	 * @var    bool True to install a caching plugin.
 	 */
 	public $install_cache = false;
 

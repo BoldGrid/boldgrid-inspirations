@@ -37,7 +37,9 @@ class Cache {
 	}
 
 	/**
+	 * Install our caching plugin.
 	 *
+	 * @since SINCEVERSION
 	 */
 	public function install() {
 		$data = (object) [

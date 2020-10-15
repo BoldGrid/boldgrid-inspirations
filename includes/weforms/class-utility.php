@@ -26,9 +26,9 @@ class Utility {
 	public static function get_all_forms() {
 		$forms_manager = new \WeForms_Form_Manager();
 
-		$all_forms = $forms_manager->all()['forms'];
+		$all_forms = $forms_manager->all();
 
-		return empty( $all_forms ) ? array() : $all_forms;
+		return empty( $all_forms['forms'] ) ? array() : $all_forms['forms'];
 	}
 
 	/**
