@@ -37,6 +37,10 @@ class Utility {
 	 * @return bool Status of import.
 	 */
 	public static function import_json_file( $filepath ) {
+		if ( ! class_exists( 'WeForms_Form' ) ) {
+			require_once WP_PLUGIN_DIR . '/weforms/includes/class-form.php';
+		}
+
 		if ( ! class_exists( 'WeForms_Admin_Tools' ) ) {
 			require_once WP_PLUGIN_DIR . '/weforms/includes/admin/class-admin-tools.php';
 		}

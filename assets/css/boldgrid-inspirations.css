@@ -91,7 +91,6 @@ body.bginsp-full-screen {
 }
 
 .pageset-option,
-.feature-option,
 .sub-category {
 	cursor: pointer;
 }
@@ -415,6 +414,34 @@ body.waiting .pointer {
 	transition: width .3s;
 }
 
+
+/**
+ * Features.
+ *
+ * For example, "Blog" and "Invoice".
+ */
+
+.feature-option .help p {
+	padding: 0 10px;
+	margin-bottom: 0;
+	font-size: 12px;
+}
+
+.feature-option [data-id="bginsp-invoice"] img {
+	width: calc(100% - 10px);
+	background: linear-gradient( #fff, #b9e4eb );
+	padding: 0 5px;
+	border-bottom: 1px solid #bbb;
+}
+
+.feature-option [data-id="bginsp-cache"] img {
+	width: calc(100% - 20px);
+	padding: 10px 10px 0 10px;
+	display: block;
+	background: linear-gradient( #fff 70%, #ccc );
+	border-bottom: 1px solid #bbb;
+	margin-bottom: -0.5em;
+}
 
 /**
  * #.# Toggles

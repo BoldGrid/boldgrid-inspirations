@@ -113,6 +113,16 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 	self.$wrap = $( '.wrap' );
 
 	/**
+	 * An array of elements with pointers.
+	 *
+	 * For example, the "cache" feature will be added here if clicked. Usefull to know all pointers
+	 * so we can take action on them all at once - like closing them.
+	 *
+	 * @since SINCEVERSION
+	 */
+	self.pointers = [];
+
+	/**
 	 * Enable or disable all actions on the page.
 	 *
 	 * The "body .waiting" class adds the "wait" icon to various elements on the page.
@@ -163,6 +173,17 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 	};
 
 	/**
+	 * Close all pointers on the page.
+	 *
+	 * @since SINCEVERSION
+	 */
+	this.closePointers = function() {
+		self.pointers.forEach( function( $element ) {
+			$element.pointer( 'close' );
+		});
+	}
+
+	/**
 	 *
 	 */
 	this.toggleCheckbox = function() {
@@ -180,7 +201,8 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 	this.toggleFeature = function( $feature ) {
 		var $featureInput = $feature.find( 'input[type="checkbox"]' ),
 			$toggle = $feature.find( '.toggle' ).data( 'toggles' ),
-			newCheckedProp = ! $featureInput.is( ':checked' );
+			newCheckedProp = ! $featureInput.is( ':checked' ),
+			maybeLoadBuild = "true" !== $feature.attr( "data-no-build" );
 
 		// If we're waiting on something, don't allow the user to toggle features.
 		if ( $( 'body' ).hasClass( 'waiting' ) ) {
@@ -191,7 +213,46 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 
 		$toggle.toggle( newCheckedProp );
 
-		self.loadBuild();
+		// Not all features require a new build (IE adding a caching plugin doesn't need another preview).
+		if ( maybeLoadBuild ) {
+			self.loadBuild();
+		}
+	};
+
+	/**
+	 * Toggle feature pointer.
+	 *
+	 * For example, if someone selects "cache", we need to show them a pointer that says the preview
+	 * won't update because [...].
+	 *
+	 * @since SINCEVERSION
+	 *
+	 * @param jQuery object $feature The feature clicked.
+	 */
+	this.toggleFeaturePointer = function( $feature ) {
+		var id = $feature.attr('id'),
+			hasPointer = $feature.is( "[data-shown-pointer]" ),
+			hasPointerContent = typeof Inspiration.pointers[id] !== 'undefined',
+			hasBeenShown = 'true' === $feature.attr( 'data-shown-pointer' );
+
+		if ( ! hasPointer || ! hasPointerContent || hasBeenShown ) {
+			return;
+		}
+
+		$feature
+			.pointer({
+				content: Inspiration.pointers[id],
+				position: {
+					edge: 'left',
+					align: 'center'
+				},
+			})
+			.pointer( 'open' );
+
+		// Flag that we've shown this pointer.
+		$feature.attr( 'data-shown-pointer', 'true' );
+
+		self.pointers.push( $feature );
 	};
 
 	/**
@@ -382,9 +443,14 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 		self.$wrap.on( 'click', '#try-build-again', self.loadBuild );
 
 		// During step 2, you can toggle build features (like a blog). Handle click of those features.
-		self.$wrap.on( 'click', '.feature-option', function() {
-			var $feature = $( this );
+		self.$wrap.on( 'click', '.feature-option .toggle', function() {
+			var $feature = $( this ).closest( '.feature-option' );
+
 			self.toggleFeature( $feature );
+
+			// We don't want to have Pointers stack on top of each other.
+			self.closePointers();
+			self.toggleFeaturePointer( $feature );
 		} );
 
 		/*
@@ -413,6 +479,8 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 			var $checkbox = $( this );
 			self.surveyToggleDisplay( $checkbox );
 		} );
+
+		self.$wrap.on( 'click', '.dashicons-editor-help', self.onClickHelp );
 	};
 
 	/**
@@ -481,6 +549,22 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 	};
 
 	/**
+	 * @summary Actions to take when help buttons are clicked.
+	 *
+	 * IE help button next to Functionality / Invoice.
+	 *
+	 * @since SINCEVERSION
+	 */
+	this.onClickHelp = function() {
+		/*
+		 * Close all pointers. UX is off when "cache" is expanded and the pointer is showing for it,
+		 * but then the user clicks the help button for "invoice" and pushes everything down except
+		 * for the pointer.
+		 */
+		self.closePointers();
+	},
+
+	/**
 	 * @summary Actions to take when the window is resized.
 	 *
 	 * This method is triggered from init().
@@ -488,22 +572,23 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 	 * @since 1.2.5
 	 */
 	this.onResize = function() {
-
 		/*
-		 * When the window is resized, wait 0.4 seconds and readjust the highlighted device preview
-		 * button.
+		 * Pointers don't always do well when the window is resized. Elements my shift around on the
+		 * page and the points become "broken". If the user does resize the page while a pointer is
+		 * shown, just hide the pointer.
 		 */
-		$( window ).resize( function() {
-			clearTimeout( $.data( this, 'resizeTimer' ) );
+		self.closePointers();
 
-			$.data(
-				this,
-				'resizeTimer',
-				setTimeout( function() {
-					self.highlightDeviceButton();
-				}, 400 )
-			);
-		} );
+
+		// Wait 0.4 seconds and readjust the highlighted device preview button.
+		clearTimeout( $.data( this, 'resizeTimer' ) );
+		$.data(
+			this,
+			'resizeTimer',
+			setTimeout( function() {
+				self.highlightDeviceButton();
+			}, 400 )
+		);
 	};
 
 	/**
@@ -1062,8 +1147,13 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 		window.location.href = Inspiration.myInspirationUrl;
 	};
 
+	/**
+	 * Init the Inspirations page.
+	 */
 	this.initInspirationsPage = function() {
 		self.bindClicks();
+
+		$( window ).on( 'resize', self.onResize );
 
 		var promptingForKey = self.$wrap.find( '#screen-api-key' ).length;
 		if ( promptingForKey ) {
@@ -1455,8 +1545,7 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 			// Should our request for a build be for a generic build?
 			requestGeneric = false,
 			hasBlog = $( '[name="install-blog"]' ).is( ':checked' ),
-			hasInvoice = $( '[name="install-invoice"]' ).is( ':checked' ),
-			hasCache = $( '[name="install-cache"]' ).is( ':checked' );
+			hasInvoice = $( '[name="install-invoice"]' ).is( ':checked' );
 
 		/*
 		 * By default, we will not request a generic build. The only time we will request a generic
@@ -1464,8 +1553,9 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 		 * # Pageset:		Default
 		 * # Coin budget:	20
 		 * # Blog:			False
+		 * # Invoice:       False
 		 */
-		if ( '1' === self.$pageset.attr( 'data-is-default' ) && ! hasBlog ) {
+		if ( '1' === self.$pageset.attr( 'data-is-default' ) && ! hasBlog && ! hasInvoice ) {
 			requestGeneric = true;
 		}
 
@@ -1535,8 +1625,7 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 			is_generic: requestGeneric,
 
 			has_blog: hasBlog,
-			has_invoice: hasInvoice,
-			has_cache: hasCache
+			has_invoice: hasInvoice
 		};
 
 		// Set form.

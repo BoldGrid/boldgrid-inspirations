@@ -603,6 +603,10 @@ class Boldgrid_Inspirations_Built {
 				'tryFewMinutes'           => __( 'Please try again in a few minutes.', 'boldgrid-inspirations' ),
 				'tryFewSeconds'           => __( 'Please try again in a few seconds.', 'boldgrid-inspirations' ),
 				'tryAgain'                => __( 'Try again', 'boldgrid-inspirations' ),
+				'pointers'                => array(
+					'feature_option_cache' => '<h3>' . esc_html__( 'No Preview Update Needed', 'boldgrid-inspirations' ) . '</h3>' .
+						'<p>' . esc_html__( 'W3 Total Cache speeds up your website, but doesn\'t change how it looks. Your Inspirations Preview won\'t update, but W3 Total Cache will be installed with your Inspirations!', 'boldgrid-inspirations' ) . '</p>',
+				),
 			)
 		);
 

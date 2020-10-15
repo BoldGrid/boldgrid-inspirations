@@ -336,14 +336,25 @@ if ( $show_content_warning ) {
 					<div id="blog-toggle" class="toggle toggle-light"></div>
 				</div>
 				<div class="feature-option">
-					<input type="checkbox" name="install-invoice" value=true /> <?php esc_html_e( 'Invoice', 'boldgrid-inspirations' ); ?>
+					<input type="checkbox" name="install-invoice" value=true />
+					<?php esc_html_e( 'Invoice', 'boldgrid-inspirations' ); ?>
+					<span class="dashicons dashicons-editor-help" data-id="bginsp-invoice"></span>
 					<div id="invoice-toggle" class="toggle toggle-light"></div>
-					<img style="width: calc(100% - 10px); background: linear-gradient(#fff, #b9e4eb); padding: 0 5px; border-bottom: 1px solid #bbb;" src="<?php echo esc_url( BOLDGRID_BASE_URL . '/assets/images/inspirations/invoice/sprout-invoices.png' ); ?>" />
+
+					<div class="help" data-id="bginsp-invoice">
+						<p><?php esc_html_e( 'With Sprout Invoices, you can create beautiful estimates and invoices for your clients in minutes, and get paid easily.', 'boldgrid-inspirations' ); ?></p>
+						<img src="<?php echo esc_url( BOLDGRID_BASE_URL . '/assets/images/inspirations/invoice/sprout-invoices.png' ); ?>" />
+					</div>
 				</div>
-				<div class="feature-option">
-					<input type="checkbox" name="install-cache" value=true /> <?php esc_html_e( 'Cache', 'boldgrid-inspirations' ); ?>
+				<div class="feature-option" id="feature_option_cache" data-shown-pointer=false data-no-build="true">
+					<input type="checkbox" name="install-cache" value=true /> <?php esc_html_e( 'Speed Boost', 'boldgrid-inspirations' ); ?>
+					<span class="dashicons dashicons-editor-help" data-id="bginsp-cache"></span>
 					<div id="cache-toggle" class="toggle toggle-light"></div>
-					<img style="width: calc(100% - 20px); margin: 5px 10px 0 10px;" src="<?php echo esc_url( BOLDGRID_BASE_URL . '/assets/images/inspirations/cache/w3-total-cache.png' ); ?>" />
+
+					<div class="help" data-id="bginsp-cache">
+						<p><?php esc_html_e( 'Faster website = better search rankings, more visitors, increased revenue and more. W3 Total Cache speeds up your WordPress website by reducing its download time, which makes your page load extremely fast.', 'boldgrid-inspirations' ); ?></p>
+						<img src="<?php echo esc_url( BOLDGRID_BASE_URL . '/assets/images/inspirations/cache/w3-total-cache.png' ); ?>" />
+					</div>
 				</div>
 			</div>
 		</div>
