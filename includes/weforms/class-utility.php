@@ -17,17 +17,42 @@ namespace Boldgrid\Inspirations\Weforms;
  */
 class Utility {
 	/**
-	 * Get the last form created.
+	 * Get all forms.
 	 *
 	 * @since SINCEVERSION
 	 *
-	 * @return object
+	 * @return array
 	 */
-	public static function get_latest_form() {
+	public static function get_all_forms() {
 		$forms_manager = new \WeForms_Form_Manager();
 
-		return $forms_manager->all()['forms'][0];
+		$all_forms = $forms_manager->all()['forms'];
+
+		return empty( $all_forms ) ? array() : $all_forms;
 	}
+
+	/**
+	 * Get a form by title.
+	 *
+	 * Returns the first form that matches.
+	 *
+	 * @since SINCEVERSION
+	 *
+	 * @param string $title
+	 * @return mixed WeForms_Form Object on success, false when not found.
+	 */
+	public static function get_by_title( $title ) {
+		$all_forms = self::get_all_forms();
+
+		foreach ( $all_forms as $form ) {
+			if ( $title === $form->data->post_title ) {
+				return $form;
+			}
+		}
+
+		return false;
+	}
+
 	/**
 	 * Import a json file.
 	 *

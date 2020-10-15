@@ -44,7 +44,10 @@ class Invoice {
 
 		// Import our weForms form and get the id.
 		\Boldgrid\Inspirations\Weforms\Utility::import_json_file( dirname( __FILE__ ) . '/invoice/forms/get-a-quote.json' );
-		$form_id = \Boldgrid\Inspirations\Weforms\Utility::get_latest_form()->id;
+		$form = \Boldgrid\Inspirations\Weforms\Utility::get_by_title( 'Get a Quote Form' );
+		if ( empty( $form->id ) ) {
+			return false;
+		}
 
 		// Insert our "Get a Quote" page. $form_id is used in get-a-quote.php below.
 		$post = include 'invoice/posts/get-a-quote.php';

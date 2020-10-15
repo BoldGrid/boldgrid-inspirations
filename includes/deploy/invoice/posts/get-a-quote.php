@@ -15,7 +15,7 @@ $post = array(
 <div class="col-md-12 col-xs-12 col-sm-12">
 <p>&nbsp;</p>
 <p class="">Are you looking to get a quote for our services? Please fill out the form below and provide us with all necessary information for us to generate a quote. We will get back with you within 1 to 2 business days.</p>
-<p class="">[weforms id="' . $form_id . '"]</p>
+<p class="">[weforms id="' . $form->id . '"]</p>
 </div>
 </div>
 </div>
