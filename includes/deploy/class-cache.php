@@ -54,5 +54,8 @@ class Cache {
 			null,
 			$data
 		);
+
+		$slug = explode( '/', $data->plugin_activate_path )[0];
+		$this->deploy->messages->print_plugin( $data->plugin_title, $slug );
 	}
 }
