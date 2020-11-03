@@ -64,6 +64,8 @@ class Boldgrid_Inspirations_Deploy_Post {
 	 * These hooks are added via the Boldgrid_Inspirations_Inspiration class, within its
 	 * add_hooks_always method. These hooks are added regardless of is_admin().
 	 *
+	 * This method is ran within the "init" filter. Keep this in mind when adding filters below.
+	 *
 	 * @since 1.7.0
 	 */
 	public function add_hooks() {
@@ -71,6 +73,10 @@ class Boldgrid_Inspirations_Deploy_Post {
 
 		if ( $this->is_post_deploy ) {
 			add_filter( 'after_switch_theme', array( $this, 'install_widgets' ), 15 );
+
+			if ( ! empty( $_POST['install_cache'] ) ) {
+				add_filter( 'wp_loaded', '\Boldgrid\Inspirations\W3TC\Utility::deploy_post_setup' );
+			}
 		}
 	}
 

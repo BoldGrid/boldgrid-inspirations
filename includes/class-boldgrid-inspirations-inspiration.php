@@ -441,6 +441,8 @@ public function include_admin_files() {
 	require_once BOLDGRID_BASE_DIR . '/includes/weforms/class-utility.php';
 
 	require_once BOLDGRID_BASE_DIR . '/includes/sprout/class-utility.php';
+
+	require_once BOLDGRID_BASE_DIR . '/includes/w3tc/class-utility.php';
 }
 
 /**

@@ -1575,6 +1575,7 @@ class Boldgrid_Inspirations_Deploy {
 				'method'  => 'POST',
 				'body'    => array(
 					'dummy_post_data' => 'Dummy post data',
+					'install_cache'   => $this->install_cache,
 				),
 			)
 		);
