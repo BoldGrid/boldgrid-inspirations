@@ -606,6 +606,8 @@ class Boldgrid_Inspirations_Built {
 				'pointers'                => array(
 					'feature_option_cache' => '<h3>' . esc_html__( 'No Preview Update Needed', 'boldgrid-inspirations' ) . '</h3>' .
 						'<p>' . esc_html__( 'W3 Total Cache speeds up your website, but doesn\'t change how it looks. Your Inspirations Preview won\'t update, but W3 Total Cache will be installed with your Inspirations!', 'boldgrid-inspirations' ) . '</p>',
+					'feature_option_invoice' => '<h3>' . esc_html__( 'Adding a new "Get a Quote" page...', 'boldgrid-inspirations' ) . '</h3>' .
+						'<p>' . esc_html__( 'Your Inspirations preview site is being rebuilt and will include a new "Get a Quote" page.', 'boldgrid-inspirations' ) . '</p>',
 				),
 			)
 		);
