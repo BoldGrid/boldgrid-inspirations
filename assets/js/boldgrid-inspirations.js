@@ -8,6 +8,65 @@ var IMHWPB = IMHWPB || {};
  * @since 1.2.3
  *
  * @memberof IMHWPB
+ *
+ * Methods:
+ * # allActions
+ * # chooseTheme
+ * # closePointers
+ * # toggleCheckbox
+ * # toggleFeature
+ * # toggleFeaturePointer
+ * # devicePreviews
+ * # fancybox
+ * # fanceboxSelect
+ * # backButton
+ * # bindClicks
+ * # bindInstallModal
+ * # isMobile
+ * # mobileToggle
+ * # mobileCollapse
+ * # mobileMenuToggle
+ * # onClickHelp
+ * # onResize
+ * # processResellerMeta
+ * # showAll
+ * # socialMediaAdd
+ * # socialMediaDefaults
+ * # socialMediaRemove
+ * # sortAll
+ * # sortCategories
+ * # sortThemes
+ * # toggleShowAll
+ * # updateFilterText
+ * # subcategories
+ * # surveyToggleDisplay
+ * # switchAttributes
+ * # selectTheme
+ * # setDistinctThemes
+ * # hoverColors
+ * # highlightDeviceButton
+ * # pagesetOptions
+ * # removeCategory
+ * # coinOptions
+ * # iframeLoad
+ * # steps
+ * # init
+ * # initDeployPage
+ * # initDeployFinish
+ * # initInspirationsPage
+ * # newKeyAdded
+ * # bindOverwriteCheck
+ * # initCategories
+ * # initFeatureToggles
+ * # initPagesets
+ * # initThemes
+ * # loadBuild
+ * # loadBuildFail
+ * # initFullScreen
+ * # toggleStep
+ * # toggleSubCategory
+ * # validateContact
+ * # getAllScreens
  */
 IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 	var self = this;
@@ -590,6 +649,20 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 			}, 400 )
 		);
 	};
+
+	/**
+	 * @summary Process reseller meta data when we get it.
+	 *
+	 * @since SINCEVERSION
+	 *
+	 * @param object meta An object of reseller meta data.
+	 */
+	this.processResellerMeta = function( meta ) {
+		// By default, caching feature is shown. Only hide if explicitly asked to hide.
+		if ( meta.allow_insp_cache !== undefined && 0 == meta.allow_insp_cache ) {
+			$( '#feature_option_cache' ).hide();
+		}
+	}
 
 	/**
 	 * @summary Handles the Show All filter.
@@ -1309,6 +1382,14 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 			self.sortCategories( 'data-display-order' );
 
 			self.initThemes();
+
+			/*
+			 * If we have reseller data, take action on it now. Having reseller data returned with a
+			 * call to get categories is unexpected, be on the lookout if that is refactored.
+			 */
+			if ( msg.result.data.reseller_meta !== undefined ) {
+				self.processResellerMeta( msg.result.data.reseller_meta );
+			}
 		};
 
 		self.ajax.ajaxCall(
@@ -1757,6 +1838,12 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 		 * Essentially we're changing the height from 99% to 100%, which gets them showing again.
 		 */
 		self.$themePreview.css( 'height', previewHeight );
+
+		/*
+		 * Hide all pointers. A pointer on one step shouldn't show when we go to the next step. IE the
+		 * pointer explaining the cache feature should not show once we've clicked onward to the next step.
+		 */
+		self.closePointers();
 	};
 
 	/**
