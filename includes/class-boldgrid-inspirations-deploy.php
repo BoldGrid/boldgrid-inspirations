@@ -2325,6 +2325,8 @@ class Boldgrid_Inspirations_Deploy {
 		}
 
 		$this->finish_deployment();
+
+		return true;
 	}
 
 	/**
@@ -2381,7 +2383,14 @@ class Boldgrid_Inspirations_Deploy {
 		 */
 		add_filter( 'wp_kses_allowed_html', array( $this, 'filter_allowed_html', ), 10, 2 );
 
-		$this->full_deploy();
+		$success = $this->full_deploy();
+
+		/*
+		 * Add a hidden var to show whether or not deployment was a success. Inspirations by default
+		 * redirects the user to the "My Inspirations" page after the deployment is finished. But, if
+		 * the install failed, it shouldn't redirect so we can see error messages.
+		 */
+		echo '<input type="hidden" name="deployment_success" value="' . ( $success ? 1 : 0 ) . '" />';
 
 		// Save report to the log.
 		if ( ! empty( $boldgrid_configs['xhprof'] ) && extension_loaded( 'xhprof' ) ) {

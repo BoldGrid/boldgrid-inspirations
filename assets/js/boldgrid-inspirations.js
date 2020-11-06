@@ -1219,6 +1219,12 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 	 * @since 1.7.0
 	 */
 	this.onDeployFinish = function() {
+		var $success = $( '[name=deployment_success]' ),
+			/*
+			 * A successful deployment is assumed / we don't require [name=deployment_success] to be
+			 * there telling us it was successful.
+			 */
+			success = ! ( 1 === $success.length && 0 == $success.val() );
 
 		/*
 		 * Redirect the user to the My Inspirations page.
@@ -1227,7 +1233,9 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 		 * deploying page show items as they're being installed. Sometimes they will just see the
 		 * whole page load at once.
 		 */
-		window.location.href = Inspiration.myInspirationUrl;
+		if ( success ) {
+			window.location.href = Inspiration.myInspirationUrl;
+		}
 	};
 
 	/**
