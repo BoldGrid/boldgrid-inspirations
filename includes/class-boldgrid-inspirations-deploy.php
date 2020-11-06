@@ -1020,11 +1020,8 @@ class Boldgrid_Inspirations_Deploy {
 								'abort_if_destination_exists' => false
 							) );
 
-						$this->theme_name = $upgrader->result['destination_name'];
-
-						// If Theme_Upgrader::install reports failure or we have no theme name, then
-						// something went wrong.
-						if ( ( ! $wp_theme_install_success || empty( $this->theme_name ) ) ) {
+						// Take action based on whether or not the theme installed.
+						if ( ! $wp_theme_install_success || is_wp_error( $wp_theme_install_success ) ) {
 							delete_theme( $this->theme_details->theme->Name );
 
 							$theme_installation_failed_attemps ++;
