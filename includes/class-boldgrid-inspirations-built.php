@@ -571,6 +571,17 @@ class Boldgrid_Inspirations_Built {
 	 * @since 1.7.0
 	 */
 	public function enqueue_inspirations_js( $in_footer = true ) {
+		/*
+		 * Inspirations may install an invoicing or caching plugin. Get those classes now so later we
+		 * can check if either of the plugins are active.
+		 */
+		$invoice_plugin = null;
+		$cache_plugin   = null;
+		if ( class_exists( '\Boldgrid\Library\Library\Plugin\Factory' ) ) {
+			$invoice_plugin = \Boldgrid\Library\Library\Plugin\Factory::create( 'sprout-invoices' );
+			$cache_plugin   = \Boldgrid\Library\Library\Plugin\Factory::create( 'w3-total-cache' );
+		}
+
 		$handle = 'boldgrid-inspirations';
 
 		wp_register_script( $handle,
@@ -609,6 +620,9 @@ class Boldgrid_Inspirations_Built {
 					'feature_option_invoice' => '<h3>' . esc_html__( 'Adding a new "Get a Quote" page...', 'boldgrid-inspirations' ) . '</h3>' .
 						'<p>' . esc_html__( 'Your Inspirations preview site is being rebuilt and will include a new "Get a Quote" page.', 'boldgrid-inspirations' ) . '</p>',
 				),
+				// If the caching or invoice plugin are already active, we won't show them as choices.
+				'cache_active'            => empty( $cache_plugin ) ? false : $cache_plugin->isActive(),
+				'invoice_active'          => empty( $invoice_plugin ) ? false : $invoice_plugin->isActive(),
 			)
 		);
 

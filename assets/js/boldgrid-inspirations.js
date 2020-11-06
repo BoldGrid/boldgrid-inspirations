@@ -658,7 +658,12 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 	 * @param object meta An object of reseller meta data.
 	 */
 	this.processResellerMeta = function( meta ) {
-		// By default, caching feature is shown. Only hide if explicitly asked to hide.
+		/*
+		 * By default, caching feature is shown. Only hide if explicitly asked to hide.
+		 *
+		 * This method is only hiding caching / invoices features. If we one day need to show them,
+		 * please see self.initFeatureToggles() as they may have been hidden there.
+		 */
 		if ( meta.allow_insp_cache !== undefined && 0 == meta.allow_insp_cache ) {
 			$( '#feature_option_cache' ).hide();
 		}
@@ -1413,6 +1418,18 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 	 * @since 1.3.7
 	 */
 	this.initFeatureToggles = function() {
+		/*
+		 * If the invoice / caching plugin are already installed, we won't show them as choices to the
+		 * user. We'll continue to bind them below, as maybe they'll get shown at some point again.
+		 */
+		if ( Inspiration.invoice_active ) {
+			$( '#feature_option_invoice' ).hide();
+		}
+
+		if ( Inspiration.cache_active ) {
+			$( '#feature_option_cache' ).hide();
+		}
+
 		$( '#blog-toggle' )
 			.toggles( {
 				checkbox: $( '[name="install-blog"]' ),
