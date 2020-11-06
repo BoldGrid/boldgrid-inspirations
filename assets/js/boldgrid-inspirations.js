@@ -662,6 +662,11 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 		if ( meta.allow_insp_cache !== undefined && 0 == meta.allow_insp_cache ) {
 			$( '#feature_option_cache' ).hide();
 		}
+
+		// By default, invoice feature is shown. Only hide if explicitly asked to hide.
+		if ( meta.allow_insp_invoice !== undefined && 0 == meta.allow_insp_invoice ) {
+			$( '#feature_option_invoice' ).hide();
+		}
 	}
 
 	/**
