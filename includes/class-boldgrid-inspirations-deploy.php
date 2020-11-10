@@ -801,6 +801,8 @@ class Boldgrid_Inspirations_Deploy {
 			'is_staged'          => ! empty( $_POST['staging'] ) ? trim( $_POST['staging'] ) : null,
 			'key'                => ! empty( $api_key_hash ) ? $api_key_hash : null,
 			'site_hash'          => ! empty( $boldgrid_configs['site_hash'] ) ? $boldgrid_configs['site_hash'] : null,
+			// Misc.
+			'has_cache'          => $this->install_cache,
 		);
 
 		$this->theme_details = $this->api->get_theme_details( $args );
