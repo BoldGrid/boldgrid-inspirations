@@ -43,4 +43,29 @@ class Utility {
 			$config->save();
 		}
 	}
+
+	/**
+	 * Get an instace of \Boldgrid\Library\Library\Plugin for this plugin.
+	 *
+	 * @since SINCEVERSION
+	 *
+	 * @return \Boldgrid\Library\Library\Plugin
+	 */
+	public static function get_plugin() {
+		return \Boldgrid\Library\Library\Plugin\Factory::create( 'w3-total-cache' );
+	}
+
+	/**
+	 * Whether or not W3TC was installed during a deployment.
+	 *
+	 * @since SINCEVERSION
+	 *
+	 * @return bool
+	 */
+	public static function is_deploy() {
+		$installed = new \Boldgrid_Inspirations_Installed();
+		$option    = $installed->get_install_option( 'install_cache' );
+
+		return ! empty( $option );
+	}
 }

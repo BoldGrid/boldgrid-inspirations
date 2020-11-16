@@ -578,8 +578,8 @@ class Boldgrid_Inspirations_Built {
 		$invoice_plugin = null;
 		$cache_plugin   = null;
 		if ( class_exists( '\Boldgrid\Library\Library\Plugin\Factory' ) ) {
-			$invoice_plugin = \Boldgrid\Library\Library\Plugin\Factory::create( 'sprout-invoices' );
-			$cache_plugin   = \Boldgrid\Library\Library\Plugin\Factory::create( 'w3-total-cache' );
+			$invoice_plugin = \Boldgrid\Inspirations\Sprout\Utility::get_plugin();
+			$cache_plugin   = \Boldgrid\Inspirations\W3TC\Utility::get_plugin();
 		}
 
 		$handle = 'boldgrid-inspirations';
