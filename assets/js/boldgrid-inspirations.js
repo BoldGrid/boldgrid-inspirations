@@ -615,12 +615,20 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 	 * @since SINCEVERSION
 	 */
 	this.onClickHelp = function() {
+		// Other plugins may be using "data-id", "bginsp" was added for specificity.
+		var id = $( this ).attr( 'data-bginsp-id' );
+
 		/*
 		 * Close all pointers. UX is off when "cache" is expanded and the pointer is showing for it,
 		 * but then the user clicks the help button for "invoice" and pushes everything down except
 		 * for the pointer.
 		 */
 		self.closePointers();
+
+		// Toggle the help text.
+		if ( id !== undefined ) {
+			$( '.help[data-bginsp-id="' + id + '"]' ).slideToggle();
+		}
 	},
 
 	/**

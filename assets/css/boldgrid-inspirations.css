@@ -427,14 +427,14 @@ body.waiting .pointer {
 	font-size: 12px;
 }
 
-.feature-option [data-id="bginsp-invoice"] img {
+.feature-option [data-bginsp-id="bginsp-invoice"] img {
 	width: calc(100% - 10px);
 	background: linear-gradient( #fff, #b9e4eb );
 	padding: 0 5px;
 	border-bottom: 1px solid #bbb;
 }
 
-.feature-option [data-id="bginsp-cache"] img {
+.feature-option [data-bginsp-id="bginsp-cache"] img {
 	width: calc(100% - 20px);
 	padding: 10px 10px 0 10px;
 	display: block;
@@ -697,6 +697,11 @@ http://ivomynttinen.com/blog/the-ios-design-cheat-sheet-volume-2
 
 /* Hide all notices except the Connect Key prompt. */
 .notice:not( #container_boldgrid_api_key_notice ):not( .bginsp-deploy-notice ) {
+	display: none;
+}
+
+/* By default, toggleable help content is hidden. */
+.help[data-bginsp-id] {
 	display: none;
 }
 
