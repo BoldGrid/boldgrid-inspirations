@@ -563,6 +563,13 @@ class Boldgrid_Inspirations_Update {
 					if ( isset( $transient->response[ $slug ] ) ) {
 						unset( $transient->response[ $slug ] );
 					}
+
+					/*
+					 * In order for a theme to be compatible with the Auto Updates UI
+					 * in WordPress 5.5, it must return a no_update value in this transient
+					 * when there are no updates available
+					 */
+					$transient->no_update[ $slug ] = $installed_theme;
 				}
 			}
 		}
