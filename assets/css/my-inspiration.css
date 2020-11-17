@@ -24,13 +24,49 @@
 	width: calc( 33.5% - 7.5px );
 }
 
-#wpbody-content #dashboard-widgets #postbox-container-5 { /* The full width at the bottom of the page. */
+#wpbody-content #dashboard-widgets #postbox-container-5,
+#wpbody-content #dashboard-widgets #postbox-container-6 { /* The full width at the bottom of the page. */
 	width: 100%;
 }
+
+/* The invoice / cache container is most likely to be empty. Avoid ugly UI, hide it if it's empty. */
+#container6-sortables.empty-container {
+	display: none;
+}
+
+
+/**
+ * Postboxes.
+ */
 
 .postbox {
 	min-width: unset;
 }
+
+#wpbody-content #dashboard-widgets #postbox-container-6 .postbox {
+	width: 303px;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 27px;
+}
+
+
+/**
+ * Postbox content.
+ */
+
+.myinsp-logo {
+	max-height: 40px;
+}
+
+#postbox-container-2 .button:first-of-type {
+	margin-bottom: 5px; /* If "Go to Pages / Posts" buttons stack, ensure there's space between them. */
+}
+
+
+/**
+ * Media queries.
+ */
 
 /* The point the WordPress dashboard hides the left nav. */
 @media screen and (max-width: 782px) {
@@ -66,13 +102,4 @@
 
 #screen-options-wrap .dashicons-editor-help {
 	display: none;
-}
-
-
-/**
- * #.# Misc.
- */
-
-#postbox-container-2 .button:first-of-type {
-	margin-bottom: 5px; /* If "Go to Pages / Posts" buttons stack, ensure there's space between them. */
 }

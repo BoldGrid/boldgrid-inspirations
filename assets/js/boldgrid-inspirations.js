@@ -8,6 +8,65 @@ var IMHWPB = IMHWPB || {};
  * @since 1.2.3
  *
  * @memberof IMHWPB
+ *
+ * Methods:
+ * # allActions
+ * # chooseTheme
+ * # closePointers
+ * # toggleCheckbox
+ * # toggleFeature
+ * # toggleFeaturePointer
+ * # devicePreviews
+ * # fancybox
+ * # fanceboxSelect
+ * # backButton
+ * # bindClicks
+ * # bindInstallModal
+ * # isMobile
+ * # mobileToggle
+ * # mobileCollapse
+ * # mobileMenuToggle
+ * # onClickHelp
+ * # onResize
+ * # processResellerMeta
+ * # showAll
+ * # socialMediaAdd
+ * # socialMediaDefaults
+ * # socialMediaRemove
+ * # sortAll
+ * # sortCategories
+ * # sortThemes
+ * # toggleShowAll
+ * # updateFilterText
+ * # subcategories
+ * # surveyToggleDisplay
+ * # switchAttributes
+ * # selectTheme
+ * # setDistinctThemes
+ * # hoverColors
+ * # highlightDeviceButton
+ * # pagesetOptions
+ * # removeCategory
+ * # coinOptions
+ * # iframeLoad
+ * # steps
+ * # init
+ * # initDeployPage
+ * # initDeployFinish
+ * # initInspirationsPage
+ * # newKeyAdded
+ * # bindOverwriteCheck
+ * # initCategories
+ * # initFeatureToggles
+ * # initPagesets
+ * # initThemes
+ * # loadBuild
+ * # loadBuildFail
+ * # initFullScreen
+ * # toggleStep
+ * # toggleSubCategory
+ * # validateContact
+ * # getAllScreens
  */
 IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 	var self = this;
@@ -113,6 +172,16 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 	self.$wrap = $( '.wrap' );
 
 	/**
+	 * An array of elements with pointers.
+	 *
+	 * For example, the "cache" feature will be added here if clicked. Usefull to know all pointers
+	 * so we can take action on them all at once - like closing them.
+	 *
+	 * @since SINCEVERSION
+	 */
+	self.pointers = [];
+
+	/**
 	 * Enable or disable all actions on the page.
 	 *
 	 * The "body .waiting" class adds the "wait" icon to various elements on the page.
@@ -163,6 +232,17 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 	};
 
 	/**
+	 * Close all pointers on the page.
+	 *
+	 * @since SINCEVERSION
+	 */
+	this.closePointers = function() {
+		self.pointers.forEach( function( $element ) {
+			$element.pointer( 'close' );
+		});
+	}
+
+	/**
 	 *
 	 */
 	this.toggleCheckbox = function() {
@@ -180,7 +260,8 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 	this.toggleFeature = function( $feature ) {
 		var $featureInput = $feature.find( 'input[type="checkbox"]' ),
 			$toggle = $feature.find( '.toggle' ).data( 'toggles' ),
-			newCheckedProp = ! $featureInput.is( ':checked' );
+			newCheckedProp = ! $featureInput.is( ':checked' ),
+			maybeLoadBuild = "true" !== $feature.attr( "data-no-build" );
 
 		// If we're waiting on something, don't allow the user to toggle features.
 		if ( $( 'body' ).hasClass( 'waiting' ) ) {
@@ -191,7 +272,46 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 
 		$toggle.toggle( newCheckedProp );
 
-		self.loadBuild();
+		// Not all features require a new build (IE adding a caching plugin doesn't need another preview).
+		if ( maybeLoadBuild ) {
+			self.loadBuild();
+		}
+	};
+
+	/**
+	 * Toggle feature pointer.
+	 *
+	 * For example, if someone selects "cache", we need to show them a pointer that says the preview
+	 * won't update because [...].
+	 *
+	 * @since SINCEVERSION
+	 *
+	 * @param jQuery object $feature The feature clicked.
+	 */
+	this.toggleFeaturePointer = function( $feature ) {
+		var id = $feature.attr('id'),
+			hasPointer = $feature.is( "[data-shown-pointer]" ),
+			hasPointerContent = typeof Inspiration.pointers[id] !== 'undefined',
+			hasBeenShown = 'true' === $feature.attr( 'data-shown-pointer' );
+
+		if ( ! hasPointer || ! hasPointerContent || hasBeenShown ) {
+			return;
+		}
+
+		$feature
+			.pointer({
+				content: Inspiration.pointers[id],
+				position: {
+					edge: 'left',
+					align: 'center'
+				},
+			})
+			.pointer( 'open' );
+
+		// Flag that we've shown this pointer.
+		$feature.attr( 'data-shown-pointer', 'true' );
+
+		self.pointers.push( $feature );
 	};
 
 	/**
@@ -382,9 +502,14 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 		self.$wrap.on( 'click', '#try-build-again', self.loadBuild );
 
 		// During step 2, you can toggle build features (like a blog). Handle click of those features.
-		self.$wrap.on( 'click', '.feature-option', function() {
-			var $feature = $( this );
+		self.$wrap.on( 'click', '.feature-option .toggle', function() {
+			var $feature = $( this ).closest( '.feature-option' );
+
 			self.toggleFeature( $feature );
+
+			// We don't want to have Pointers stack on top of each other.
+			self.closePointers();
+			self.toggleFeaturePointer( $feature );
 		} );
 
 		/*
@@ -413,6 +538,8 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 			var $checkbox = $( this );
 			self.surveyToggleDisplay( $checkbox );
 		} );
+
+		self.$wrap.on( 'click', '.dashicons-editor-help', self.onClickHelp );
 	};
 
 	/**
@@ -481,6 +608,30 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 	};
 
 	/**
+	 * @summary Actions to take when help buttons are clicked.
+	 *
+	 * IE help button next to Functionality / Invoice.
+	 *
+	 * @since SINCEVERSION
+	 */
+	this.onClickHelp = function() {
+		// Other plugins may be using "data-id", "bginsp" was added for specificity.
+		var id = $( this ).attr( 'data-bginsp-id' );
+
+		/*
+		 * Close all pointers. UX is off when "cache" is expanded and the pointer is showing for it,
+		 * but then the user clicks the help button for "invoice" and pushes everything down except
+		 * for the pointer.
+		 */
+		self.closePointers();
+
+		// Toggle the help text.
+		if ( id !== undefined ) {
+			$( '.help[data-bginsp-id="' + id + '"]' ).slideToggle();
+		}
+	},
+
+	/**
 	 * @summary Actions to take when the window is resized.
 	 *
 	 * This method is triggered from init().
@@ -488,23 +639,48 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 	 * @since 1.2.5
 	 */
 	this.onResize = function() {
-
 		/*
-		 * When the window is resized, wait 0.4 seconds and readjust the highlighted device preview
-		 * button.
+		 * Pointers don't always do well when the window is resized. Elements may shift around on the
+		 * page and the pointers become "broken". If the user does resize the page while a pointer is
+		 * shown, just hide the pointer.
 		 */
-		$( window ).resize( function() {
-			clearTimeout( $.data( this, 'resizeTimer' ) );
+		self.closePointers();
 
-			$.data(
-				this,
-				'resizeTimer',
-				setTimeout( function() {
-					self.highlightDeviceButton();
-				}, 400 )
-			);
-		} );
+
+		// Wait 0.4 seconds and readjust the highlighted device preview button.
+		clearTimeout( $.data( this, 'resizeTimer' ) );
+		$.data(
+			this,
+			'resizeTimer',
+			setTimeout( function() {
+				self.highlightDeviceButton();
+			}, 400 )
+		);
 	};
+
+	/**
+	 * @summary Process reseller meta data when we get it.
+	 *
+	 * @since SINCEVERSION
+	 *
+	 * @param object meta An object of reseller meta data.
+	 */
+	this.processResellerMeta = function( meta ) {
+		/*
+		 * By default, caching feature is shown. Only hide if explicitly asked to hide.
+		 *
+		 * This method is only hiding caching / invoices features. If we one day need to show them,
+		 * please see self.initFeatureToggles() as they may have been hidden there.
+		 */
+		if ( meta.allow_insp_cache !== undefined && 0 == meta.allow_insp_cache ) {
+			$( '#feature_option_cache' ).hide();
+		}
+
+		// By default, invoice feature is shown. Only hide if explicitly asked to hide.
+		if ( meta.allow_insp_invoice !== undefined && 0 == meta.allow_insp_invoice ) {
+			$( '#feature_option_invoice' ).hide();
+		}
+	}
 
 	/**
 	 * @summary Handles the Show All filter.
@@ -1051,6 +1227,12 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 	 * @since 1.7.0
 	 */
 	this.onDeployFinish = function() {
+		var $success = $( '[name=deployment_success]' ),
+			/*
+			 * A successful deployment is assumed / we don't require [name=deployment_success] to be
+			 * there telling us it was successful.
+			 */
+			success = ! ( 1 === $success.length && 0 == $success.val() );
 
 		/*
 		 * Redirect the user to the My Inspirations page.
@@ -1059,11 +1241,18 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 		 * deploying page show items as they're being installed. Sometimes they will just see the
 		 * whole page load at once.
 		 */
-		window.location.href = Inspiration.myInspirationUrl;
+		if ( success ) {
+			window.location.href = Inspiration.myInspirationUrl;
+		}
 	};
 
+	/**
+	 * Init the Inspirations page.
+	 */
 	this.initInspirationsPage = function() {
 		self.bindClicks();
+
+		$( window ).on( 'resize', self.onResize );
 
 		var promptingForKey = self.$wrap.find( '#screen-api-key' ).length;
 		if ( promptingForKey ) {
@@ -1219,6 +1408,14 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 			self.sortCategories( 'data-display-order' );
 
 			self.initThemes();
+
+			/*
+			 * If we have reseller data, take action on it now. Having reseller data returned with a
+			 * call to get categories is unexpected, be on the lookout if that is refactored.
+			 */
+			if ( msg.result.data.reseller_meta !== undefined ) {
+				self.processResellerMeta( msg.result.data.reseller_meta );
+			}
 		};
 
 		self.ajax.ajaxCall(
@@ -1237,9 +1434,47 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 	 * @since 1.3.7
 	 */
 	this.initFeatureToggles = function() {
+		/*
+		 * If the caching plugin is already installed, we won't show it as a choice to the user. We'll
+		 * continue to bind them below, as maybe they'll get shown at some point again.
+		 */
+		if ( Inspiration.cache_active ) {
+			$( '#feature_option_cache' ).hide();
+		}
+
 		$( '#blog-toggle' )
 			.toggles( {
 				checkbox: $( '[name="install-blog"]' ),
+				click: false,
+				drag: false,
+				text: {
+					on: '',
+					off: ''
+				},
+				height: 15,
+				width: 40
+			} )
+			.find( '.toggle-on' )
+			.addClass( 'blue' );
+
+		$( '#invoice-toggle' )
+			.toggles( {
+				checkbox: $( '[name="install-invoice"]' ),
+				click: false,
+				drag: false,
+				text: {
+					on: '',
+					off: ''
+				},
+				height: 15,
+				width: 40
+			} )
+			.find( '.toggle-on' )
+			.addClass( 'blue' );
+
+		$( '#cache-toggle' )
+			.toggles( {
+				checkbox: $( '[name="install-cache"]' ),
 				click: false,
 				drag: false,
 				text: {
@@ -1424,7 +1659,8 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 
 			// Should our request for a build be for a generic build?
 			requestGeneric = false,
-			hasBlog = $( '[name="install-blog"]' ).is( ':checked' );
+			hasBlog = $( '[name="install-blog"]' ).is( ':checked' ),
+			hasInvoice = $( '[name="install-invoice"]' ).is( ':checked' );
 
 		/*
 		 * By default, we will not request a generic build. The only time we will request a generic
@@ -1432,8 +1668,9 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 		 * # Pageset:		Default
 		 * # Coin budget:	20
 		 * # Blog:			False
+		 * # Invoice:       False
 		 */
-		if ( '1' === self.$pageset.attr( 'data-is-default' ) && ! hasBlog ) {
+		if ( '1' === self.$pageset.attr( 'data-is-default' ) && ! hasBlog && ! hasInvoice ) {
 			requestGeneric = true;
 		}
 
@@ -1501,7 +1738,9 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 			site_hash: self.configs.site_hash,
 			inspirations_mode: 'standard',
 			is_generic: requestGeneric,
-			has_blog: hasBlog
+
+			has_blog: hasBlog,
+			has_invoice: hasInvoice
 		};
 
 		// Set form.
@@ -1633,6 +1872,12 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 		 * Essentially we're changing the height from 99% to 100%, which gets them showing again.
 		 */
 		self.$themePreview.css( 'height', previewHeight );
+
+		/*
+		 * Hide all pointers. A pointer on one step shouldn't show when we go to the next step. IE the
+		 * pointer explaining the cache feature should not show once we've clicked onward to the next step.
+		 */
+		self.closePointers();
 	};
 
 	/**

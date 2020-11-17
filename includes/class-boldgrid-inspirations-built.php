@@ -571,6 +571,15 @@ class Boldgrid_Inspirations_Built {
 	 * @since 1.7.0
 	 */
 	public function enqueue_inspirations_js( $in_footer = true ) {
+		/*
+		 * Inspirations may install a caching plugin. Get that class now so later we can check if it
+		 * is active.
+		 */
+		$cache_plugin = null;
+		if ( class_exists( '\Boldgrid\Library\Library\Plugin\Factory' ) ) {
+			$cache_plugin   = \Boldgrid\Inspirations\W3TC\Utility::get_plugin();
+		}
+
 		$handle = 'boldgrid-inspirations';
 
 		wp_register_script( $handle,
@@ -603,6 +612,14 @@ class Boldgrid_Inspirations_Built {
 				'tryFewMinutes'           => __( 'Please try again in a few minutes.', 'boldgrid-inspirations' ),
 				'tryFewSeconds'           => __( 'Please try again in a few seconds.', 'boldgrid-inspirations' ),
 				'tryAgain'                => __( 'Try again', 'boldgrid-inspirations' ),
+				'pointers'                => array(
+					'feature_option_cache' => '<h3>' . esc_html__( 'No Preview Update Needed', 'boldgrid-inspirations' ) . '</h3>' .
+						'<p>' . esc_html__( 'W3 Total Cache speeds up your website, but doesn\'t change how it looks. Your Inspirations Preview won\'t update, but W3 Total Cache will be installed with your Inspirations!', 'boldgrid-inspirations' ) . '</p>',
+					'feature_option_invoice' => '<h3>' . esc_html__( 'Adding a new "Get a Quote" page...', 'boldgrid-inspirations' ) . '</h3>' .
+						'<p>' . esc_html__( 'Your Inspirations preview site is being rebuilt and will include a new "Get a Quote" page.', 'boldgrid-inspirations' ) . '</p>',
+				),
+				// If the caching or invoice plugin are already active, we won't show them as choices.
+				'cache_active'            => empty( $cache_plugin ) ? false : $cache_plugin->isActive(),
 			)
 		);
 

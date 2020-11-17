@@ -503,13 +503,25 @@ class Boldgrid_Inspirations_Deploy_Bps {
 			/**
 			 * Filter the url to replace placeholder url with.
 			 *
+			 * The image may have originally been:
+			 * https://placehold.it/200x200&text=200x200+(dynamic+image)
+			 *
+			 * If we were able to parse a width and height from the image url (IE 200px by 200px), they
+			 * will be stored in $image_data['download_params']['width'] and ['height']. If we have
+			 * those attributues, we'll apply this filter that resizes the downloaded image to the dimensions
+			 * specified by the author in the "placehold.it" image url.
+			 *
 			 * @since 1.4.8
+			 *
+			 * @see Boldgrid_Inspirations_Deploy_Image::post_process_image
 			 *
 			 * @param int $attachment_data['attachment_id']
 			 * @param int $image_data['download_params']['width']
 			 * @param int $image_data['download_params']['height']
 			 */
-			$attachment_url = apply_filters( 'boldgrid_deploy_post_process_image', $attachment_data['attachment_id'], $image_data['download_params']['width'], $image_data['download_params']['height'] );
+			if ( ! empty( $image_data['download_params']['width'] ) && ! empty( $image_data['download_params']['height'] ) ) {
+				$attachment_url = apply_filters( 'boldgrid_deploy_post_process_image', $attachment_data['attachment_id'], $image_data['download_params']['width'], $image_data['download_params']['height'] );
+			}
 
 			// Update our data...
 			$this->image_placeholders_needing_images['by_page_id'][$image_data['post_id']][$image_data['images_array_key']]['attachment_url'] = $attachment_url;

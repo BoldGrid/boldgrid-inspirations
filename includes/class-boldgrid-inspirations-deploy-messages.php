@@ -166,7 +166,7 @@ class Boldgrid_Inspirations_Deploy_Messages {
 	 * @param string $type    The type of notice, such as error, success, etc.
 	 */
 	public function print_notice( $message, $type = 'error' ) {
-		echo '<div class="notice notice-' . $type . ' bginsp-deploy-notice"><p>' . $message . '</p></div>';
+		echo '<div class="notice notice-' . $type . ' inline bginsp-deploy-notice"><p>' . $message . '</p></div>';
 	}
 
 	/**

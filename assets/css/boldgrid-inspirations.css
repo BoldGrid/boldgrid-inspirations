@@ -91,7 +91,6 @@ body.bginsp-full-screen {
 }
 
 .pageset-option,
-.feature-option,
 .sub-category {
 	cursor: pointer;
 }
@@ -417,6 +416,34 @@ body.waiting .pointer {
 
 
 /**
+ * Features.
+ *
+ * For example, "Blog" and "Invoice".
+ */
+
+.feature-option .help p {
+	padding: 0 10px;
+	margin-bottom: 0;
+	font-size: 12px;
+}
+
+.feature-option [data-bginsp-id="bginsp-invoice"] img {
+	width: calc(100% - 10px);
+	background: linear-gradient( #fff, #b9e4eb );
+	padding: 0 5px;
+	border-bottom: 1px solid #bbb;
+}
+
+.feature-option [data-bginsp-id="bginsp-cache"] img {
+	width: calc(100% - 20px);
+	padding: 10px 10px 0 10px;
+	display: block;
+	background: linear-gradient( #fff 70%, #ccc );
+	border-bottom: 1px solid #bbb;
+	margin-bottom: -0.5em;
+}
+
+/**
  * #.# Toggles
  *
  * For example, the toggle for "Blog".
@@ -670,6 +697,11 @@ http://ivomynttinen.com/blog/the-ios-design-cheat-sheet-volume-2
 
 /* Hide all notices except the Connect Key prompt. */
 .notice:not( #container_boldgrid_api_key_notice ):not( .bginsp-deploy-notice ) {
+	display: none;
+}
+
+/* By default, toggleable help content is hidden. */
+.help[data-bginsp-id] {
 	display: none;
 }
 

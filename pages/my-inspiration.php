@@ -58,6 +58,10 @@ wp_nonce_field( 'closedpostboxes', 'closedpostboxesnonce', false );
 
 				<div style="clear:both;"></div>
 
+				<div id="postbox-container-6" class="postbox-container">
+					<?php do_meta_boxes( $this->screen_id, 'container6', null ); ?>
+				</div>
+
 				<div id="postbox-container-5" class="postbox-container">
 					<?php do_meta_boxes( $this->screen_id, 'container5' ,null ); ?>
 				</div>

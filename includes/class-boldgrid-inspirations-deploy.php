@@ -187,6 +187,16 @@ class Boldgrid_Inspirations_Deploy {
 	public $bgforms;
 
 	/**
+	 * An instance of Deploy Cache.
+	 *
+	 * A class for installing a caching plugin.
+	 *
+	 * @since SINCEVERSION
+	 * @var Boldgrid\Inspirations\Deploy\Cache
+	 */
+	public $cache;
+
+	/**
 	 * Coin budget.
 	 *
 	 * @since 1.7.0
@@ -229,6 +239,34 @@ class Boldgrid_Inspirations_Deploy {
 	 * @var    bool True to install a sample blog.
 	 */
 	public $install_blog = false;
+
+	/**
+	 * Install an invoicing plugin.
+	 *
+	 * @since  SINCEVERSION
+	 * @access public
+	 * @var    bool True to install an invoicing plugin.
+	 */
+	public $install_invoice = false;
+
+	/**
+	 * Install a caching plugin.
+	 *
+	 * @since  SINCEVERSION
+	 * @access public
+	 * @var    bool True to install a caching plugin.
+	 */
+	public $install_cache = false;
+
+	/**
+	 * An instance of Deploy Invoice.
+	 *
+	 * A class for helping to install an invoicing plugin.
+	 *
+	 * @since SINCEVERSION
+	 * @var Boldgrid\Inspirations\Deploy\Invoice
+	 */
+	public $invoice;
 
 	/**
 	 * Is author.
@@ -369,7 +407,9 @@ class Boldgrid_Inspirations_Deploy {
 		require_once BOLDGRID_BASE_DIR . '/includes/class-boldgrid-inspirations-asset-manager.php';
 		$this->asset_manager = new Boldgrid_Inspirations_Asset_Manager();
 
-		$this->install_blog = isset( $_REQUEST['install-blog'] ) && 'true' === $_REQUEST['install-blog'];
+		$this->install_blog    = isset( $_REQUEST['install-blog'] ) && 'true' === $_REQUEST['install-blog'];
+		$this->install_invoice = isset( $_REQUEST['install-invoice'] ) && 'true' === $_REQUEST['install-invoice'];
+		$this->install_cache   = isset( $_REQUEST['install-cache'] ) && 'true' === $_REQUEST['install-cache'];
 
 		$this->survey = new Boldgrid_Inspirations_Survey();
 
@@ -398,7 +438,9 @@ class Boldgrid_Inspirations_Deploy {
 		$this->deploy_theme = new Boldgrid_Inspirations_Deploy_Theme();
 		$this->deploy_theme->set_deploy( $this );
 
-		$this->social_menu   = new Boldgrid\Inspirations\Deploy\Social_Menu( $this );
+		$this->social_menu = new Boldgrid\Inspirations\Deploy\Social_Menu( $this );
+		$this->invoice     = new Boldgrid\Inspirations\Deploy\Invoice( $this );
+		$this->cache       = new Boldgrid\Inspirations\Deploy\Cache( $this );
 	}
 
 	/**
@@ -541,6 +583,8 @@ class Boldgrid_Inspirations_Deploy {
 			'build_profile_id'      => intval( $this->boldgrid_build_profile_id ),
 			'custom_pages'          => $this->custom_pages,
 			'install_blog'          => $this->install_blog,
+			'install_invoice'       => $this->install_invoice,
+			'install_cache'         => $this->install_cache,
 			'install_timestamp'     => time(),
 		);
 
@@ -757,6 +801,8 @@ class Boldgrid_Inspirations_Deploy {
 			'is_staged'          => ! empty( $_POST['staging'] ) ? trim( $_POST['staging'] ) : null,
 			'key'                => ! empty( $api_key_hash ) ? $api_key_hash : null,
 			'site_hash'          => ! empty( $boldgrid_configs['site_hash'] ) ? $boldgrid_configs['site_hash'] : null,
+			// Misc.
+			'has_cache'          => $this->install_cache,
 		);
 
 		$this->theme_details = $this->api->get_theme_details( $args );
@@ -976,11 +1022,8 @@ class Boldgrid_Inspirations_Deploy {
 								'abort_if_destination_exists' => false
 							) );
 
-						$this->theme_name = $upgrader->result['destination_name'];
-
-						// If Theme_Upgrader::install reports failure or we have no theme name, then
-						// something went wrong.
-						if ( ( ! $wp_theme_install_success || empty( $this->theme_name ) ) ) {
+						// Take action based on whether or not the theme installed.
+						if ( ! $wp_theme_install_success || is_wp_error( $wp_theme_install_success ) ) {
 							delete_theme( $this->theme_details->theme->Name );
 
 							$theme_installation_failed_attemps ++;
@@ -1387,6 +1430,11 @@ class Boldgrid_Inspirations_Deploy {
 		if ( isset( $this->theme_details->homepage ) ) {
 			$this->set_custom_homepage();
 		}
+
+		// If we're installing the "Invoice" feature, do all the things now.
+		if ( $this->install_invoice ) {
+			$this->invoice->deploy( array( 'menu_id' => $menu_id ) );
+		}
 	}
 
 	/**
@@ -1526,6 +1574,7 @@ class Boldgrid_Inspirations_Deploy {
 				'method'  => 'POST',
 				'body'    => array(
 					'dummy_post_data' => 'Dummy post data',
+					'install_cache'   => $this->install_cache,
 				),
 			)
 		);
@@ -1683,6 +1732,10 @@ class Boldgrid_Inspirations_Deploy {
 
 				$this->download_and_install_plugin( $plugin_list_v->plugin_zip_url, $plugin_list_v->plugin_activate_path, $plugin_list_v->version, $plugin_list_v );
 			}
+		}
+
+		if ( $this->install_cache ) {
+			$this->cache->install();
 		}
 	}
 
@@ -2274,6 +2327,8 @@ class Boldgrid_Inspirations_Deploy {
 		}
 
 		$this->finish_deployment();
+
+		return true;
 	}
 
 	/**
@@ -2330,7 +2385,14 @@ class Boldgrid_Inspirations_Deploy {
 		 */
 		add_filter( 'wp_kses_allowed_html', array( $this, 'filter_allowed_html', ), 10, 2 );
 
-		$this->full_deploy();
+		$success = $this->full_deploy();
+
+		/*
+		 * Add a hidden var to show whether or not deployment was a success. Inspirations by default
+		 * redirects the user to the "My Inspirations" page after the deployment is finished. But, if
+		 * the install failed, it shouldn't redirect so we can see error messages.
+		 */
+		echo '<input type="hidden" name="deployment_success" value="' . ( $success ? 1 : 0 ) . '" />';
 
 		// Save report to the log.
 		if ( ! empty( $boldgrid_configs['xhprof'] ) && extension_loaded( 'xhprof' ) ) {

@@ -335,6 +335,27 @@ if ( $show_content_warning ) {
 					<input type="checkbox" name="install-blog" value=true /> <?php echo $lang['Blog']; ?>
 					<div id="blog-toggle" class="toggle toggle-light"></div>
 				</div>
+				<div class="feature-option" id="feature_option_invoice" data-shown-pointer=false >
+					<input type="checkbox" name="install-invoice" value=true />
+					<?php esc_html_e( 'Invoice', 'boldgrid-inspirations' ); ?>
+					<span class="dashicons dashicons-editor-help" data-bginsp-id="bginsp-invoice"></span>
+					<div id="invoice-toggle" class="toggle toggle-light"></div>
+
+					<div class="help" data-bginsp-id="bginsp-invoice">
+						<p><?php esc_html_e( 'With Sprout Invoices, you can create beautiful estimates and invoices for your clients in minutes, and get paid easily.', 'boldgrid-inspirations' ); ?></p>
+						<img src="<?php echo esc_url( BOLDGRID_BASE_URL . '/assets/images/inspirations/invoice/sprout-invoices.png' ); ?>" />
+					</div>
+				</div>
+				<div class="feature-option" id="feature_option_cache" data-shown-pointer=false data-no-build="true">
+					<input type="checkbox" name="install-cache" value=true /> <?php esc_html_e( 'Speed Boost', 'boldgrid-inspirations' ); ?>
+					<span class="dashicons dashicons-editor-help" data-bginsp-id="bginsp-cache"></span>
+					<div id="cache-toggle" class="toggle toggle-light"></div>
+
+					<div class="help" data-bginsp-id="bginsp-cache">
+						<p><?php esc_html_e( 'Faster website = better search rankings, more visitors, increased revenue and more. W3 Total Cache speeds up your WordPress website by reducing its download time, which makes your page load extremely fast.', 'boldgrid-inspirations' ); ?></p>
+						<img src="<?php echo esc_url( BOLDGRID_BASE_URL . '/assets/images/inspirations/cache/w3-total-cache.png' ); ?>" />
+					</div>
+				</div>
 			</div>
 		</div>
 

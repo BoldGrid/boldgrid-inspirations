@@ -82,6 +82,7 @@ class Boldgrid_Inspirations_Inspiration extends Boldgrid_Inspirations {
 	 * @see Boldgrid_Inspirations_Dashboard::add_hooks().
 	 */
 	public function add_hooks_always() {
+
 		/* Add hooks for admin section pages. */
 		if ( is_admin() ) {
 			// Check PHP and WordPress versions for compatibility.
@@ -158,6 +159,8 @@ class Boldgrid_Inspirations_Inspiration extends Boldgrid_Inspirations {
 					'check_asset_server_callback',
 				)
 			);
+
+			add_action( 'si_plugin_activation_hook', '\Boldgrid\Inspirations\Sprout\Utility::cancel_activation_redirection', 15 );
 		}
 
 		/* Load hooks for all pages. */
@@ -432,6 +435,14 @@ public function include_admin_files() {
 	require_once BOLDGRID_BASE_DIR . '/includes/class-boldgrid-inspirations-install-backup.php';
 
 	require_once BOLDGRID_BASE_DIR . '/includes/deploy/class-social-menu.php';
+	require_once BOLDGRID_BASE_DIR . '/includes/deploy/class-invoice.php';
+	require_once BOLDGRID_BASE_DIR . '/includes/deploy/class-cache.php';
+
+	require_once BOLDGRID_BASE_DIR . '/includes/weforms/class-utility.php';
+
+	require_once BOLDGRID_BASE_DIR . '/includes/sprout/class-utility.php';
+
+	require_once BOLDGRID_BASE_DIR . '/includes/w3tc/class-utility.php';
 }
 
 /**

@@ -114,6 +114,26 @@ class Boldgrid_Inspirations_My_Inspiration {
 				'container5'
 			);
 
+			if ( \Boldgrid\Inspirations\Sprout\Utility::is_deploy() ) {
+				add_meta_box(
+					'invoice',
+					esc_html__( 'Sprout Invoices', 'boldgrid-inspirations' ),
+					array( $this, 'box_invoice' ),
+					$this->screen_id,
+					'container6'
+				);
+			}
+
+			if ( \Boldgrid\Inspirations\W3TC\Utility::is_deploy() ) {
+				add_meta_box(
+					'cache',
+					esc_html__( 'W3 Total Cache', 'boldgrid-inspirations' ),
+					array( $this, 'box_cache' ),
+					$this->screen_id,
+					'container6'
+				);
+			}
+
 			// Add .imgedit-group-top class to applicable meta boxes so that the help icons work.
 			$box_ids = array( 'pages_content', 'customization' );
 			foreach( $box_ids as $id ) {
@@ -192,6 +212,20 @@ class Boldgrid_Inspirations_My_Inspiration {
 	}
 
 	/**
+	 * Render the W3 Total Cache meta box.
+	 *
+	 * @since SINCEVERSION
+	 */
+	public function box_cache() { ?>
+		<img class="myinsp-logo" src="<?php echo esc_url( BOLDGRID_BASE_URL . '/assets/images/inspirations/cache/w3-total-cache.png' ); ?>">
+		<p><?php esc_html_e( 'W3 Total Cache speeds up your WordPress website by reducing its download time, which makes your page load extremely fast.', 'boldgrid-inspirations' ); ?></p>
+		<ul>
+			<li><a href="https://www.boldgrid.com/support/w3-total-cache/"><?php esc_html_e( 'W3 Total Cache Tutorials', 'boldgrid-inspirations' );?></a></li>
+			<li><a href="https://www.boldgrid.com/support/w3-total-cache/configuring-w3-total-cache-for-wordpress-with-shared-hosting/"><?php esc_html_e( 'How to configure W3 Total Cache', 'boldgrid-inspirations' );?></a></li>
+		</ul>
+	<?php }
+
+	/**
 	 * Render meta box for, "Current Inspiration".
 	 *
 	 * @since 1.7.0
@@ -247,6 +281,20 @@ class Boldgrid_Inspirations_My_Inspiration {
 	public function box_features() { ?>
 		<ul>
 			<li><?php esc_html_e( 'Blog', 'boldgrid-inspirations' ); ?> <a class="dashicons-before dashicons-admin-post small" href="<?php echo esc_url( admin_url( 'edit.php' ) ); ?>"><?php esc_html_e( 'Go to Posts', 'boldgrid-inspirations' ); ?></a>
+		</ul>
+	<?php }
+
+	/**
+	 * Render meta box for, "Sprout Invoices".
+	 *
+	 * @since SINCEVERSION
+	 */
+	public function box_invoice() { ?>
+		<img class="myinsp-logo" src="<?php echo esc_url( BOLDGRID_BASE_URL . '/assets/images/inspirations/invoice/sprout-invoices.png' ); ?>">
+		<p><?php esc_html_e( 'With Sprout Invoices, you can create beautiful estimates and invoices for your clients in minutes, and get paid easily.', 'boldgrid-inspirations' ); ?></p>
+		<ul>
+			<li><a href="https://docs.sproutinvoices.com/article/5-getting-started-sprout-invoices"><?php esc_html_e( 'Getting Started with Sprout Invoices', 'boldgrid-inspirations' ); ?></a></li>
+			<li><a href="https://docs.sproutinvoices.com/article/263-weforms-integration"><?php esc_html_e( 'Sprout Invoices + weForms Integration', 'boldgrid-inspirations' ); ?></a></li>
 		</ul>
 	<?php }
 

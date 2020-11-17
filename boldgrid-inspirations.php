@@ -21,6 +21,10 @@ if ( ! defined( 'BOLDGRID_BASE_DIR' ) ) {
 	define( 'BOLDGRID_BASE_DIR', dirname( __FILE__ ) );
 }
 
+if ( ! defined( 'BOLDGRID_BASE_URL' ) ) {
+	define( 'BOLDGRID_BASE_URL', plugins_url( '', __FILE__ ) );
+}
+
 // Prevent direct calls.
 require BOLDGRID_BASE_DIR . '/pages/templates/restrict-direct-access.php';
 
