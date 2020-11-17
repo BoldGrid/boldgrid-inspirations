@@ -1435,13 +1435,9 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 	 */
 	this.initFeatureToggles = function() {
 		/*
-		 * If the invoice / caching plugin are already installed, we won't show them as choices to the
-		 * user. We'll continue to bind them below, as maybe they'll get shown at some point again.
+		 * If the caching plugin is already installed, we won't show it as a choice to the user. We'll
+		 * continue to bind them below, as maybe they'll get shown at some point again.
 		 */
-		if ( Inspiration.invoice_active ) {
-			$( '#feature_option_invoice' ).hide();
-		}
-
 		if ( Inspiration.cache_active ) {
 			$( '#feature_option_cache' ).hide();
 		}

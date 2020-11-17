@@ -572,13 +572,11 @@ class Boldgrid_Inspirations_Built {
 	 */
 	public function enqueue_inspirations_js( $in_footer = true ) {
 		/*
-		 * Inspirations may install an invoicing or caching plugin. Get those classes now so later we
-		 * can check if either of the plugins are active.
+		 * Inspirations may install a caching plugin. Get that class now so later we can check if it
+		 * is active.
 		 */
-		$invoice_plugin = null;
-		$cache_plugin   = null;
+		$cache_plugin = null;
 		if ( class_exists( '\Boldgrid\Library\Library\Plugin\Factory' ) ) {
-			$invoice_plugin = \Boldgrid\Inspirations\Sprout\Utility::get_plugin();
 			$cache_plugin   = \Boldgrid\Inspirations\W3TC\Utility::get_plugin();
 		}
 
@@ -622,7 +620,6 @@ class Boldgrid_Inspirations_Built {
 				),
 				// If the caching or invoice plugin are already active, we won't show them as choices.
 				'cache_active'            => empty( $cache_plugin ) ? false : $cache_plugin->isActive(),
-				'invoice_active'          => empty( $invoice_plugin ) ? false : $invoice_plugin->isActive(),
 			)
 		);
 
