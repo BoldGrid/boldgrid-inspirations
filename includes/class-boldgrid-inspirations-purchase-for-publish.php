@@ -1394,7 +1394,7 @@ class Boldgrid_Inspirations_Purchase_For_Publish extends Boldgrid_Inspirations {
 		 */
 		if ( isset( $asset['crops'] ) && count( $asset['crops'] ) > 0 ) {
 			foreach ( $asset['crops'] as $crops_key => $crops_array ) {
-				$array_file_names_to_query[] = end( ( explode( '/', $crops_array['path'] ) ) );
+				$array_file_names_to_query[] = basename( $crops_array['path'] );
 			}
 		}
 
