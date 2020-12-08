@@ -304,7 +304,7 @@ IMHWPB.StockImageSearch = function( configs, $ ) {
 			action = 'add-to-gallery';
 		} else if ( 'create-gallery' === $bgcsTab.attr( 'data-added-by' ) ) {
 			action = 'create-gallery';
-		} else if ( 'undefined' !== typeof parent.wp.blocks ) {
+		} else if ( parent.document.body.classList.contains( 'block-editor-page' ) ) {
 			action = 'gutenberg';
 		} else if ( 'function' === typeof parent.window.send_to_editor && ! inCustomizer ) {
 			action = 'editor';
