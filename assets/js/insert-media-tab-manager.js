@@ -26,6 +26,19 @@ IMHWPB.InsertMediaTabManager = function( $ ) {
 	var self = this;
 
 	$( function() {
+		/*
+		 * This script relies on _wpMediaViewsL10n. If we don't have it, abort.
+		 *
+		 * One example of when this doesn't exist is within Sprout Invoices > Add Invoice. At this time,
+		 * they do not have any "Add media" buttons or a way to add media to an invoice. In this case,
+		 * avoid js errors and abort.
+		 *
+		 * @todo We may need a cleaner approach to this in the future.
+		 */
+		if ( typeof _wpMediaViewsL10n === 'undefined' ) {
+			return;
+		}
+
 		self.initVars();
 
 		/*
