@@ -208,6 +208,11 @@ class Boldgrid_Inspirations_Deploy_Messages {
 			$slug = 'post-and-page-builder';
 		}
 
+		// @todo This is a temporary fix as the Crio Premium plugin has no icon.
+		if ( 'crio-premium' === $slug ) {
+			$slug = '';
+		}
+
 		/*
 		 * Determine what we will print as an icon for the plugin. It will either be a generic
 		 * dashicon, or the plugin's actual icon / logo.

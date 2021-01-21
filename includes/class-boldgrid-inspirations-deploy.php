@@ -1097,6 +1097,21 @@ class Boldgrid_Inspirations_Deploy {
 			foreach ( $this->theme_details->theme_mods as $theme_mod ) {
 				set_theme_mod( $theme_mod->name, $theme_mod->value );
 			}
+
+			/*
+			 * Download any plugins included with this theme.
+			 *
+			 * For example, the Crio theme may include the Crio Premium plugin.
+			 */
+			foreach ( $this->theme_details->plugins as $plugin ) {
+				$this->download_and_install_plugin(
+					$plugin->plugin_zip_url,
+					$plugin->plugin_activate_path,
+					$plugin->version,
+					$plugin
+				);
+			}
+
 		} // foreach( array ( 'child', 'parent' ) as $entity )
 
 		if ( $this->deploy_theme->is_crio() ) {
@@ -1692,6 +1707,12 @@ class Boldgrid_Inspirations_Deploy {
 		$this->after_theme_switch();
 
 		$this->messages->print_complete();
+
+		/*
+		 * New licenses may have been added to the account during the deployment. IE a Crio install
+		 * may have added a Crio Premium service for the user. Delete license data so it can be refreshed.
+		 */
+		Boldgrid_Inspirations_Update::delete_license();
 	}
 
 	/**
