@@ -15,7 +15,7 @@ class Boldgrid_Inspirations_Purchase_For_Publish extends Boldgrid_Inspirations {
 	/**
 	 * Name of transient that stores total cost to purchase for publish.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.5.0
 	 * @var string
 	 *
 	 * @see self::get_total_cost_to_purchase_for_publishing()
@@ -84,7 +84,7 @@ class Boldgrid_Inspirations_Purchase_For_Publish extends Boldgrid_Inspirations {
 	/**
 	 * Add hooks, regardless of is_admin.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.5.0
 	 */
 	public function add_hooks_always() {
 		/*

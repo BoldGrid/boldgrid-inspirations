@@ -191,7 +191,7 @@ class Boldgrid_Inspirations_Deploy {
 	 *
 	 * A class for installing a caching plugin.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.5.0
 	 * @var Boldgrid\Inspirations\Deploy\Cache
 	 */
 	public $cache;
@@ -216,7 +216,7 @@ class Boldgrid_Inspirations_Deploy {
 	/**
 	 * Class used to help deploy themes.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.5.0
 	 * @var Boldgrid_Inspirations_Deploy_Theme
 	 */
 	public $deploy_theme;
@@ -243,7 +243,7 @@ class Boldgrid_Inspirations_Deploy {
 	/**
 	 * Install an invoicing plugin.
 	 *
-	 * @since  SINCEVERSION
+	 * @since  2.5.0
 	 * @access public
 	 * @var    bool True to install an invoicing plugin.
 	 */
@@ -252,7 +252,7 @@ class Boldgrid_Inspirations_Deploy {
 	/**
 	 * Install a caching plugin.
 	 *
-	 * @since  SINCEVERSION
+	 * @since  2.5.0
 	 * @access public
 	 * @var    bool True to install a caching plugin.
 	 */
@@ -263,7 +263,7 @@ class Boldgrid_Inspirations_Deploy {
 	 *
 	 * A class for helping to install an invoicing plugin.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.5.0
 	 * @var Boldgrid\Inspirations\Deploy\Invoice
 	 */
 	public $invoice;
@@ -339,7 +339,7 @@ class Boldgrid_Inspirations_Deploy {
 	/**
 	 * An instance of Social_Menu.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.5.0
 	 * @var Boldgrid\Inspirations\Deploy\Social_Menu
 	 */
 	public $social_menu;

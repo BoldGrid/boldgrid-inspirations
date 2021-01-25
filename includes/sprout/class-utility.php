@@ -13,7 +13,7 @@ namespace Boldgrid\Inspirations\Sprout;
 /**
  * Sprout Utility Class.
  *
- * @since SINCEVERSION
+ * @since 2.5.0
  */
 class Utility {
 	/**
@@ -22,7 +22,7 @@ class Utility {
 	 * Sprout's normal hook at 10 adds the option - which will trigger the redirect. We hook in at
 	 * priority 15 and delete the option.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.5.0
 	 */
 	public static function cancel_activation_redirection() {
 		delete_option( 'si_do_activation_redirect' );
@@ -31,7 +31,7 @@ class Utility {
 	/**
 	 * Get an instace of \Boldgrid\Library\Library\Plugin for this plugin.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.5.0
 	 *
 	 * @return \Boldgrid\Library\Library\Plugin
 	 */
@@ -42,7 +42,7 @@ class Utility {
 	/**
 	 * Whether or not Sprout was installed during a deployment.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.5.0
 	 *
 	 * @return bool
 	 */

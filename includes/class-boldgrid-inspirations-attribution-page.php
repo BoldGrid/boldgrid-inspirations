@@ -149,7 +149,7 @@ class Boldgrid_Inspirations_Attribution_Page {
 	 *
 	 * Originally added because Crio was not showing the full Attribution page.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.5.0
 	 *
 	 * @param  string  $post_excerpt The post excerpt.
 	 * @param  WP_Post $post         Post object.
