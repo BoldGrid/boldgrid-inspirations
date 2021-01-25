@@ -13,13 +13,13 @@ namespace Boldgrid\Inspirations\Deploy;
 /**
  * Deploy Invoice class.
  *
- * @since SINCEVERSION
+ * @since 2.5.0
  */
 class Invoice {
 	/**
 	 * Our deploy class.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.5.0
 	 * @access private
 	 * @var Boldgrid_Inspirations_Deploy
 	 */
@@ -28,7 +28,7 @@ class Invoice {
 	/**
 	 * Constructor.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.5.0
 	 *
 	 * @param Boldgrid_Inspirations_Deploy $deploy
 	 */
@@ -39,7 +39,7 @@ class Invoice {
 	/**
 	 * Run the deployment of our invoicing plugin.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.5.0
 	 *
 	 * @param array $args An array of arguments.
 	 */
@@ -75,7 +75,7 @@ class Invoice {
 	/**
 	 * Install Sprout Invoices.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.5.0
 	 */
 	public function install() {
 		$data = (object) [

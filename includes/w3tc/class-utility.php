@@ -13,13 +13,13 @@ namespace Boldgrid\Inspirations\W3TC;
 /**
  * W3TC Utility Class.
  *
- * @since SINCEVERSION
+ * @since 2.5.0
  */
 class Utility {
 	/**
 	 * Configure W3TC after an Inspiration's deploy.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.5.0
 	 *
 	 * @see Boldgrid_Inspirations_Deploy_Post::add_hooks.
 	 */
@@ -47,7 +47,7 @@ class Utility {
 	/**
 	 * Get an instace of \Boldgrid\Library\Library\Plugin for this plugin.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.5.0
 	 *
 	 * @return \Boldgrid\Library\Library\Plugin
 	 */
@@ -58,7 +58,7 @@ class Utility {
 	/**
 	 * Whether or not W3TC was installed during a deployment.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.5.0
 	 *
 	 * @return bool
 	 */

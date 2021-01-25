@@ -13,13 +13,13 @@ namespace Boldgrid\Inspirations\Deploy;
 /**
  * Deploy Cache class.
  *
- * @since SINCEVERSION
+ * @since 2.5.0
  */
 class Cache {
 	/**
 	 * Our deploy class.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.5.0
 	 * @access private
 	 * @var Boldgrid_Inspirations_Deploy
 	 */
@@ -28,7 +28,7 @@ class Cache {
 	/**
 	 * Constructor.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.5.0
 	 *
 	 * @param Boldgrid_Inspirations_Deploy $deploy
 	 */
@@ -39,7 +39,7 @@ class Cache {
 	/**
 	 * Install our caching plugin.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.5.0
 	 */
 	public function install() {
 		$data = (object) [

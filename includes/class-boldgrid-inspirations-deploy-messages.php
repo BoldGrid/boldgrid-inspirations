@@ -34,7 +34,7 @@ class Boldgrid_Inspirations_Deploy_Messages {
 	/**
 	 * Our Boldgrid_Inspirations_Deploy class.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.5.0
 	 * @access private
 	 * @var Boldgrid_Inspirations_Deploy
 	 */
@@ -43,7 +43,7 @@ class Boldgrid_Inspirations_Deploy_Messages {
 	/**
 	 * Constructor.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.5.0
 	 *
 	 * @param Boldgrid_Inspirations_Deploy $deploy
 	 */

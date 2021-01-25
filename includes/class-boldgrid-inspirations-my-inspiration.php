@@ -214,7 +214,7 @@ class Boldgrid_Inspirations_My_Inspiration {
 	/**
 	 * Render the W3 Total Cache meta box.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.5.0
 	 */
 	public function box_cache() { ?>
 		<img class="myinsp-logo" src="<?php echo esc_url( BOLDGRID_BASE_URL . '/assets/images/inspirations/cache/w3-total-cache.png' ); ?>">
@@ -287,7 +287,7 @@ class Boldgrid_Inspirations_My_Inspiration {
 	/**
 	 * Render meta box for, "Sprout Invoices".
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.5.0
 	 */
 	public function box_invoice() { ?>
 		<img class="myinsp-logo" src="<?php echo esc_url( BOLDGRID_BASE_URL . '/assets/images/inspirations/invoice/sprout-invoices.png' ); ?>">

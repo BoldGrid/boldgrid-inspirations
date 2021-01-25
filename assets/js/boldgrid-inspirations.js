@@ -177,7 +177,7 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 	 * For example, the "cache" feature will be added here if clicked. Usefull to know all pointers
 	 * so we can take action on them all at once - like closing them.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.5.0
 	 */
 	self.pointers = [];
 
@@ -234,7 +234,7 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 	/**
 	 * Close all pointers on the page.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.5.0
 	 */
 	this.closePointers = function() {
 		self.pointers.forEach( function( $element ) {
@@ -284,7 +284,7 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 	 * For example, if someone selects "cache", we need to show them a pointer that says the preview
 	 * won't update because [...].
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.5.0
 	 *
 	 * @param jQuery object $feature The feature clicked.
 	 */
@@ -612,7 +612,7 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 	 *
 	 * IE help button next to Functionality / Invoice.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.5.0
 	 */
 	this.onClickHelp = function() {
 		// Other plugins may be using "data-id", "bginsp" was added for specificity.
@@ -661,7 +661,7 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 	/**
 	 * @summary Process reseller meta data when we get it.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.5.0
 	 *
 	 * @param object meta An object of reseller meta data.
 	 */
