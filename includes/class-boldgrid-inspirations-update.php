@@ -694,6 +694,18 @@ class Boldgrid_Inspirations_Update {
 	}
 
 	/**
+	 * Clear licence data.
+	 *
+	 * Generally called so the license data can be refreshed.
+	 *
+	 * @since SINCEVERSION
+	 */
+	public static function delete_license() {
+		delete_site_transient( 'bg_license_data' );
+		delete_site_transient( 'boldgrid_api_data' );
+	}
+
+	/**
 	 * Display admin notices.
 	 *
 	 * @since 1.0.12
