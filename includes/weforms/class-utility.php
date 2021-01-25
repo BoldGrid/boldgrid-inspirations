@@ -13,13 +13,13 @@ namespace Boldgrid\Inspirations\Weforms;
 /**
  * weForms Untility class.
  *
- * @since SINCEVERSION
+ * @since 2.5.0
  */
 class Utility {
 	/**
 	 * Get all forms.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.5.0
 	 *
 	 * @return array
 	 */
@@ -36,7 +36,7 @@ class Utility {
 	 *
 	 * Returns the first form that matches.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.5.0
 	 *
 	 * @param string $title
 	 * @return mixed WeForms_Form Object on success, false when not found.
@@ -56,7 +56,7 @@ class Utility {
 	/**
 	 * Import a json file.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.5.0
 	 *
 	 * @param string $filepath Path to json file.
 	 * @return bool Status of import.

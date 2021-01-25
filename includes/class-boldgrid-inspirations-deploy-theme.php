@@ -35,7 +35,7 @@ class Boldgrid_Inspirations_Deploy_Theme {
 	/**
 	 * Our deploy class.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.5.0
 	 * @access private
 	 * @var Boldgrid_Inspirations_Deploy
 	 */
@@ -44,7 +44,7 @@ class Boldgrid_Inspirations_Deploy_Theme {
 	/**
 	 * Get an attribute from the theme details.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.5.0
 	 *
 	 * @param  string $key
 	 * @param  mixed  $default
@@ -57,7 +57,7 @@ class Boldgrid_Inspirations_Deploy_Theme {
 	/**
 	 * Get the url to download a theme.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.5.0
 	 */
 	public function get_download_link() {
 		/*
@@ -92,7 +92,7 @@ class Boldgrid_Inspirations_Deploy_Theme {
 	 *
 	 * The theme folder name is the same as the theme name.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.5.0
 	 *
 	 * @return string
 	 */
@@ -127,7 +127,7 @@ class Boldgrid_Inspirations_Deploy_Theme {
 	/**
 	 * Get the url to the theme's screenshot.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.5.0
 	 *
 	 * @return string
 	 */
@@ -155,7 +155,7 @@ class Boldgrid_Inspirations_Deploy_Theme {
 	/**
 	 * Get theme info from the WordPress api.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.5.0
 	 *
 	 * @return mixed False on failure, object on success. Example: https://pastebin.com/Z9qt3KFF
 	 */
@@ -174,7 +174,7 @@ class Boldgrid_Inspirations_Deploy_Theme {
 	/**
 	 * Determine whether or not this theme is crio.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.5.0
 	 *
 	 * @return bool
 	 */
@@ -185,7 +185,7 @@ class Boldgrid_Inspirations_Deploy_Theme {
 	/**
 	 * Determine whether or not this is a WordPress repo theme.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.5.0
 	 */
 	public function is_repo_theme() {
 		$prefix = 'https://downloads.wordpress.org/theme/';

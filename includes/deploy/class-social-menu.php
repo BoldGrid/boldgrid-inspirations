@@ -13,13 +13,13 @@ namespace Boldgrid\Inspirations\Deploy;
 /**
  * Social Menu class.
  *
- * @since SINCEVERSION
+ * @since 2.5.0
  */
 class Social_Menu {
 	/**
 	 * Our deploy class.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.5.0
 	 * @access private
 	 * @var Boldgrid_Inspirations_Deploy
 	 */
@@ -28,7 +28,7 @@ class Social_Menu {
 	/**
 	 * Constructor.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.5.0
 	 *
 	 * @param Boldgrid_Inspirations_Deploy $deploy
 	 */
@@ -39,7 +39,7 @@ class Social_Menu {
 	/**
 	 * Create a unique menu for our social links.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.5.0
 	 *
 	 * @param  string $name Menu name.
 	 * @return int          Id of menu created.
@@ -71,7 +71,7 @@ class Social_Menu {
 	 * This method has been introduced for Crio. Prior, the social media menu was created by filtering
 	 * the bgtfw configs. As of Crio, that code no longer exists, and so we must actually create a menu.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.5.0
 	 */
 	public function deploy() {
 		// Make sure we have social media data.
@@ -110,7 +110,7 @@ class Social_Menu {
 	 *
 	 * Data is gathered from the user via the Inspirations process.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.5.0
 	 *
 	 * @return array Example: https://pastebin.com/ANt5G8uq
 	 */
