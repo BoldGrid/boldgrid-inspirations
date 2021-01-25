@@ -35,6 +35,12 @@ The second phase is Customization; tools to transform your website into your vis
 
 == Changelog ==
 
+= 2.6.0 In progress =
+
+Release date: Januarey ??, 2021
+
+* New feature: Theme deployments can now include theme specific plugins.
+
 = 2.5.2 =
 
 Release date: December 8th, 2020
