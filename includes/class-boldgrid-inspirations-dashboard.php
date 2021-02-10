@@ -35,20 +35,6 @@ class Boldgrid_Inspirations_Dashboard extends Boldgrid_Inspirations {
 	 * Add hooks.
 	 */
 	public function add_hooks() {
-		// Get BoldGrid settings from the blog's WP option.
-		$boldgrid_settings_blog = get_option( 'boldgrid_settings' );
-
-		// If value returned is not an integer.
-		if ( ! isset( $boldgrid_settings_blog['boldgrid_menu_option'] ) ||
-			! is_int( $boldgrid_settings_blog['boldgrid_menu_option'] ) ) {
-
-			// Then set key in array to our default menu arrangement value (1).
-			$boldgrid_settings_blog['boldgrid_menu_option'] = '1';
-
-			// Update blog WP option.
-			update_option( 'boldgrid_settings', $boldgrid_settings_blog );
-		}
-
 		if ( is_admin() ) {
 			Boldgrid_Inspirations_Feedback::enqueue_js();
 
@@ -59,9 +45,6 @@ class Boldgrid_Inspirations_Dashboard extends Boldgrid_Inspirations {
 				)
 			);
 
-			// grab array of settings for boldgrid from database
-			$boldgrid_menu_options = get_option( 'boldgrid_settings' );
-
 			// if in admin add CSS and JS to dashboard for widget and styling
 			add_action( 'admin_enqueue_scripts',
 				array(
@@ -71,7 +54,7 @@ class Boldgrid_Inspirations_Dashboard extends Boldgrid_Inspirations {
 			);
 
 			// If option is marked to rearrange admin menus.
-			if ( 1 == $boldgrid_menu_options['boldgrid_menu_option'] ) {
+			if ( Boldgrid_Inspirations_Config::use_boldgrid_menu() ) {
 				/*
 				 * Check if we are using multisite or not, then change our hook location and
 				 * priority accordingly.
@@ -135,14 +118,7 @@ class Boldgrid_Inspirations_Dashboard extends Boldgrid_Inspirations {
 
 	// Rearrange our plugin menu items into single menu item.
 	public function boldgrid_admin_one_menu_add() {
-
-		// Grab array of settings again.
-		$boldgrid_menu_options = get_option( 'boldgrid_settings' );
-
-		// Check key for value of boldgrid_menu_option and remove boldgrid-inspirations menu if we
-		// are using single menu system.
-		empty( $boldgrid_menu_options['boldgrid_menu_option'] ) ?
-		remove_menu_page( 'boldgrid-inspirations' ) : false;
+		! Boldgrid_Inspirations_Config::use_boldgrid_menu() ? remove_menu_page( 'boldgrid-inspirations' ) : false;
 
 		// Define our menu name.
 		$top_level_menu = 'boldgrid-inspirations';

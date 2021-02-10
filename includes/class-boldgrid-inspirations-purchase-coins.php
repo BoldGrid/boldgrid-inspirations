@@ -25,9 +25,7 @@ class Boldgrid_Inspirations_Purchase_Coins extends Boldgrid_Inspirations {
 	 */
 	public function add_hooks() {
 		if ( is_admin() ) {
-			$boldgrid_menu_options = get_option( 'boldgrid_settings' );
-
-			( 1 == $boldgrid_menu_options['boldgrid_menu_option'] ? add_action( 'admin_menu',
+			( Boldgrid_Inspirations_Config::use_boldgrid_menu() ? add_action( 'admin_menu',
 				array (
 					$this,
 					'menu_purchase_coins'
@@ -43,9 +41,7 @@ class Boldgrid_Inspirations_Purchase_Coins extends Boldgrid_Inspirations {
 	 * Purchase Coins submenu item.
 	 */
 	public function menu_purchase_coins() {
-		$boldgrid_settings = get_option( 'boldgrid_settings' );
-
-		( 1 == $boldgrid_settings['boldgrid_menu_option'] ? add_submenu_page(
+		( Boldgrid_Inspirations_Config::use_boldgrid_menu() ? add_submenu_page(
 			'boldgrid-transactions', __( 'Purchase Coins', 'boldgrid-inspirations' ), __( 'Purchase Coins', 'boldgrid-inspirations' ), 'administrator',
 			'boldgrid-purchase-coins', array (
 				$this,

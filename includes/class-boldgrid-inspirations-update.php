@@ -191,11 +191,8 @@ class Boldgrid_Inspirations_Update {
 	 * @access private
 	 */
 	private function set_notice_params() {
-		// Get boldgrid settings.
-		$boldgrid_settings = get_option( 'boldgrid_settings' );
-
 		// Get the boldgrid menu option from settings.
-		$this->notice_params['boldgrid_menu_option'] = $boldgrid_settings['boldgrid_menu_option'];
+		$this->notice_params['boldgrid_menu_option'] = Boldgrid_Inspirations_Config::use_boldgrid_menu();
 
 		if ( ! function_exists( 'get_plugin_data' ) ) {
 			require_once ABSPATH . 'wp-admin/includes/plugin.php';

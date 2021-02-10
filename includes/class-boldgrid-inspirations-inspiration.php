@@ -488,7 +488,7 @@ public function add_boldgrid_configs_to_header() {
 	if( false === $this->allow_header_configs() ) {
 		$configs = array(
 			'settings' => array(
-				'boldgrid_menu_option' => $configs['settings']['boldgrid_menu_option'],
+				'boldgrid_menu_option' => Boldgrid_Inspirations_Config::use_boldgrid_menu(),
 			),
 		);
 	}
