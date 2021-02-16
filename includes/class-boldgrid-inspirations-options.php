@@ -159,13 +159,11 @@ class Boldgrid_Inspirations_Options {
 	 * Callback for menu reordering.
 	 */
 	public function boldgrid_menu_callback() {
-		$options = get_option( 'boldgrid_settings' );
-
 		?>
 <input type="checkbox" id="boldgrid_menu_option"
 name="boldgrid_settings[boldgrid_menu_option]" value="1"
 		<?php
-		echo checked( 1, ( bool ) $options['boldgrid_menu_option'], false );
+		echo checked( 1, Boldgrid_Inspirations_Config::use_boldgrid_menu(), false );
 		?> />
 <label for="boldgrid_menu_option"><?php esc_html_e( 'Use BoldGrid Admin Menu system', 'boldgrid-inspirations' ); ?></label>
 		<?php
@@ -286,6 +284,9 @@ name='boldgrid_settings[boldgrid_feedback_optout]' value='1'
 
 		// Save updated settings.
 		update_option( 'boldgrid_settings', $boldgrid_settings );
+
+		// Reset cache of settings just saved.
+		Boldgrid_Inspirations_Config::reset_configs();
 
 		include BOLDGRID_BASE_DIR . '/pages/templates/settings-saved.php';
 

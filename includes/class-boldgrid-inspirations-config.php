@@ -126,6 +126,19 @@ class Boldgrid_Inspirations_Config {
 	}
 
 	/**
+	 * Reset our configs.
+	 *
+	 * This is useful for pages where the configs are changed mid page load. This class caches the
+	 * configs (see the first lines of self::get_format_configs()). If the configs are changed mid
+	 * page load, we'll need to reset that cache.
+	 *
+	 * @since SINCEVERSION
+	 */
+	public static function reset_configs() {
+		self::$configs = array();
+	}
+
+	/**
 	 * Configure default settings.
 	 *
 	 * Pass in an array of BoldGrid settings. For our default settings, set those defaults in the
@@ -145,7 +158,8 @@ class Boldgrid_Inspirations_Config {
 		}
 
 		$defaults = array(
-			'boldgrid_menu_option' => '1',
+			// By default, do not rearrange the dashboard menus.
+			'boldgrid_menu_option' => '0',
   			'boldgrid_feedback_optout' => '0',
   			'release_channel' => 'stable',
   			'theme_release_channel' => 'stable',

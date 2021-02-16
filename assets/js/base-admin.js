@@ -162,7 +162,7 @@ IMHWPB.BaseAdmin = function( $ ) {
 			useAdminMenu = IMHWPB.configs.settings.boldgrid_menu_option;
 		}
 
-		if ( 1 == useAdminMenu && 'undefined' != typeof pagenow && 'dashboard-network' != pagenow ) {
+		if ( useAdminMenu && 'undefined' != typeof pagenow && 'dashboard-network' != pagenow ) {
 
 			// Configure the correct link.
 			var correct_link = 'customize.php?return=' + returnUrl;

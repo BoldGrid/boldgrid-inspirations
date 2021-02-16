@@ -767,9 +767,7 @@ class Boldgrid_Inspirations_Purchase_For_Publish extends Boldgrid_Inspirations {
 
 	// Add the cart submenu page
 	public function cart_checkout() {
-		$boldgrid_menu_options = get_option( 'boldgrid_settings' );
-
-		if ( 1 == $boldgrid_menu_options['boldgrid_menu_option'] ) {
+		if ( Boldgrid_Inspirations_Config::use_boldgrid_menu() ) {
 			add_submenu_page(
 				'boldgrid-transactions',
 				esc_html__( 'Cart', 'boldgrid-inspirations' ),
