@@ -111,7 +111,19 @@ class Boldgrid_Inspirations_Deploy_Messages {
 		echo '
 			<div class="notice notice-success inline bginsp-deploy-notice">
 				<p>
-					' . esc_html__( '&#10003; Inspirations Installed Successfully! Redirecting you to the Inspirations dashboard...', 'boldgrid-inspirations' ) . ' <span class="spinner inline"></span>
+					' . wp_kses(
+							sprintf(
+								// translators: 1 An opening anchor tag to the My Inspirations page, 2 its closing tag.
+								__( '&#10003; Inspirations Installed Successfully! If you are not redirected to your Inspirations dashboard within a few seconds, please %1$sclick here%2$s.', 'boldgrid-inspirations' ),
+								'<a href="' . admin_url( 'admin.php?page=my-inspiration' ) . '">',
+								'</a>'
+							),
+							array(
+								'a' => array(
+									'href' => array(),
+								),
+							)
+						) . ' <span class="spinner inline"></span>
 				</p>
 			</div>
 		';
