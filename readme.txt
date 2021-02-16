@@ -4,7 +4,7 @@ Tags: inspiration, customization, build, create, design
 Requires at least: 4.4
 Tested up to: 5.6
 Requires PHP: 5.4
-Stable tag: 2.6.0
+Stable tag: 2.6.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -34,6 +34,13 @@ The second phase is Customization; tools to transform your website into your vis
 3. You will find the Inspirations menu in your WordPress Dashboard / admin panel.
 
 == Changelog ==
+
+= 2.6.1 =
+
+Release date: February 16th, 2021
+
+* Update: Disable custom menu by default.
+* Bug fix: Add "My Inspirations" link in case js does not redirect.
 
 = 2.6.0 =
 
