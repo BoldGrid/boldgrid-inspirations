@@ -4,7 +4,7 @@ Tags: inspiration, customization, build, create, design
 Requires at least: 4.4
 Tested up to: 5.6
 Requires PHP: 5.4
-Stable tag: 2.6.1
+Stable tag: 2.6.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -34,6 +34,12 @@ The second phase is Customization; tools to transform your website into your vis
 3. You will find the Inspirations menu in your WordPress Dashboard / admin panel.
 
 == Changelog ==
+
+= 2.6.2 =
+
+Release date: April 14th, 2021
+
+* Update: Add footer-social menu location.
 
 = 2.6.1 =
 
