@@ -353,7 +353,11 @@ class Boldgrid_Inspirations_My_Inspiration {
 		$reseller_amp_url = method_exists( $reseller, 'getAttribute' ) ? $reseller->getAttribute( 'reseller_amp_url' ) : 'https://www.boldgrid.com/central';
 	?>
 		<p>
-			<a href="https://www.boldgrid.com/support/inspirations-plugin/" class="dashicons-before dashicons-external" target="_blank"><?php esc_html_e( 'View Support Docs', 'boldgrid-inspirations' ); ?></a>
+			<a href="https://www.boldgrid.com/support/inspirations-plugin/" class="dashicons-before dashicons-external" target="_blank"><?php esc_html_e( 'View Inspiration Plugin Support Docs', 'boldgrid-inspirations' ); ?></a>
+		</p>
+
+		<p>
+			<a href="https://www.boldgrid.com/support/themes/" class="dashicons-before dashicons-external" target="_blank"><?php esc_html_e( 'View BoldGrid Theme Support Docs', 'boldgrid-inspirations' ); ?></a>
 		</p>
 
 		<h3><?php esc_html_e( 'New to WordPress? Ways to get Support:', 'boldgrid-inspirations' ); ?></h3>
