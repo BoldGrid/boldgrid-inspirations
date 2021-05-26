@@ -351,13 +351,20 @@ class Boldgrid_Inspirations_My_Inspiration {
 
 		// The method_exists() call is a tmp fix in cases where the wrong library is loaded.
 		$reseller_amp_url = method_exists( $reseller, 'getAttribute' ) ? $reseller->getAttribute( 'reseller_amp_url' ) : 'https://www.boldgrid.com/central';
+
+		// Determine which theme docs to link to. Crio and Classic themes have different docs.
+		$theme_url = 'https://www.boldgrid.com/support/boldgrid-crio-supertheme-product-guide/';
+		$theme     = wp_get_theme();
+		if ( 'Crio' !== $theme->get( 'Name' ) ) {
+			$theme_url = 'https://www.boldgrid.com/support/boldgrid-themes/';
+		}
 	?>
 		<p>
 			<a href="https://www.boldgrid.com/support/inspirations-plugin/" class="dashicons-before dashicons-external" target="_blank"><?php esc_html_e( 'View Inspiration Plugin Support Docs', 'boldgrid-inspirations' ); ?></a>
 		</p>
 
 		<p>
-			<a href="https://www.boldgrid.com/support/themes/" class="dashicons-before dashicons-external" target="_blank"><?php esc_html_e( 'View BoldGrid Theme Support Docs', 'boldgrid-inspirations' ); ?></a>
+			<a href="<?php echo esc_url( $theme_url ); ?>" class="dashicons-before dashicons-external" target="_blank"><?php esc_html_e( 'View BoldGrid Theme Support Docs', 'boldgrid-inspirations' ); ?></a>
 		</p>
 
 		<h3><?php esc_html_e( 'New to WordPress? Ways to get Support:', 'boldgrid-inspirations' ); ?></h3>
