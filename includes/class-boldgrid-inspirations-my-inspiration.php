@@ -359,13 +359,26 @@ class Boldgrid_Inspirations_My_Inspiration {
 			$theme_url = 'https://www.boldgrid.com/support/boldgrid-themes/';
 		}
 	?>
-		<p>
-			<a href="https://www.boldgrid.com/support/inspirations-plugin/" class="dashicons-before dashicons-external" target="_blank"><?php esc_html_e( 'View Inspiration Plugin Support Docs', 'boldgrid-inspirations' ); ?></a>
-		</p>
 
-		<p>
-			<a href="<?php echo esc_url( $theme_url ); ?>" class="dashicons-before dashicons-external" target="_blank"><?php esc_html_e( 'View BoldGrid Theme Support Docs', 'boldgrid-inspirations' ); ?></a>
-		</p>
+		<ul class="support-boxes">
+
+			<li>
+				<?php esc_html_e( 'Learn to add some style to your new site!', 'boldgrid-inspirations' ); ?>
+
+				<p>
+					<a href="<?php echo esc_url( $this->get_utm_url( $theme_url, 'support-and-learning', 'theme-documentation' ) ); ?>" class="button dashicons-before dashicons-sos" target="_blank"><?php esc_html_e( 'Theme Documentation', 'boldgrid-inspirations' ); ?></a>
+				</p>
+			</li>
+
+			<li>
+				<?php esc_html_e( 'Build a better website with the Post & Page Builder.', 'boldgrid-inspirations' ); ?>
+
+				<p>
+					<a href="<?php echo esc_url( $this->get_utm_url( 'https://www.boldgrid.com/support/page-builder/', 'support-and-learning', 'builder-documentation' ) ); ?>" class="button dashicons-before dashicons-sos" target="_blank"><?php esc_html_e( 'Builder Documentation', 'boldgrid-inspirations' ); ?></a>
+				</p>
+			</li>
+
+		</ul>
 
 		<h3><?php esc_html_e( 'New to WordPress? Ways to get Support:', 'boldgrid-inspirations' ); ?></h3>
 
@@ -374,7 +387,7 @@ class Boldgrid_Inspirations_My_Inspiration {
 			<li>
 				<?php esc_html_e( 'Find guides and tutorials on BoldGrid.com.', 'boldgrid-inspirations' ); ?>
 				<p>
-					<a href="https://www.boldgrid.com/support/" class="button dashicons-before dashicons-sos" target="_blank"><?php esc_html_e( 'View Tutorials', 'boldgrid-inspirations' ); ?></a>
+					<a href="<?php echo esc_url( $this->get_utm_url( 'https://www.boldgrid.com/support/', 'support-and-learning', 'view-tutorials' ) ); ?>" class="button dashicons-before dashicons-sos" target="_blank"><?php esc_html_e( 'View Tutorials', 'boldgrid-inspirations' ); ?></a>
 				</p>
 			</li>
 
@@ -430,6 +443,24 @@ class Boldgrid_Inspirations_My_Inspiration {
 		}
 
 		return $url;
+	}
+
+	/**
+	 * Add appropriate utm codes to a link coming from my inspirations.
+	 *
+	 * @since SINCEVERSION
+	 *
+	 * @param  string $url    The url to add the params to.
+	 * @param  string $source The utm_source.
+	 * @param  string $medium The utm_medium.
+	 * @return string
+	 */
+	public function get_utm_url( $url, $source, $medium ) {
+		return add_query_arg( array(
+			'utm_campaign' => 'my-inspirations',
+			'utm_source'   => $source,
+			'utm_medium'   => $medium,
+		), $url );
 	}
 
 	/**
