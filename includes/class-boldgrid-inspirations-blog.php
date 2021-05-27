@@ -113,7 +113,8 @@ class Boldgrid_Inspirations_Blog {
 		 * With v1 themes it used to be 'sidebar-1'. As Inspirations has transitioned to installing
 		 * Crio themes, the sidebar is now 'primary-sidebar'.
 		 */
-		$sidebar = 'primary-sidebar';
+		$theme   = wp_get_theme();
+		$sidebar = 'Crio' === $theme->get( 'Name' ) ? 'primary-sidebar' : 'sidebar-1';
 
 		/**
 		 * Filter the sidebar to add our new widgets to.
