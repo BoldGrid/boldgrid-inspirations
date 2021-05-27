@@ -568,7 +568,7 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 			$( this ).after( '<span class="spinner inline spinner-left"></span>' );
 
 			// Uncomment for testing, deploy to new tab to quickly test deploy several times.
-			$( '#post_deploy' ).attr( 'target', '_blank' ); self.allActions( 'enable' );
+			// $( '#post_deploy' ).attr( 'target', '_blank' ); self.allActions( 'enable' );
 
 			$( '#post_deploy' ).submit();
 		} );
