@@ -691,10 +691,6 @@ class Boldgrid_Inspirations_Deploy {
 			// create the new blog
 			$new_blog_id = wpmu_create_blog( $_SERVER['SERVER_NAME'], '/' . $this->new_path, $blog_title, get_current_user_id() );
 
-			if ( is_object( $new_blog_id ) ) {
-				echo '<pre>' . print_r( $new_blog_id, 1 ) . '</pre>';
-			}
-
 			switch_to_blog( $new_blog_id );
 
 			// Set the blog's admin email address using the network admin email address.
@@ -1217,10 +1213,9 @@ class Boldgrid_Inspirations_Deploy {
 
 		$this->assign_menu_id_to_all_locations( $menu_id );
 
-		if( $this->install_blog ) {
-			$this->blog->create_category();
-			$this->set_permalink_structure( '/%category%/%postname%/' );
-			$this->blog->create_menu_item( $this->primary_menu_id, 150 );
+		if( $this->install_blog && $this->blog->create_page() ) {
+			update_option( 'page_for_posts', $this->blog->page_id );
+			$this->blog->create_menu_item( $this->primary_menu_id  );
 		}
 
 		// Determine the release channel:
@@ -1359,11 +1354,6 @@ class Boldgrid_Inspirations_Deploy {
 				'post_type'   => $post['post_type'],
 				'post_status' => $post['post_status'],
 			);
-
-			// Assign this blog post to our blog category.
-			if( $is_blog_post && $this->install_blog ) {
-				wp_set_post_categories( $post_id, array( $this->blog->category_id ) );
-			}
 
 			// add page to menu
 			if ( '1' == $page_v->in_menu ) {

@@ -16,20 +16,28 @@
 class Boldgrid_Inspirations_Blog {
 
 	/**
-	 * The Blog category id.
-	 *
-	 * @since 1.4
-	 * @var   int
-	 */
-	public $category_id;
-
-	/**
 	 * Configs.
 	 *
 	 * @since 1.4
 	 * @var   array
 	 */
 	public $configs;
+
+	/**
+	 * The page id of the blog page.
+	 *
+	 * @since SINCEVERSION
+	 * @var int
+	 */
+	public $page_id;
+
+	/**
+	 * The title of our blog page.
+	 *
+	 * @since SINCEVERSION
+	 * @var string
+	 */
+	public $title;
 
 	/**
 	 * Constructor.
@@ -40,21 +48,7 @@ class Boldgrid_Inspirations_Blog {
 	 */
 	public function __construct( $configs = array() ) {
 		$this->configs = $configs;
-	}
-
-	/**
-	 * Create the blog category.
-	 *
-	 * @since 1.4
-	 */
-	public function create_category() {
-		$category = get_category_by_slug( __( 'Blog', 'boldgrid-inspirations' ) );
-
-		if( $category ) {
-			$this->category_id = $category->term_id;
-		} else {
-			$this->category_id = wp_create_category( __( 'Blog', 'boldgrid-inspirations' ) );
-		}
+		$this->title   = __( 'Blog', 'boldgrid-inspirations' );
 	}
 
 	/**
@@ -63,22 +57,45 @@ class Boldgrid_Inspirations_Blog {
 	 * @since 1.4
 	 *
 	 * @param int $menu_id
-	 * @param int $menu_order
+	 * @param int $menu_order Default value is 150. This number was previously in the code without
+	 *                        any comments.
 	 */
-	public function create_menu_item( $menu_id, $menu_order ) {
+	public function create_menu_item( $menu_id, $menu_order = 150 ) {
 		$data = array(
-			'menu-item-title' => __( 'Blog', 'boldgrid-inspirations' ),
-			'menu-item-object-id' => $this->category_id,
-			'menu-item-db-id' => 0,
-			'menu-item-object' => 'category',
+			'menu-item-object-id' => $this->page_id,
 			'menu-item-parent-id' => 0,
-			'menu-item-type' => 'taxonomy',
-			'menu-item-url' => get_category_link( $this->category_id ),
-			'menu-item-status' => 'publish',
-			'menu-item-position' => $menu_order,
+			'menu-item-object'    => 'page',
+			'menu-item-type'      => 'post_type',
+			'menu-item-status'    => 'publish',
+			'menu-item-position'  => $menu_order,
 		);
 
 		return wp_update_nav_menu_item( $menu_id, 0, $data );
+	}
+
+	/**
+	 * Create our blog page.
+	 *
+	 * @since SINCEVERSION
+	 */
+	public function create_page() {
+		$page = get_page_by_title( $this->title );
+
+		if ( ! empty( $page->post_status ) && 'published' === $page->post_status ) {
+			$page_id = $page->ID;
+		} else {
+			$page_id = wp_insert_post( array(
+				'post_title'     => $this->title,
+				'post_name'      => sanitize_key( $this->title ),
+				'post_status'    => 'publish',
+				'post_type'      => 'page',
+				'comment_status' => 'closed',
+			) );
+		}
+
+		$this->page_id = (int) $page_id;
+
+		return ! empty( $this->page_id );
 	}
 
 	/**
@@ -90,7 +107,14 @@ class Boldgrid_Inspirations_Blog {
 	 * @since 1.4
 	 */
 	public function create_sidebar_widgets() {
-		$sidebar = 'sidebar-1';
+		/*
+		 * Set our sidebar id.
+		 *
+		 * With v1 themes it used to be 'sidebar-1'. As Inspirations has transitioned to installing
+		 * Crio themes, the sidebar is now 'primary-sidebar'.
+		 */
+		$theme   = wp_get_theme();
+		$sidebar = 'Crio' === $theme->get( 'Name' ) ? 'primary-sidebar' : 'sidebar-1';
 
 		/**
 		 * Filter the sidebar to add our new widgets to.
