@@ -2,9 +2,9 @@
 Contributors: boldgrid, imh_brad, joemoto, rramo012, timph
 Tags: inspiration, customization, build, create, design
 Requires at least: 4.4
-Tested up to: 5.6
+Tested up to: 5.7
 Requires PHP: 5.4
-Stable tag: 2.6.2
+Stable tag: 2.6.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -34,6 +34,14 @@ The second phase is Customization; tools to transform your website into your vis
 3. You will find the Inspirations menu in your WordPress Dashboard / admin panel.
 
 == Changelog ==
+
+= 2.6.3 =
+
+Release date: June 10th, 2021
+
+* Update: Updated the way blogs are installed via Inspirations.
+* Update: Updated the My Inspirations page with links to theme support.
+* Update: Updated dependencies.
 
 = 2.6.2 =
 
