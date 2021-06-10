@@ -113,16 +113,16 @@
         },
         {
             "name": "boldgrid/library",
-            "version": "2.13.2",
+            "version": "2.13.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/BoldGrid/library.git",
-                "reference": "9c644ed7dfbd00f050451cc39f2717e4618f7f0b"
+                "reference": "1e131289ca2b1a76ca18ded68a3d427c062dd1a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BoldGrid/library/zipball/9c644ed7dfbd00f050451cc39f2717e4618f7f0b",
-                "reference": "9c644ed7dfbd00f050451cc39f2717e4618f7f0b",
+                "url": "https://api.github.com/repos/BoldGrid/library/zipball/1e131289ca2b1a76ca18ded68a3d427c062dd1a9",
+                "reference": "1e131289ca2b1a76ca18ded68a3d427c062dd1a9",
                 "shasum": ""
             },
             "type": "library",
@@ -159,7 +159,7 @@
                 }
             ],
             "description": "The BoldGrid Library for shared code used in official BoldGrid plugins and themes.",
-            "time": "2020-08-12T17:47:34+00:00"
+            "time": "2021-06-10T17:28:33+00:00"
         },
         {
             "name": "boldgrid/plugin-installer",
