@@ -303,7 +303,7 @@ class Boldgrid_Inspirations_Attribution_Page {
 
 		// Ensure the Attribute page is noindex.
 		add_action( 'wp_head', 'wp_no_robots' );
-		add_filter( 'boldgrid-seo/seo/robots/run', '__return_false' );
+		remove_all_actions( 'boldgrid-seo/seo/robots' );
 	}
 
 	/**
