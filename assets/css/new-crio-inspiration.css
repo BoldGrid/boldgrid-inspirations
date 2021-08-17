@@ -1,0 +1,75 @@
+.about-wrap.bgcrio-about-wrap {
+	max-width: 100%;
+	margin: 0;
+}
+
+.bgcrio-header {
+	text-align: center;
+}
+
+.bgcrio-card {
+    box-shadow: 5px 4px 5px #bdbdbd7a;
+    padding: 1em;
+	background-color:white;
+}
+
+.bgcrio-header h1 {
+	width: 100%;
+	color: white;
+}
+
+.bgcrio-about-wrap > div:first-child {
+	background-image: url(../../../../themes/crio/images/welcome/bg-crio-gradient.png), -webkit-gradient(linear, left top, right top, from(#f95c27), to(#9d7770));
+	background-image: url(../../../../themes/crio/images/welcome/bg-crio-gradient.png), linear-gradient(to right, #f95c27, #9d7770);
+	color: #fff;
+	margin: -25px 0px 0px -40px;
+	padding: 15px 160px 15px 45px;
+	background-size: cover;
+	background-repeat: no-repeat;
+  }
+
+  .bgcrio-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bgcrio-intro {
+    width: calc( 90% - 1em );
+    background-color: white;
+    padding: 1em;
+    margin: 1em;
+}
+
+.bgcrio-features {
+    width: calc( 90% + 1em);
+    padding: 0;
+    margin: 1em;
+    display: flex;
+    justify-content: space-between;
+}
+
+.bgcrio-feature {
+    background-color: white;
+    padding: 1em;
+    width: calc( 50% - 3em );
+    display: flex;
+    flex-direction: column;
+}
+
+.feature-image {
+    width: 100%;
+    min-height: 300px;
+    background-image: url(../images/placeholder.jpg);
+    background-position: center;
+    margin-bottom: 1em;
+}
+
+.feature-button {
+    display: flex;
+    justify-content: center;
+}
+
+p.intro-text {
+	margin: 0;
+}

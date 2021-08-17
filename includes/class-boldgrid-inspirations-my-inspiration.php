@@ -191,6 +191,13 @@ class Boldgrid_Inspirations_My_Inspiration {
 			BOLDGRID_INSPIRATIONS_VERSION
 		);
 
+		wp_enqueue_style(
+			'new-crio-inspiration-css',
+			plugins_url( '/' . basename( BOLDGRID_BASE_DIR ) . '/assets/css/new-crio-inspiration.css' ),
+			array(),
+			BOLDGRID_INSPIRATIONS_VERSION
+		);
+
 		wp_enqueue_script( 'image-edit' );
 	}
 
@@ -438,6 +445,8 @@ class Boldgrid_Inspirations_My_Inspiration {
 	public static function get_url( $new = false ) {
 		$url = admin_url( 'admin.php?page=my-inspiration' );
 
+		$theme = wp_get_theme();
+
 		if ( $new ) {
 			$url .= '&new_inspiration=1';
 		}
@@ -469,7 +478,14 @@ class Boldgrid_Inspirations_My_Inspiration {
 	 * @since 1.7.0
 	 */
 	public function page() {
-		include BOLDGRID_BASE_DIR . '/pages/my-inspiration.php';
+		$theme = wp_get_theme();
+		$theme_name = $theme->get( 'Name' );
+		$new_inspiration = ! empty( $_GET['new_inspiration'] );
+		if ( 'Crio' === $theme_name && $new_inspiration ) {
+			include BOLDGRID_BASE_DIR . '/pages/new-crio-inspiration.php';
+		} else {
+			include BOLDGRID_BASE_DIR . '/pages/my-inspiration.php';
+		}
 	}
 
 	/**
