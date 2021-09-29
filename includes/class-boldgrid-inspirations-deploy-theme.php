@@ -65,10 +65,22 @@ class Boldgrid_Inspirations_Deploy_Theme {
 		 * of Crio). The else section implements the original logic (prior to Crio).
 		 */
 		if ( ! empty( $this->deploy->theme_details->theme->DownloadUrl ) ) {
-			$edge_download_url = 'https://repo.imh-ip.com/crio/crio-edge.zip';
-			$options           = get_option( 'boldgrid_settings' );
-			$release_channel   = ! empty( $options['theme_release_channel'] ) ? $options['theme_release_channel'] : 'stable';
-			$theme_url         = 'stable' === $release_channel ? $this->deploy->theme_details->theme->DownloadUrl : $edge_download_url;
+			// Allow downloading an edge release candidate from this url.
+			$options         = get_option( 'boldgrid_settings' );
+			$release_channel = ! empty( $options['theme_release_channel'] ) ? $options['theme_release_channel'] : 'stable';
+			switch ( $release_channel ) {
+				case 'stable':
+					$theme_url = $this->deploy->theme_details->theme->DownloadUrl;
+					break;
+				case 'edge':
+					$theme_url = 'https://repo.imh-ip.com/crio/crio-edge.zip';
+					break;
+				case 'candidate':
+					$theme_url = 'https://repo.imh-ip.com/crio/crio-candidate.zip';
+					break;
+				default:
+					$theme_url = $this->deploy->theme_details->theme->DownloadUrl;
+			}
 		} else {
 			$boldgrid_configs = $this->deploy->get_configs();
 			$api_key_hash     = $this->deploy->asset_manager->api->get_api_key_hash();

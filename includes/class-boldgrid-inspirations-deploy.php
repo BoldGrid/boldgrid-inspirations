@@ -1800,7 +1800,8 @@ class Boldgrid_Inspirations_Deploy {
 	 * @param object $full_plugin_data Plugin details.
 	 */
 	public function download_and_install_plugin( $url, $activate_path, $version, $full_plugin_data ) {
-		$installing_form_plugin = preg_match( '/^(wpforms|weforms)/', $activate_path );
+		$installing_form_plugin  = preg_match( '/^(wpforms|weforms)/', $activate_path );
+		$installing_crio_premium = preg_match( '/^(crio-premium)/', $activate_path );
 
 		if ( ! $installing_form_plugin ) {
 			$this->messages->add_plugin( $full_plugin_data );
@@ -1872,6 +1873,22 @@ class Boldgrid_Inspirations_Deploy {
 
 		$boldgrid_configs = $this->get_configs();
 
+		// If installing Crio Premium, allow choosing an edge or candidate install.
+		if ( $installing_crio_premium ) {
+			$release_channel = isset( $boldgrid_configs['settings']['release_channel'] ) ? $boldgrid_configs['settings']['release_channel'] : 'stable';
+			switch ( $release_channel ) {
+				case 'stable':
+					break;
+				case 'edge':
+					$url = 'https://repo.imh-ip.com/crio-premium/crio-premium-edge.zip';
+					break;
+				case 'candidate':
+					$url = 'https://repo.imh-ip.com/crio-premium/crio-premium-candidate.zip';
+					break;
+				default:
+					$url = $url;
+				}
+		}
 		// If ASSET_SERVER in plugin url name, then replace it from configs.
 		if ( false !== strpos( $url, 'ASSET_SERVER' ) ) {
 			// Replace ASSET_SERVER with the asset server name
