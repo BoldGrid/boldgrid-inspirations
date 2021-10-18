@@ -66,6 +66,7 @@ class Boldgrid_Inspirations_Deploy_Theme {
 		 */
 		if ( ! empty( $this->deploy->theme_details->theme->DownloadUrl ) ) {
 			$theme_url = $this->deploy->theme_details->theme->DownloadUrl;
+			$theme_url = apply_filters( 'boldgrid_inspirations_theme_download_url', $theme_url );
 		} else {
 			$boldgrid_configs = $this->deploy->get_configs();
 			$api_key_hash     = $this->deploy->asset_manager->api->get_api_key_hash();

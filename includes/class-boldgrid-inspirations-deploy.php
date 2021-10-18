@@ -1800,7 +1800,8 @@ class Boldgrid_Inspirations_Deploy {
 	 * @param object $full_plugin_data Plugin details.
 	 */
 	public function download_and_install_plugin( $url, $activate_path, $version, $full_plugin_data ) {
-		$installing_form_plugin = preg_match( '/^(wpforms|weforms)/', $activate_path );
+		$installing_form_plugin  = preg_match( '/^(wpforms|weforms)/', $activate_path );
+		$installing_crio_premium = preg_match( '/^(crio-premium)/', $activate_path );
 
 		if ( ! $installing_form_plugin ) {
 			$this->messages->add_plugin( $full_plugin_data );
@@ -1871,6 +1872,10 @@ class Boldgrid_Inspirations_Deploy {
 		}
 
 		$boldgrid_configs = $this->get_configs();
+
+		if ( $installing_crio_premium ) {
+			$url = apply_filters( 'boldgrid_inspirations_crio_premium_url', $url );
+		}
 
 		// If ASSET_SERVER in plugin url name, then replace it from configs.
 		if ( false !== strpos( $url, 'ASSET_SERVER' ) ) {
