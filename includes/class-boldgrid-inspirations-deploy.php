@@ -1873,22 +1873,10 @@ class Boldgrid_Inspirations_Deploy {
 
 		$boldgrid_configs = $this->get_configs();
 
-		// If installing Crio Premium, allow choosing an edge or candidate install.
 		if ( $installing_crio_premium ) {
-			$release_channel = isset( $boldgrid_configs['settings']['release_channel'] ) ? $boldgrid_configs['settings']['release_channel'] : 'stable';
-			switch ( $release_channel ) {
-				case 'stable':
-					break;
-				case 'edge':
-					$url = 'https://repo.imh-ip.com/crio-premium/crio-premium-edge.zip';
-					break;
-				case 'candidate':
-					$url = 'https://repo.imh-ip.com/crio-premium/crio-premium-candidate.zip';
-					break;
-				default:
-					$url = $url;
-				}
+			$url = apply_filters( 'boldgrid_inspirations_crio_premium_url', $url );
 		}
+
 		// If ASSET_SERVER in plugin url name, then replace it from configs.
 		if ( false !== strpos( $url, 'ASSET_SERVER' ) ) {
 			// Replace ASSET_SERVER with the asset server name
