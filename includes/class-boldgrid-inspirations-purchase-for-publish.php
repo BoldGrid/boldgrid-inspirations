@@ -536,8 +536,7 @@ class Boldgrid_Inspirations_Purchase_For_Publish extends Boldgrid_Inspirations {
 			// After this point, the image is purchased and coins deducted
 
 			// Download and update the attachment:
-			$call_to_download_and_attach = $assetManager->download_and_attach_asset( null, null,
-				$download_data, 'all', true );
+			$call_to_download_and_attach = $assetManager->download_and_attach_asset( null, $download_data, null, 'all', true );
 
 			// Were we able to download the image successfully?
 			if ( false === $this->is_successful_purchase( $call_to_download_and_attach ) ) {
@@ -645,8 +644,7 @@ class Boldgrid_Inspirations_Purchase_For_Publish extends Boldgrid_Inspirations {
 			)
 		);
 
-		$call_to_download_and_attach = $assetManager->download_and_attach_asset( null, null,
-			$download_data, 'all', true );
+		$call_to_download_and_attach = $assetManager->download_and_attach_asset( null, $download_data, null, 'all', true );
 
 		echo json_encode( $call_to_download_and_attach );
 

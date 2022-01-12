@@ -388,8 +388,8 @@ class Boldgrid_Inspirations_Asset_Manager extends Boldgrid_Inspirations {
 	 * @example http://www.example.com/wp-content/uploads/2014/09/0.340150001410438820.jpg
 	 *
 	 * @param int $post_id
-	 * @param string $featured_image
 	 * @param int|array $asset_id
+	 * @param string $featured_image
 	 * @param string $return (Possible values: url (default), attachment_id, all)
 	 * @param string $add_meta_data
 	 *
@@ -397,7 +397,7 @@ class Boldgrid_Inspirations_Asset_Manager extends Boldgrid_Inspirations {
 	 *
 	 * @return string|int|array|bool
 	 */
-	public function download_and_attach_asset( $post_id, $featured_image = null, $asset_id, $return = 'url', $add_meta_data = false ) {
+	public function download_and_attach_asset( $post_id, $asset_id, $featured_image = null, $return = 'url', $add_meta_data = false ) {
 		// Is this an image purchase?
 		$is_purchase = ( is_array( $asset_id ) && 'built_photo_search_purchase' == $asset_id['type'] );
 
