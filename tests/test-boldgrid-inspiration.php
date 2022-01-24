@@ -27,7 +27,7 @@ class Test_Boldgrid_Inspiration extends WP_UnitTestCase {
 	/**
 	 * Setup.
 	 */
-	public function setUp() {
+	public function set_up() {
 		// include('includes/class-boldgrid-inspirations.php');
 		$this->testClass = new Boldgrid_Inspirations( $this->settings );
 	}
