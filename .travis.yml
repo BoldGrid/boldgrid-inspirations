@@ -31,6 +31,9 @@ matrix:
         - nvm use 10
         - yarn
         - composer self-update --1
+        # The phpunit version in the lock file was one installed with php 74. Remove it so we can get
+        # an updated copy.
+        - composer remove --dev phpunit/phpunit
         - composer require --dev phpunit/phpunit
         - composer require --dev yoast/phpunit-polyfills
         - composer install -o
