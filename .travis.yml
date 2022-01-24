@@ -1,6 +1,7 @@
 language: php
 
-dist: focal
+dist: xenial
+# dist: focal
 # dist: trusty
 
 services:
