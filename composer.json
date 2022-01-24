@@ -13,5 +13,8 @@
             "yarn run cpx -v 'node_modules/jquery-toggles/css/toggles-full.css' 'assets/css/jquery-toggles/'",
             "composer run-script post-autoload-dump -d ./vendor/boldgrid/library"
         ]
+    },
+    "require-dev": {
+        "yoast/phpunit-polyfills": "^1.0"
     }
 }

@@ -16,6 +16,9 @@ function _manually_load_plugin() {
 	require_once dirname( dirname( __FILE__ ) ) . '/vendor/boldgrid/library/src/Library/Filter.php';
 
 	require dirname( dirname( __FILE__ ) ) . '/boldgrid-inspirations.php';
+
+	// PHPUnit Polyfills library is a requirement for running the WP test suite.
+	require_once dirname( dirname( __FILE__ ) ) . '/vendor/yoast/phpunit-polyfills/phpunitpolyfills-autoload.php';
 }
 tests_add_filter( 'muplugins_loaded', '_manually_load_plugin' );
 
