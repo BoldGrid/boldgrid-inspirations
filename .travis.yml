@@ -1,5 +1,6 @@
 language: php
 
+dist: focal
 # dist: trusty
 
 notifications:
