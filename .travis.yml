@@ -13,22 +13,31 @@ notifications:
   slack:
     secure: "hku/sEQX6jMCmLaZx7GciHru54QkLwBmovONr3jMDBV5C1GxIDkmCvcmFiIGqQ9neMsL615diGN2tBqUXe90kqsy7vkUer75/8wCR47ClPXEmFns2f4bAG2/DRU/Zd6myWe5n/703j9WhS/IKTc85sVoxiJ+rrgGDmY5b5xG3huatRVE5clYD+c9dnIgj/upebgyytsLzOnHarqb/lYQ5dV51CQkYUnRa4RaY5tbrxxq6H0LllRLWe/tDCd+LH+ktnmCFHgdg9YG01RXd6HiIrzBiAqFVQ9HbnZlWbW1kfTJqPgH7sSN3+4CYnKiOZbMbJTVLapoOgkINJ515WVmZAx/9XEBeOnoK14QweusiThXCVdTGi01bcsSDs9DR9cUImHjutPf7v1p9U7lubk7hZ1k8c21lvpWV/IANm55QyXVulTI9P+j1bpTPhMWAgpw+KvzR/5tsq1FnsY14jpUAzkNYSI9BOb95BKz+utn3MOEk+OuuI4Fhmdfmr8ptpc5J5UChA8hmBI81WsKUjX4SsEk3FCOUhSAN4UGrAcZQDdXwhNJ5CgUo/s/fkOVRHgInMq5BaCLkMCBMDiYEG7gQdlqg4zHfBljHg0vkp2FTkja20e+gZFCxzoGWG4wt0nbzOO6qQ5rcWyStQwfq2nvw5Fyo+kcHXfNV7dYHyxQQ3I="
 
-php:
-  - 7.4
-  - 8.0
-# - 5.6
+matrix:
+  include:
+    - php: 7.4
+      before_script:
+        - nvm install 10
+        - nvm use 10
+        - yarn
+        - composer self-update --1
+        - composer require --dev phpunit/phpunit ^7
+        - composer require --dev yoast/phpunit-polyfills
+        - composer install -o
+        - bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
+    - php: 8.0
+      before_script:
+        - nvm install 10
+        - nvm use 10
+        - yarn
+        - composer self-update --1
+        - composer require --dev phpunit/phpunit
+        - composer require --dev yoast/phpunit-polyfills
+        - composer install -o
+        - bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
 
 env:
   - WP_VERSION=latest WP_MULTISITE=0
-
-before_script:
-  - nvm install 10
-  - nvm use 10
-  - yarn
-  # Use composer 1. Todo, upgrade to composer 2.
-  - composer self-update --1
-  - composer install -o
-  - bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
 
 script:
   - find . -name composer -prune -o -name node_modules -prune -o -name '*.php' -exec php -lf {} \; > /dev/null
