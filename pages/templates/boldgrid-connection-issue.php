@@ -30,7 +30,7 @@
 			esc_html__( 'If the issue persists, then please feel free to check our %1$sBoldGrid Status%2$s page.',
 				'boldgrid-inspirations'
 			),
-			'<a target="_blank" href="https://www.boldgrid.com/">',
+			'<a target="_blank" href="https://status.boldgrid.com/">',
 			'</a>'
 		);
 		?>
