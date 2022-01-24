@@ -275,7 +275,7 @@ iframe#boldgrid_connect_search {
 		 */
 		$post_id = ( is_null( $post ) ? false : $post->ID );
 
-		$image = $this->asset_manager->download_and_attach_asset( $post_id, null, $item, 'all', false );
+		$image = $this->asset_manager->download_and_attach_asset( $post_id, $item, null, 'all', false );
 
 		$response['attachment_id'] = $image['attachment_id'];
 

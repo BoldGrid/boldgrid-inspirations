@@ -1399,7 +1399,7 @@ class Boldgrid_Inspirations_Deploy {
 
 			// Take action if we have a featured image.
 			if ( $page_v->featured_image_asset_id ) {
-				$this->asset_manager->download_and_attach_asset( $post_id, true, $page_v->featured_image_asset_id );
+				$this->asset_manager->download_and_attach_asset( $post_id, $page_v->featured_image_asset_id, true );
 			}
 
 			// If this page has theme mods, set them.
@@ -1504,8 +1504,7 @@ class Boldgrid_Inspirations_Deploy {
 					 */
 					// Set the last argument to true in order to 'add_meta_data'.
 					// This is because the attribution class looks for thumbnails.
-					$pde_url = $this->asset_manager->download_and_attach_asset( false, false,
-						$asset_id, 'url', true );
+					$pde_url = $this->asset_manager->download_and_attach_asset( false, $asset_id, false, 'url', true );
 
 					/**
 					 * ********************************************************
@@ -2026,8 +2025,7 @@ class Boldgrid_Inspirations_Deploy {
 
 					// Take action if we have any featured images.
 					if ( 0 != $homepage_step_obj->page->featured_image_asset_id ) {
-						$this->asset_manager->download_and_attach_asset( $post_id, true,
-							$homepage_step_obj->page->featured_image_asset_id );
+						$this->asset_manager->download_and_attach_asset( $post_id, $homepage_step_obj->page->featured_image_asset_id, true );
 					}
 
 					if ( ! empty( $homepage_step_obj->return_value_save_as ) ) {
@@ -2088,7 +2086,7 @@ class Boldgrid_Inspirations_Deploy {
 					break;
 
 				case 'download_asset' :
-					$url_to_uploaded_asset = $this->asset_manager->download_and_attach_asset( false, false, $homepage_step_obj->action_id );
+					$url_to_uploaded_asset = $this->asset_manager->download_and_attach_asset( false, $homepage_step_obj->action_id, false );
 
 					if ( substr( $homepage_step_obj->return_value_save_as, 0, 7 ) == 'option:' ) {
 						$exploded_return_value_save_as = explode( ':', $homepage_step_obj->return_value_save_as );
