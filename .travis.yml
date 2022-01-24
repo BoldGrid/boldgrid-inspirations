@@ -3,6 +3,9 @@ language: php
 dist: focal
 # dist: trusty
 
+services:
+  - mysql
+
 notifications:
   email:
     on_success: never
