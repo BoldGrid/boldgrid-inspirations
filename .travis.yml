@@ -20,6 +20,8 @@ before_script:
   - nvm install 10
   - nvm use 10
   - yarn
+  # Use composer 1. Todo, upgrade to composer 2.
+  - composer self-update --1
   - composer install -o
   - bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
 
