@@ -25,11 +25,10 @@ install_wp() {
 		local ARCHIVE_NAME="wordpress-$WP_VERSION"
 	fi
 
-	# Temporarily set to the nightly build.
-	# wget -nv -O /tmp/wordpress.tar.gz https://wordpress.org/${ARCHIVE_NAME}.tar.gz
+	# Install the WordPress files.
+	# Unzip quietly (-qq) so the automated tests are not flooded with the unzip output.
 	wget -nv -O /tmp/wordpress-latest.zip https://wordpress.org/nightly-builds/wordpress-latest.zip
-	unzip /tmp/wordpress-latest.zip -d /tmp
-	# tar --strip-components=1 -zxmf /tmp/wordpress.tar.gz -C $WP_CORE_DIR
+	unzip -qq /tmp/wordpress-latest.zip -d /tmp
 
 	wget -nv -O $WP_CORE_DIR/wp-content/db.php https://raw.github.com/markoheijnen/wp-mysqli/master/db.php
 }
@@ -45,6 +44,7 @@ install_test_suite() {
 	# set up testing suite
 	mkdir -p $WP_TESTS_DIR
 	cd $WP_TESTS_DIR
+	# As each new version of WP is released, the branch should be updated in the 2 lines below.
 	svn co --quiet https://develop.svn.wordpress.org/branches/5.9/tests/phpunit/includes/
 	wget -nv -O wp-tests-config.php https://develop.svn.wordpress.org/branches/5.9/wp-tests-config-sample.php
 	sed $ioption "s:dirname( __FILE__ ) . '/src/':'$WP_CORE_DIR':" wp-tests-config.php
