@@ -1406,14 +1406,24 @@ class Boldgrid_Inspirations_Deploy {
 			if ( ! empty( $page_v->theme_mods ) ) {
 				$theme_mods = json_decode( $page_v->theme_mods, true );
 				foreach ( $theme_mods as $name => $value ) {
-					// Theme mods shouldn't have menu locations. If they do, don't skip them.
-					$skips = [ 'nav_menu_locations' ];
+					$skips = array(
+						'nav_menu_locations',
+						// This is a private setting, only used to tell us we have a logo and and which asset it is.
+						'site_logo_asset_id',
+						// If we do have a custom_logo, it will be set below.
+						'custom_logo',
+					);
 
 					if ( in_array( $name, $skips, true ) ) {
 						continue;
 					}
 
 					set_theme_mod( $name, $value );
+				}
+
+				// Install our logo.
+				if ( ! empty( $theme_mods['site_logo_asset_id'] ) ) {
+					\Boldgrid\Inspirations\Deploy\Logo::deploy( $theme_mods['site_logo_asset_id'], $this );
 				}
 			}
 
