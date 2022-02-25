@@ -1195,28 +1195,14 @@ class Boldgrid_Inspirations_Deploy {
 	public function deploy_page_sets() {
 		$pages_created = 0;
 
-		// Set the menu name
-		$menu_name = 'primary';
-
-		// Allow plugins, like BoldGrid Staging, to create 'primary-staging' instead of 'primary'.
-		$menu_name = apply_filters( 'boldgrid_deployment_primary_menu_name', $menu_name );
-
-		// We want to start fresh, so if the menu exists, delete it.
-		$menu_exists = wp_get_nav_menu_object( $menu_name );
-		if ( true == $menu_exists ) {
-			wp_delete_nav_menu( $menu_name );
-		}
-
-		// Create the menu
-		$menu_id = wp_create_nav_menu( $menu_name );
-		$this->primary_menu_id = $menu_id;
-
-		$this->assign_menu_id_to_all_locations( $menu_id );
-
-		if( $this->install_blog && $this->blog->create_page() ) {
-			update_option( 'page_for_posts', $this->blog->page_id );
-			$this->blog->create_menu_item( $this->primary_menu_id  );
-		}
+		/*
+		 * An array of menu items to create.
+		 *
+		 * In v1, we created menu items as we created the pages. With the introduction of v2 menus,
+		 * v1 menu item configs are stored in this array and those menu items eventually created after
+		 * all the pages have been setup. IE loop through this array and create a menu item with each item.
+		 */
+		$v1_menu_items = array();
 
 		// Determine the release channel:
 		$options = get_option( 'boldgrid_settings' );
@@ -1308,6 +1294,8 @@ class Boldgrid_Inspirations_Deploy {
 
 		$existing_pages_from_meta_data = $this->get_existing_pages();
 
+		$deploy_menus = new \Boldgrid\Inspirations\Deploy\Menus( $pages_in_pageset );
+
 		foreach ( $pages_in_pageset as $page_v ) {
 			if ( ! is_object( $page_v ) ) {
 				continue;
@@ -1357,13 +1345,13 @@ class Boldgrid_Inspirations_Deploy {
 
 			// add page to menu
 			if ( '1' == $page_v->in_menu ) {
-				wp_update_nav_menu_item( $menu_id, 0, array(
+				$v1_menu_items[] = array(
 					'menu-item-object-id' => $post_id,
 					'menu-item-parent-id' => 0,
 					'menu-item-object'    => 'page',
 					'menu-item-type'      => 'post_type',
 					'menu-item-status'    => 'publish'
-				) );
+				);
 			}
 
 			// Steps to take if this is the homepage.
@@ -1446,9 +1434,45 @@ class Boldgrid_Inspirations_Deploy {
 			$this->set_custom_homepage();
 		}
 
+		/*
+		 * We've created all of our posts and pages, it's now time to setup our menus.
+		 *
+		 * If the conditional is met, we have a v2 menu. A v2 menu is a _bginsp_menus post type that
+		 * has been delivered. Its code / html is a json string containing all of the info needed
+		 * to create a custom menu.
+		 *
+		 * Else, we're working with a v1 menu. A v1 menu is a menu that is configured entirely within
+		 * the BoldGrid Management System.
+		 */
+		if ( $deploy_menus->has_menu() ) {
+			$deploy_menus->deploy();
+			$this->primary_menu_id = $deploy_menus->get_primary_menu_id();
+		} else {
+			$menu_name = apply_filters( 'boldgrid_deployment_primary_menu_name', 'primary' );
+
+			// We want to start fresh, so if the menu exists, delete it.
+			if ( wp_get_nav_menu_object( $menu_name ) ) {
+				wp_delete_nav_menu( $menu_name );
+			}
+
+			$this->primary_menu_id = wp_create_nav_menu( $menu_name );
+
+			// Add all of our menu items to the menu.
+			foreach ( $v1_menu_items as $menu_item ) {
+				wp_update_nav_menu_item( $this->primary_menu_id, 0, $menu_item );
+			}
+
+			$this->assign_menu_id_to_all_locations( $this->primary_menu_id );
+		}
+
+		if( $this->install_blog && $this->blog->create_page() ) {
+			update_option( 'page_for_posts', $this->blog->page_id );
+			$this->blog->create_menu_item( $this->primary_menu_id  );
+		}
+
 		// If we're installing the "Invoice" feature, do all the things now.
 		if ( $this->install_invoice ) {
-			$this->invoice->deploy( array( 'menu_id' => $menu_id ) );
+			$this->invoice->deploy( array( 'menu_id' => $this->primary_menu_id ) );
 		}
 	}
 
