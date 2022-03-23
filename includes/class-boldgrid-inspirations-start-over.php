@@ -83,7 +83,8 @@ class Boldgrid_Inspirations_Start_Over {
 			'page',
 			'post',
 			'revision',
-			'attachment'
+			'attachment',
+			'crio_page_header',
 		);
 
 		$post_statuses = array (
@@ -226,7 +227,8 @@ class Boldgrid_Inspirations_Start_Over {
 			'boldgrid_show_tip_start_editing',
 			'boldgrid_inspirations_fetching_kitchen_sink_status',
 			'_transient_boldgrid_inspirations_kitchen_sink',
-			'_transient_timeout_boldgrid_inspirations_kitchen_sink'
+			'_transient_timeout_boldgrid_inspirations_kitchen_sink',
+			'crio_premium_sample_templates_installed',
 		);
 
 		// Delete those options.
