@@ -1415,6 +1415,18 @@ class Boldgrid_Inspirations_Deploy {
 				}
 			}
 
+			// If this is a crio page header (or footer or sticky header), configure taxonomy.
+			if ( 'crio_page_header' === $post['post_type'] ) {
+				\Boldgrid\Inspirations\Deploy\Crio_Utility::register_template_locations();
+
+				$location    = get_term_by( 'slug', 'footer', 'template_locations', ARRAY_A );
+				$location_id = ! empty( $location ) ? $location['term_id'] : 0;
+
+				if ( $location_id ) {
+					$term_data = wp_set_object_terms( $post_id, $location_id, 'template_locations' );
+				}
+			}
+
 			$pages_created ++;
 
 			// Add the page id so that we can recognize it

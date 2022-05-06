@@ -439,6 +439,7 @@ public function include_admin_files() {
 	require_once BOLDGRID_BASE_DIR . '/includes/deploy/class-cache.php';
 	require_once BOLDGRID_BASE_DIR . '/includes/deploy/class-logo.php';
 	require_once BOLDGRID_BASE_DIR . '/includes/deploy/class-menus.php';
+	require_once BOLDGRID_BASE_DIR . '/includes/deploy/class-crio-utility.php';
 
 	require_once BOLDGRID_BASE_DIR . '/includes/weforms/class-utility.php';
 
