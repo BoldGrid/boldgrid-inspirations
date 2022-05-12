@@ -1296,6 +1296,18 @@ class Boldgrid_Inspirations_Deploy {
 
 		$deploy_menus = new \Boldgrid\Inspirations\Deploy\Menus( $pages_in_pageset );
 
+		/*
+		 * If the page has custom page headers, after the pages are created, we need to update the page headers.
+		 * This value starts out as false, and is set to true if we find custom page headers.
+		 */
+		$theme_has_cph = false;
+
+		/*
+		 * This variable will store the original post IDs so that they can be changed in the theme mods
+		 * at a later point.
+		 */
+		$cph_original_ids = array();
+
 		foreach ( $pages_in_pageset as $page_v ) {
 			if ( ! is_object( $page_v ) ) {
 				continue;
@@ -1427,6 +1439,9 @@ class Boldgrid_Inspirations_Deploy {
 
 					if ( $term_id ) {
 						wp_set_object_terms( $post_id, $term_id, $tax_data->taxonomy );
+						$theme_has_cph = true;
+						// This will create the correlation between the original post ID and the new post id.
+						$cph_original_ids[ $tax_data->post_id ] = $post_id;
 					}
 				}
 			}
@@ -1489,6 +1504,16 @@ class Boldgrid_Inspirations_Deploy {
 		// If we're installing the "Invoice" feature, do all the things now.
 		if ( $this->install_invoice ) {
 			$this->invoice->deploy( array( 'menu_id' => $this->primary_menu_id ) );
+		}
+
+		/*
+		 * If the theme has a Custom Page Header, we must do the needful
+		 * and make sure all the menu IDs and post IDs match up. For more info
+		 * please refer to the Crio_Utility Class.
+		 */
+		if ( $theme_has_cph ) {
+			\Boldgrid\Inspirations\Deploy\Crio_Utility::set_custom_templates( $cph_original_ids );
+			\Boldgrid\Inspirations\Deploy\Crio_Utility::set_template_menus();
 		}
 	}
 
