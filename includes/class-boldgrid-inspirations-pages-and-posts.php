@@ -399,7 +399,6 @@ class Boldgrid_Inspirations_Pages_And_Posts {
 				 '/pages/includes/post_submitbox_misc_actions_auto_add_to_menu.php';
 
 			// Pass the selected checkboxes to the JavaScript.
-			// This was changed to an array to get rid of wp_localize_script warnings.
 			wp_localize_script( 'manage_menu_assignment_within_editor', 'original_selections',
 				array( $original_selections ) );
 
@@ -527,7 +526,6 @@ class Boldgrid_Inspirations_Pages_And_Posts {
 			 '/pages/includes/post_submitbox_misc_actions_auto_add_to_menu.php';
 
 		// Pass the selected checkboxes to the JavaScript.
-		// this was changed to an array to get rid of wp_localize_script() warnings.
 		wp_localize_script( 'manage_menu_assignment_within_editor', 'original_selections',
 			array( $original_selections ) );
 	}

@@ -72,9 +72,9 @@ return array(
 		// Preview Server.
 		'get-site-content' => 							'/wpb-maintenance/get-site-content.php',
 	),
-	'asset_server' =>									'https://wp-assets.boldgrid.com',
-	'preview_server' =>									'https://wp-preview.boldgrid.com',
-	'author_preview_server' =>							'https://wp-staging.boldgrid.com',
+	'asset_server' =>									'https://api-dev-jamesros.boldgrid.com',
+	'preview_server' =>									'https://wp-preview-dev-jamesros.boldgrid.com/',
+	'author_preview_server' =>							'https://wp-staging-dev-jamesros.boldgrid.com/',
 	'installation' => array(
 		'max_num_install_attempts' => 5,
 	),

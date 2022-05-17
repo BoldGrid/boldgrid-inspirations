@@ -1305,6 +1305,8 @@ class Boldgrid_Inspirations_Deploy {
 		/*
 		 * This variable will store the original post IDs so that they can be changed in the theme mods
 		 * at a later point.
+		 *
+		 * array( 'author_post_id' => 'local_post_id' ).
 		 */
 		$cph_original_ids = array();
 
@@ -1439,8 +1441,11 @@ class Boldgrid_Inspirations_Deploy {
 
 					if ( $term_id ) {
 						wp_set_object_terms( $post_id, $term_id, $tax_data->taxonomy );
+					}
+
+					// This will create the correlation between the original author's post ID and the new local post id.
+					if ( isset( $tax_data->post_id ) && $term_id && 'template_locations' === $tax_data->taxonomy ) {
 						$theme_has_cph = true;
-						// This will create the correlation between the original post ID and the new post id.
 						$cph_original_ids[ $tax_data->post_id ] = $post_id;
 					}
 				}
@@ -1512,8 +1517,9 @@ class Boldgrid_Inspirations_Deploy {
 		 * please refer to the Crio_Utility Class.
 		 */
 		if ( $theme_has_cph ) {
-			\Boldgrid\Inspirations\Deploy\Crio_Utility::set_custom_templates( $cph_original_ids );
-			\Boldgrid\Inspirations\Deploy\Crio_Utility::set_template_menus();
+			$crio_premium_utility = new \Boldgrid\Inspirations\Deploy\Crio_Premium_Utility( $cph_original_ids );
+			$crio_premium_utility->set_custom_templates( $cph_original_ids );
+			$crio_premium_utility->set_template_menus();
 		}
 	}
 
