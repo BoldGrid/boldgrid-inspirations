@@ -1518,7 +1518,7 @@ class Boldgrid_Inspirations_Deploy {
 		 */
 		if ( $theme_has_cph ) {
 			$crio_premium_utility = new \Boldgrid\Inspirations\Deploy\Crio_Premium_Utility( $cph_original_ids );
-			$crio_premium_utility->set_custom_templates( $cph_original_ids );
+			$crio_premium_utility->set_custom_templates();
 			$crio_premium_utility->set_template_menus();
 		}
 	}

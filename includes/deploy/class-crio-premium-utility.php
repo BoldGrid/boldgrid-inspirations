@@ -55,7 +55,7 @@ class Crio_Premium_Utility {
 	 *
 	 * @param array $cph_original_ids Original CPH Id Numbers.
 	 */
-	public function set_custom_templates( $cph_original_ids ) {
+	public function set_custom_templates() {
 		$template_locations = array( 'page_headers', 'page_footers', 'sticky_page_headers' );
 		$page_post_types    = array( 'global', 'pages', 'posts', 'home', 'blog', 'search' );
 
@@ -70,9 +70,9 @@ class Crio_Premium_Utility {
 		foreach ( $template_locations as $location ) {
 			foreach ( $page_post_types as $page_post_type ) {
 				$theme_mod_name = 'bgtfw_' . $location . '_' . $page_post_type . '_template';
-				$template_id = get_theme_mod( $theme_mod_name );
-				if ( isset( $cph_original_ids[ $template_id ] ) ) {
-					set_theme_mod( $theme_mod_name, $cph_original_ids[ $template_id ] );
+				$template_id    = get_theme_mod( $theme_mod_name );
+				if ( isset( $this->cph_original_ids[ $template_id ] ) ) {
+					set_theme_mod( $theme_mod_name, $this->cph_original_ids[ $template_id ] );
 				}
 				$theme_mods[ $theme_mod_name ] = get_theme_mod( $theme_mod_name );
 			}
