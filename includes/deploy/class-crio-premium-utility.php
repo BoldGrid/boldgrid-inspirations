@@ -147,6 +147,15 @@ class Crio_Premium_Utility {
 			true
 		);
 
+		/** There are two ways that a menu from the custom template can be matched
+		 * against the new menus created by inspirations. The first is by referencing
+		 * the 'nav_menu_locations' theme mod. This is the primary way that it should
+		 * be matched. However, in the case of a custom template using the new v2
+		 * nested menus, the menu is not set to a location. Therefore, we need to
+		 * reference the menus listed in wp_nav_menu() and match them against them.
+		 */
+		$menu_adjusted = false;
+
 		/**
 		 * This is where we check to see if the menu location name is contained
 		 * within the shortcode's attributes. If it is, we change the menu id to
@@ -157,8 +166,22 @@ class Crio_Premium_Utility {
 				$menu_attrs['widget-boldgrid_component_menu[][bgc_menu_location_id]'],
 				$menu_location
 			);
+
 			if ( false !== $strpos ) {
 				$menu_attrs['widget-boldgrid_component_menu[][bgc_menu]'] = $menu_id;
+				$menu_adjusted                                            = true;
+			}
+		}
+
+		/**
+		 * If the menu was not adjusted in the previous step, we check
+		 * to see if the menu's location name matches the menu's name.
+		 */
+		if ( false === $menu_adjusted ) {
+			foreach ( wp_get_nav_menus() as $menu ) {
+				if ( $menu->name === $menu_attrs['widget-boldgrid_component_menu[][bgc_menu_location]'] ) {
+					$menu_attrs['widget-boldgrid_component_menu[][bgc_menu]'] = $menu->term_id;
+				}
 			}
 		}
 

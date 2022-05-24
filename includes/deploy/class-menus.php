@@ -90,7 +90,7 @@ class Menus {
 
 		foreach ( $configs['menus'] as $term_id => $menu_data ) {
 			// Create the menu.
-			$menu_id = wp_create_nav_menu( $menu_data['name'] . '-test' );
+			$menu_id = wp_create_nav_menu( $menu_data['name'] );
 
 			// Keep track of the fact we created this menu.
 			$menu_ids[ $term_id ] = $menu_id;
