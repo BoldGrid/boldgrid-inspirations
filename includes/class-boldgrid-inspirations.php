@@ -318,6 +318,50 @@ class Boldgrid_Inspirations {
 				'filter_allowed_html',
 			), 10, 2
 		);
+
+		add_filter( 'get_local_id_from_author_id',
+			array(
+				$this,
+				'get_local_id_from_author_id',
+			), 10, 1
+		);
+
+		add_filter( 'get_author_id_from_local_id',
+			array(
+				$this,
+				'get_author_id_from_local_id',
+			), 10, 1
+		);
+	}
+
+	/**
+	 * Get the local id from the author id.
+	 *
+	 * @since 1.2.3
+	 * @access public
+	 *
+	 * @param int $author_id The author id.
+	 * @return int
+	 */
+	public function get_local_id_from_author_id( $author_id ) {
+		$ids_option = get_option( 'boldgrid_author_ids_to_local', array() );
+
+		return isset( $ids_option[ $author_id ] ) ? $ids_option[ $author_id ] : $author_id;
+	}
+
+	/**
+	 * Get the author id from the local id.
+	 *
+	 * @since 1.2.3
+	 * @access public
+	 *
+	 * @param int $local_id The local id.
+	 * @return int
+	 */
+	public function get_author_id_from_local_id( $local_id ) {
+		$ids_option = get_option( 'boldgrid_author_ids_to_local', array() );
+
+		return array_search( $local_id, $ids_option ) ? array_search( $local_id, $ids_option ) : $local_id;
 	}
 
 	/**

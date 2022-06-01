@@ -19,24 +19,18 @@ namespace Boldgrid\Inspirations\Deploy;
  */
 class Crio_Premium_Utility {
 	/**
-	 * Original Page ID's of the Crio Page Headers.
+	 * Post Meta Keys.
 	 *
-	 * @since sinceversion
+	 * These post meta keys are to be imported when setting
+	 * post meta.
 	 *
-	 * @var array
+	 * @var array post meta keys.
 	 */
-	public $cph_original_ids;
-
-	/**
-	 * Constructor
-	 *
-	 * @param array $cph_original_ids The original IDs of the Crio Page Headers.
-	 *
-	 * @since sinceversion
-	 */
-	public function __construct( $cph_original_ids ) {
-		$this->cph_original_ids = $cph_original_ids;
-	}
+	public static $post_meta_keys = array(
+		'crio-premium-page-header-override',
+		'crio-premium-page-header-select',
+		'crio-premium-page-header-background',
+	);
 
 	/**
 	 * Set Custom Templates.
@@ -55,11 +49,9 @@ class Crio_Premium_Utility {
 	 *
 	 * @param array $cph_original_ids Original CPH Id Numbers.
 	 */
-	public function set_custom_templates() {
+	public static function set_custom_templates() {
 		$template_locations = array( 'page_headers', 'page_footers', 'sticky_page_headers' );
 		$page_post_types    = array( 'global', 'pages', 'posts', 'home', 'blog', 'search' );
-
-		$theme_mods = array();
 
 		/*
 		 * The theme mods that store the various custom template settings are a combination of
@@ -69,12 +61,13 @@ class Crio_Premium_Utility {
 		 */
 		foreach ( $template_locations as $location ) {
 			foreach ( $page_post_types as $page_post_type ) {
-				$theme_mod_name = 'bgtfw_' . $location . '_' . $page_post_type . '_template';
-				$template_id    = get_theme_mod( $theme_mod_name );
-				if ( isset( $this->cph_original_ids[ $template_id ] ) ) {
-					set_theme_mod( $theme_mod_name, $this->cph_original_ids[ $template_id ] );
+				$theme_mod_name     = 'bgtfw_' . $location . '_' . $page_post_type . '_template';
+				$template_author_id = get_theme_mod( $theme_mod_name );
+				$template_local_id  = apply_filters( 'get_local_id_from_author_id', $template_author_id );
+
+				if ( false !== $template_author_id ) {
+					set_theme_mod( $theme_mod_name, $template_local_id );
 				}
-				$theme_mods[ $theme_mod_name ] = get_theme_mod( $theme_mod_name );
 			}
 		}
 	}
@@ -88,7 +81,7 @@ class Crio_Premium_Utility {
 	 * in the theme. For example, if you are wanting to include the 'main' menu, you must include the
 	 * word 'main' in the template's menu location name.
 	 */
-	public function set_template_menus() {
+	public static function set_template_menus() {
 		$templates = get_posts(
 			array(
 				'post_type' => 'crio_page_header',
@@ -103,7 +96,7 @@ class Crio_Premium_Utility {
 			$menus = array();
 			preg_match( '/\[boldgrid_component type="wp_boldgrid_component_menu".*\]/s', $content, $menus );
 			foreach ( $menus as $menu ) {
-				$adjusted_menu = $this->adjust_menu_id( $menu );
+				$adjusted_menu = self::adjust_menu_id( $menu );
 				$content       = str_replace( $menu, $adjusted_menu, $content );
 			}
 
@@ -125,7 +118,7 @@ class Crio_Premium_Utility {
 	 *
 	 * @return string The adjusted menu shortcode.
 	 */
-	public function adjust_menu_id( $menu ) {
+	public static function adjust_menu_id( $menu ) {
 		$menu_locations = get_theme_mod( 'nav_menu_locations' );
 
 		/**
@@ -204,5 +197,21 @@ class Crio_Premium_Utility {
 		$opts = rawurlencode( $opts . '}' );
 
 		return '[boldgrid_component type="wp_boldgrid_component_menu" opts="' . $opts . '"]';
+	}
+
+
+	/**
+	 * Set Post Meta
+	 *
+	 * This is run after all pages / posts are added to the site. This is used to set
+	 * the post meta header overrides for the pages / posts.
+	 */
+	public static function set_post_meta( $post_id, $post_meta ) {
+		foreach ( $post_meta as $key => $value ) {
+			if ( false !== array_search( $key, self::$post_meta_keys, true ) ) {
+				$filtered_value = apply_filters( 'get_local_id_from_author_id', $value[0] );
+				update_post_meta( $post_id, $key, $filtered_value );
+			}
+		}
 	}
 }

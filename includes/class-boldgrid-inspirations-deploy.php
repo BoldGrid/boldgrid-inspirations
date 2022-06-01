@@ -1308,7 +1308,14 @@ class Boldgrid_Inspirations_Deploy {
 		 *
 		 * array( 'author_post_id' => 'local_post_id' ).
 		 */
-		$cph_original_ids = array();
+		$author_ids_to_local = array();
+
+		/*
+		 * This variable will store a set of posts that have post_meta to be updated.
+		 *
+		 * array( 'post_id' => 'post_meta' ).
+		 */
+		$posts_to_update_meta = array();
 
 		foreach ( $pages_in_pageset as $page_v ) {
 			if ( ! is_object( $page_v ) ) {
@@ -1435,6 +1442,19 @@ class Boldgrid_Inspirations_Deploy {
 				\Boldgrid\Inspirations\Deploy\Crio_Utility::register_template_locations();
 
 				$taxonomy = json_decode( $page_v->taxonomy );
+
+				if ( property_exists( $taxonomy, 'author_id' ) ) {
+					$author_ids_to_local[ $taxonomy->author_id ] = $post_id;
+				}
+
+				if ( property_exists( $taxonomy, 'post_meta' ) ) {
+					$posts_to_update_meta[ $post_id ] = $taxonomy->post_meta;
+				}
+
+				if ( ! property_exists( $taxonomy, 'by_slug' ) ) {
+					continue;
+				}
+
 				foreach ( $taxonomy->by_slug as $tax_data ) {
 					$term    = get_term_by( 'slug', $tax_data->slug, $tax_data->taxonomy, ARRAY_A );
 					$term_id = ! empty( $term ) ? $term['term_id'] : 0;
@@ -1444,9 +1464,8 @@ class Boldgrid_Inspirations_Deploy {
 					}
 
 					// This will create the correlation between the original author's post ID and the new local post id.
-					if ( isset( $tax_data->post_id ) && $term_id && 'template_locations' === $tax_data->taxonomy ) {
+					if ( property_exists( $taxonomy, 'author_id' ) && $term_id && 'template_locations' === $tax_data->taxonomy ) {
 						$theme_has_cph = true;
-						$cph_original_ids[ $tax_data->post_id ] = $post_id;
 					}
 				}
 			}
@@ -1511,15 +1530,22 @@ class Boldgrid_Inspirations_Deploy {
 			$this->invoice->deploy( array( 'menu_id' => $this->primary_menu_id ) );
 		}
 
+		update_option( 'boldgrid_author_ids_to_local', $author_ids_to_local );
+
 		/*
 		 * If the theme has a Custom Page Header, we must do the needful
 		 * and make sure all the menu IDs and post IDs match up. For more info
 		 * please refer to the Crio_Utility Class.
 		 */
 		if ( $theme_has_cph ) {
-			$crio_premium_utility = new \Boldgrid\Inspirations\Deploy\Crio_Premium_Utility( $cph_original_ids );
-			$crio_premium_utility->set_custom_templates();
-			$crio_premium_utility->set_template_menus();
+			\Boldgrid\Inspirations\Deploy\Crio_Premium_Utility::set_custom_templates();
+			\Boldgrid\Inspirations\Deploy\Crio_Premium_Utility::set_template_menus();
+		}
+
+		if ( ! empty( $posts_to_update_meta ) ) {
+			foreach ( $posts_to_update_meta as $post_id => $post_meta ) {
+				\Boldgrid\Inspirations\Deploy\Crio_Premium_Utility::set_post_meta( $post_id, $post_meta );
+			}
 		}
 	}
 
