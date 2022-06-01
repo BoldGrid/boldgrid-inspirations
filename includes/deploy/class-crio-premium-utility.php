@@ -30,6 +30,7 @@ class Crio_Premium_Utility {
 		'crio-premium-page-header-override',
 		'crio-premium-page-header-select',
 		'crio-premium-page-header-background',
+		'crio-premium-page-header-featured-image-background',
 	);
 
 	/**
