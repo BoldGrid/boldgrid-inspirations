@@ -31,6 +31,7 @@ class Crio_Premium_Utility {
 		'crio-premium-page-header-select',
 		'crio-premium-page-header-background',
 		'crio-premium-page-header-featured-image-background',
+		'crio-premium-template-has-page-title',
 	);
 
 	/**
@@ -91,11 +92,12 @@ class Crio_Premium_Utility {
 
 		foreach ( $templates as $template ) {
 			$content = $template->post_content;
+
 			if ( empty( $content ) ) {
 				continue;
 			}
 			$menus = array();
-			preg_match( '/\[boldgrid_component type="wp_boldgrid_component_menu".*\]/s', $content, $menus );
+			preg_match( '/\[boldgrid_component type="wp_boldgrid_component_menu".*\]/', $content, $menus );
 			foreach ( $menus as $menu ) {
 				$adjusted_menu = self::adjust_menu_id( $menu );
 				$content       = str_replace( $menu, $adjusted_menu, $content );
