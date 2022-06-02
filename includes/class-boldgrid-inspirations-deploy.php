@@ -1463,8 +1463,8 @@ class Boldgrid_Inspirations_Deploy {
 						wp_set_object_terms( $post_id, $term_id, $tax_data->taxonomy );
 					}
 
-					// This will create the correlation between the original author's post ID and the new local post id.
-					if ( property_exists( $taxonomy, 'author_id' ) && $term_id && 'template_locations' === $tax_data->taxonomy ) {
+					// This will ensure that the theme is marked as having a custom page header ensuring that necessary steps are run later.
+					if ( $term_id && 'template_locations' === $tax_data->taxonomy ) {
 						$theme_has_cph = true;
 					}
 				}
@@ -1535,13 +1535,18 @@ class Boldgrid_Inspirations_Deploy {
 		/*
 		 * If the theme has a Custom Page Header, we must do the needful
 		 * and make sure all the menu IDs and post IDs match up. For more info
-		 * please refer to the Crio_Utility Class.
+		 * please refer to the Crio_Premium_Utility Class.
 		 */
 		if ( $theme_has_cph ) {
 			\Boldgrid\Inspirations\Deploy\Crio_Premium_Utility::set_custom_templates();
 			\Boldgrid\Inspirations\Deploy\Crio_Premium_Utility::set_template_menus();
 		}
 
+		/*
+		 * If we have any posts with post_meta that need to be updated
+		 * We run the updates now. This is done after page creating to ensure that all posts are
+		 * properly created first.
+		 */
 		if ( ! empty( $posts_to_update_meta ) ) {
 			foreach ( $posts_to_update_meta as $post_id => $post_meta ) {
 				\Boldgrid\Inspirations\Deploy\Crio_Premium_Utility::set_post_meta( $post_id, $post_meta );
