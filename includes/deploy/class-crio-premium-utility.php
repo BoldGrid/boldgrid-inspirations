@@ -68,7 +68,7 @@ class Crio_Premium_Utility {
 				$template_local_id  = apply_filters( 'get_local_id_from_author_id', $template_author_id );
 
 				if ( false !== $template_author_id ) {
-					set_theme_mod( $theme_mod_name, $template_local_id );
+					set_theme_mod( $theme_mod_name, strval( $template_local_id ) );
 				}
 			}
 		}
