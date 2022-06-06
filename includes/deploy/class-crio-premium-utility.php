@@ -19,22 +19,6 @@ namespace Boldgrid\Inspirations\Deploy;
  */
 class Crio_Premium_Utility {
 	/**
-	 * Post Meta Keys.
-	 *
-	 * These post meta keys are to be imported when setting
-	 * post meta.
-	 *
-	 * @var array post meta keys.
-	 */
-	public static $post_meta_keys = array(
-		'crio-premium-page-header-override',
-		'crio-premium-page-header-select',
-		'crio-premium-page-header-background',
-		'crio-premium-page-header-featured-image-background',
-		'crio-premium-template-has-page-title',
-	);
-
-	/**
 	 * Set Custom Templates.
 	 *
 	 * This is run after all pages / posts are added to the site.
@@ -65,11 +49,9 @@ class Crio_Premium_Utility {
 			foreach ( $page_post_types as $page_post_type ) {
 				$theme_mod_name     = 'bgtfw_' . $location . '_' . $page_post_type . '_template';
 				$template_author_id = get_theme_mod( $theme_mod_name );
-				$template_local_id  = apply_filters( 'get_local_id_from_author_id', $template_author_id );
+				$template_local_id  = \Boldgrid\Inspirations\Deploy\Author_Ids::get_from_author( $template_author_id );
 
-				if ( false !== $template_author_id ) {
-					set_theme_mod( $theme_mod_name, strval( $template_local_id ) );
-				}
+				set_theme_mod( $theme_mod_name, strval( $template_local_id ) );
 			}
 		}
 	}
@@ -200,21 +182,5 @@ class Crio_Premium_Utility {
 		$opts = rawurlencode( $opts . '}' );
 
 		return '[boldgrid_component type="wp_boldgrid_component_menu" opts="' . $opts . '"]';
-	}
-
-
-	/**
-	 * Set Post Meta
-	 *
-	 * This is run after all pages / posts are added to the site. This is used to set
-	 * the post meta header overrides for the pages / posts.
-	 */
-	public static function set_post_meta( $post_id, $post_meta ) {
-		foreach ( $post_meta as $key => $value ) {
-			if ( false !== array_search( $key, self::$post_meta_keys, true ) ) {
-				$filtered_value = apply_filters( 'get_local_id_from_author_id', $value[0] );
-				update_post_meta( $post_id, $key, $filtered_value );
-			}
-		}
 	}
 }

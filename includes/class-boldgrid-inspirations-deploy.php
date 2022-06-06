@@ -1443,14 +1443,21 @@ class Boldgrid_Inspirations_Deploy {
 
 				$taxonomy = json_decode( $page_v->taxonomy );
 
+				// If the taxonomy contains an 'author_id' key, we need to set the post's author_id => local id.
 				if ( property_exists( $taxonomy, 'author_id' ) ) {
 					$author_ids_to_local[ $taxonomy->author_id ] = $post_id;
 				}
 
+				// If the taxonomy contains post meta, we need to add it to the array of posts with post meta.
 				if ( property_exists( $taxonomy, 'post_meta' ) ) {
 					$posts_to_update_meta[ $post_id ] = $taxonomy->post_meta;
 				}
 
+				/*
+				 * The $taxonomy->by_slug property contains an array of 'terms' to be added to the post.
+				 * If the this property does not exist, we can continue the loop, as there are no terms to add.
+				 * If we try to loop through $taxonomy->by_slug and it does not exist, we get an error.
+				 */
 				if ( ! property_exists( $taxonomy, 'by_slug' ) ) {
 					continue;
 				}
@@ -1530,7 +1537,8 @@ class Boldgrid_Inspirations_Deploy {
 			$this->invoice->deploy( array( 'menu_id' => $this->primary_menu_id ) );
 		}
 
-		update_option( 'boldgrid_author_ids_to_local', $author_ids_to_local );
+		// This option is used by filters to coorelate author ids <=> local ids.
+		\Boldgrid\Inspirations\Deploy\Author_Ids::set_author_ids( $author_ids_to_local );
 
 		/*
 		 * If the theme has a Custom Page Header, we must do the needful
@@ -1549,7 +1557,7 @@ class Boldgrid_Inspirations_Deploy {
 		 */
 		if ( ! empty( $posts_to_update_meta ) ) {
 			foreach ( $posts_to_update_meta as $post_id => $post_meta ) {
-				\Boldgrid\Inspirations\Deploy\Crio_Premium_Utility::set_post_meta( $post_id, $post_meta );
+				\Boldgrid\Inspirations\Deploy\Post_Meta::set_post_meta( $post_id, $post_meta, true );
 			}
 		}
 	}

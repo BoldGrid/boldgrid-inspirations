@@ -441,6 +441,8 @@ public function include_admin_files() {
 	require_once BOLDGRID_BASE_DIR . '/includes/deploy/class-menus.php';
 	require_once BOLDGRID_BASE_DIR . '/includes/deploy/class-crio-utility.php';
 	require_once BOLDGRID_BASE_DIR . '/includes/deploy/class-crio-premium-utility.php';
+	require_once BOLDGRID_BASE_DIR . '/includes/deploy/class-author-ids.php';
+	require_once BOLDGRID_BASE_DIR . '/includes/deploy/class-post-meta.php';
 
 	require_once BOLDGRID_BASE_DIR . '/includes/weforms/class-utility.php';
 
