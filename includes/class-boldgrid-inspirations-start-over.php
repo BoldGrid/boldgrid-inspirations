@@ -188,23 +188,18 @@ class Boldgrid_Inspirations_Start_Over {
 	/**
 	 * Remove menus.
 	 *
-	 * Based on the user's request, delete either / both the active / staging menus.
+	 * Delete all nav menus. This prevents inspirations
+	 * from creating duplicate menus when re-run through the wizard.
+	 *
+	 * Previously we only deleted the 'primary' menu. However, as more and more
+	 * menus are being added by inspirations, it is now more prudent to delete
+	 * all menus when starting over.
 	 */
 	public function cleanup_nav_menus() {
-		/**
-		 * Active site.
-		 *
-		 * BoldGrid uses one menu, 'primary'. Let's delete that menu
-		 */
-		if ( true == $this->start_over_active ) {
-			wp_delete_nav_menu( 'primary' );
-		}
+		$wp_nav_menus = wp_get_nav_menus();
 
-		/**
-		 * Staging site.
-		 */
-		if ( true == $this->start_over_staging ) {
-			do_action( 'boldgrid_options_cleanup_nav_menus' );
+		foreach ( $wp_nav_menus as $menu ) {
+			wp_delete_nav_menu( $menu->term_id );
 		}
 	}
 

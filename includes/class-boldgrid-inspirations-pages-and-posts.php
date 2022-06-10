@@ -400,7 +400,7 @@ class Boldgrid_Inspirations_Pages_And_Posts {
 
 			// Pass the selected checkboxes to the JavaScript.
 			wp_localize_script( 'manage_menu_assignment_within_editor', 'original_selections',
-				$original_selections );
+				array( $original_selections ) );
 
 			return;
 		}
@@ -527,7 +527,7 @@ class Boldgrid_Inspirations_Pages_And_Posts {
 
 		// Pass the selected checkboxes to the JavaScript.
 		wp_localize_script( 'manage_menu_assignment_within_editor', 'original_selections',
-			$original_selections );
+			array( $original_selections ) );
 	}
 
 	/**

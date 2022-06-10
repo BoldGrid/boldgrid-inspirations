@@ -1296,6 +1296,27 @@ class Boldgrid_Inspirations_Deploy {
 
 		$deploy_menus = new \Boldgrid\Inspirations\Deploy\Menus( $pages_in_pageset );
 
+		/*
+		 * If the page has custom page headers, after the pages are created, we need to update the page headers.
+		 * This value starts out as false, and is set to true if we find custom page headers.
+		 */
+		$theme_has_cph = false;
+
+		/*
+		 * This variable will store the original post IDs so that they can be changed in the theme mods
+		 * at a later point.
+		 *
+		 * array( 'author_post_id' => 'local_post_id' ).
+		 */
+		$author_ids_to_local = array();
+
+		/*
+		 * This variable will store a set of posts that have post_meta to be updated.
+		 *
+		 * array( 'post_id' => 'post_meta' ).
+		 */
+		$posts_to_update_meta = array();
+
 		foreach ( $pages_in_pageset as $page_v ) {
 			if ( ! is_object( $page_v ) ) {
 				continue;
@@ -1421,12 +1442,37 @@ class Boldgrid_Inspirations_Deploy {
 				\Boldgrid\Inspirations\Deploy\Crio_Utility::register_template_locations();
 
 				$taxonomy = json_decode( $page_v->taxonomy );
+
+				// If the taxonomy contains an 'author_id' key, we need to set the post's author_id => local id.
+				if ( property_exists( $taxonomy, 'author_id' ) ) {
+					$author_ids_to_local[ $taxonomy->author_id ] = $post_id;
+				}
+
+				// If the taxonomy contains post meta, we need to add it to the array of posts with post meta.
+				if ( property_exists( $taxonomy, 'post_meta' ) ) {
+					$posts_to_update_meta[ $post_id ] = $taxonomy->post_meta;
+				}
+
+				/*
+				 * The $taxonomy->by_slug property contains an array of 'terms' to be added to the post.
+				 * If the this property does not exist, we can continue the loop, as there are no terms to add.
+				 * If we try to loop through $taxonomy->by_slug and it does not exist, we get an error.
+				 */
+				if ( ! property_exists( $taxonomy, 'by_slug' ) ) {
+					continue;
+				}
+
 				foreach ( $taxonomy->by_slug as $tax_data ) {
 					$term    = get_term_by( 'slug', $tax_data->slug, $tax_data->taxonomy, ARRAY_A );
 					$term_id = ! empty( $term ) ? $term['term_id'] : 0;
 
 					if ( $term_id ) {
 						wp_set_object_terms( $post_id, $term_id, $tax_data->taxonomy );
+					}
+
+					// This will ensure that the theme is marked as having a custom page header ensuring that necessary steps are run later.
+					if ( $term_id && 'template_locations' === $tax_data->taxonomy ) {
+						$theme_has_cph = true;
 					}
 				}
 			}
@@ -1489,6 +1535,30 @@ class Boldgrid_Inspirations_Deploy {
 		// If we're installing the "Invoice" feature, do all the things now.
 		if ( $this->install_invoice ) {
 			$this->invoice->deploy( array( 'menu_id' => $this->primary_menu_id ) );
+		}
+
+		// This option is used by filters to coorelate author ids <=> local ids.
+		\Boldgrid\Inspirations\Deploy\Author_Ids::set_author_ids( $author_ids_to_local );
+
+		/*
+		 * If the theme has a Custom Page Header, we must do the needful
+		 * and make sure all the menu IDs and post IDs match up. For more info
+		 * please refer to the Crio_Premium_Utility Class.
+		 */
+		if ( $theme_has_cph ) {
+			\Boldgrid\Inspirations\Deploy\Crio_Premium_Utility::set_custom_templates();
+			\Boldgrid\Inspirations\Deploy\Crio_Premium_Utility::set_template_menus();
+		}
+
+		/*
+		 * If we have any posts with post_meta that need to be updated
+		 * We run the updates now. This is done after page creating to ensure that all posts are
+		 * properly created first.
+		 */
+		if ( ! empty( $posts_to_update_meta ) ) {
+			foreach ( $posts_to_update_meta as $post_id => $post_meta ) {
+				\Boldgrid\Inspirations\Deploy\Post_Meta::set_post_meta( $post_id, $post_meta, true );
+			}
 		}
 	}
 
