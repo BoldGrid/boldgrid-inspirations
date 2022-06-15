@@ -157,7 +157,11 @@ class Crio_Premium_Utility {
 		 */
 		if ( false === $menu_adjusted ) {
 			foreach ( wp_get_nav_menus() as $menu ) {
-				if ( $menu->name === $menu_attrs['widget-boldgrid_component_menu[][bgc_menu_location]'] ) {
+				$location_name = strtolower( $menu_attrs['widget-boldgrid_component_menu[][bgc_menu_location]'] );
+				if (
+					strtolower( $menu->name ) === $location_name ||
+					0 !== strpos( $location_name, strtolower( $menu->name ) )
+				) {
 					$menu_attrs['widget-boldgrid_component_menu[][bgc_menu]'] = $menu->term_id;
 				}
 			}
