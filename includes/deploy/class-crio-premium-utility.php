@@ -79,8 +79,8 @@ class Crio_Premium_Utility {
 				continue;
 			}
 			$menus = array();
-			preg_match( '/\[boldgrid_component type="wp_boldgrid_component_menu".*\]/', $content, $menus );
-			foreach ( $menus as $menu ) {
+			preg_match_all( '/\[boldgrid_component type="wp_boldgrid_component_menu".*\]/', $content, $menus );
+			foreach ( $menus[0] as $menu ) {
 				$adjusted_menu = self::adjust_menu_id( $menu );
 				$content       = str_replace( $menu, $adjusted_menu, $content );
 			}
@@ -105,6 +105,10 @@ class Crio_Premium_Utility {
 	 */
 	public static function adjust_menu_id( $menu ) {
 		$menu_locations = get_theme_mod( 'nav_menu_locations' );
+		$boldgrid_survey = get_option( 'boldgrid_survey' );
+		$dnd_social_menu = isset( $boldgrid_survey['social'] ) &&
+			isset( $boldgrid_survey['social']['do-not-display'] ) &&
+			true === $boldgrid_survey['social']['do-not-display'];
 
 		/**
 		 * The menu attributes are url encoded, and contain all kinds of things that get
@@ -124,6 +128,8 @@ class Crio_Premium_Utility {
 			),
 			true
 		);
+
+		error_log( 'BGC Menu: ' . json_encode( $menu_attrs ) );
 
 		/** There are two ways that a menu from the custom template can be matched
 		 * against the new menus created by inspirations. The first is by referencing
@@ -158,6 +164,7 @@ class Crio_Premium_Utility {
 		if ( false === $menu_adjusted ) {
 			foreach ( wp_get_nav_menus() as $menu ) {
 				$location_name = strtolower( $menu_attrs['widget-boldgrid_component_menu[][bgc_menu_location]'] );
+
 				if (
 					strtolower( $menu->name ) === $location_name ||
 					0 !== strpos( $location_name, strtolower( $menu->name ) )
