@@ -1521,7 +1521,9 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 
 		// Success function: We successfully fetched pagesets.
 		pagesetSuccess = function( msg ) {
-			var template = wp.template( 'pagesets' );
+			var template = wp.template( 'pagesets' ),
+				defaultPagesets = msg.result.data.pageSets,
+				adjustedPagesets = [];
 
 			// If we have 0 pagesets, show a try again notice and abort.
 			if ( 0 === $( msg.result.data.pageSets ).length ) {
@@ -1529,7 +1531,25 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 				return;
 			}
 
-			$( '#pageset-options' ).html( template( msg.result.data.pageSets ) );
+			if ( 'DH-Plumbing' === self.$theme.closest( '.theme' ).attr( 'data-theme-title' ) ) {
+				defaultPagesets.forEach( function( pageset ) {
+					if ( 'Base' === pageset.page_set_name ) {
+						return;
+					}
+
+					if ( 'Five Page' === pageset.page_set_name ) {
+						pageset.is_active           = '1';
+						pageset.is_default_page_set = '1';
+					}
+
+					adjustedPagesets.push( pageset );
+				} );
+
+			}
+
+			console.log( { adjustedPagesets: adjustedPagesets } );
+
+			$( '#pageset-options' ).html( template( adjustedPagesets ) );
 
 			self.$pageset = $( 'input[name="pageset"]:checked' );
 
