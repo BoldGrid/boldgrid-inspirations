@@ -33,6 +33,7 @@ class Post_Meta {
 		'crio-premium-page-header-background',
 		'crio-premium-page-header-featured-image-background',
 		'crio-premium-template-has-page-title',
+		'crio-premium-include-site-header',
 	);
 
 	/**

@@ -80,8 +80,9 @@ class Crio_Premium_Utility {
 			}
 			$menus = array();
 			preg_match_all( '/\[boldgrid_component type="wp_boldgrid_component_menu".*\]/', $content, $menus );
+
 			foreach ( $menus[0] as $menu ) {
-				$adjusted_menu = self::adjust_menu_id( $menu );
+				$adjusted_menu = self::adjust_menu_id( $menu, $template->ID );
 				$content       = str_replace( $menu, $adjusted_menu, $content );
 			}
 
@@ -99,11 +100,13 @@ class Crio_Premium_Utility {
 	 *
 	 * This performs the actual string replacement of the menu id.
 	 *
-	 * @param string $menu The menu to adjust.
+	 * @param string $menu        The menu to adjust.
+	 * @param string $template_id The post id of this template.
 	 *
 	 * @return string The adjusted menu shortcode.
 	 */
-	public static function adjust_menu_id( $menu ) {
+	public static function adjust_menu_id( $menu, $template_id ) {
+		$crio_premium_menu_locations = get_option( 'crio_premium_menu_locations', array() );
 		$menu_locations = get_theme_mod( 'nav_menu_locations' );
 		$boldgrid_survey = get_option( 'boldgrid_survey' );
 		$dnd_social_menu = isset( $boldgrid_survey['social'] ) &&
@@ -129,8 +132,6 @@ class Crio_Premium_Utility {
 			true
 		);
 
-		error_log( 'BGC Menu: ' . json_encode( $menu_attrs ) );
-
 		/** There are two ways that a menu from the custom template can be matched
 		 * against the new menus created by inspirations. The first is by referencing
 		 * the 'nav_menu_locations' theme mod. This is the primary way that it should
@@ -146,14 +147,23 @@ class Crio_Premium_Utility {
 		 * the correct id number.
 		 */
 		foreach ( $menu_locations as $menu_location => $menu_id ) {
+			$menu_location_id = $menu_attrs['widget-boldgrid_component_menu[][bgc_menu_location_id]'];
+
 			$strpos = strpos(
-				$menu_attrs['widget-boldgrid_component_menu[][bgc_menu_location_id]'],
+				$menu_location_id,
 				$menu_location
 			);
 
 			if ( false !== $strpos ) {
 				$menu_attrs['widget-boldgrid_component_menu[][bgc_menu]'] = $menu_id;
 				$menu_adjusted                                            = true;
+
+				$crio_premium_menu_locations[ $menu_location_id ] = array(
+					'id'          => $menu_location_id,
+					'name'        => ucwords( str_replace( '-', ' ', explode( '_', $menu_location_id )[0] ) ),
+					'template_id' => $template_id,
+				);
+
 			}
 		}
 
@@ -163,16 +173,26 @@ class Crio_Premium_Utility {
 		 */
 		if ( false === $menu_adjusted ) {
 			foreach ( wp_get_nav_menus() as $menu ) {
-				$location_name = strtolower( $menu_attrs['widget-boldgrid_component_menu[][bgc_menu_location]'] );
+				$location_name    = strtolower( $menu_attrs['widget-boldgrid_component_menu[][bgc_menu_location]'] );
+				$menu_location_id = $menu_attrs['widget-boldgrid_component_menu[][bgc_menu_location_id]'];
 
 				if (
 					strtolower( $menu->name ) === $location_name ||
-					0 !== strpos( $location_name, strtolower( $menu->name ) )
+					0 !== strpos( $location_name, strtolower( $menu->name ) ) ||
+					0 !== strpos( strtolower( $menu->name ), $location_name )
 				) {
 					$menu_attrs['widget-boldgrid_component_menu[][bgc_menu]'] = $menu->term_id;
+
+					$crio_premium_menu_locations[ $menu_location_id ] = array(
+						'id'          => $menu_location_id,
+						'name'        => ucwords( str_replace( '-', ' ', explode( '_', $menu_location_id )[0] ) ),
+						'template_id' => $template_id,
+					);
 				}
 			}
 		}
+
+		update_option( 'crio_premium_menu_locations', $crio_premium_menu_locations );
 
 		/**
 		 * Here, this is all re-assembled into a shortcode string, to be returned
