@@ -178,8 +178,8 @@ class Crio_Premium_Utility {
 
 				if (
 					strtolower( $menu->name ) === $location_name ||
-					0 !== strpos( $location_name, strtolower( $menu->name ) ) ||
-					0 !== strpos( strtolower( $menu->name ), $location_name )
+					false !== strpos( $location_name, strtolower( $menu->name ) ) ||
+					false !== strpos( strtolower( $menu->name ), $location_name )
 				) {
 					$menu_attrs['widget-boldgrid_component_menu[][bgc_menu]'] = $menu->term_id;
 
