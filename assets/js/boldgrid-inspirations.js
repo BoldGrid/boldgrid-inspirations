@@ -1544,10 +1544,9 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 
 					adjustedPagesets.push( pageset );
 				} );
-
+			} else {
+				adjustedPagesets = defaultPagesets;
 			}
-
-			console.log( { adjustedPagesets: adjustedPagesets } );
 
 			$( '#pageset-options' ).html( template( adjustedPagesets ) );
 
