@@ -109,6 +109,7 @@ class Menus {
 					'menu-item-position'  => $item['menu_order'],
 					'menu-item-url'       => empty( $item['url'] ) ? '' : $item['url'],
 					'menu-item-title'     => $item['title'],
+					'menu-item-classes'   => implode( ' ', $item['classes'] ),
 				) );
 
 				// Keep track of the menu item's ID, both locally and remotely.

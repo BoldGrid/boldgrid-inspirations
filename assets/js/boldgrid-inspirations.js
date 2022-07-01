@@ -1531,7 +1531,8 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 				return;
 			}
 
-			if ( 'DH-Plumbing' === self.$theme.closest( '.theme' ).attr( 'data-theme-title' ) ) {
+			if ( 'DH-Plumbing' === self.$theme.closest( '.theme' ).attr( 'data-theme-title' ) ||
+				self.$theme.closest( '.theme' ).attr( 'data-theme-title' ).includes( 'DH' ) ) {
 				defaultPagesets.forEach( function( pageset ) {
 					if ( 'Base' === pageset.page_set_name ) {
 						return;
