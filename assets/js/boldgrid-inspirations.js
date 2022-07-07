@@ -1531,25 +1531,7 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 				return;
 			}
 
-			if ( 'DH-Plumbing' === self.$theme.closest( '.theme' ).attr( 'data-theme-title' ) ||
-				self.$theme.closest( '.theme' ).attr( 'data-theme-title' ).includes( 'DH' ) ) {
-				defaultPagesets.forEach( function( pageset ) {
-					if ( 'Base' === pageset.page_set_name ) {
-						return;
-					}
-
-					if ( 'Five Page' === pageset.page_set_name ) {
-						pageset.is_active           = '1';
-						pageset.is_default_page_set = '1';
-					}
-
-					adjustedPagesets.push( pageset );
-				} );
-			} else {
-				adjustedPagesets = defaultPagesets;
-			}
-
-			$( '#pageset-options' ).html( template( adjustedPagesets ) );
+			$( '#pageset-options' ).html( template( msg.result.data.pageSets ) );
 
 			self.$pageset = $( 'input[name="pageset"]:checked' );
 
