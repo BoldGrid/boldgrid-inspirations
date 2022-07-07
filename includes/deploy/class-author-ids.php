@@ -62,3 +62,4 @@ class Author_Ids {
 		return isset( $ids_option[ $author_id ] ) ? $ids_option[ $author_id ] : $author_id;
 	}
 }
+

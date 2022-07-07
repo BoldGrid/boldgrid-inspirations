@@ -2,7 +2,7 @@
 Contributors: boldgrid, imh_brad, joemoto, rramo012, timph
 Tags: inspiration, customization, build, create, design
 Requires at least: 4.4
-Tested up to: 5.9
+Tested up to: 6.0:wq
 Requires PHP: 5.4
 Stable tag: 2.7.0
 License: GPLv2 or later
@@ -37,7 +37,7 @@ The second phase is Customization; tools to transform your website into your vis
 
 = 2.7.0 =
 
-Release date: July 6th, 2022
+Release date: July 7th, 2022
 
 * New feature: Logo support.
 * New feature: Nested menus.
