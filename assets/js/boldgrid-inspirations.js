@@ -1521,9 +1521,7 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 
 		// Success function: We successfully fetched pagesets.
 		pagesetSuccess = function( msg ) {
-			var template = wp.template( 'pagesets' ),
-				defaultPagesets = msg.result.data.pageSets,
-				adjustedPagesets = [];
+			var template = wp.template( 'pagesets' );
 
 			// If we have 0 pagesets, show a try again notice and abort.
 			if ( 0 === $( msg.result.data.pageSets ).length ) {
