@@ -154,6 +154,30 @@ class Boldgrid_Inspirations_Utility {
 	}
 
 	/**
+	 * Pass in the id of an asset server's page, and get the id of the local page (as installed via
+	 * Inspirations).
+	 *
+	 * For example, on the asset server "About Us" may have an id of 524. When we install that page
+	 * in this WordPress, it may have an id of 3. Pass 524 to this method and get 3.
+	 *
+	 * @since SINCEVERSION
+	 *
+	 * @param int $asset_id
+	 * @return int
+	 */
+	public static function get_local_id( $asset_id ) {
+		$installed_pages = get_option( 'boldgrid_installed_page_ids', array() );
+
+		foreach ( $installed_pages as $remote_id => $local_id ) {
+			if ( $asset_id === $remote_id ) {
+				return $local_id;
+			}
+		}
+
+		return 0;
+	}
+
+	/**
 	 * Convert content encoding from "UTF-8" to "HTML-ENTITIES".
 	 *
 	 * If mbstring is not loaded in PHP then the input will be returned unconverted.

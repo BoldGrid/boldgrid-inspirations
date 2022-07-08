@@ -1195,28 +1195,14 @@ class Boldgrid_Inspirations_Deploy {
 	public function deploy_page_sets() {
 		$pages_created = 0;
 
-		// Set the menu name
-		$menu_name = 'primary';
-
-		// Allow plugins, like BoldGrid Staging, to create 'primary-staging' instead of 'primary'.
-		$menu_name = apply_filters( 'boldgrid_deployment_primary_menu_name', $menu_name );
-
-		// We want to start fresh, so if the menu exists, delete it.
-		$menu_exists = wp_get_nav_menu_object( $menu_name );
-		if ( true == $menu_exists ) {
-			wp_delete_nav_menu( $menu_name );
-		}
-
-		// Create the menu
-		$menu_id = wp_create_nav_menu( $menu_name );
-		$this->primary_menu_id = $menu_id;
-
-		$this->assign_menu_id_to_all_locations( $menu_id );
-
-		if( $this->install_blog && $this->blog->create_page() ) {
-			update_option( 'page_for_posts', $this->blog->page_id );
-			$this->blog->create_menu_item( $this->primary_menu_id  );
-		}
+		/*
+		 * An array of menu items to create.
+		 *
+		 * In v1, we created menu items as we created the pages. With the introduction of v2 menus,
+		 * v1 menu item configs are stored in this array and those menu items eventually created after
+		 * all the pages have been setup. IE loop through this array and create a menu item with each item.
+		 */
+		$v1_menu_items = array();
 
 		// Determine the release channel:
 		$options = get_option( 'boldgrid_settings' );
@@ -1308,6 +1294,29 @@ class Boldgrid_Inspirations_Deploy {
 
 		$existing_pages_from_meta_data = $this->get_existing_pages();
 
+		$deploy_menus = new \Boldgrid\Inspirations\Deploy\Menus( $pages_in_pageset );
+
+		/*
+		 * If the page has custom page headers, after the pages are created, we need to update the page headers.
+		 * This value starts out as false, and is set to true if we find custom page headers.
+		 */
+		$theme_has_cph = false;
+
+		/*
+		 * This variable will store the original post IDs so that they can be changed in the theme mods
+		 * at a later point.
+		 *
+		 * array( 'author_post_id' => 'local_post_id' ).
+		 */
+		$author_ids_to_local = array();
+
+		/*
+		 * This variable will store a set of posts that have post_meta to be updated.
+		 *
+		 * array( 'post_id' => 'post_meta' ).
+		 */
+		$posts_to_update_meta = array();
+
 		foreach ( $pages_in_pageset as $page_v ) {
 			if ( ! is_object( $page_v ) ) {
 				continue;
@@ -1357,13 +1366,13 @@ class Boldgrid_Inspirations_Deploy {
 
 			// add page to menu
 			if ( '1' == $page_v->in_menu ) {
-				wp_update_nav_menu_item( $menu_id, 0, array(
+				$v1_menu_items[] = array(
 					'menu-item-object-id' => $post_id,
 					'menu-item-parent-id' => 0,
 					'menu-item-object'    => 'page',
 					'menu-item-type'      => 'post_type',
 					'menu-item-status'    => 'publish'
-				) );
+				);
 			}
 
 			// Steps to take if this is the homepage.
@@ -1406,14 +1415,65 @@ class Boldgrid_Inspirations_Deploy {
 			if ( ! empty( $page_v->theme_mods ) ) {
 				$theme_mods = json_decode( $page_v->theme_mods, true );
 				foreach ( $theme_mods as $name => $value ) {
-					// Theme mods shouldn't have menu locations. If they do, don't skip them.
-					$skips = [ 'nav_menu_locations' ];
+					$skips = array(
+						'nav_menu_locations',
+						// This is a private setting, only used to tell us we have a logo and and which asset it is.
+						'site_logo_asset_id',
+						// If we do have a custom_logo, it will be set below.
+						'custom_logo',
+					);
 
 					if ( in_array( $name, $skips, true ) ) {
 						continue;
 					}
 
 					set_theme_mod( $name, $value );
+				}
+
+				// Install our logo.
+				if ( ! empty( $theme_mods['site_logo_asset_id'] ) ) {
+					\Boldgrid\Inspirations\Deploy\Logo::deploy( $theme_mods['site_logo_asset_id'], $this );
+				}
+			}
+
+			// If this page has taxonomy data, set it.
+			if ( ! empty( $page_v->taxonomy ) ) {
+				// Do this just once?
+				\Boldgrid\Inspirations\Deploy\Crio_Utility::register_template_locations();
+
+				$taxonomy = json_decode( $page_v->taxonomy );
+
+				// If the taxonomy contains an 'author_id' key, we need to set the post's author_id => local id.
+				if ( property_exists( $taxonomy, 'author_id' ) ) {
+					$author_ids_to_local[ $taxonomy->author_id ] = $post_id;
+				}
+
+				// If the taxonomy contains post meta, we need to add it to the array of posts with post meta.
+				if ( property_exists( $taxonomy, 'post_meta' ) ) {
+					$posts_to_update_meta[ $post_id ] = $taxonomy->post_meta;
+				}
+
+				/*
+				 * The $taxonomy->by_slug property contains an array of 'terms' to be added to the post.
+				 * If the this property does not exist, we can continue the loop, as there are no terms to add.
+				 * If we try to loop through $taxonomy->by_slug and it does not exist, we get an error.
+				 */
+				if ( ! property_exists( $taxonomy, 'by_slug' ) ) {
+					continue;
+				}
+
+				foreach ( $taxonomy->by_slug as $tax_data ) {
+					$term    = get_term_by( 'slug', $tax_data->slug, $tax_data->taxonomy, ARRAY_A );
+					$term_id = ! empty( $term ) ? $term['term_id'] : 0;
+
+					if ( $term_id ) {
+						wp_set_object_terms( $post_id, $term_id, $tax_data->taxonomy );
+					}
+
+					// This will ensure that the theme is marked as having a custom page header ensuring that necessary steps are run later.
+					if ( $term_id && 'template_locations' === $tax_data->taxonomy ) {
+						$theme_has_cph = true;
+					}
 				}
 			}
 
@@ -1436,9 +1496,69 @@ class Boldgrid_Inspirations_Deploy {
 			$this->set_custom_homepage();
 		}
 
+		/*
+		 * We've created all of our posts and pages, it's now time to setup our menus.
+		 *
+		 * If the conditional is met, we have a v2 menu. A v2 menu is a _bginsp_menus post type that
+		 * has been delivered. Its code / html is a json string containing all of the info needed
+		 * to create a custom menu.
+		 *
+		 * Else, we're working with a v1 menu. A v1 menu is a menu that is configured entirely within
+		 * the BoldGrid Management System.
+		 */
+		if ( $deploy_menus->has_menu() ) {
+			$deploy_menus->deploy();
+			$this->primary_menu_id = $deploy_menus->get_primary_menu_id();
+		} else {
+			$menu_name = apply_filters( 'boldgrid_deployment_primary_menu_name', 'primary' );
+
+			// We want to start fresh, so if the menu exists, delete it.
+			if ( wp_get_nav_menu_object( $menu_name ) ) {
+				wp_delete_nav_menu( $menu_name );
+			}
+
+			$this->primary_menu_id = wp_create_nav_menu( $menu_name );
+
+			// Add all of our menu items to the menu.
+			foreach ( $v1_menu_items as $menu_item ) {
+				wp_update_nav_menu_item( $this->primary_menu_id, 0, $menu_item );
+			}
+
+			$this->assign_menu_id_to_all_locations( $this->primary_menu_id );
+		}
+
+		if( $this->install_blog && $this->blog->create_page() ) {
+			update_option( 'page_for_posts', $this->blog->page_id );
+			$this->blog->create_menu_item( $this->primary_menu_id  );
+		}
+
 		// If we're installing the "Invoice" feature, do all the things now.
 		if ( $this->install_invoice ) {
-			$this->invoice->deploy( array( 'menu_id' => $menu_id ) );
+			$this->invoice->deploy( array( 'menu_id' => $this->primary_menu_id ) );
+		}
+
+		// This option is used by filters to coorelate author ids <=> local ids.
+		\Boldgrid\Inspirations\Deploy\Author_Ids::set_author_ids( $author_ids_to_local );
+
+		/*
+		 * If the theme has a Custom Page Header, we must do the needful
+		 * and make sure all the menu IDs and post IDs match up. For more info
+		 * please refer to the Crio_Premium_Utility Class.
+		 */
+		if ( $theme_has_cph ) {
+			\Boldgrid\Inspirations\Deploy\Crio_Premium_Utility::set_custom_templates();
+			\Boldgrid\Inspirations\Deploy\Crio_Premium_Utility::set_template_menus();
+		}
+
+		/*
+		 * If we have any posts with post_meta that need to be updated
+		 * We run the updates now. This is done after page creating to ensure that all posts are
+		 * properly created first.
+		 */
+		if ( ! empty( $posts_to_update_meta ) ) {
+			foreach ( $posts_to_update_meta as $post_id => $post_meta ) {
+				\Boldgrid\Inspirations\Deploy\Post_Meta::set_post_meta( $post_id, $post_meta, true );
+			}
 		}
 	}
 
