@@ -177,7 +177,28 @@ class Boldgrid_Inspirations_Config {
 	}
 
 	/**
+	 * Get a config from the configs.
+	 *
+	 * This is very similar to self::get_setting(). That method limits retrieving from
+	 * $configs['settings'][ $key ], while this method gets top level settings such as
+	 * $configs[ $key ].
+	 *
+	 * @since 2.7.2
+	 *
+	 * @param  string $key The config's key.
+	 * @param  mixed  $default The default value to return if the config doesn't exist.
+	 * @return mixed
+	 */
+	public static function get_config( $key, $default = false ) {
+		$configs = self::get_format_configs();
+
+		return isset( $configs[ $key ] ) ? $configs[ $key ] : $default;
+	}
+
+	/**
 	 * Get a setting from $configs['settings'].
+	 *
+	 * Very similar to self::get_config().
 	 *
 	 * @since 1.7.0
 	 *

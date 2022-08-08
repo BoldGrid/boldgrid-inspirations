@@ -428,6 +428,8 @@ class Boldgrid_Inspirations_Asset_Manager extends Boldgrid_Inspirations {
 		set_time_limit(
 			( ( $max_execution_time = ini_get( 'max_execution_time' ) ) > 120 ? $max_execution_time : 120 ) );
 
+		$timeout = Boldgrid_Inspirations_Config::get_config( 'image_download_timeout', 60 );
+
 		// Initialize $image_from_cache.
 		$image_from_cache = false;
 
@@ -457,13 +459,13 @@ class Boldgrid_Inspirations_Asset_Manager extends Boldgrid_Inspirations {
 				switch ( $info['method'] ) {
 					case 'get' :
 						// all get requests should have an increased timeout.
-						$info['arguments']['timeout'] = 10;
+						$info['arguments']['timeout'] = $timeout;
 						$response = wp_remote_get( $info['url'], $info['arguments'] );
 						break;
 
 					case 'post' :
 						// all post requests should have an increased timeout.
-						$info['arguments']['timeout'] = 10;
+						$info['arguments']['timeout'] = $timeout;
 						$response = wp_remote_post( $info['url'], $info['arguments'] );
 						break;
 				}

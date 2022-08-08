@@ -128,4 +128,6 @@ return array(
 			'value' => array(),
 		),
 	),
+	// Timeout for when downloading images from the asset server.
+	'image_download_timeout' => 60,
 );
