@@ -1403,16 +1403,6 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 				]
 			};
 
-			// Remove a category from display if the displayOrder is 0. This is used for themes we wish to display only in the
-			// 'All' or 'Default' categories, but still require their own category for pageset reasons.
-			for ( key in self.categories ) {
-				self.categories[key].subcategories.forEach( function( subcategory, index, subcategoryArray ) {
-					if ( 0 === subcategory.displayOrder ) {
-						subcategoryArray.splice( index, 1 );
-					}
-				} );
-			}
-
 			self.$categories.html( template( self.categories ) );
 
 			self.sortCategories( 'data-display-order' );
@@ -1625,9 +1615,9 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 					defaultBuilds++;
 					self.$themes.append( template( { configs: IMHWPB.configs, build: build } ) );
 					build.isDefault = false;
+				} else {
+					self.$themes.append( template( { configs: IMHWPB.configs, build: build } ) );
 				}
-
-				self.$themes.append( template( { configs: IMHWPB.configs, build: build } ) );
 			} );
 
 			if ( 0 === defaultBuilds ) {
