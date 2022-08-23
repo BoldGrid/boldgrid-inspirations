@@ -1607,9 +1607,11 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 			_.each( self.genericBuilds, function( build ) {
 
 				/*
-				 * Default themes are printed twice. This allows for
+				 * Default themes used to be printed twice to allow for
 				 * "Pavilion / Real Estate" to show in both the Default category
-				 * and the Real Estate category.
+				 * and the Real Estate category. This is no longer required, and
+				 * produces undesired effects with single-theme categories. Now,
+				 * the default themes will only be printed once.
 				 */
 				if ( build.isDefault ) {
 					defaultBuilds++;
