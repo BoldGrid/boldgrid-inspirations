@@ -8,9 +8,11 @@
 
 	<# _.each( data, function( category ) { #>
 		<# _.each( category.subcategories, function( sub_category ) { #>
-			<div class="sub-category" data-display-order="{{sub_category.displayOrder}}" >
-				<input type="radio" name="sub-category" data-sub-category-id="{{sub_category.id}}"> <span class="sub-category-name">{{sub_category.name}}</span>
-			</div>
+			<# if ( ! category.isHiddenFromSidebar ) { #>
+				<div class="sub-category" data-display-order="{{sub_category.displayOrder}}" >
+					<input type="radio" name="sub-category" data-sub-category-id="{{sub_category.id}}"> <span class="sub-category-name">{{sub_category.name}}</span>
+				</div>
+			<# } #>
 		<# }); #>
 	<# }); #>
 </script>
