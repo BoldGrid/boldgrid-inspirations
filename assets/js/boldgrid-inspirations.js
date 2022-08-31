@@ -1551,16 +1551,11 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 	 * @param {object} build The build to check.
 	 */
 	this.getCategoryHidden = function( build ) {
-		var categoryIsHidden = false;
-		_.each( self.categories, function( category ) {
-			_.each( category.subcategories, function( subCategory ) {
-				if ( subCategory.id === build.CategoryId ) {
-					categoryIsHidden = subCategory.isHiddenFromSidebar;
-				}
-			} );
-		} );
-
-		return categoryIsHidden;
+		if ( self.categories[ build.ParentCategoryId ] && self.categories[ build.ParentCategoryId ].subcategories[build.CategoryId] ) {
+			return self.categories[ build.ParentCategoryId ].subcategories[build.CategoryId].isHiddenFromSidebar;
+		} else {
+			return false;
+		}
 	};
 
 	/**
