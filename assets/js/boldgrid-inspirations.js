@@ -1623,7 +1623,6 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 			self.$themes.empty();
 
 			_.each( self.genericBuilds, function( build ) {
-				build.categoryIsHidden = self.getCategoryHidden( build );
 
 				/*
 				 * Default themes should be printed twice in order for them to show under
@@ -1642,7 +1641,7 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 				 * to have it printed twice, since the user does not need to be able to select that
 				 * theme's category from the sidebar.
 				 */
-				if ( ! build.categoryIsHidden ) {
+				if ( ! self.getCategoryHidden( build ) ) {
 					self.$themes.append( template( { configs: IMHWPB.configs, build: build } ) );
 				}
 			} );
