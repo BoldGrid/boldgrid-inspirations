@@ -1555,11 +1555,7 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 	 * @return {boolean} True if the category is hidden, false otherwise.
 	 */
 	this.getCategoryHidden = function( build ) {
-		if ( self.categories[ build.ParentCategoryId ] && self.categories[ build.ParentCategoryId ].subcategories[build.CategoryId] ) {
-			return self.categories[ build.ParentCategoryId ].subcategories[build.CategoryId].isHiddenFromSidebar;
-		} else {
-			return false;
-		}
+		return self.categories[ build.ParentCategoryId ].subcategories[build.CategoryId].isHiddenFromSidebar;
 	};
 
 	/**
