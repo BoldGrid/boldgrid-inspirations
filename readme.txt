@@ -40,6 +40,7 @@ The second phase is Customization; tools to transform your website into your vis
 Release date: TBD
 
 * Bug Fix: Prevent default themes from printing to 'All' category tab twice.
+* Bug Fix: Prevent hidden categories from displaying in the sidebar during inspirations process.
 
 = 2.7.2 =
 
