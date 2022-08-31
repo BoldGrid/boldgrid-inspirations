@@ -1545,20 +1545,6 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 	};
 
 	/**
-	 * Determines whether or not the category for a build is hidden
-	 * from the sidebar.
-	 *
-	 * @since 2.7.3
-	 *
-	 * @param {object} build The build to check.
-	 *
-	 * @return {boolean} True if the category is hidden, false otherwise.
-	 */
-	this.getCategoryHidden = function( build ) {
-		return self.categories[ build.ParentCategoryId ].subcategories[build.CategoryId].isHiddenFromSidebar;
-	};
-
-	/**
 	 * @summary Init Themes.
 	 *
 	 * @since 1.2.3
@@ -1637,7 +1623,7 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 				 * to have it printed twice, since the user does not need to be able to select that
 				 * theme's category from the sidebar.
 				 */
-				if ( ! self.getCategoryHidden( build ) ) {
+				if ( ! self.categories[ build.ParentCategoryId ].subcategories[build.CategoryId].isHiddenFromSidebar ) {
 					self.$themes.append( template( { configs: IMHWPB.configs, build: build } ) );
 				}
 			} );
