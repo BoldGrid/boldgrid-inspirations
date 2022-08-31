@@ -1548,7 +1548,11 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 	 * Determines whether or not the category for a build is hidden
 	 * from the sidebar.
 	 *
+	 * @since 2.7.3
+	 *
 	 * @param {object} build The build to check.
+	 *
+	 * @returns {boolean} True if the category is hidden, false otherwise.
 	 */
 	this.getCategoryHidden = function( build ) {
 		if ( self.categories[ build.ParentCategoryId ] && self.categories[ build.ParentCategoryId ].subcategories[build.CategoryId] ) {
