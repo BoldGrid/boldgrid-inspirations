@@ -1545,6 +1545,25 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 	};
 
 	/**
+	 * Determines whether or not the category for a build is hidden
+	 * from the sidebar.
+	 *
+	 * @param {object} build The build to check.
+	 */
+	this.getCategoryHidden = function( build ) {
+		var categoryIsHidden = false;
+		_.each( self.categories, function( category ) {
+			_.each( category.subcategories, function( subCategory ) {
+				if ( subCategory.id === build.CategoryId ) {
+					categoryIsHidden = subCategory.isHiddenFromSidebar;
+				}
+			} );
+		} );
+
+		return categoryIsHidden;
+	};
+
+	/**
 	 * @summary Init Themes.
 	 *
 	 * @since 1.2.3
@@ -1605,19 +1624,26 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 			self.$themes.empty();
 
 			_.each( self.genericBuilds, function( build ) {
+				build.categoryIsHidden = self.getCategoryHidden( build );
 
 				/*
-				 * Default themes used to be printed twice to allow for
-				 * "Pavilion / Real Estate" to show in both the Default category
-				 * and the Real Estate category. This is no longer required, and
-				 * produces undesired effects with single-theme categories. Now,
-				 * the default themes will only be printed once.
+				 * Default themes should be printed twice in order for them to show under
+				 * the 'Default' category tab, but to also show up in the theme's specific
+				 * category tab. For example, the default theme for 'Design' is the v2 Coherent
+				 * theme, So it needs to be printed once for 'Default' and once for 'Design'.
 				 */
 				if ( build.isDefault ) {
 					defaultBuilds++;
 					self.$themes.append( template( { configs: IMHWPB.configs, build: build } ) );
 					build.isDefault = false;
-				} else {
+				}
+
+				/**
+				 * If, however, the theme's category is hidden from the sidebar, we do not want
+				 * to have it printed twice, since the user does not need to be able to select that
+				 * theme's category from the sidebar.
+				 */
+				if ( ! build.categoryIsHidden ) {
 					self.$themes.append( template( { configs: IMHWPB.configs, build: build } ) );
 				}
 			} );
