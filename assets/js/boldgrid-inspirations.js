@@ -1403,16 +1403,6 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 				]
 			};
 
-			// Remove a category from display if the displayOrder is 0. This is used for themes we wish to display only in the
-			// 'All' or 'Default' categories, but still require their own category for pageset reasons.
-			for ( key in self.categories ) {
-				self.categories[key].subcategories.forEach( function( subcategory, index, subcategoryArray ) {
-					if ( 0 === subcategory.displayOrder ) {
-						subcategoryArray.splice( index, 1 );
-					}
-				} );
-			}
-
 			self.$categories.html( template( self.categories ) );
 
 			self.sortCategories( 'data-display-order' );
@@ -1617,9 +1607,10 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 			_.each( self.genericBuilds, function( build ) {
 
 				/*
-				 * Default themes are printed twice. This allows for
-				 * "Pavilion / Real Estate" to show in both the Default category
-				 * and the Real Estate category.
+				 * Default themes should be printed twice in order for them to show under
+				 * the 'Default' category tab, but to also show up in the theme's specific
+				 * category tab. For example, the default theme for 'Design' is the v2 Coherent
+				 * theme, So it needs to be printed once for 'Default' and once for 'Design'.
 				 */
 				if ( build.isDefault ) {
 					defaultBuilds++;
@@ -1627,7 +1618,14 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 					build.isDefault = false;
 				}
 
-				self.$themes.append( template( { configs: IMHWPB.configs, build: build } ) );
+				/**
+				 * If, however, the theme's category is hidden from the sidebar, we do not want
+				 * to have it printed twice, since the user does not need to be able to select that
+				 * theme's category from the sidebar.
+				 */
+				if ( ! self.categories[ build.ParentCategoryId ].subcategories[build.CategoryId].isHiddenFromSidebar ) {
+					self.$themes.append( template( { configs: IMHWPB.configs, build: build } ) );
+				}
 			} );
 
 			if ( 0 === defaultBuilds ) {
