@@ -37,9 +37,9 @@ The second phase is Customization; tools to transform your website into your vis
 
 = 2.7.3 =
 
-Release date: TBD
+Release date: September 7th, 2022
 
-* Bug Fix: Prevent hidden categories from displaying in the sidebar during inspirations process.
+* Update: Prevent hidden categories from displaying in the sidebar during inspirations process.
 
 = 2.7.2 =
 
