@@ -90,6 +90,13 @@ class Menus {
 
 		foreach ( $configs['menus'] as $term_id => $menu_data ) {
 			// Create the menu.
+			$menu_exists = wp_get_nav_menu_object( $menu_data['name'] );
+
+			// Prevent attempting to create a menu that already exists.
+			if ( $menu_exists ) {
+				continue;
+			}
+
 			$menu_id = wp_create_nav_menu( $menu_data['name'] );
 
 			// Keep track of the fact we created this menu.
