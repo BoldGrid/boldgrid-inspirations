@@ -793,13 +793,14 @@ class Boldgrid_Inspirations_Deploy_Bps {
 	public function get_media_pages() {
 		$posts = array();
 
-		$post_params = array (
+		$post_params = array(
 			'posts_per_page' => -1,
 			'post__in'       => $this->deploy->installed_page_ids,
-			'post_type'      => array (
+			'post_type'      => array(
 				'page',
 				'post',
-			)
+				'crio_page_header',
+			),
 		);
 
 		if ( 'publish' != $this->deploy->post_status ) {
