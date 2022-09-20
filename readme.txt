@@ -4,7 +4,7 @@ Tags: inspiration, customization, build, create, design
 Requires at least: 4.4
 Tested up to: 6.0
 Requires PHP: 5.4
-Stable tag: 2.7.3
+Stable tag: 2.7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -34,6 +34,13 @@ The second phase is Customization; tools to transform your website into your vis
 3. You will find the Inspirations menu in your WordPress Dashboard / admin panel.
 
 == Changelog ==
+
+= 2.7.4 =
+
+Release date: September 20th, 2022
+
+* Bug Fix: background images in crio_page_headers are not getting replaced [#155](https://github.com/BoldGrid/boldgrid-inspirations/issues/155)
+* Bug Fix: Object of class WP_Error could not be converted to int [#153](https://github.com/BoldGrid/boldgrid-inspirations/issues/153)
 
 = 2.7.3 =
 
