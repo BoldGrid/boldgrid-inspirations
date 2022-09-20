@@ -90,6 +90,21 @@ class Menus {
 
 		foreach ( $configs['menus'] as $term_id => $menu_data ) {
 			// Create the menu.
+			$menu_exists = wp_get_nav_menu_object( $menu_data['name'] );
+
+			/*
+			 * If the nav menu exists already, skip it.
+			 *
+			 * Nav menus may already exist because (1) they're created through the social menu
+			 * and (2) they're included in the new v2 menus.
+			 *
+			 * @todo v2 menus should be updated to exclude menus that will be created through
+			 * the social options.
+			 */
+			if ( $menu_exists ) {
+				continue;
+			}
+
 			$menu_id = wp_create_nav_menu( $menu_data['name'] );
 
 			// Keep track of the fact we created this menu.
