@@ -35,6 +35,13 @@ The second phase is Customization; tools to transform your website into your vis
 
 == Changelog ==
 
+= 2.7.4 =
+
+Release date: September 20th, 2022
+
+* Bug Fix: background images in crio_page_headers are not getting replaced [#155](https://github.com/BoldGrid/boldgrid-inspirations/issues/155)
+* Bug Fix: Object of class WP_Error could not be converted to int [#153](https://github.com/BoldGrid/boldgrid-inspirations/issues/153)
+
 = 2.7.3 =
 
 Release date: September 7th, 2022
