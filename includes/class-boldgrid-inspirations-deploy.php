@@ -605,7 +605,8 @@ class Boldgrid_Inspirations_Deploy {
 	public function remote_install_options() {
 		$boldgrid_install_options = $this->installed->get_install_options();
 
-		$api_key_hash = $this->asset_manager->api->get_api_key_hash();
+		$api_key_hash  = $this->asset_manager->api->get_api_key_hash();
+		$api_site_hash = $this->asset_manager->api->get_site_hash();
 
 		$args = array(
 			'subcategory_id' => $boldgrid_install_options['subcategory_id'],
@@ -613,7 +614,19 @@ class Boldgrid_Inspirations_Deploy {
 			'key'            => ! empty( $api_key_hash ) ? $api_key_hash : null,
 		);
 
+		$build_args = array(
+			'site_hash'        => ! empty( $api_site_hash ) ? $api_site_hash : null,
+			'theme_release_channel' => ! empty( $boldgrid_install_options['theme_version_type'] ) ? $boldgrid_install_options['theme_version_type'] : 'stable',
+			'inspirations_version' => BOLDGRID_INSPIRATIONS_VERSION,
+			'key'			  => ! empty( $api_key_hash ) ? $api_key_hash : null,
+		);
+
 		$remote_options = $this->api->get_install_options( $args );
+
+		$build_profile       = $this->api->get_build_profile( $boldgrid_install_options['build_profile_id'], $build_args );
+		$screenshot_asset_id = isset( $build_profile['AssetId'] ) ? $build_profile['AssetId'] : null;
+
+		$remote_options['screenshot_asset_id'] = $screenshot_asset_id;
 
 		$boldgrid_install_options = array_merge( $boldgrid_install_options, $remote_options );
 

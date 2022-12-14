@@ -74,6 +74,39 @@ class Boldgrid_Inspirations_Deploy_Api {
 	}
 
 	/**
+	 * Get Build Profile.
+	 *
+	 * @since SINCEVERSION
+	 *
+	 * @param array $args Array of arguments
+	 *
+	 * @return array
+	 */
+	public function get_build_profile( $build_profile_id, $args = array() ) {
+		$api_url = $this->configs['asset_server'] . $this->configs['ajax_calls']['get_generic'];
+
+		$remote_post_args = array(
+			'method'  => 'POST',
+			'body'    => $args,
+			'timeout' => 20,
+		);
+
+		$response = wp_remote_retrieve_body( wp_remote_post( $api_url, $remote_post_args ) );
+		$response = json_decode( $response ? $response : '', true );
+
+		$builds = ( ! empty( $response['result']['data'] ) ? $response['result']['data'] : array() );
+
+		$build_ids = [];
+
+		foreach ( $builds as $build ) {
+			$build_ids[] = $build['Id'];
+			if ( $build_profile_id === $build['Id'] ) {
+				return $build;
+			}
+		}
+	}
+
+	/**
 	 * Get page set.
 	 *
 	 * @since 1.7.0

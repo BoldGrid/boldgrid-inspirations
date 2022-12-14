@@ -421,9 +421,20 @@ class Boldgrid_Inspirations_My_Inspiration {
 	 * @since 1.7.0
 	 */
 	public function box_theme() {
-		$theme = wp_get_theme(); ?>
+		$theme           = wp_get_theme();
+		$install_options = get_option( 'boldgrid_install_options', array() );
+		$key             = get_option( 'boldgrid_api_key' );
+		$id              = ! empty( $install_options['screenshot_asset_id'] ) ? $install_options['screenshot_asset_id'] : '';
 
-		<p><img src="<?php echo esc_url( $theme->get_screenshot() ); ?>" style="max-width:100%; border:1px solid #ddd;" /></p>
+		if ( ! empty( $id ) && 'Crio' === $theme->get( 'Name' ) ) {
+			$url = "https://wp-assets.boldgrid.com/api/asset/get?key=$key&id=$id&thumbnail=1";
+		} else {
+			$url = $theme->get_screenshot();
+		}
+
+		?>
+
+		<p><img src="<?php echo esc_url( $url ); ?>" style="max-width:100%; border:1px solid #ddd;" /></p>
 
 	<?php }
 
