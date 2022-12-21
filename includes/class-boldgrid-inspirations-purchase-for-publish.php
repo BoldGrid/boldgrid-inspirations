@@ -1459,14 +1459,13 @@ class Boldgrid_Inspirations_Purchase_For_Publish extends Boldgrid_Inspirations {
 
 		if ( 'image' == $asset_type && ! empty( $array_file_names_to_query ) ) {
 			foreach ( $array_file_names_to_query as $file_name_to_query ) {
-				$post_status_getexts = implode( ', ', array_fill( 0, count( $post_status ), '%s' ) ) .
 				// SELECT post_title where post_content like
 				// '%2015/02/google-maps-int-1410976385-pi.jpg%'
 				$query = $wpdb->prepare("
 					SELECT	`ID`
 					FROM	$wpdb->posts
 					WHERE	`post_content` LIKE %s AND
-							`post_status` IN ( . $post_status_getexts . ) AND
+							`post_status` IN ( " . implode( ', ', array_fill( 0, count( $post_status ), '%s' ) ) . " ) AND
 							`post_type` IN ('page','post')
 					",
 					$this->_placeholder(
