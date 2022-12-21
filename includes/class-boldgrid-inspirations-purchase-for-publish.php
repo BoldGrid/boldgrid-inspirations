@@ -1009,35 +1009,6 @@ class Boldgrid_Inspirations_Purchase_For_Publish extends Boldgrid_Inspirations {
 	}
 
 	/**
-	 * Generate prepare placeholders
-	 *
-	 * When properly preparing a mysql statement, the array
-	 * string is dynamically generated to prevent improper
-	 * escaping. This method will generate the array of placeholders
-	 * to be used by that prepare string.
-	 *
-	 * @param array $values,
-	 * @return array $placeholders
-	 */
-	public function get_placeholder_values( $values ) {
-		$placeholders = array();
-
-		foreach ( $values as $value ) {
-			if ( is_array( $value ) ) {
-				/**
-				 * If the value is an array, we need to merge it
-				 * so that we end up with a single dimensional array
-				 * to pass to the prepare statement.
-				 */
-				$placeholders = array_merge( $placeholders, $value );
-			} else {
-				$placeholders[] = $value;
-			}
-		}
-
-		return $placeholders;
-	}
-	/**
 	 * Ajax calls come here to get details by transaction_item_id.
 	 *
 	 * When you are reviewing your transaction history and click 'View' for an invoice, this method
@@ -1335,12 +1306,7 @@ class Boldgrid_Inspirations_Purchase_For_Publish extends Boldgrid_Inspirations {
 				"SELECT `ID` FROM $wpdb->posts WHERE `post_status` IN ( " .
 				implode( ', ', array_fill( 0, count( $post_status ), '%s' ) ) .
 				" ) AND `post_type` IN ( 'page', 'post' ) AND `post_content` REGEXP %s",
-				$this->get_placeholder_values(
-					array(
-						$post_status,
-						$regexp,
-					)
-				)
+				array_merge( $post_status, array( $regexp ) )
 			)
 		);
 		if ( ! empty( $in_shortcode ) ) {
@@ -1362,12 +1328,7 @@ class Boldgrid_Inspirations_Purchase_For_Publish extends Boldgrid_Inspirations {
 				$wpdb->posts.post_status IN ( " .
 				implode( ', ', array_fill( 0, count( $post_status ), '%s' ) ) .
 				") AND $wpdb->posts.post_type IN ('page','post')",
-				$this->get_placeholder_values(
-					array(
-						$attachment_id,
-						$post_status,
-					)
-				)
+				array_merge( array( $attachment_id ), $post_status )
 			)
 		);
 
@@ -1468,12 +1429,7 @@ class Boldgrid_Inspirations_Purchase_For_Publish extends Boldgrid_Inspirations {
 							`post_status` IN ( " . implode( ', ', array_fill( 0, count( $post_status ), '%s' ) ) . " ) AND
 							`post_type` IN ('page','post')
 					",
-					$this->_placeholder(
-						array(
-							$post_status,
-							'%' . $wpdb->esc_like( $file_name_to_query ) . '%',
-						)
-					)
+					array_merge( $post_status, array( '%' . $wpdb->esc_like( $file_name_to_query ) . '%' ) )
 				);
 
 				// If we want to exclude any page IDs, exclude them now.
