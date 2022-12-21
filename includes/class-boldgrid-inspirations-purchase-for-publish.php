@@ -988,7 +988,7 @@ class Boldgrid_Inspirations_Purchase_For_Publish extends Boldgrid_Inspirations {
 	 *
 	 * @since 1.1.4
 	 *
-	 * @return array an array used after in IN statement, example: ( 'draft', 'publish' ).
+	 * @return array An array of post status., example: ( 'draft', 'publish' ).
 	 */
 	public function get_post_status() {
 		$post_status = array( 'draft', 'publish' );
