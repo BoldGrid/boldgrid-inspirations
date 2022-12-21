@@ -1019,12 +1019,16 @@ class Boldgrid_Inspirations_Purchase_For_Publish extends Boldgrid_Inspirations {
 	 * @param array $values,
 	 * @return array $placeholders
 	 */
-	public function get_prepare_placeholders( $values ) {
+	public function get_placeholder_values( $values ) {
 		$placeholders = array();
 
 		foreach ( $values as $value ) {
 			if ( is_array( $value ) ) {
-				error_log( 'value is array: ' . json_encode( $value ) );
+				/**
+				 * If the value is an array, we need to merge it
+				 * so that we end up with a single dimensional array
+				 * to pass to the prepare statement.
+				 */
 				$placeholders = array_merge( $placeholders, $value );
 			} else {
 				$placeholders[] = $value;
@@ -1033,7 +1037,6 @@ class Boldgrid_Inspirations_Purchase_For_Publish extends Boldgrid_Inspirations {
 
 		return $placeholders;
 	}
-
 	/**
 	 * Ajax calls come here to get details by transaction_item_id.
 	 *
@@ -1320,30 +1323,26 @@ class Boldgrid_Inspirations_Purchase_For_Publish extends Boldgrid_Inspirations {
 		 * Is this image used within shortcode? For example, is image 123 used in a gallery, such as
 		 * [gallery ids='123,456'].
 		 */
-		$regexp = '[\\[][^\\]]+[\'\", ]' . $attachment_id . '[^0-9]+.*[\\]]';
-
+		$regexp = '[\[][^\]]+[\'\", ]' . $attachment_id . '[^0-9]+.*[\]]';
 		/**
 		 * Previously, we were not using a prepare statement.
 		 * In order to ensure that the prepare statment
 		 * doesn't incorrectly escape the post status array,
 		 * we dynamically create the placeholders now.
 		 */
-		$placeholders = $this->get_prepare_placeholders(
-			array(
-				$post_status,
-				$regexp,
-			)
-		);
-
 		$in_shortcode = $wpdb->get_var(
 			$wpdb->prepare(
 				"SELECT `ID` FROM $wpdb->posts WHERE `post_status` IN ( " .
 				implode( ', ', array_fill( 0, count( $post_status ), '%s' ) ) .
 				" ) AND `post_type` IN ( 'page', 'post' ) AND `post_content` REGEXP %s",
-				...$placeholders
+				$this->get_placeholder_values(
+					array(
+						$post_status,
+						$regexp,
+					)
+				)
 			)
 		);
-
 		if ( ! empty( $in_shortcode ) ) {
 			$this->assets_needing_purchase['by_page_id'][ $in_shortcode ][] = $asset;
 			return true;
@@ -1352,16 +1351,9 @@ class Boldgrid_Inspirations_Purchase_For_Publish extends Boldgrid_Inspirations {
 		/**
 		 * Is this a featured image needing attribution?
 		 */
-		$placeholders = $this->get_prepare_placeholders(
-			array(
-				$attachment_id,
-				$post_status,
-			)
-		);
-	
 		$asset_a_featured_image = $wpdb->get_var(
 			$wpdb->prepare(
-				"SELECT `post_id`
+				"	SELECT `post_id`
 				FROM	$wpdb->postmeta,
 				$wpdb->posts
 				WHERE	$wpdb->postmeta.meta_key = '_thumbnail_id' AND
@@ -1370,7 +1362,12 @@ class Boldgrid_Inspirations_Purchase_For_Publish extends Boldgrid_Inspirations {
 				$wpdb->posts.post_status IN ( " .
 				implode( ', ', array_fill( 0, count( $post_status ), '%s' ) ) .
 				") AND $wpdb->posts.post_type IN ('page','post')",
-				...$placeholders
+				$this->get_placeholder_values(
+					array(
+						$attachment_id,
+						$post_status,
+					)
+				)
 			)
 		);
 
@@ -1462,21 +1459,22 @@ class Boldgrid_Inspirations_Purchase_For_Publish extends Boldgrid_Inspirations {
 
 		if ( 'image' == $asset_type && ! empty( $array_file_names_to_query ) ) {
 			foreach ( $array_file_names_to_query as $file_name_to_query ) {
-
+				$post_status_getexts = implode( ', ', array_fill( 0, count( $post_status ), '%s' ) ) .
 				// SELECT post_title where post_content like
 				// '%2015/02/google-maps-int-1410976385-pi.jpg%'
-				$placeholders = $this->get_prepare_placeholders(
-					array(
-						$post_status,
-						'%' . $wpdb->esc_like( $file_name_to_query ) . '%',
-					)
-				);
-
-				$query = $wpdb->prepare(
-					"SELECT	`ID` FROM $wpdb->posts WHERE `post_content` LIKE %s AND `post_status` IN ( " .
-					implode( ', ', array_fill( 0, count( $post_status ), '%s' ) ) .
-					" ) AND	`post_type` IN ('page','post')",
-					...$placeholders
+				$query = $wpdb->prepare("
+					SELECT	`ID`
+					FROM	$wpdb->posts
+					WHERE	`post_content` LIKE %s AND
+							`post_status` IN ( . $post_status_getexts . ) AND
+							`post_type` IN ('page','post')
+					",
+					$this->_placeholder(
+						array(
+							$post_status,
+							'%' . $wpdb->esc_like( $file_name_to_query ) . '%',
+						)
+					);
 				);
 
 				// If we want to exclude any page IDs, exclude them now.
