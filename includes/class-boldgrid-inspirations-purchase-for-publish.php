@@ -1474,7 +1474,7 @@ class Boldgrid_Inspirations_Purchase_For_Publish extends Boldgrid_Inspirations {
 							$post_status,
 							'%' . $wpdb->esc_like( $file_name_to_query ) . '%',
 						)
-					);
+					)
 				);
 
 				// If we want to exclude any page IDs, exclude them now.
