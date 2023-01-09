@@ -1445,8 +1445,6 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 				]
 			};
 
-			console.log( { releaseChannel: self.themeReleaseChannel, categories: self.categories } );
-
 			self.$categories.html( template( self.categories ) );
 
 			self.sortCategories( 'data-display-order' );
