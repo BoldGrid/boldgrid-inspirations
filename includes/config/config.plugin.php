@@ -21,6 +21,7 @@ return array(
 		'get_install_details' =>						'/api/build/get-install-details',
 		'get_build_profile_using_in_progress_theme' =>	'/api/build/get-using-in-progress-theme',
 		'get_generic' =>								'/api/build/get-generic',
+		'get_screenshot' =>								'/api/build/get-screenshot',
 		// Pde.
 		'get_curated' =>								'/api/pde/get-curated-asset',
 		// Theme.
