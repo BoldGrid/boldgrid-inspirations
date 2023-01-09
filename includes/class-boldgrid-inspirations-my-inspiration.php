@@ -421,9 +421,13 @@ class Boldgrid_Inspirations_My_Inspiration {
 	 * @since 1.7.0
 	 */
 	public function box_theme() {
-		$theme = wp_get_theme(); ?>
+		$theme          = wp_get_theme();
+		$screenshot_url = get_option( 'boldgrid_site_screenshot', $theme->get_screenshot() );
+		?>
 
-		<p><img src="<?php echo esc_url( $theme->get_screenshot() ); ?>" style="max-width:100%; border:1px solid #ddd;" /></p>
+
+
+		<p><img src="<?php echo esc_url( $screenshot_url ); ?>" style="max-width:100%; border:1px solid #ddd;" /></p>
 
 	<?php }
 

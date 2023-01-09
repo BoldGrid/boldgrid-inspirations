@@ -43,6 +43,32 @@ class Boldgrid_Inspirations_Deploy_Api {
 	}
 
 	/**
+	 * Get Screenshot.
+	 *
+	 * @param array $args
+	 */
+	public function get_screenshot( $args ) {
+		$api_url = $this->configs['asset_server'] . $this->configs['ajax_calls']['get_screenshot'];
+
+		$remote_post_args = array(
+			'method'  => 'POST',
+			'body'    => $args,
+			'timeout' => 20,
+		);
+
+		$response = wp_remote_retrieve_body( wp_remote_post( $api_url, $remote_post_args ) );
+		$response = json_decode( $response ? $response : '', true );
+
+		if ( $response && ! empty( $response['result']['data']['asset_id'] ) ) {
+			$asset_id = $response['result']['data']['asset_id'];
+			$key      = get_option( 'boldgrid_api_key' );
+			$url      = $this->configs['asset_server'] . '/api/asset/get?key=' . $key . '&id=' . $asset_id;
+
+			update_option( 'boldgrid_site_screenshot', $url );
+		}
+	}
+
+	/**
 	 * Get install options.
 	 *
 	 * @since 1.7.0

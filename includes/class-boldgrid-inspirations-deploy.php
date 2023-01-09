@@ -1822,6 +1822,25 @@ class Boldgrid_Inspirations_Deploy {
 		 * may have added a Crio Premium service for the user. Delete license data so it can be refreshed.
 		 */
 		Boldgrid_Inspirations_Update::delete_license();
+
+		// Get a screenshot of the new site.
+		$this->get_screenshot();
+	}
+
+	/**
+	 * Get the screenshot.
+	 */
+	public function get_screenshot() {
+		$site_url = get_site_url();
+
+		$api_key_hash = $this->asset_manager->api->get_api_key_hash();
+
+		$args = array(
+			'site_url' => $site_url,
+			'key'      => $api_key_hash,
+		);
+
+		$this->api->get_screenshot( $args );
 	}
 
 	/**
