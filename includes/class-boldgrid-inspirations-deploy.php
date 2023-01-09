@@ -615,10 +615,10 @@ class Boldgrid_Inspirations_Deploy {
 		);
 
 		$build_args = array(
-			'site_hash'        => ! empty( $api_site_hash ) ? $api_site_hash : null,
+			'site_hash'             => ! empty( $api_site_hash ) ? $api_site_hash : null,
 			'theme_release_channel' => ! empty( $boldgrid_install_options['theme_version_type'] ) ? $boldgrid_install_options['theme_version_type'] : 'stable',
-			'inspirations_version' => BOLDGRID_INSPIRATIONS_VERSION,
-			'key'			  => ! empty( $api_key_hash ) ? $api_key_hash : null,
+			'inspirations_version'  => BOLDGRID_INSPIRATIONS_VERSION,
+			'key'                   => ! empty( $api_key_hash ) ? $api_key_hash : null,
 		);
 
 		$remote_options = $this->api->get_install_options( $args );
