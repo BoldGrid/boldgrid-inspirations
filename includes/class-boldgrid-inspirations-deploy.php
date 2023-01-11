@@ -606,7 +606,6 @@ class Boldgrid_Inspirations_Deploy {
 		$boldgrid_install_options = $this->installed->get_install_options();
 
 		$api_key_hash = $this->asset_manager->api->get_api_key_hash();
-		$api_site_hash = $this->asset_manager->api->get_site_hash();
 
 		$args = array(
 			'subcategory_id' => $boldgrid_install_options['subcategory_id'],
@@ -1831,9 +1830,10 @@ class Boldgrid_Inspirations_Deploy {
 	/**
 	 * Get Screenshot.
 	 *
-	 * Get the screenshot associated with this theme build.
+	 * Get the cached screenshot associated
+	 * with this theme's generic build.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 */
 	public function get_screenshot() {
 		$boldgrid_install_options = $this->installed->get_install_options();
@@ -1855,6 +1855,7 @@ class Boldgrid_Inspirations_Deploy {
 			'page_set_id'           => $page_set_id,
 			'theme_version_type'    => 'stable',
 			'page_set_version_type' => 'stable',
+			// The default coin_budget value for generic builds is always 20.
 			'coin_budget'           => '20',
 			'site_hash'             => ! empty( $api_site_hash ) ? $api_site_hash : null,
 			'is_generic'            => 'true',
@@ -1866,18 +1867,6 @@ class Boldgrid_Inspirations_Deploy {
 		$build_profile = $this->api->get_build_profile( $build_args );
 		$asset_id      = isset( $build_profile['asset_id'] ) ? $build_profile['asset_id'] : null;
 
-		error_log(
-			json_encode(
-				array(
-					'method' => __METHOD__,
-					'line'   => __LINE__,
-					'cat id' => $boldgrid_install_options['category_id'],
-					'page_set_id' => $page_set_id,
-					'build_profile' => $build_profile,
-				)
-			)
-		);
-
 		if ( $asset_id ) {
 			update_option(
 				'boldgrid_site_screenshot',
@@ -1886,8 +1875,6 @@ class Boldgrid_Inspirations_Deploy {
 		} else {
 			delete_option( 'boldgrid_site_screenshot' );
 		}
-
-
 	}
 
 	/**
