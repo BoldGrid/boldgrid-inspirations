@@ -82,8 +82,8 @@ class Boldgrid_Inspirations_Deploy_Api {
 	 *
 	 * @return array
 	 */
-	public function get_build_profile( $build_profile_id, $args = array() ) {
-		$api_url = $this->configs['asset_server'] . $this->configs['ajax_calls']['get_generic'];
+	public function get_build_profile( $args = array() ) {
+		$api_url = $this->configs['asset_server'] . $this->configs['ajax_calls']['get_build_profile'];
 
 		$remote_post_args = array(
 			'method'  => 'POST',
@@ -94,16 +94,9 @@ class Boldgrid_Inspirations_Deploy_Api {
 		$response = wp_remote_retrieve_body( wp_remote_post( $api_url, $remote_post_args ) );
 		$response = json_decode( $response ? $response : '', true );
 
-		$builds = ( ! empty( $response['result']['data'] ) ? $response['result']['data'] : array() );
+		$build_profile = ( ! empty( $response['result']['data']['profile'] ) ? $response['result']['data']['profile'] : null );
 
-		$build_ids = [];
-
-		foreach ( $builds as $build ) {
-			$build_ids[] = $build['Id'];
-			if ( $build_profile_id === $build['Id'] ) {
-				return $build;
-			}
-		}
+		return $build_profile;
 	}
 
 	/**

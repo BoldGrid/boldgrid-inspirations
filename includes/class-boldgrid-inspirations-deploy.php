@@ -605,7 +605,7 @@ class Boldgrid_Inspirations_Deploy {
 	public function remote_install_options() {
 		$boldgrid_install_options = $this->installed->get_install_options();
 
-		$api_key_hash  = $this->asset_manager->api->get_api_key_hash();
+		$api_key_hash = $this->asset_manager->api->get_api_key_hash();
 		$api_site_hash = $this->asset_manager->api->get_site_hash();
 
 		$args = array(
@@ -614,19 +614,7 @@ class Boldgrid_Inspirations_Deploy {
 			'key'            => ! empty( $api_key_hash ) ? $api_key_hash : null,
 		);
 
-		$build_args = array(
-			'site_hash'             => ! empty( $api_site_hash ) ? $api_site_hash : null,
-			'theme_release_channel' => ! empty( $boldgrid_install_options['theme_version_type'] ) ? $boldgrid_install_options['theme_version_type'] : 'stable',
-			'inspirations_version'  => BOLDGRID_INSPIRATIONS_VERSION,
-			'key'                   => ! empty( $api_key_hash ) ? $api_key_hash : null,
-		);
-
 		$remote_options = $this->api->get_install_options( $args );
-
-		$build_profile       = $this->api->get_build_profile( $boldgrid_install_options['build_profile_id'], $build_args );
-		$screenshot_asset_id = isset( $build_profile['AssetId'] ) ? $build_profile['AssetId'] : null;
-
-		$remote_options['screenshot_asset_id'] = $screenshot_asset_id;
 
 		$boldgrid_install_options = array_merge( $boldgrid_install_options, $remote_options );
 
@@ -1835,6 +1823,71 @@ class Boldgrid_Inspirations_Deploy {
 		 * may have added a Crio Premium service for the user. Delete license data so it can be refreshed.
 		 */
 		Boldgrid_Inspirations_Update::delete_license();
+
+		// Get a screenshot of the new site.
+		$this->get_screenshot();
+	}
+
+	/**
+	 * Get Screenshot.
+	 *
+	 * Get the screenshot associated with this theme build.
+	 *
+	 * @since SINCEVERSION
+	 */
+	public function get_screenshot() {
+		$boldgrid_install_options = $this->installed->get_install_options();
+
+		$api_key_hash  = $this->asset_manager->api->get_api_key_hash();
+		$api_site_hash = $this->asset_manager->api->get_site_hash();
+
+		/**
+		 * All themes except the dreamhost themes have the option of selecting a page set.
+		 * However, we want to pull the screenshot from the cached generic build, so we need
+		 * to ensure the page set is always 'base' (34) DH themes ( category 36 ), or (17) for all others.
+		 */
+		$page_set_id = ! empty( $boldgrid_install_options['category_id'] && 36 === $boldgrid_install_options['category_id'] ) ? 34 : 17;
+
+		$build_args = array(
+			'pde'                   => 'false',
+			'sub_cat_id'            => $boldgrid_install_options['subcategory_id'],
+			'theme_id'              => $boldgrid_install_options['theme_id'],
+			'page_set_id'           => $page_set_id,
+			'theme_version_type'    => 'stable',
+			'page_set_version_type' => 'stable',
+			'coin_budget'           => '20',
+			'site_hash'             => ! empty( $api_site_hash ) ? $api_site_hash : null,
+			'is_generic'            => 'true',
+			'key'                   => ! empty( $api_key_hash ) ? $api_key_hash : null,
+			'has_blog'              => 'false',
+			'has_invoice'           => 'false',
+		);
+
+		$build_profile = $this->api->get_build_profile( $build_args );
+		$asset_id      = isset( $build_profile['asset_id'] ) ? $build_profile['asset_id'] : null;
+
+		error_log(
+			json_encode(
+				array(
+					'method' => __METHOD__,
+					'line'   => __LINE__,
+					'cat id' => $boldgrid_install_options['category_id'],
+					'page_set_id' => $page_set_id,
+					'build_profile' => $build_profile,
+				)
+			)
+		);
+
+		if ( $asset_id ) {
+			update_option(
+				'boldgrid_site_screenshot',
+				$this->configs['asset_server'] . '/api/asset/get?key=' . $api_key_hash . '&id=' . $asset_id
+			);
+		} else {
+			delete_option( 'boldgrid_site_screenshot' );
+		}
+
+
 	}
 
 	/**
