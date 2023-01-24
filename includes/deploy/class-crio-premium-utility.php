@@ -57,6 +57,96 @@ class Crio_Premium_Utility {
 	}
 
 	/**
+	 * Update alternative logo
+	 *
+	 * This is run after all pages / posts are added to the site.
+	 *
+	 * @return void
+	 */
+	public static function update_alt_logo() {
+		$templates = get_posts(
+			array(
+				'post_type' => 'crio_page_header',
+			)
+		);
+
+		foreach ( $templates as $template ) {
+			$content = $template->post_content;
+
+			if ( empty( $content ) ) {
+				continue;
+			}
+
+			$bgc_logo_components = array();
+			preg_match_all( '/<div class="bgc-alt-logo".*data-image-url="([^"]*)".*>/', $content, $bgc_logo_components );
+			error_log( 'bgc_logo_components: ' . json_encode( $bgc_logo_components, JSON_UNESCAPED_SLASHES ) );
+
+			if ( ! isset( $bgc_logo_components[1] ) || empty( $bgc_logo_components[1] ) ) {
+				continue;
+			}
+
+			$alt_logo_url = $bgc_logo_components[1][0];
+			$alt_logo_id  = attachment_url_to_postid( $alt_logo_url );
+
+			$component_shortcodes = array();
+			preg_match_all( '/\[boldgrid_component type="wp_boldgrid_component_logo".*\]/', $content, $component_shortcodes );
+
+			foreach ( $component_shortcodes[0] as $component_shortcode ) {
+				$adjusted_shortcode = self::adjust_logo_component( $component_shortcode, $alt_logo_url, $alt_logo_id );
+				$content            = str_replace( $component_shortcode, $adjusted_shortcode, $content );
+			}
+		}
+	}
+
+	/**
+	 * Adjusts the shortcode arguments for the logo component.
+	 *
+	 * @param string  $component_shortcode The shortcode for the logo component.
+	 * @param string  $alt_logo_url        The url of the alternative logo.
+	 * @param string  $alt_logo_id         The id of the alternative logo.
+	 * @return string $component_shortcode The adjusted shortcode for the logo component.
+	 */
+	public static function adjust_logo_component( $component_shortcode, $alt_logo_url, $alt_logo_id ) {
+		/**
+		 * The logo attributes are url encoded, and contain all kinds of things that get
+		 * in the way of parsing them into an array. This is a simple way to get the
+		 * attributes into an array.
+		 */
+		$attributes = json_decode(
+			trim(
+				urldecode(
+					str_replace(
+						array( ']', 'opts=' ),
+						'',
+						shortcode_parse_atts( trim( $component_shortcode ) )['1'] // phpcs:ignore WordPress.NamingConventions.ValidVariableName
+					)
+				),
+				'"'
+			),
+			true
+		);
+
+		$attributes['widget-boldgrid_component_logo[][bgc_alt_logo]'] = $alt_logo_id;
+		$attributes['widget-boldgrid_component_logo[][bgc_alt_logo_url]']  = $alt_logo_url;
+
+		/**
+		 * Here, this is all re-assembled into a shortcode string, to be returned
+		 * and replaced in the post's content.
+		 */
+		$opts = '{';
+
+		foreach ( $attributes as $key => $value ) {
+			$opts .= '"' . $key . '":"' . $value . '",';
+		}
+
+		$opts = rtrim( $opts, ',' );
+
+		$opts = rawurlencode( $opts . '}' );
+
+		return '[boldgrid_component type="wp_boldgrid_component_logo" opts="' . $opts . '"]';
+	}
+
+	/**
 	 * Set Template Menus
 	 *
 	 * This is run after all pages / posts are added to the site. This is used to adjust the

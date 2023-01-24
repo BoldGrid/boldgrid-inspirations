@@ -2452,6 +2452,9 @@ class Boldgrid_Inspirations_Deploy {
 		// download / setup the primary design elements.
 		$this->deploy_pde();
 
+		// Update alternative logo if it exists.
+		\Boldgrid\Inspirations\Deploy\Crio_Premium_Utility::update_alt_logo();
+
 		// create the attribution page.
 		$this->build_attribution_page();
 
