@@ -79,7 +79,7 @@ class Boldgrid_Inspirations_Blog {
 	 * @since SINCEVERSION
 	 */
 	public function create_page() {
-		$page = get_page_by_title( $this->title );
+		$page = Boldgrid_Inspirations_Utility::get_page_by_title( $this->title );
 
 		if ( ! empty( $page->post_status ) && 'published' === $page->post_status ) {
 			$page_id = $page->ID;

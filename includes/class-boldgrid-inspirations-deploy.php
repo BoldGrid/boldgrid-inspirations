@@ -725,12 +725,12 @@ class Boldgrid_Inspirations_Deploy {
 	 * @link https://wordpress.org/support/topic/remove-default-pages-created-on-all-multisites
 	 */
 	private function delete_sample_pages() {
-		$defaultPage = get_page_by_title( __( 'Sample Page' ) );
+		$defaultPage = Boldgrid_Inspirations_Utility::get_page_by_title( __( 'Sample Page' ) );
 		if ( $defaultPage ) {
 			wp_delete_post( $defaultPage->ID );
 		}
 
-		$defaultPage = get_page_by_title( __( 'Hello world!' ), OBJECT, 'post' );
+		$defaultPage = Boldgrid_Inspirations_Utility::get_page_by_title( __( 'Hello world!' ), OBJECT, 'post' );
 		if ( $defaultPage ) {
 			wp_delete_post( $defaultPage->ID );
 		}
@@ -2126,7 +2126,7 @@ class Boldgrid_Inspirations_Deploy {
 					$page_type = $homepage_step_obj->page->post_type;
 
 					// only create the page if it doesn't already exist
-					$existing_page = get_page_by_title( $homepage_step_obj->page->page_title,
+					$existing_page = Boldgrid_Inspirations_Utility::get_page_by_title( $homepage_step_obj->page->page_title,
 						OBJECT, $page_type );
 
 					if ( null === $existing_page ) {
@@ -2223,7 +2223,7 @@ class Boldgrid_Inspirations_Deploy {
 					break;
 
 				case 'get_permalink' :
-					$existing_page = get_page_by_title( $homepage_step_obj->page->page_title, OBJECT, $homepage_step_obj->page->post_type );
+					$existing_page = Boldgrid_Inspirations_Utility::get_page_by_title( $homepage_step_obj->page->page_title, OBJECT, $homepage_step_obj->page->post_type );
 
 					$post_id = $existing_page->ID;
 

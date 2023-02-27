@@ -339,9 +339,9 @@ class Boldgrid_Inspirations_Built {
 		}
 
 		// Get default, attribution, and coming soon pages.
-		$default_page = get_page_by_title( __( 'Sample Page' ) );
-		$attribution_page = get_page_by_title( 'Attribution' );
-		$coming_soon_page = get_page_by_title( __( 'WEBSITE COMING SOON' ) );
+		$default_page     = Boldgrid_Inspirations_Utility::get_page_by_title( __( 'Sample Page' ) );
+		$attribution_page = Boldgrid_Inspirations_Utility::get_page_by_title( 'Attribution' );
+		$coming_soon_page = Boldgrid_Inspirations_Utility::get_page_by_title( __( 'WEBSITE COMING SOON' ) );
 
 		// Initialize $ids_to_remove.
 		$ids_to_filter = array();
@@ -388,7 +388,7 @@ class Boldgrid_Inspirations_Built {
 		 *
 		 * If we have an active Attribution page, exclude that from the list.
 		 */
-		$attribution_page = get_page_by_title( 'Attribution' );
+		$attribution_page = Boldgrid_Inspirations_Utility::get_page_by_title( 'Attribution' );
 
 		if ( is_object( $attribution_page ) ) {
 			$exclude = $attribution_page->ID;
@@ -408,8 +408,8 @@ class Boldgrid_Inspirations_Built {
 
 		// Get default pages we're expecting.
 		$default_pages = array(
-			'sample' => get_page_by_title( __( 'Sample Page' ) ),
-			'coming_soon' => get_page_by_title( __( 'WEBSITE COMING SOON' ) ),
+			'sample'      => Boldgrid_Inspirations_Utility::get_page_by_title( __( 'Sample Page' ) ),
+			'coming_soon' => Boldgrid_Inspirations_Utility::get_page_by_title( __( 'WEBSITE COMING SOON' ) ),
 		);
 
 		// How many of our default pages were found.
