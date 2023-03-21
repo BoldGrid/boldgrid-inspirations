@@ -224,8 +224,13 @@ class Boldgrid_Inspirations_Utility {
 	 * This is meant to replace the deprecated
 	 * core function get_page_by_title()
 	 *
-	 * @param string $title
-	 * @return WP_POST|void
+	 * @since 2.7.5
+	 *
+	 * @param string $page_title Page title.
+	 * @param string $output Optional. Output type. OBJECT, ARRAY_N, or ARRAY_A.
+	 * @param string $post_type Optional. Post type. Default 'page'.
+	 *
+	 * @return WP_Post|null WP_Post on success or null on failure.
 	 */
 	public static function get_page_by_title( $page_title, $output = OBJECT, $post_type = 'page' ) {
 		$query = new WP_Query(
