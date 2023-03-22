@@ -7,7 +7,7 @@ if ( ! defined( 'WPINC' ) ) {
 	exit();
 }
 
-$auto_created_form = get_page_by_title( 'Contact form 1', 'OBJECT', 'wpcf7_contact_form' );
+$auto_created_form = Boldgrid_Inspirations_Utility::get_page_by_title( 'Contact form 1', 'OBJECT', 'wpcf7_contact_form' );
 
 $short_code = '[contact-form-7 id="' . $auto_created_form->ID . '" title="Contact form 1"]';
 

@@ -217,4 +217,42 @@ class Boldgrid_Inspirations_Utility {
 
 		return $query->length !== 0 ? true : false;
 	}
+
+	/**
+	 * Get Page By Title.
+	 *
+	 * This is meant to replace the deprecated
+	 * core function get_page_by_title()
+	 *
+	 * @since 2.7.5
+	 *
+	 * @param string $page_title Page title.
+	 * @param string $output Optional. Output type. OBJECT, ARRAY_N, or ARRAY_A.
+	 * @param string $post_type Optional. Post type. Default 'page'.
+	 *
+	 * @return WP_Post|null WP_Post on success or null on failure.
+	 */
+	public static function get_page_by_title( $page_title, $output = OBJECT, $post_type = 'page' ) {
+		$query = new WP_Query(
+			array(
+				'title'                  => $page_title,
+				'post_type'              => $post_type,
+				'post_status'            => get_post_stati(),
+				'posts_per_page'         => 1,
+				'update_post_term_cache' => false,
+				'update_post_meta_cache' => false,
+				'no_found_rows'          => true,
+				'orderby'                => 'post_date ID',
+				'order'                  => 'ASC',
+			)
+		);
+
+		$pages = $query->posts;
+
+		if ( empty( $pages ) ) {
+			return null;
+		}
+
+		return get_post( $pages[0], $output );
+	}
 }
