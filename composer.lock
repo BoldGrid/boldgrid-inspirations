@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "boldgrid/bgforms",
-            "version": "1.2.1",
+            "version": "1.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/BoldGrid/bgforms.git",
-                "reference": "8c995754d4116d18818f918338dae8d0794ff482"
+                "reference": "4d76c60d0c031b36827ceb22df4d2780cc12435e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BoldGrid/bgforms/zipball/8c995754d4116d18818f918338dae8d0794ff482",
-                "reference": "8c995754d4116d18818f918338dae8d0794ff482",
+                "url": "https://api.github.com/repos/BoldGrid/bgforms/zipball/4d76c60d0c031b36827ceb22df4d2780cc12435e",
+                "reference": "4d76c60d0c031b36827ceb22df4d2780cc12435e",
                 "shasum": ""
             },
             "require": {
@@ -58,20 +58,20 @@
                 }
             ],
             "description": "A composer package for BoldGrid Forms.",
-            "time": "2023-01-25T20:56:19+00:00"
+            "time": "2023-03-27T14:42:55+00:00"
         },
         {
             "name": "boldgrid/boldgrid-inspirations-premium",
-            "version": "1.1.1",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/BoldGrid/boldgrid-inspirations-premium.git",
-                "reference": "9be9c5a0ecca2ac3cd0cc571b1517a7cf58a5635"
+                "reference": "538ab2ad1867b1137fda99f332b22e5257cfcf9f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BoldGrid/boldgrid-inspirations-premium/zipball/9be9c5a0ecca2ac3cd0cc571b1517a7cf58a5635",
-                "reference": "9be9c5a0ecca2ac3cd0cc571b1517a7cf58a5635",
+                "url": "https://api.github.com/repos/BoldGrid/boldgrid-inspirations-premium/zipball/538ab2ad1867b1137fda99f332b22e5257cfcf9f",
+                "reference": "538ab2ad1867b1137fda99f332b22e5257cfcf9f",
                 "shasum": ""
             },
             "require": {
@@ -109,7 +109,7 @@
                 }
             ],
             "description": "Premium BoldGrid Inspirations Features.",
-            "time": "2020-06-15T13:28:50+00:00"
+            "time": "2023-03-27T14:42:25+00:00"
         },
         {
             "name": "boldgrid/library",
