@@ -331,7 +331,7 @@ if ( $show_content_warning ) {
 			</div>
 			<div class="content-menu-section">
 				<div class="feature-filter"><?php echo $lang['AddFunctionality']; ?></div>
-				<div class="feature-option">
+				<div class="feature-option" id="feature_option_blog" data-shown-pointer=false>
 					<input type="checkbox" name="install-blog" value=true /> <?php echo $lang['Blog']; ?>
 					<div id="blog-toggle" class="toggle toggle-light"></div>
 				</div>
