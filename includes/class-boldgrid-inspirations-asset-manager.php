@@ -386,7 +386,7 @@ class Boldgrid_Inspirations_Asset_Manager extends Boldgrid_Inspirations {
 	 * @since 1.3.1
 	 */
 	public function delete_boldgrid_asset() {
-		$this->wp_options_asset = false;
+		$this->wp_options_asset = array();
 	}
 
 	/**
