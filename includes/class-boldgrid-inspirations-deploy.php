@@ -31,6 +31,20 @@ class Boldgrid_Inspirations_Deploy {
 	protected $full_page_list;
 
 	/**
+	 * A list of Installed Page IDs.
+	 *
+	 * @var array
+	 */
+	public $installed_page_ids;
+
+	/**
+	 * Deploy Results
+	 *
+	 * @var array
+	 */
+	public $deploy_results;
+
+	/**
 	 * An instance of the Boldgrid_Inspirations_Deploy_Bps class.
 	 *
 	 * @since 1.7.0

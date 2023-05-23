@@ -484,7 +484,7 @@ class Boldgrid_Inspirations_Pages_And_Posts {
 				$nav_menu->name );
 
 			// Convert the $div_classes array into a space separated string of class names.
-			$div_classes = ( empty( $div_classes ) ? null : implode( ' ', $div_classes ) );
+			$div_classes = ( empty( $div_classes ) ? '' : implode( ' ', $div_classes ) );
 
 			// Create the div tag.
 			// If we have no $div_classes to add, omit the class attribute.

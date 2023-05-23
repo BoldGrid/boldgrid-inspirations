@@ -100,7 +100,7 @@ class Social_Menu {
 		}
 
 		// Save our new menu to the theme's nav_menu_locations.
-		$locations                  = get_theme_mod( 'nav_menu_locations' );
+		$locations                  = get_theme_mod( 'nav_menu_locations', array() );
 		$locations['footer-social'] = $menu_id;
 		$locations['social']        = $menu_id;
 		set_theme_mod( 'nav_menu_locations', $locations );
