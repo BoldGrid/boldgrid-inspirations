@@ -61,6 +61,15 @@ class Boldgrid_Inspirations_Asset_Manager extends Boldgrid_Inspirations {
 	);
 
 	/**
+	 * WP Options Asset
+	 *
+	 * @since 2.7.6
+	 *
+	 * @var array
+	 */
+	public $wp_options_asset;
+
+	/**
 	 * Get the access cache object.
 	 *
 	 * @since 1.1.2

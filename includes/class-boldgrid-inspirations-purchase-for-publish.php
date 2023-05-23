@@ -23,6 +23,24 @@ class Boldgrid_Inspirations_Purchase_For_Publish extends Boldgrid_Inspirations {
 	public static $transient_name_cost = 'bginsp_total_coin_cost';
 
 	/**
+	 * Assets Needing Purchase.
+	 *
+	 * @since 2.7.6
+	 *
+	 * @var array
+	 */
+	public $assets_needing_purchase = array();
+
+	/**
+	 * WP Options Asset
+	 *
+	 * @since 2.7.6
+	 *
+	 * @var array
+	 */
+	public $wp_options_asset = array();
+
+	/**
 	 * Hooks required for the PurchaseForPublish class
 	 */
 	public function add_admin_hooks() {

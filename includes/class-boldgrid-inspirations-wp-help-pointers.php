@@ -19,6 +19,24 @@ class Boldgrid_WP_Help_Pointers {
 	public $pointers;
 
 	/**
+	 * My Pointers.
+	 *
+	 * @since 2.7.6
+	 *
+	 * @var array
+	 */
+	public $my_pointers = array();
+
+	/**
+	 * Initial Pointers.
+	 *
+	 * @since 2.7.6
+	 *
+	 * @var array
+	 */
+	public $initial_pointers = array();
+
+	/**
 	 * Constructor
 	 */
 	public function __construct() {

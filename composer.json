@@ -1,9 +1,27 @@
 {
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/boldgrid/library"
+        },
+        {
+            "type": "git",
+            "url": "https://github.com/boldgrid/boldgrid-inspirations-premium"
+        },
+        {
+            "type": "git",
+            "url": "https://github.com/boldgrid/bgforms"
+        },
+        {
+            "type": "git",
+            "url": "https://github.com/boldgrid/plugin-installer"
+        }
+    ],
     "require": {
-        "boldgrid/library": "^2.13.8",
-        "boldgrid/boldgrid-inspirations-premium": "^1.0.0",
-        "boldgrid/plugin-installer": "^1.0.7",
-        "boldgrid/bgforms": "^1.0.0"
+        "boldgrid/library": "dev-php8.2-fixes",
+        "boldgrid/boldgrid-inspirations-premium": "dev-php8.2-fixes",
+        "boldgrid/plugin-installer": "dev-php8.2-fixes",
+        "boldgrid/bgforms": "dev-php8.2-fixes"
     },
     "scripts": {
         "post-autoload-dump": [

@@ -48,6 +48,18 @@ class Boldgrid_Inspirations_Built {
 	 */
 	protected $current_theme_names;
 
+
+	/**
+	 * Admin Colors.
+	 *
+	 * @since 2.7.6
+	 *
+	 * @var array
+	 *
+	 * @access protected
+	 */
+	protected $admin_colors = array();
+
 	/**
 	 * Take in the main plugin as a param.
 	 *
