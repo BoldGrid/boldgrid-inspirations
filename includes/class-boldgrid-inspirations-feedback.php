@@ -223,7 +223,7 @@ class Boldgrid_Inspirations_Feedback {
 		$timestamp = date( 'Y-m-d H:i:s' );
 
 		// Get the current feedback data.
-		$feedback_data = get_option( 'boldgrid_feedback' );
+		$feedback_data = get_option( 'boldgrid_feedback', array() );
 
 		// Insert new data.
 		$feedback_data[] = array(
