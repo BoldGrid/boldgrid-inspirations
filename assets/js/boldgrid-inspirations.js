@@ -1511,9 +1511,11 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 			pagesetFail,
 			pagesetSuccess;
 
-		// If the theme doesn't allow a blog, hid the blog option.
+		// If the theme doesn't allow a blog, hide the blog option.
 		if ( 'true' === self.$theme.closest( '.theme' ).attr( 'data-no-blog' ) ) {
 			$( '#feature_option_blog' ).hide();
+		} else {
+			$( '#feature_option_blog' ).show();
 		}
 
 		// Reset any previous error messages.
