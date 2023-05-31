@@ -41,6 +41,15 @@ class Boldgrid_Inspirations_Deploy_Cta {
 	public $bstw_enabled = true;
 
 	/**
+	 * Util.
+	 *
+	 * @since 2.7.6
+	 *
+	 * @var Boldgrid_Inspirations_Utility
+	 */
+	public $util;
+
+	/**
 	 * Initialize Class.
 	 *
 	 * @since 1.3.5

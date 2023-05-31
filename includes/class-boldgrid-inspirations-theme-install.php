@@ -18,6 +18,14 @@
  */
 class Boldgrid_Inspirations_Theme_Install {
 
+	/**
+	 * BoldGrid Configs.
+	 *
+	 * @since 2.7.6
+	 *
+	 * @var array
+	 */
+	public $configs = array();
 
 	public function __construct( $configs ) {
 		$this->configs = $configs;
