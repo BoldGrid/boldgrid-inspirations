@@ -6,6 +6,8 @@
  */
 
 $address = Boldgrid_Inspirations_Survey::get_value( 'address' );
+$address = $address ? $address : '';
+
 $email = Boldgrid_Inspirations_Survey::get_value( 'email' );
 $phone = Boldgrid_Inspirations_Survey::get_value( 'phone' );
 $blogname = get_option( 'blogname' );

@@ -41,6 +41,24 @@ class Boldgrid_Inspirations_Purchase_For_Publish extends Boldgrid_Inspirations {
 	public $wp_options_asset = array();
 
 	/**
+	 * Local Publish Cost Data
+	 *
+	 * @since 2.7.6
+	 *
+	 * @var array
+	 */
+	public $local_publish_cost_data = array();
+
+	/**
+	 * Remote Publish Cost Data
+	 *
+	 * @since 2.7.6
+	 *
+	 * @var array
+	 */
+	public $remote_publish_cost_data = array();
+
+	/**
 	 * Hooks required for the PurchaseForPublish class
 	 */
 	public function add_admin_hooks() {
