@@ -201,8 +201,8 @@ class Boldgrid_Inspirations_My_Inspiration {
 	 */
 	public function admin_menu() {
 		add_submenu_page(
-			// Null so "My Inspiration" does not show as a menu item.
-			null,
+			// 'null' so "My Inspiration" does not show as a menu item.
+			'null',
 			__( 'My Inspiration', 'boldgrid-inspirations' ),
 			__( 'My Inspiration', 'boldgrid-inspirations' ),
 			'manage_options',

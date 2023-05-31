@@ -31,6 +31,20 @@ class Boldgrid_Inspirations_Deploy {
 	protected $full_page_list;
 
 	/**
+	 * A list of Installed Page IDs.
+	 *
+	 * @var array
+	 */
+	public $installed_page_ids;
+
+	/**
+	 * Deploy Results
+	 *
+	 * @var array
+	 */
+	public $deploy_results;
+
+	/**
 	 * An instance of the Boldgrid_Inspirations_Deploy_Bps class.
 	 *
 	 * @since 1.7.0
@@ -381,6 +395,33 @@ class Boldgrid_Inspirations_Deploy {
 	public $tags_having_background = array( 'div' );
 
 	/**
+	 * External Plugin.
+	 *
+	 * @since 2.7.6
+	 *
+	 * @var Boldgrid_Inspirations_External_Plugin
+	 */
+	public $external_plugin;
+
+	/**
+	 * Blog.
+	 *
+	 * @since 2.7.6
+	 *
+	 * @var Boldgrid_Inspirations_Blog
+	 */
+	public $blog;
+
+	/**
+	 * Site Hash.
+	 *
+	 * @since 2.7.6
+	 *
+	 * @var string
+	 */
+	public $site_hash;
+
+	/**
 	 * Theme id.
 	 *
 	 * Required.
@@ -389,6 +430,24 @@ class Boldgrid_Inspirations_Deploy {
 	 * @var int
 	 */
 	public $theme_id;
+
+	/**
+	 * Theme Details.
+	 *
+	 * @since 2.7.6
+	 *
+	 * @var object Example return: https://pastebin.com/9gYqTRvM
+	 */
+	public $theme_details;
+
+	/**
+	 * Theme Details Original.
+	 *
+	 * @since 2.7.6
+	 *
+	 * @var object Example return: https://pastebin.com/9gYqTRvM
+	 */
+	public $theme_details_original;
 
 	/**
 	 * Constructor.

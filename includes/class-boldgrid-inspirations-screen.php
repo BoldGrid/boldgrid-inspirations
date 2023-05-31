@@ -15,6 +15,15 @@
  */
 class Boldgrid_Inspirations_Screen {
 	/**
+	 * Screen.
+	 *
+	 * @since 2.7.6
+	 *
+	 * @var WP_Screen
+	 */
+	public $screen;
+
+	/**
 	 * Add hooks.
 	 */
 	public function add_hooks() {
