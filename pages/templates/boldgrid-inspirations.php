@@ -42,6 +42,7 @@
 		data-all-order="{{allOrder}}"
 		data-category-order="{{categoryOrder}}"
 		data-is-default="{{data.build.isDefault}}"
+		data-allow-blog="{{data.build.Theme.AllowBlog}}"
 		data-build-id="{{data.build.Id}}">
 
 		<div class="theme-screenshot">

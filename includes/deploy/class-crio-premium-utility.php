@@ -107,7 +107,7 @@ class Crio_Premium_Utility {
 	 */
 	public static function adjust_menu_id( $menu, $template_id ) {
 		$crio_premium_menu_locations = get_option( 'crio_premium_menu_locations', array() );
-		$menu_locations = get_theme_mod( 'nav_menu_locations' );
+		$menu_locations = get_theme_mod( 'nav_menu_locations', array() );
 		$boldgrid_survey = get_option( 'boldgrid_survey' );
 		$dnd_social_menu = isset( $boldgrid_survey['social'] ) &&
 			isset( $boldgrid_survey['social']['do-not-display'] ) &&
