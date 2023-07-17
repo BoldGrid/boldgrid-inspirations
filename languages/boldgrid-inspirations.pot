@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-05-23T12:32:58-04:00\n"
+"POT-Creation-Date: 2023-07-14T09:16:18-04:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: boldgrid-inspirations\n"
@@ -199,7 +199,7 @@ msgstr ""
 
 #: includes/class-boldgrid-inspirations-built.php:623
 #: pages/includes/browse_category.php:15
-#: pages/templates/boldgrid-inspirations.php:61
+#: pages/templates/boldgrid-inspirations.php:62
 #: pages/templates/feedback-notice-1-1.php:18
 #: pages/templates/feedback-notice-1-1.php:60
 #: pages/templates/feedback-widget.php:14
@@ -291,71 +291,71 @@ msgstr ""
 msgid "Installing your theme..."
 msgstr ""
 
-#: includes/class-boldgrid-inspirations-deploy.php:807
+#: includes/class-boldgrid-inspirations-deploy.php:866
 msgid "Error: Failed to retrieve theme!"
 msgstr ""
 
-#: includes/class-boldgrid-inspirations-deploy.php:813
+#: includes/class-boldgrid-inspirations-deploy.php:872
 msgid "Error: Received an unsuccessful return code when retrieving theme information!"
 msgstr ""
 
-#: includes/class-boldgrid-inspirations-deploy.php:931
+#: includes/class-boldgrid-inspirations-deploy.php:990
 msgid "Error: Exceeded max theme install attempts!"
 msgstr ""
 
-#: includes/class-boldgrid-inspirations-deploy.php:1027
+#: includes/class-boldgrid-inspirations-deploy.php:1086
 msgid "Error: Exiting theme deployment."
 msgstr ""
 
-#: includes/class-boldgrid-inspirations-deploy.php:1235
+#: includes/class-boldgrid-inspirations-deploy.php:1294
 msgid "WP ERROR"
 msgstr ""
 
-#: includes/class-boldgrid-inspirations-deploy.php:1239
+#: includes/class-boldgrid-inspirations-deploy.php:1298
 msgid "Error: Asset server did not return HTTP 200 OK!"
 msgstr ""
 
-#: includes/class-boldgrid-inspirations-deploy.php:1243
+#: includes/class-boldgrid-inspirations-deploy.php:1302
 msgid "Error: Asset server returned an empty data set!"
 msgstr ""
 
-#: includes/class-boldgrid-inspirations-deploy.php:1613
+#: includes/class-boldgrid-inspirations-deploy.php:1672
 msgid "Error downloading asset."
 msgstr ""
 
-#: includes/class-boldgrid-inspirations-deploy.php:1730
+#: includes/class-boldgrid-inspirations-deploy.php:1789
 msgid "Deployment failed. We're sorry but unfortunately the site deployment failed with the following message:"
 msgstr ""
 
-#: includes/class-boldgrid-inspirations-deploy.php:1815
+#: includes/class-boldgrid-inspirations-deploy.php:1874
 msgid "Wrapping things up..."
 msgstr ""
 
-#: includes/class-boldgrid-inspirations-deploy.php:1849
+#: includes/class-boldgrid-inspirations-deploy.php:1908
 msgid "Error downloading plugin list."
 msgstr ""
 
-#: includes/class-boldgrid-inspirations-deploy.php:1896
+#: includes/class-boldgrid-inspirations-deploy.php:1955
 msgid "The following existing plugins where activated for use on your new BoldGrid site:"
 msgstr ""
 
-#: includes/class-boldgrid-inspirations-deploy.php:1947
+#: includes/class-boldgrid-inspirations-deploy.php:2006
 msgid "Error: Form plugin activation failed!"
 msgstr ""
 
-#: includes/class-boldgrid-inspirations-deploy.php:1959
+#: includes/class-boldgrid-inspirations-deploy.php:2018
 msgid "Error: Plugin installation failed!"
 msgstr ""
 
-#: includes/class-boldgrid-inspirations-deploy.php:1984
+#: includes/class-boldgrid-inspirations-deploy.php:2043
 msgid "Plugin activation failed."
 msgstr ""
 
-#: includes/class-boldgrid-inspirations-deploy.php:2082
+#: includes/class-boldgrid-inspirations-deploy.php:2141
 msgid "Error: Plugin activation failed!"
 msgstr ""
 
-#: includes/class-boldgrid-inspirations-deploy.php:2431
+#: includes/class-boldgrid-inspirations-deploy.php:2490
 msgid "Theme deployment failed.  Please choose another theme."
 msgstr ""
 
@@ -686,114 +686,114 @@ msgstr ""
 msgid "Purchase Coins"
 msgstr ""
 
-#: includes/class-boldgrid-inspirations-purchase-for-publish.php:164
+#: includes/class-boldgrid-inspirations-purchase-for-publish.php:182
 msgid "Error, image selection has not been updated."
 msgstr ""
 
-#: includes/class-boldgrid-inspirations-purchase-for-publish.php:165
+#: includes/class-boldgrid-inspirations-purchase-for-publish.php:183
 msgid "Please enter your BoldGrid Connect Key!"
 msgstr ""
 
-#: includes/class-boldgrid-inspirations-purchase-for-publish.php:166
+#: includes/class-boldgrid-inspirations-purchase-for-publish.php:184
 msgid "Invalid BoldGrid Connect Key!"
 msgstr ""
 
-#: includes/class-boldgrid-inspirations-purchase-for-publish.php:167
+#: includes/class-boldgrid-inspirations-purchase-for-publish.php:185
 msgid "Your BoldGrid Connect Key appears to be invalid, it is too short."
 msgstr ""
 
 #. translators: 1 A break tag, please insert the break tag in the middle of the sentence.
-#: includes/class-boldgrid-inspirations-purchase-for-publish.php:170
+#: includes/class-boldgrid-inspirations-purchase-for-publish.php:188
 msgid "Please review the terms of service and%1$scheck the box above if you agree."
 msgstr ""
 
-#: includes/class-boldgrid-inspirations-purchase-for-publish.php:260
+#: includes/class-boldgrid-inspirations-purchase-for-publish.php:278
 msgid "Insufficient permissions"
 msgstr ""
 
-#: includes/class-boldgrid-inspirations-purchase-for-publish.php:352
-#: includes/class-boldgrid-inspirations-purchase-for-publish.php:465
+#: includes/class-boldgrid-inspirations-purchase-for-publish.php:370
+#: includes/class-boldgrid-inspirations-purchase-for-publish.php:483
 msgid "Error: We have no local cost data"
 msgstr ""
 
 #. translators: 1 The count of watermarked images on this page, 'Image' or 'Images', 3 a link to where the user can purchase these images.
-#: includes/class-boldgrid-inspirations-purchase-for-publish.php:439
+#: includes/class-boldgrid-inspirations-purchase-for-publish.php:457
 msgid "Watermarked: <strong>%1$u %2$s</strong> %3$s"
 msgstr ""
 
-#: includes/class-boldgrid-inspirations-purchase-for-publish.php:460
+#: includes/class-boldgrid-inspirations-purchase-for-publish.php:478
 msgid "Gathering local data about images needing purchase..."
 msgstr ""
 
-#: includes/class-boldgrid-inspirations-purchase-for-publish.php:470
+#: includes/class-boldgrid-inspirations-purchase-for-publish.php:488
 msgid "Gathering remote data about each image..."
 msgstr ""
 
-#: includes/class-boldgrid-inspirations-purchase-for-publish.php:473
+#: includes/class-boldgrid-inspirations-purchase-for-publish.php:491
 msgid "Checking your coin balance..."
 msgstr ""
 
 #. translators: 1 The user's current Copyright Coin balance.
-#: includes/class-boldgrid-inspirations-purchase-for-publish.php:479
+#: includes/class-boldgrid-inspirations-purchase-for-publish.php:497
 msgid "Available coin balance before purchase is: %1$s"
 msgstr ""
 
 #. translators: 1 The opening anchor tag to our Cart page, 2 its closing anchor tag.
-#: includes/class-boldgrid-inspirations-purchase-for-publish.php:493
+#: includes/class-boldgrid-inspirations-purchase-for-publish.php:511
 msgid "Local prices have been updated.  Please proceed to the %1$sCart%2$s"
 msgstr ""
 
-#: includes/class-boldgrid-inspirations-purchase-for-publish.php:566
+#: includes/class-boldgrid-inspirations-purchase-for-publish.php:584
 msgid "Error downloading image."
 msgstr ""
 
-#: includes/class-boldgrid-inspirations-purchase-for-publish.php:598
+#: includes/class-boldgrid-inspirations-purchase-for-publish.php:616
 msgid "Replacing watermaked image..."
 msgstr ""
 
-#: includes/class-boldgrid-inspirations-purchase-for-publish.php:647
+#: includes/class-boldgrid-inspirations-purchase-for-publish.php:665
 msgid "Invalid data."
 msgstr ""
 
 #. translators: 1 The id of the asset that is no longer available for purchase.
-#: includes/class-boldgrid-inspirations-purchase-for-publish.php:743
+#: includes/class-boldgrid-inspirations-purchase-for-publish.php:761
 msgid "Error: Image (asset id \"%1$s\") is no longer available for purchase, and will be removed from the cart."
 msgstr ""
 
 #. translators: 1 The local coin cost, 2 the remote coin cost.
-#: includes/class-boldgrid-inspirations-purchase-for-publish.php:754
+#: includes/class-boldgrid-inspirations-purchase-for-publish.php:772
 msgid "Error: Local coin cost of %1$s does not match remote coin cost %2$s."
 msgstr ""
 
 #. translators: 1 An opening anchor tag linking to the shopping card, 2 its closing anchor tag.
-#: includes/class-boldgrid-inspirations-purchase-for-publish.php:772
+#: includes/class-boldgrid-inspirations-purchase-for-publish.php:790
 msgid "Local prices have been updated! Please proceed to the %1$sCart%2$s."
 msgstr ""
 
-#: includes/class-boldgrid-inspirations-purchase-for-publish.php:789
-#: includes/class-boldgrid-inspirations-purchase-for-publish.php:790
-#: includes/class-boldgrid-inspirations-purchase-for-publish.php:798
-#: includes/class-boldgrid-inspirations-purchase-for-publish.php:799
+#: includes/class-boldgrid-inspirations-purchase-for-publish.php:807
+#: includes/class-boldgrid-inspirations-purchase-for-publish.php:808
+#: includes/class-boldgrid-inspirations-purchase-for-publish.php:816
+#: includes/class-boldgrid-inspirations-purchase-for-publish.php:817
 msgid "Cart"
 msgstr ""
 
-#: includes/class-boldgrid-inspirations-purchase-for-publish.php:815
+#: includes/class-boldgrid-inspirations-purchase-for-publish.php:833
 msgid "Error processing request to purchase for publish; WordPress security violation! Please try again."
 msgstr ""
 
-#: includes/class-boldgrid-inspirations-purchase-for-publish.php:955
+#: includes/class-boldgrid-inspirations-purchase-for-publish.php:973
 msgid "Purchase complete!"
 msgstr ""
 
-#: includes/class-boldgrid-inspirations-purchase-for-publish.php:956
+#: includes/class-boldgrid-inspirations-purchase-for-publish.php:974
 msgid "Purchase complete (with errors)!"
 msgstr ""
 
-#: includes/class-boldgrid-inspirations-purchase-for-publish.php:1133
+#: includes/class-boldgrid-inspirations-purchase-for-publish.php:1151
 msgid "Unable to get image details."
 msgstr ""
 
-#: includes/class-boldgrid-inspirations-purchase-for-publish.php:1151
+#: includes/class-boldgrid-inspirations-purchase-for-publish.php:1169
 msgid "Unable to get image details from asset server."
 msgstr ""
 
