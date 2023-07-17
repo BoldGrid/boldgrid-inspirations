@@ -4,7 +4,7 @@ Tags: inspiration, customization, build, create, design
 Requires at least: 4.4
 Tested up to: 6.2
 Requires PHP: 5.4
-Stable tag: 2.7.5
+Stable tag: 2.7.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -34,6 +34,13 @@ The second phase is Customization; tools to transform your website into your vis
 3. You will find the Inspirations menu in your WordPress Dashboard / admin panel.
 
 == Changelog ==
+
+= 2.7.6 =
+
+Release Date: July 17th, 2023
+
+* Update: Improve support for PHP 8.1 & 8.2
+* Update: Allow for specific themes to dis-allow adding a blog during the inspirations process.
 
 = 2.7.5 =
 
