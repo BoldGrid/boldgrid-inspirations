@@ -318,6 +318,52 @@ class Boldgrid_Inspirations {
 				'filter_allowed_html',
 			), 10, 2
 		);
+
+		// Add Onboarding Progress Bar to Admin Bar.
+		add_action(
+			'admin_bar_menu',
+			array( $this, 'add_onboarding_progress' ),
+			500
+		);
+	}
+
+	/**
+	 * Add Onboarding Progress Bar to Admin Bar.
+	 *
+	 * @since SINCEVERSION
+	 */
+	public function add_onboarding_progress( $admin_bar ) {
+		$config   = $this->get_configs();
+		$progress = get_option( $config['onboarding_progress_option'], false );
+
+		// Verify user is logged in.
+		if ( ! is_user_logged_in() || ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		// Verify that there is a valid progress to display.
+		if ( false === $progress ) {
+			return;
+		}
+
+		$formatted_progress = sprintf( '%.0f%%', (float) $progress * 100 );
+
+		$admin_bar->add_menu(
+			array(
+				'id'     => 'inspirations-onboarding-progress',
+				'parent' => null,
+				'group'  => null,
+				'title'  => sprintf(
+					'BoldGrid Inspirations <span class="bginsp-progress">%1$s</span>',
+					esc_html( $formatted_progress )
+				),
+				'href'   => admin_url( 'admin.php?page=boldgrid-inspirations' ),
+				'meta'   => array(
+					'title' => $formatted_progress,
+				),
+			)
+		);
+
 	}
 
 	/**
