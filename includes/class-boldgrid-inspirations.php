@@ -328,6 +328,17 @@ class Boldgrid_Inspirations {
 	}
 
 	/**
+	 * Create Onboarding Tasks.
+	 *
+	 * @param array $install_options The install options.
+	 */
+	public function create_onboarding_tasks( $install_options ) {
+		require_once BOLDGRID_BASE_DIR . '/includes/class-boldgrid-inspirations-onboarding-tasks.php';
+		$onboarding_tasks = new Boldgrid_Inspirations_Onboarding_Tasks( $this->get_configs() );
+		$onboarding_tasks->create_tasks( $install_options );
+	}
+
+	/**
 	 * Add Onboarding Progress Bar to Admin Bar.
 	 *
 	 * @since SINCEVERSION
