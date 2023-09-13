@@ -395,6 +395,15 @@ class Boldgrid_Inspirations_Deploy {
 	public $tags_having_background = array( 'div' );
 
 	/**
+	 * Has Custom Page Headers
+	 *
+	 * @since SINCEVERSION
+	 * @access public
+	 * @var bool
+	 */
+	public $theme_has_cph = false;
+
+	/**
 	 * External Plugin.
 	 *
 	 * @since 2.7.6
@@ -644,6 +653,7 @@ class Boldgrid_Inspirations_Deploy {
 			'install_blog'          => $this->install_blog,
 			'install_invoice'       => $this->install_invoice,
 			'install_cache'         => $this->install_cache,
+			'theme_has_cph'         => $this->theme_has_cph,
 			'install_timestamp'     => time(),
 		);
 
@@ -1356,12 +1366,6 @@ class Boldgrid_Inspirations_Deploy {
 		$deploy_menus = new \Boldgrid\Inspirations\Deploy\Menus( $pages_in_pageset );
 
 		/*
-		 * If the page has custom page headers, after the pages are created, we need to update the page headers.
-		 * This value starts out as false, and is set to true if we find custom page headers.
-		 */
-		$theme_has_cph = false;
-
-		/*
 		 * This variable will store the original post IDs so that they can be changed in the theme mods
 		 * at a later point.
 		 *
@@ -1531,7 +1535,14 @@ class Boldgrid_Inspirations_Deploy {
 
 					// This will ensure that the theme is marked as having a custom page header ensuring that necessary steps are run later.
 					if ( $term_id && 'template_locations' === $tax_data->taxonomy ) {
-						$theme_has_cph = true;
+						$this->theme_has_cph = true;
+						// This also ensures that the information is passed on to the install options.
+						$this->installed->update_install_options(
+							array_merge(
+								$this->installed->get_install_options(),
+								array( 'theme_has_cph' => true )
+							)
+						);
 					}
 				}
 			}
@@ -1604,7 +1615,7 @@ class Boldgrid_Inspirations_Deploy {
 		 * and make sure all the menu IDs and post IDs match up. For more info
 		 * please refer to the Crio_Premium_Utility Class.
 		 */
-		if ( $theme_has_cph ) {
+		if ( $this->theme_has_cph ) {
 			\Boldgrid\Inspirations\Deploy\Crio_Premium_Utility::set_custom_templates();
 			\Boldgrid\Inspirations\Deploy\Crio_Premium_Utility::set_template_menus();
 		}
