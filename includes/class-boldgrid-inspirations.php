@@ -325,12 +325,19 @@ class Boldgrid_Inspirations {
 			array( $this, 'add_onboarding_progress' ),
 			500
 		);
+
+		add_action(
+			'boldgrid_inspirations_deploy_complete',
+			array( $this, 'create_onboarding_tasks' )
+		);
 	}
 
 	/**
-	 * Create Onboarding Tasks.
+	 * Create Onboarding Tasks
 	 *
-	 * @param array $install_options The install options.
+	 * @since SINCEVERSION
+	 *
+	 * @param array $install_options
 	 */
 	public function create_onboarding_tasks( $install_options ) {
 		require_once BOLDGRID_BASE_DIR . '/includes/class-boldgrid-inspirations-onboarding-tasks.php';
