@@ -1881,6 +1881,59 @@ class Boldgrid_Inspirations_Deploy {
 		 * may have added a Crio Premium service for the user. Delete license data so it can be refreshed.
 		 */
 		Boldgrid_Inspirations_Update::delete_license();
+
+		// Get a screenshot of the new site.
+		$this->get_screenshot();
+	}
+
+	/**
+	 * Get Screenshot.
+	 *
+	 * Get the cached screenshot associated
+	 * with this theme's generic build.
+	 *
+	 * @since 2.8.0
+	 */
+	public function get_screenshot() {
+		$boldgrid_install_options = $this->installed->get_install_options();
+
+		$api_key_hash  = $this->asset_manager->api->get_api_key_hash();
+		$api_site_hash = $this->asset_manager->api->get_site_hash();
+
+		/**
+		 * All themes except the dreamhost themes have the option of selecting a page set.
+		 * However, we want to pull the screenshot from the cached generic build, so we need
+		 * to ensure the page set is always 'base' (34) DH themes ( category 36 ), or (17) for all others.
+		 */
+		$page_set_id = ! empty( $boldgrid_install_options['category_id'] && 36 === $boldgrid_install_options['category_id'] ) ? 34 : 17;
+
+		$build_args = array(
+			'pde'                   => 'false',
+			'sub_cat_id'            => $boldgrid_install_options['subcategory_id'],
+			'theme_id'              => $boldgrid_install_options['theme_id'],
+			'page_set_id'           => $page_set_id,
+			'theme_version_type'    => 'stable',
+			'page_set_version_type' => 'stable',
+			// The default coin_budget value for generic builds is always 20.
+			'coin_budget'           => '20',
+			'site_hash'             => ! empty( $api_site_hash ) ? $api_site_hash : null,
+			'is_generic'            => 'true',
+			'key'                   => ! empty( $api_key_hash ) ? $api_key_hash : null,
+			'has_blog'              => 'false',
+			'has_invoice'           => 'false',
+		);
+
+		$build_profile = $this->api->get_build_profile( $build_args );
+		$asset_id      = isset( $build_profile['asset_id'] ) ? $build_profile['asset_id'] : null;
+
+		if ( $asset_id ) {
+			update_option(
+				'boldgrid_site_screenshot',
+				$this->configs['asset_server'] . '/api/asset/get?key=' . $api_key_hash . '&id=' . $asset_id
+			);
+		} else {
+			delete_option( 'boldgrid_site_screenshot' );
+		}
 	}
 
 	/**
