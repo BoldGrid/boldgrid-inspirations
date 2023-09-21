@@ -428,3 +428,9 @@ a:not(.button).dashicons-before:before {
 	max-height: 1.2em;
 	letter-spacing: 0.1em;
 }
+
+#wp-admin-bar-inspirations-onboarding-progress span.bginsp-progress {
+    background: green;
+    padding: 2px 4px;
+    border-radius: 35%;
+}

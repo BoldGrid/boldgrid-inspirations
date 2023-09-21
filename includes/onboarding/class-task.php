@@ -77,7 +77,7 @@ class Task {
 	 *
 	 * @var bool
 	 */
-	var $complete = false;
+	var $task_complete = false;
 
 	/**
 	 * Constructor.
@@ -93,12 +93,13 @@ class Task {
 	 * @param array  $buttons       The task buttons.
 	 */
 	public function __construct( $id, $title, $description, $card_id, $task_complete, $links, $buttons ) {
-		$this->id          = $id;
-		$this->title       = $title;
-		$this->description = $description;
-		$this->card_id     = $card_id;
-		$this->links       = $links;
-		$this->buttons     = $buttons;
+		$this->id            = $id;
+		$this->title         = $title;
+		$this->description   = $description;
+		$this->card_id       = $card_id;
+		$this->links         = $links;
+		$this->buttons       = $buttons;
+		$this->task_complete = $task_complete;
 	}
 
 	/**
@@ -109,14 +110,17 @@ class Task {
 	 * @return string The rendered task markup.
 	 */
 	public function render() {
-		$markup  = '<div class="boldgrid-onboarding-task" id="task-' . esc_attr( $this->id ) . '">';
+		$complete = $this->task_complete ? 'complete collapsed' : '';
+
+		$markup  = '<div class="boldgrid-onboarding-task ' . esc_attr( $complete ) . '" id="' . esc_attr( $this->id ) . '">';
 		$markup .= $this->render_checkbox();
 		$markup .= '<div class="task-content">';
 		$markup .= $this->render_title();
 		$markup .= $this->render_description();
-		$markup .= '</div>';
 		$markup .= $this->render_links();
 		$markup .= $this->render_buttons();
+		$markup .= '</div>';
+		$markup .= '<div class="collapse-expand"><span class="dashicons"></div>';
 		$markup .= '</div>';
 
 		return $markup;
@@ -130,10 +134,9 @@ class Task {
 	 * @return string The rendered task checkbox markup.
 	 */
 	public function render_checkbox() {
-		$icon_class = $this->task_complete ? 'dashicons-yes' : 'dashicons-marker';
 
 		$markup  = '<div class="boldgrid-onboarding-task-checkbox">';
-		$markup .= '<span class="dashicons ' . esc_attr( $icon_class ) . '"></span>';
+		$markup .= '<span class="dashicons"></span>';
 		$markup .= '</div>';
 
 		return $markup;
@@ -203,7 +206,10 @@ class Task {
 
 		foreach ( $this->buttons as $button ) {
 			$markup .= '<li>';
-			$markup .= '<a href="' . esc_url( $button['url'] ) . '" class="button ' . esc_attr( $button['class'] ) . '">' . esc_html( $button['text'] ) . '</a>';
+			$markup .= '<a href="' . esc_url( $button['url'] ) . '" ';
+			$markup .= 'class="button ' . esc_attr( isset( $button['class'] ) ? $button['class'] : '' ) . '" ';
+			$markup .= 'target="' . esc_attr( isset( $button['target'] ) ? $button['target'] : '_blank' ) . '">';
+			$markup .= esc_html( $button['text'] ) . '</a>';
 			$markup .= '</li>';
 		}
 

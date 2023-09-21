@@ -82,11 +82,11 @@ class Task_Card {
 	 * @param string $icon        The card icon.
 	 * @param array  $tasks       The card tasks.
 	 */
-	public function __construct( $id, $title, $description, $color, $icon, $tasks ) {
+	public function __construct( $id, $title, $description, $colors, $icon, $tasks ) {
 		$this->id          = $id;
 		$this->title       = $title;
 		$this->description = $description;
-		$this->color       = $color;
+		$this->colors      = $colors;
 		$this->icon        = $icon;
 		$this->tasks       = $tasks;
 	}
@@ -101,28 +101,41 @@ class Task_Card {
 	public function render() {
 		$tasks = '';
 
-		foreach ( $this->tasks as $task ) {
+		foreach ( $this->tasks as $task_data ) {
+			$task = new Task(
+				$task_data['id'],
+				$task_data['title'],
+				$task_data['description'],
+				$task_data['card_id'],
+				$task_data['task_complete'],
+				empty( $task_data['links'] ) ? array() : $task_data['links'],
+				empty( $task_data['buttons'] ) ? array() : $task_data['buttons']
+			);
+
 			$tasks .= $task->render();
 		}
 
 		$card = sprintf(
-			'<div id="card-%1$s" class="boldgrid-onboarding-card">
-				<div class="boldgrid-onboarding-card-title" style="border-bottom: 2px %2$s solid">
-					<p>%3$s</p>
-					<div class="boldgrid-onboarding-card-description">%4$s</div>
+			'<div id="card-%1$s" class="boldgrid-onboarding-card" style="--card-color: %2$s; --card-color-dark: %3$s">
+				<div class="boldgrid-onboarding-card-title">
+					<p>%4$s</p>
+					<div class="boldgrid-onboarding-card-description">%5$s</div>
 				</div>
 				<div class="boldgrid-onboarding-card-icon">
-					<span class="%5$s"></span>
+					<span class="%6$s"></span>
 				</div>
-				<div class="boldgrid-onboarding-card-tasks">%6$s</div>
+				<div class="boldgrid-onboarding-card-tasks">%7$s</div>
 			</div>',
 			esc_attr( $this->id ),
-			esc_attr( $this->color ),
+			esc_attr( $this->colors[0] ),
+			esc_attr( $this->colors[1] ),
 			esc_html( $this->title ),
 			wp_kses_post( $this->description ),
 			esc_attr( $this->icon ),
 			wp_kses_post( $tasks )
 		);
+
+		error_log( json_encode( $card ) );
 
 		return $card;
 	}

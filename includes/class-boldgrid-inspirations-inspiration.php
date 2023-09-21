@@ -243,7 +243,7 @@ class Boldgrid_Inspirations_Inspiration extends Boldgrid_Inspirations {
 			$staging = new Boldgrid_Inspirations_Staging();
 			$staging->add_hooks();
 
-			$my_inspiration = new Boldgrid_Inspirations_My_Inspiration();
+			$my_inspiration = new Boldgrid_Inspirations_My_Inspiration( $this->configs );
 			$my_inspiration->add_admin_hooks();
 
 			$redirect = new Boldgrid_Inspirations_Redirect();

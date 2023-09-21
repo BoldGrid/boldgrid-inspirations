@@ -57,29 +57,59 @@ class Boldgrid_Inspirations_Onboarding_Tasks {
 	public function create_tasks( $install_options ) {
 		$available_tasks = $this->configs['available_onboarding_tasks'];
 		$active_tasks    = array();
+		$complete_tasks  = 0;
 
 		foreach ( $available_tasks as $task ) {
 			// If no active callback is provided, the task is always active.
 			if ( ! isset( $task['active_callback'] ) ) {
-				$active_tasks[] = $task;
+				$active_tasks[] = array(
+					'id'            => $task['id'],
+					'task_complete' => $task['task_complete'],
+				);
 				continue;
 			}
 
 			// If the active callback is a callable function, run it.
 			if ( is_callable( $task['active_callback'] ) && true === call_user_func( $task['active_callback'], $install_options ) ) {
-				$active_tasks[] = $task;
+				$active_tasks[] = array(
+					'id'            => $task['id'],
+					'task_complete' => $task['task_complete'],
+				);
 				continue;
 			}
 
 			// If the active callback is a method of this class, run it.
 			if ( is_callable( array( $this, $task['active_callback'] ) ) && true === call_user_func( array( $this, $task['active_callback'] ), $install_options ) ) {
-				$active_tasks[] = $task;
+				$active_tasks[] = array(
+					'id'            => $task['id'],
+					'task_complete' => $task['task_complete'],
+				);
 				continue;
+			}
+		}
+
+		foreach ( $active_tasks as $task ) {
+			if ( true === $task['task_complete'] ) {
+				$complete_tasks++;
 			}
 		}
 
 		// Save the active tasks.
 		update_option( $this->option_name, $active_tasks );
+		update_option( $this->configs['onboarding_progress_option'], $complete_tasks / count( $active_tasks ) );
+	}
+
+	public function get_task( $task_id, $task_complete ) {
+		$available_tasks = $this->configs['available_onboarding_tasks'];
+
+		foreach ( $available_tasks as $task ) {
+			if ( $task['id'] === $task_id ) {
+				$task['task_complete'] = $task_complete;
+				return $task;
+			}
+		}
+
+		return array();
 	}
 
 	/**
@@ -115,15 +145,16 @@ class Boldgrid_Inspirations_Onboarding_Tasks {
 	 * @return array The tasks for the card.
 	 */
 	public function get_tasks_for_card( $card_id ) {
-		$tasks = get_option( $this->option_name );
+		$active_tasks = get_option( $this->option_name );
 
-		if ( ! is_array( $tasks ) ) {
+		if ( ! is_array( $active_tasks ) ) {
 			return array();
 		}
 
 		$tasks_for_card = array();
 
-		foreach ( $tasks as $task ) {
+		foreach ( $active_tasks as $active_task ) {
+			$task = $this->get_task( $active_task['id'], $active_task['task_complete'] );
 			if ( $task['card_id'] === $card_id ) {
 				$tasks_for_card[] = $task;
 			}
