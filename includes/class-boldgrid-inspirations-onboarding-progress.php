@@ -62,7 +62,6 @@ class Boldgrid_Inspirations_Onboarding_Progress {
 	 * @since SINCEVERSION
 	 */
 	public function add_ajax_hooks() {
-		error_log( 'add_ajax_hooks' );
 		add_action( 'wp_ajax_boldgrid_inspirations_update_task', array( $this, 'ajax_update_task' ) );
 	}
 
@@ -148,7 +147,6 @@ class Boldgrid_Inspirations_Onboarding_Progress {
 	 * @since SINCEVERSION
 	 */
 	public function ajax_update_task() {
-		error_log( json_encode( $_POST ) );
 		if ( ! isset( $_POST['nonce'] ) ) {
 			wp_send_json_error( 'missing_nonce' );
 		}

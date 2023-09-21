@@ -135,8 +135,6 @@ class Task_Card {
 			wp_kses_post( $tasks )
 		);
 
-		error_log( json_encode( $card ) );
-
 		return $card;
 	}
 }
