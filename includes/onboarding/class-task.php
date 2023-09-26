@@ -92,12 +92,13 @@ class Task {
 	 * @param array  $links         The task links.
 	 * @param array  $buttons       The task buttons.
 	 */
-	public function __construct( $id, $title, $description, $card_id, $task_complete, $links, $buttons ) {
+	public function __construct( $id, $title, $description, $card_id, $links, $buttons, $task_complete = null, $icon = null ) {
 		$this->id            = $id;
 		$this->title         = $title;
 		$this->description   = $description;
 		$this->card_id       = $card_id;
 		$this->links         = $links;
+		$this->icon          = $icon;
 		$this->buttons       = $buttons;
 		$this->task_complete = $task_complete;
 	}
@@ -114,6 +115,7 @@ class Task {
 
 		$markup  = '<div class="boldgrid-onboarding-task ' . esc_attr( $complete ) . '" id="' . esc_attr( $this->id ) . '">';
 		$markup .= $this->render_checkbox();
+		$markup .= $this->render_icon();
 		$markup .= '<div class="task-content">';
 		$markup .= $this->render_title();
 		$markup .= $this->render_description();
@@ -134,9 +136,31 @@ class Task {
 	 * @return string The rendered task checkbox markup.
 	 */
 	public function render_checkbox() {
+		if ( null === $this->task_complete ) {
+			return '';
+		}
 
 		$markup  = '<div class="boldgrid-onboarding-task-checkbox">';
 		$markup .= '<span class="dashicons"></span>';
+		$markup .= '</div>';
+
+		return $markup;
+	}
+
+	/**
+	 * Render the task icon.
+	 *
+	 * @since SINCEVERSION
+	 *
+	 * @return string The rendered task icon markup.
+	 */
+	public function render_icon() {
+		if ( empty( $this->icon ) ) {
+			return '';
+		}
+
+		$markup  = '<div class="task-icon">';
+		$markup .= '<span class="dashicons ' . esc_attr( $this->icon ) . '"></span>';
 		$markup .= '</div>';
 
 		return $markup;
@@ -187,6 +211,8 @@ class Task {
 
 		$markup .= '</ul>';
 		$markup .= '</div>';
+
+		return $markup;
 	}
 
 	/**

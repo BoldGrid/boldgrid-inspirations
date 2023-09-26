@@ -265,5 +265,71 @@ return array(
 			'icon'        => 'dashicons dashicons-admin-generic',
 		),
 	),
+	/**
+	 * Each support task should be listed here
+	 * with the following properties:
+	 * - id: The unique ID of the card.
+	 * - title: The title of the card.
+	 * - description: The description of the card.
+	 * - icon: The icons class to use for the card.
+	 * - buttons (optional): An array of buttons to display on the task. Each button should have the following properties:
+	 *          - text: The text of the button.
+	 *          - url: The URL of the button.
+	 *          - class (optional): String of classes to add to button.
+	 *          - target (optional): The target of the button ( default is '_blank' ).
+	 */
+	'available_support_tasks'    => array(
+		array(
+			'id'          => 'support_center',
+			'title'       => __( 'Support Center', 'boldgrid-inspirations' ),
+			'description' => __(
+				'We have a large collection of support articles, videos, and more to help you learn everything you need to make the most out of your site.',
+				'boldgrid-inspirations'
+			),
+			'icon'        => 'dashicons boldgrid-icon',
+			'buttons'     => array(
+				array(
+					'text'   => __( 'Learn More', 'boldgrid-inspirations' ),
+					'url'    => 'https://www.boldgrid.com/support/',
+					'class'  => 'button-secondary',
+					'target' => '_blank',
+				),
+			),
+		),
+		array(
+			'id'          => 'boldgrid_forums',
+			'title'       => __( 'BoldGrid Forums', 'boldgrid-inspirations' ),
+			'description' => __(
+				'You can also submit a question to the BoldGrid Support Forums',
+				'boldgrid-inspirations'
+			),
+			'icon'        => 'dashicons dashicons-admin-comments',
+			'buttons'     => array(
+				array(
+					'text'   => __( 'Learn More', 'boldgrid-inspirations' ),
+					'url'    => 'https://www.boldgrid.com/support/ask-a-question/',
+					'class'  => 'button-secondary',
+					'target' => '_blank',
+				),
+			),
+		),
+		array(
+			'id'          => 'premium_user_support',
+			'title'       => __( 'Premium User Support', 'boldgrid-inspirations' ),
+			'icon'        => 'dashicons dashicons-format-chat',
+			'description' => __(
+				'Premium users have access to our Premium Support Team. They are available to help you with any issues you may have.',
+				'boldgrid-inspirations'
+			),
+			'buttons'     => array(
+				array(
+					'text'   => __( 'Learn More', 'boldgrid-inspirations' ),
+					'url'    => 'https://www.boldgrid.com/central/account/help/premium/',
+					'class'  => 'button-secondary',
+					'target' => '_blank',
+				),
+			),
+		),
+	),
 );
 

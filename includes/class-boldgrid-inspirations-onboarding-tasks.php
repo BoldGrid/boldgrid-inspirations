@@ -163,6 +163,10 @@ class Boldgrid_Inspirations_Onboarding_Tasks {
 		return $tasks_for_card;
 	}
 
+	public function get_support_tasks_data() {
+		return $this->configs['available_support_tasks'];
+	}
+
 	/**
 	 * Has Legacy Headers
 	 *

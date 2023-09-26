@@ -100,16 +100,15 @@ class Task_Card {
 	 */
 	public function render() {
 		$tasks = '';
-
 		foreach ( $this->tasks as $task_data ) {
 			$task = new Task(
 				$task_data['id'],
 				$task_data['title'],
 				$task_data['description'],
 				$task_data['card_id'],
-				$task_data['task_complete'],
 				empty( $task_data['links'] ) ? array() : $task_data['links'],
-				empty( $task_data['buttons'] ) ? array() : $task_data['buttons']
+				empty( $task_data['buttons'] ) ? array() : $task_data['buttons'],
+				$task_data['task_complete'],
 			);
 
 			$tasks .= $task->render();

@@ -430,7 +430,9 @@ a:not(.button).dashicons-before:before {
 }
 
 #wp-admin-bar-inspirations-onboarding-progress span.bginsp-progress {
-    background: green;
+    background: #0fcb0f;
     padding: 2px 4px;
     border-radius: 35%;
+	color: black;
+	font-weight: 600;
 }
