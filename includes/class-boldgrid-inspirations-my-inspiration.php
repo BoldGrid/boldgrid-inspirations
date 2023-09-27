@@ -144,10 +144,15 @@ class Boldgrid_Inspirations_My_Inspiration {
 		$initial_progress   = get_option( $this->configs['onboarding_progress_option'], 0 );
 		$formatted_progress = sprintf( '%.0f', (float) $initial_progress * 100 );
 		$nonce              = wp_create_nonce( 'boldgrid_inspirations_update_task' );
-		$subtitle           = __(
+		$complete           = '100' === $formatted_progress ? true : false;
+		$instructions       = __(
 			'Congratulations on your new website! Sometimes it can be overwhelming deciding what to do next, so we\'ve prepared a list of tasks you can do to get the most out of Crio
 			and Post and Page Builder. Some of them have already been completed for you! If you\'ve already finished a task, or you wish to skip it, you can mark it complete by
 			clicking on the checkbox to the left of the task.',
+			'boldgrid-inspirations'
+		);
+		$completion         = __(
+			'You\'ve completed all of the tasks! If you\'d like to see other things you can do, you can click the "Get More Help" button below.',
 			'boldgrid-inspirations'
 		);
 
@@ -158,7 +163,8 @@ class Boldgrid_Inspirations_My_Inspiration {
 				</div>
 				<div class="my-inspirations-title">
 					<h1>BoldGrid Inspirations</h1>
-					<p>' . esc_html( $subtitle ) . '</p>
+					<p class="instructions' . ( $complete ? ' hidden' : '' ) . '">' . esc_html( $instructions ) . '</p>
+					<p class="completion' . ( $complete ? '' : ' hidden' ) . '">' . esc_html( $completion ) . '</p>
 				</div>
 				<div class="my-inspirations-progress">
 					<div class="onboarding-progress-bar" role="progressbar" 
@@ -247,7 +253,15 @@ class Boldgrid_Inspirations_My_Inspiration {
 		require_once BOLDGRID_BASE_DIR . '/includes/onboarding/class-task-card.php';
 		require_once BOLDGRID_BASE_DIR . '/includes/onboarding/class-task.php';
 
-		$onboarding = new Boldgrid_Inspirations_Onboarding_Tasks( $this->configs );
+		$onboarding      = new Boldgrid_Inspirations_Onboarding_Tasks( $this->configs );
+		$install_options = get_option( 'boldgrid_install_options' );
+
+		if (
+			empty( get_option( $this->configs['onboarding_tasks_option'] ) ) &&
+			! empty( $install_options )
+			) {
+			$onboarding->create_tasks( $install_options );
+		}
 
 		$this->render_header();
 		$this->render_onboarding_cards( $onboarding );

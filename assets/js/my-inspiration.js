@@ -1,9 +1,18 @@
 
 jQuery(document).ready(function($) {
 	var updateTopbarProgress = ( completedDecimal ) => {
-		$( '#wp-admin-bar-inspirations-onboarding-progress span.bginsp-progress' ).html(
-			Math.round( completedDecimal * 100 ) + '%'
-		);
+		var formattedProgress = Math.round( completedDecimal * 100 ) + '%',
+			$progressAnchor    = $( '#wp-admin-bar-inspirations-onboarding-progress a' );
+
+		$progressAnchor.attr( 'title', formattedProgress )
+			.find( 'span' ).html( formattedProgress );
+
+		if ( '100%' === formattedProgress ) {
+			$( '#wp-admin-bar-inspirations-onboarding-progress' ).addClass( 'bginsp-progress-complete' );
+		} else {
+			$( '#wp-admin-bar-inspirations-onboarding-progress' ).removeClass( 'bginsp-progress-complete' );
+		}
+
 	};
 
 	var updateProgressBar = ( completedDecimal ) => {
@@ -14,6 +23,14 @@ jQuery(document).ready(function($) {
 		$progressBar.attr( 'style', '--percent-complete: ' + percentComplete );
 
 		$progressText.html( percentComplete );
+
+		if ( '100%' === percentComplete ) {
+			$( '.instructions' ).addClass( 'hidden' );
+			$( '.completion' ).removeClass( 'hidden' );
+		} else {
+			$( '.instructions' ).removeClass( 'hidden' );
+			$( '.completion' ).addClass( 'hidden' );
+		}
 	};
 
 	var expandOrCollapse = ( $task, isComplete ) => {
@@ -43,11 +60,15 @@ jQuery(document).ready(function($) {
 	var handleClickCheckbox = ( e ) => {
 		var $target    = $( e.currentTarget ),
 			$task      = $target.closest( '.boldgrid-onboarding-task' ),
-			nonce      = $target.closest( '.onboarding-cards').find( '.onboarding-nonce' ).data( 'nonce' ),
-			totalTasks = $( '.boldgrid-onboarding-task' ).length,
+			nonce      = $( '.onboarding-nonce' ).data( 'nonce' ),
+			totalTasks = $( '.onboarding-cards .boldgrid-onboarding-task' ).length,
 			completeTasks,
 			completedDecimal,
 			isComplete;
+
+			console.log( {
+				nonce: $( '.onboarding-nonce' ).data( 'nonce' ),
+			} );
 
 			if ( $target.hasClass( 'button' ) && $task.hasClass( 'complete' ) ) {
 				return;
@@ -76,5 +97,7 @@ jQuery(document).ready(function($) {
 
 	$( '.boldgrid-onboarding-task-checkbox span' ).on( 'click', handleClickCheckbox );
 	$( '.boldgrid-onboarding-task .collapse-expand' ).on( 'click', handleClickArrow );
+	$( '.boldgrid-onboarding-task .task-title' ).on( 'click', handleClickArrow );
 	$( '.boldgrid-onboarding-task .task-buttons .button.complete-on-click' ).on( 'click', handleClickCheckbox );
+
 } );

@@ -366,6 +366,12 @@ class Boldgrid_Inspirations {
 
 		$formatted_progress = sprintf( '%.0f%%', (float) $progress * 100 );
 
+		$class = '';
+
+		if ( '100%' === $formatted_progress ) {
+			$class = 'bginsp-progress-complete';
+		}
+
 		$admin_bar->add_menu(
 			array(
 				'id'     => 'inspirations-onboarding-progress',
@@ -378,6 +384,7 @@ class Boldgrid_Inspirations {
 				'href'   => admin_url( 'admin.php?page=boldgrid-inspirations' ),
 				'meta'   => array(
 					'title' => $formatted_progress,
+					'class' => $class,
 				),
 			)
 		);
