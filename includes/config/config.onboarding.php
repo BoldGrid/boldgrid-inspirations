@@ -37,14 +37,14 @@ return array(
 			'title'         => __( 'Choose Your Theme', 'boldgrid-inspirations' ),
 			'task_complete' => true,
 			'description'   => __(
-				'BoldGrid Inspirations provides many different themes to choose from. If you\'re unhappy with the one you have chosen, you can start over again',
+				'BoldGrid Inspirations provides many different theme designs to choose from. If you\'re unhappy with the one you have chosen, you can start over again',
 				'boldgrid-inspirations'
 			),
 			'card_id'       => 'customize_theme',
 			'links'         => array(
 				array(
 					'text' => __( 'Learn More', 'boldgrid-inspirations' ),
-					'url'  => 'https://www.boldgrid.com/support/boldgrid-crio-supertheme-product-guide/customizing-the-color-palette/',
+					'url'  => 'https://www.boldgrid.com/support/boldgrid-inspirations-plugin-product-guide/installing-your-first-boldgrid-inspiration/',
 				),
 			),
 			'buttons'       => array(
@@ -80,6 +80,29 @@ return array(
 			),
 		),
 		array(
+			'id'            => 'fonts',
+			'title'         => __( 'Choose Your Fonts', 'boldgrid-inspirations' ),
+			'task_complete' => false,
+			'description'   => __(
+				'Choosing the perfect font can really make your site stand out. Here, you can choose from a variety of fonts to use for your website.',
+				'boldgrid-inspirations'
+			),
+			'card_id'       => 'customize_theme',
+			'links'         => array(
+				array(
+					'text' => __( 'Learn More', 'boldgrid-inspirations' ),
+					'url'  => 'https://www.boldgrid.com/support/boldgrid-crio-supertheme-product-guide/working-with-fonts-in-boldgrid-crio/',
+				),
+			),
+			'buttons'       => array(
+				array(
+					'text'  => __( 'Choose Fonts', 'boldgrid-inspirations' ),
+					'url'   => add_query_arg( 'autofocus[section]', 'boldgrid_typography', admin_url( 'customize.php' ) ),
+					'class' => 'button-secondary complete-on-click',
+				),
+			),
+		),
+		array(
 			'id'            => 'edit_homepage',
 			'title'         => __( 'Edit Your Homepage', 'boldgrid-inspirations' ),
 			'task_complete' => false,
@@ -91,7 +114,7 @@ return array(
 			'links'         => array(
 				array(
 					'text' => __( 'Learn More', 'boldgrid-inspirations' ),
-					'url'  => 'https://www.boldgrid.com/support/boldgrid-crio-supertheme-product-guide/customizing-the-color-palette/',
+					'url'  => 'https://www.boldgrid.com/support/page-builder/',
 				),
 			),
 			'buttons'       => array(
@@ -109,24 +132,25 @@ return array(
 			),
 		),
 		array(
-			'id'            => 'menus',
-			'title'         => __( 'Customize Menu Designs', 'boldgrid-inspirations' ),
-			'description'   => __(
-				'How people navigate your site is important. Here, you can customize the appearance of your menus and the menu items. Choose your menu fonts, colors, spacing, hover effects, and more.',
+			'id'              => 'edit_blog',
+			'title'           => __( 'Start Blogging', 'boldgrid-inspirations' ),
+			'task_complete'   => false,
+			'description'     => __(
+				'You can use the Post and Page Builder to edit the included sample blog posts and to add additional posts.',
 				'boldgrid-inspirations'
 			),
-			'card_id'       => 'customize_theme',
-			'task_complete' => false,
-			'links'         => array(
+			'active_callback' => 'has_installed_blog',
+			'card_id'         => 'edit_content',
+			'links'           => array(
 				array(
 					'text' => __( 'Learn More', 'boldgrid-inspirations' ),
-					'url'  => 'https://www.boldgrid.com/support/boldgrid-crio-supertheme-product-guide/customizing-your-new-crio-website/',
+					'url'  => 'https://www.boldgrid.com/support/page-builder/',
 				),
 			),
-			'buttons'       => array(
+			'buttons'         => array(
 				array(
-					'text'  => __( 'Customize Main Menu', 'boldgrid-inspirations' ),
-					'url'   => add_query_arg( 'autofocus[panel]', 'bgtfw_menu_items_main', admin_url( 'customize.php' ) ),
+					'text'  => __( 'Start Blogging', 'boldgrid-inspirations' ),
+					'url'   => admin_url( 'edit.php' ),
 					'class' => 'button-secondary complete-on-click',
 				),
 			),
@@ -135,7 +159,8 @@ return array(
 			'id'              => 'customizer_headers',
 			'title'           => __( 'Headers and Footers', 'boldgrid-inspirations' ),
 			'description'     => __(
-				'The design of your headers and footers can make a big difference in the overall look of your site. Here, you can customize their appearance by changing ',
+				'The design of your headers and footers can make a big difference in the overall look of your site. Here, you can customize their appearance by changing the layout of
+				various elements, such as the logo, title, menu, and social icons.',
 				'boldgrid-inspirations'
 			),
 			'active_callback' => 'has_legacy_headers',
@@ -144,18 +169,18 @@ return array(
 			'links'           => array(
 				array(
 					'text' => __( 'Learn More', 'boldgrid-inspirations' ),
-					'url'  => 'https://www.boldgrid.com/support/boldgrid-crio-supertheme-product-guide/customizing-your-new-crio-website/',
+					'url'  => 'https://www.boldgrid.com/support/boldgrid-crio-supertheme-product-guide/customizing-the-header-design-in-boldgrid-crio/#select-a-header-layout',
 				),
 			),
 			'buttons'         => array(
 				array(
-					'text'  => __( 'Customize Headers', 'boldgrid-inspirations' ),
-					'url'   => add_query_arg( 'autofocus[panel]', 'bgtfw_menu_items_main', admin_url( 'customize.php' ) ),
+					'text'  => __( 'Customize Header', 'boldgrid-inspirations' ),
+					'url'   => add_query_arg( 'autofocus[section]', 'bgtfw_header_presets', admin_url( 'customize.php' ) ),
 					'class' => 'button-secondary complete-on-click',
 				),
 				array(
-					'text'  => __( 'Customize Footers', 'boldgrid-inspirations' ),
-					'url'   => add_query_arg( 'autofocus[panel]', 'bgtfw_menu_items_main', admin_url( 'customize.php' ) ),
+					'text'  => __( 'Customize Footer', 'boldgrid-inspirations' ),
+					'url'   => add_query_arg( 'autofocus[section]', 'boldgrid_footer_panel', admin_url( 'customize.php' ) ),
 					'class' => 'button-secondary complete-on-click',
 				),
 			),
@@ -173,13 +198,13 @@ return array(
 			'links'           => array(
 				array(
 					'text' => __( 'Learn More', 'boldgrid-inspirations' ),
-					'url'  => 'https://www.boldgrid.com/support/boldgrid-crio-supertheme-product-guide/customizing-your-new-crio-website/',
+					'url'  => 'https://www.boldgrid.com/support/boldgrid-crio-supertheme-product-guide/custom-header-templates/',
 				),
 			),
 			'buttons'         => array(
 				array(
-					'text'  => __( 'Customize Main Menu', 'boldgrid-inspirations' ),
-					'url'   => add_query_arg( 'autofocus[panel]', 'bgtfw_menu_items_main', admin_url( 'customize.php' ) ),
+					'text'  => __( 'Edit Custom Headers & Footers', 'boldgrid-inspirations' ),
+					'url'   => admin_url( 'edit.php?post_type=crio_page_header' ),
 					'class' => 'button-secondary complete-on-click',
 				),
 			),
@@ -196,13 +221,36 @@ return array(
 			'links'         => array(
 				array(
 					'text' => __( 'Learn More', 'boldgrid-inspirations' ),
-					'url'  => 'https://www.boldgrid.com/support/boldgrid-crio-supertheme-product-guide/customizing-your-new-crio-website/',
+					'url'  => 'https://www.boldgrid.com/support/boldgrid-crio-supertheme-product-guide/working-with-your-site-title-logo-and-tagline-in-boldgrid-crio/',
 				),
 			),
 			'buttons'       => array(
 				array(
 					'text'  => __( 'Edit Site Title and Tagline', 'boldgrid-inspirations' ),
 					'url'   => admin_url( 'options-general.php' ),
+					'class' => 'button-secondary complete-on-click',
+				),
+			),
+		),
+		array(
+			'id'            => 'logo',
+			'title'         => __( 'Choose a Logo', 'boldgrid-inspirations' ),
+			'description'   => __(
+				'Here, you can upload a logo.',
+				'boldgrid-inspirations'
+			),
+			'card_id'       => 'general',
+			'task_complete' => false,
+			'links'         => array(
+				array(
+					'text' => __( 'Learn More', 'boldgrid-inspirations' ),
+					'url'  => 'https://www.boldgrid.com/support/boldgrid-crio-supertheme-product-guide/customizing-your-new-crio-website/',
+				),
+			),
+			'buttons'       => array(
+				array(
+					'text'  => __( 'Upload Logo', 'boldgrid-inspirations' ),
+					'url'   => add_query_arg( 'autofocus[control]', 'custom_logo', admin_url( 'customize.php' ) ),
 					'class' => 'button-secondary complete-on-click',
 				),
 			),
@@ -219,13 +267,69 @@ return array(
 			'links'         => array(
 				array(
 					'text' => __( 'Learn More', 'boldgrid-inspirations' ),
-					'url'  => 'https://www.boldgrid.com/support/boldgrid-crio-supertheme-product-guide/customizing-your-new-crio-website/',
+					'url'  => 'https://www.boldgrid.com/support/boldgrid-crio-supertheme-product-guide/working-with-menus-in-boldgrid-crio/',
 				),
 			),
 			'buttons'       => array(
 				array(
 					'text'  => __( 'Edit Menu Items', 'boldgrid-inspirations' ),
 					'url'   => admin_url( 'nav-menus.php' ),
+					'class' => 'button-secondary complete-on-click',
+				),
+			),
+		),
+		array(
+			'id'              => 'sprout_invoices',
+			'title'           => __( 'Sprout Invoices', 'boldgrid-inspirations' ),
+			'description'     => __(
+				'With Sprout Invoices, you can create beautiful estimates and invoices for your clients in minutes, and get paid easily.',
+				'boldgrid-inspirations'
+			),
+			'card_id'         => 'general',
+			'task_complete'   => false,
+			'active_callback' => 'has_installed_invoice',
+			'links'           => array(
+				array(
+					'text' => __( 'Getting Started with Sprout Invoices', 'boldgrid-inspirations' ),
+					'url'  => 'https://docs.sproutinvoices.com/article/5-getting-started-sprout-invoices',
+				),
+				array(
+					'text' => __( 'Sprout Invoices + weForms Integration', 'boldgrid-inspirations' ),
+					'url'  => 'https://docs.sproutinvoices.com/article/263-weforms-integration',
+				),
+			),
+			'buttons'         => array(
+				array(
+					'text'  => __( 'Get Started', 'boldgrid-inspirations' ),
+					'url'   => admin_url( 'admin.php?page=sprout-invoices' ),
+					'class' => 'button-secondary complete-on-click',
+				),
+			),
+		),
+		array(
+			'id'              => 'w3tc',
+			'title'           => __( 'W3 Total Cache', 'boldgrid-inspirations' ),
+			'description'     => __(
+				'W3 Total Cache speeds up your WordPress website by reducing its download time, which makes your page load extremely fast.',
+				'boldgrid-inspirations'
+			),
+			'card_id'         => 'general',
+			'task_complete'   => false,
+			'active_callback' => 'has_installed_cache',
+			'links'           => array(
+				array(
+					'text' => __( 'W3 Total Cache Tutorials', 'boldgrid-inspirations' ),
+					'url'  => 'https://www.boldgrid.com/support/w3-total-cache/',
+				),
+				array(
+					'text' => __( 'How to configure W3 Total Cache', 'boldgrid-inspirations' ),
+					'url'  => 'https://www.boldgrid.com/support/w3-total-cache/configuring-w3-total-cache-for-wordpress-with-shared-hosting/',
+				),
+			),
+			'buttons'         => array(
+				array(
+					'text'  => __( 'Get Started', 'boldgrid-inspirations' ),
+					'url'   => admin_url( 'admin.php?page=w3tc_dashboard' ),
 					'class' => 'button-secondary complete-on-click',
 				),
 			),
@@ -260,7 +364,7 @@ return array(
 		array(
 			'id'          => 'general',
 			'title'       => __( 'General Site Settings', 'boldgrid-inspirations' ),
-			'description' => __( 'These tasks are general settings that are configured independantly of your theme or content.', 'boldgrid-inspirations' ),
+			'description' => __( 'These tasks are general settings that are configured independently of your theme or content.', 'boldgrid-inspirations' ),
 			'colors'      => array( '#aa0073', '#aa0073' ),
 			'icon'        => 'dashicons dashicons-admin-generic',
 		),
@@ -324,7 +428,14 @@ return array(
 			'buttons'     => array(
 				array(
 					'text'   => __( 'Learn More', 'boldgrid-inspirations' ),
-					'url'    => 'https://www.boldgrid.com/central/account/help/premium/',
+					'url'    => ( function() {
+						if ( ! class_exists( '\Boldgrid\Library\Library\Menu\Reseller' ) ) {
+							return 'https://www.boldgrid.com/central';
+						}
+						$reseller = new \Boldgrid\Library\Library\Menu\Reseller();
+						error_log( json_encode( $reseller->getData() ) );
+						return method_exists( $reseller, 'getAttribute' ) ? $reseller->getAttribute( 'reseller_amp_url' ) : 'https://www.boldgrid.com/central';
+					} )(),
 					'class'  => 'button-secondary',
 					'target' => '_blank',
 				),
