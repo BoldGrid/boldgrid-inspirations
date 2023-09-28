@@ -192,4 +192,43 @@ class Boldgrid_Inspirations_Onboarding_Tasks {
 	public function has_custom_headers( $install_options ) {
 		return isset( $install_options['theme_has_cph'] ) && true === $install_options['theme_has_cph'] ? true : false;
 	}
+
+	/**
+	 * Has Installed Invoice
+	 *
+	 * @since SINCEVERSION
+	 *
+	 * @param array $install_options The install options.
+	 *
+	 * @return boolean True if the theme has installed Sprout Invoices, false otherwise.
+	 */
+	public function has_installed_invoice( $install_options ) {
+		return isset( $install_options['install_invoice'] ) && true === $install_options['install_invoice'] ? true : false;
+	}
+
+	/**
+	 * Has Installed W3TC
+	 *
+	 * @since SINCEVERSION
+	 *
+	 * @param array $install_options The install options.
+	 *
+	 * @return boolean True if the theme has installed W3TC, false otherwise.
+	 */
+	public function has_installed_cache( $install_options ) {
+		return isset( $install_options['install_cache'] ) && true === $install_options['install_cache'] ? true : false;
+	}
+
+	/**
+	 * Has Installed Blog
+	 *
+	 * @since SINCEVERSION
+	 *
+	 * @param array $install_options The install options.
+	 *
+	 * @return boolean True if the theme has installed a blog, false otherwise.
+	 */
+	public function has_installed_blog( $install_options ) {
+		return isset( $install_options['install_blog'] ) && true === $install_options['install_blog'] ? true : false;
+	}
 }
