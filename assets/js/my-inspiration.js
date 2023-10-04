@@ -2,15 +2,15 @@
 jQuery(document).ready(function($) {
 	var updateTopbarProgress = ( completedDecimal ) => {
 		var formattedProgress = Math.round( completedDecimal * 100 ) + '%',
-			$progressAnchor    = $( '#wp-admin-bar-inspirations-onboarding-progress a' );
+			$progressSpan     = $( '#toplevel_page_boldgrid-inspirations .bginsp-progress' );
 
-		$progressAnchor.attr( 'title', formattedProgress )
-			.find( 'span' ).html( formattedProgress );
+		console.log( { $progressSpan } );
+		$progressSpan.html( formattedProgress );
 
 		if ( '100%' === formattedProgress ) {
-			$( '#wp-admin-bar-inspirations-onboarding-progress' ).addClass( 'bginsp-progress-complete' );
+			$progressSpan.addClass( 'complete' );
 		} else {
-			$( '#wp-admin-bar-inspirations-onboarding-progress' ).removeClass( 'bginsp-progress-complete' );
+			$progressSpan.removeClass( 'complete' );
 		}
 
 	};

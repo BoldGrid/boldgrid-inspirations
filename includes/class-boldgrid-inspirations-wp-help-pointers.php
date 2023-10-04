@@ -110,6 +110,26 @@ class Boldgrid_WP_Help_Pointers {
 					'align' => 'middle'
 				)
 			),
+			// Onboarding Progress
+			array(
+				// unique id for this pointer
+				'id'       => 'boldgrid_inspirations_onboarding_progress',
+				// this is the page hook we want our pointer to show on
+				'screen'   => 'admin_page_my-inspiration',
+				// the css selector for the pointer to be tied to, best to use ID's
+				'target'   => '#toplevel_page_boldgrid-inspirations',
+				'title'    => esc_html__( 'BoldGrid Inspirations Progress', 'boldgrid-inspirations' ),
+				// translators: 1 opening em tag, 2 closing em tag, 3 opening strong tag, 4 closing strong tag.
+				'content'  => __(
+					'You\'re progress throughought the BoldGrid Inspirations process is displayed here. You can also click on "Inspirations" at any time to return to the checklist.',
+					'boldgrid-inspirations'
+				),
+				'position' => array(
+					// top, bottom, left, right
+					'edge'  => 'left',
+					'align' => 'middle',
+				),
+			),
 			// Dashboard >> Media >> Library >> Search
 			array (
 				'id'       => 'boldgrid_media_library_image_search_internal_only',
@@ -312,6 +332,7 @@ class Boldgrid_WP_Help_Pointers {
 		 * Loop through each of our pointers.
 		 * If it is assigned to the current screen->id, then add it to $this->pointers
 		 */
+		error_log( json_encode( $this->screen_id ) );
 		foreach ( $this->my_pointers as $ptr ) {
 			if ( $ptr['screen'] == $this->screen_id ) {
 				$pointers[$ptr['id']] = array (

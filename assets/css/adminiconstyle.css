@@ -88,11 +88,11 @@
 	background-position: -1px 5px;
 }
 
-#wp-admin-bar-inspirations-onboarding-progress.bginsp-progress-complete {
+#toplevel_page_boldgrid-inspirations span.bginsp-progress.complete {
 	display: none;
 }
 
-#wp-admin-bar-inspirations-onboarding-progress span.bginsp-progress {
+#toplevel_page_boldgrid-inspirations span.bginsp-progress {
     background: green;
     padding: 2px 4px;
     border-radius: 35%;

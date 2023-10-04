@@ -319,13 +319,6 @@ class Boldgrid_Inspirations {
 			), 10, 2
 		);
 
-		// Add Onboarding Progress Bar to Admin Bar.
-		add_action(
-			'admin_bar_menu',
-			array( $this, 'add_onboarding_progress' ),
-			500
-		);
-
 		add_action(
 			'boldgrid_inspirations_deploy_complete',
 			array( $this, 'create_onboarding_tasks' )
@@ -350,8 +343,8 @@ class Boldgrid_Inspirations {
 	 *
 	 * @since SINCEVERSION
 	 */
-	public function add_onboarding_progress( $admin_bar ) {
-		$config   = $this->get_configs();
+	public function add_onboarding_progress() {
+		$config   = Boldgrid_Inspirations_Config::get_format_configs();
 		$progress = get_option( $config['onboarding_progress_option'], false );
 
 		// Verify user is logged in.
@@ -368,27 +361,7 @@ class Boldgrid_Inspirations {
 
 		$class = '';
 
-		if ( '100%' === $formatted_progress ) {
-			$class = 'bginsp-progress-complete';
-		}
-
-		$admin_bar->add_menu(
-			array(
-				'id'     => 'inspirations-onboarding-progress',
-				'parent' => null,
-				'group'  => null,
-				'title'  => sprintf(
-					'BoldGrid Inspirations <span class="bginsp-progress">%1$s</span>',
-					esc_html( $formatted_progress )
-				),
-				'href'   => admin_url( 'admin.php?page=boldgrid-inspirations' ),
-				'meta'   => array(
-					'title' => $formatted_progress,
-					'class' => $class,
-				),
-			)
-		);
-
+		return $formatted_progress;
 	}
 
 	/**
