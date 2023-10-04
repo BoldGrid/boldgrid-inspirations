@@ -204,9 +204,9 @@ class Task {
 		$markup .= '<ul>';
 
 		foreach ( $this->links as $link ) {
-			$markup .= '<li>';
-			$markup .= '<a href="' . esc_url( $link['url'] ) . '" target="_blank" rel="noopener noreferrer">' . esc_html( $link['text'] ) . '</a>';
-			$markup .= '</li>';
+			$markup .= '<li>
+				<a href="' . esc_url( $link['url'] ) . '" target="_blank" rel="noopener noreferrer">' . 
+				esc_html( $link['text'] ) . ' </a></li>';
 		}
 
 		$markup .= '</ul>';
@@ -234,8 +234,10 @@ class Task {
 			$markup .= '<li>';
 			$markup .= '<a href="' . esc_url( $button['url'] ) . '" ';
 			$markup .= 'class="button ' . esc_attr( isset( $button['class'] ) ? $button['class'] : '' ) . '" ';
-			$markup .= 'target="' . esc_attr( isset( $button['target'] ) ? $button['target'] : '_blank' ) . '">';
-			$markup .= esc_html( $button['text'] ) . '</a>';
+			$markup .= 'target="' . esc_attr( isset( $button['target'] ) ? $button['target'] : '_self' ) . '">';
+			$markup .= esc_html( $button['text'] );
+			$markup .= isset( $button['target'] ) && '_blank' === $button['target'] ? ' <span class="dashicons dashicons-external"></span>' : '';
+			$markup .= '</a>';
 			$markup .= '</li>';
 		}
 
