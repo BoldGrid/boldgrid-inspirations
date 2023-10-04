@@ -24,7 +24,7 @@ class Boldgrid_Inspirations_My_Inspiration {
 	/**
 	 * Configs
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 *
 	 * @var array
 	 */
@@ -33,7 +33,7 @@ class Boldgrid_Inspirations_My_Inspiration {
 	/**
 	 * Constructor.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 *
 	 * @param array $configs The configs.
 	 */
@@ -134,7 +134,7 @@ class Boldgrid_Inspirations_My_Inspiration {
 	/**
 	 * Render the header.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 *
 	 * @return string The rendered HTML.
 	 */
@@ -184,7 +184,7 @@ class Boldgrid_Inspirations_My_Inspiration {
 	/**
 	 * Render the cards.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 */
 	public function render_onboarding_cards( $onboarding ) {
 		$cards_data = $onboarding->get_cards_data();
@@ -210,7 +210,7 @@ class Boldgrid_Inspirations_My_Inspiration {
 	/**
 	 * Render the support card.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 */
 	public function render_support_card( $onboarding ) {
 		$support_tasks_data = $onboarding->get_support_tasks_data();

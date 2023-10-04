@@ -15,13 +15,13 @@
  * the onboarding process. This class should only run once per
  * deployment, and only run when the deployment process is completed.
  *
- * @since SINCEVERSION
+ * @since 2.8.0
  */
 class Boldgrid_Inspirations_Onboarding_Tasks {
 	/**
 	 * The onboarding tasks option name.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 *
 	 * @var string
 	 */
@@ -30,7 +30,7 @@ class Boldgrid_Inspirations_Onboarding_Tasks {
 	/**
 	 * Inspirations Configs
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 *
 	 * @var array
 	 */
@@ -39,7 +39,7 @@ class Boldgrid_Inspirations_Onboarding_Tasks {
 	/**
 	 * Constructor.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 */
 
 	public function __construct( $configs ) {
@@ -50,7 +50,7 @@ class Boldgrid_Inspirations_Onboarding_Tasks {
 	/**
 	 * Create Tasks for the onboarding process.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 *
 	 * @param array $install_options The install options.
 	 */
@@ -115,7 +115,7 @@ class Boldgrid_Inspirations_Onboarding_Tasks {
 	/**
 	 * Get Cards Data
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 *
 	 * @return array An array of cards and their tasks.
 	 */
@@ -138,7 +138,7 @@ class Boldgrid_Inspirations_Onboarding_Tasks {
 	/**
 	 * Get Tasks for card
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 *
 	 * @param string $card_id The card ID.
 	 *
@@ -170,7 +170,7 @@ class Boldgrid_Inspirations_Onboarding_Tasks {
 	/**
 	 * Has Legacy Headers
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 *
 	 * @param array $install_options
 	 *
@@ -186,7 +186,7 @@ class Boldgrid_Inspirations_Onboarding_Tasks {
 	/**
 	 * Has Custom Headers
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 *
 	 * @param array $install_options
 	 *
@@ -203,7 +203,7 @@ class Boldgrid_Inspirations_Onboarding_Tasks {
 	/**
 	 * Has Installed Invoice
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 *
 	 * @param array $install_options The install options.
 	 *
@@ -216,7 +216,7 @@ class Boldgrid_Inspirations_Onboarding_Tasks {
 	/**
 	 * Has Installed W3TC
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 *
 	 * @param array $install_options The install options.
 	 *
@@ -229,7 +229,7 @@ class Boldgrid_Inspirations_Onboarding_Tasks {
 	/**
 	 * Has Installed Blog
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 *
 	 * @param array $install_options The install options.
 	 *

@@ -13,13 +13,13 @@ namespace Boldgrid\Inspirations\Onboarding;
 /**
  * Onboarding Task class.
  *
- * @since SINCEVERSION
+ * @since 2.8.0
  */
 class Task {
 	/**
 	 * The task ID.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 *
 	 * @var string
 	 */
@@ -28,7 +28,7 @@ class Task {
 	/**
 	 * The task title.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 *
 	 * @var string
 	 */
@@ -37,7 +37,7 @@ class Task {
 	/**
 	 * The task description.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 *
 	 * @var string
 	 */
@@ -46,7 +46,7 @@ class Task {
 	/**
 	 * The task card ID.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 *
 	 * @var string
 	 */
@@ -55,7 +55,7 @@ class Task {
 	/**
 	 * The task links.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 *
 	 * @var array
 	 */
@@ -64,7 +64,7 @@ class Task {
 	/**
 	 * The task buttons.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 *
 	 * @var array
 	 */
@@ -73,7 +73,7 @@ class Task {
 	/**
 	 * Task Complete
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 *
 	 * @var bool
 	 */
@@ -82,7 +82,7 @@ class Task {
 	/**
 	 * Constructor.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 *
 	 * @param string $id            The task ID.
 	 * @param string $title         The task title.
@@ -106,7 +106,7 @@ class Task {
 	/**
 	 * Render
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 *
 	 * @return string The rendered task markup.
 	 */
@@ -131,7 +131,7 @@ class Task {
 	/**
 	 * Render the task checkbox.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 *
 	 * @return string The rendered task checkbox markup.
 	 */
@@ -150,7 +150,7 @@ class Task {
 	/**
 	 * Render the task icon.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 *
 	 * @return string The rendered task icon markup.
 	 */
@@ -169,7 +169,7 @@ class Task {
 	/**
 	 * Render the task title.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 *
 	 * @return string The rendered task title markup.
 	 */
@@ -180,7 +180,7 @@ class Task {
 	/**
 	 * Render the task description.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 *
 	 * @return string The rendered task description markup.
 	 */
@@ -191,7 +191,7 @@ class Task {
 	/**
 	 * Render the task links.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 *
 	 * @return string The rendered task links markup.
 	 */
@@ -218,7 +218,7 @@ class Task {
 	/**
 	 * Render the task buttons.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 *
 	 * @return string The rendered task buttons markup.
 	 */

@@ -397,7 +397,7 @@ class Boldgrid_Inspirations_Deploy {
 	/**
 	 * Has Custom Page Headers
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 * @access public
 	 * @var bool
 	 */

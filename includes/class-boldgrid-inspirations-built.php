@@ -672,7 +672,7 @@ class Boldgrid_Inspirations_Built {
 	/**
 	 * Add Onboarding Progress Bar to Admin Bar.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 */
 	public function add_onboarding_progress() {
 		$config   = Boldgrid_Inspirations_Config::get_format_configs();

@@ -13,13 +13,13 @@ namespace Boldgrid\Inspirations\Onboarding;
 /**
  * Onboarding Task class.
  *
- * @since SINCEVERSION
+ * @since 2.8.0
  */
 class Task_Card {
 	/**
 	 * The card ID.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 *
 	 * @var string
 	 */
@@ -28,7 +28,7 @@ class Task_Card {
 	/**
 	 * The card title.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 *
 	 * @var string
 	 */
@@ -37,7 +37,7 @@ class Task_Card {
 	/**
 	 * The card description.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 *
 	 * @var string
 	 */
@@ -46,7 +46,7 @@ class Task_Card {
 	/**
 	 * The card color.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 *
 	 * @var string
 	 */
@@ -55,7 +55,7 @@ class Task_Card {
 	/**
 	 * The card icon.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 *
 	 * @var string
 	 */
@@ -64,7 +64,7 @@ class Task_Card {
 	/**
 	 * The card tasks.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 *
 	 * @var array
 	 */
@@ -73,7 +73,7 @@ class Task_Card {
 	/**
 	 * Constructor.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 *
 	 * @param string $id          The card ID.
 	 * @param string $title       The card title.
@@ -94,7 +94,7 @@ class Task_Card {
 	/**
 	 * Render
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 *
 	 * @return string The rendered HTML.
 	 */

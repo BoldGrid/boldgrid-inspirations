@@ -15,13 +15,13 @@
  * the onboarding process. Additionally, this class is responsible
  * updating the status of tasks as they are completed.
  *
- * @since SINCEVERSION
+ * @since 2.8.0
  */
 class Boldgrid_Inspirations_Onboarding_Progress {
 	/**
 	 * The onboarding tasks option name.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 *
 	 * @var string
 	 */
@@ -30,7 +30,7 @@ class Boldgrid_Inspirations_Onboarding_Progress {
 	/**
 	 * The onboarding progress option name.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 *
 	 * @var string
 	 */
@@ -39,7 +39,7 @@ class Boldgrid_Inspirations_Onboarding_Progress {
 	/**
 	 * Inspirations Configs
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 *
 	 * @var array
 	 */
@@ -48,7 +48,7 @@ class Boldgrid_Inspirations_Onboarding_Progress {
 	/**
 	 * Constructor.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 */
 	public function __construct( $configs ) {
 		$this->configs              = $configs;
@@ -59,7 +59,7 @@ class Boldgrid_Inspirations_Onboarding_Progress {
 	/**
 	 * Add Admin Ajax hooks.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 */
 	public function add_ajax_hooks() {
 		add_action( 'wp_ajax_boldgrid_inspirations_update_task', array( $this, 'ajax_update_task' ) );
@@ -68,7 +68,7 @@ class Boldgrid_Inspirations_Onboarding_Progress {
 	/**
 	 * Get Task.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 *
 	 * @param string $task_id The task ID.
 	 *
@@ -93,7 +93,7 @@ class Boldgrid_Inspirations_Onboarding_Progress {
 	/**
 	 * Update Task.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 *
 	 * @param array $task The task object.
 	 */
@@ -118,7 +118,7 @@ class Boldgrid_Inspirations_Onboarding_Progress {
 	/**
 	 * Update Percent Complete.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 */
 	public function update_percent_complete() {
 		$tasks = get_option( $this->tasks_option_name );
@@ -146,7 +146,7 @@ class Boldgrid_Inspirations_Onboarding_Progress {
 	/**
 	 * Ajax callback to update the status of a task.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 */
 	public function ajax_update_task() {
 		if ( ! isset( $_POST['nonce'] ) ) {
@@ -183,7 +183,7 @@ class Boldgrid_Inspirations_Onboarding_Progress {
 	/**
 	 * Skip all tasks.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 */
 	public function skip_all_tasks() {
 		$tasks = get_option( $this->tasks_option_name );
