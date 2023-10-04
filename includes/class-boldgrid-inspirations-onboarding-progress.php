@@ -138,9 +138,10 @@ class Boldgrid_Inspirations_Onboarding_Progress {
 
 		$percent_complete = ( $total > 0 ) ? $complete / $total : 0;
 
-		do_action( 'boldgrid_feedback_add', 'onboarding_task_completed', $percent_complete, true );
-
-		update_option( $this->progress_option_name, $percent_complete );
+		if ( get_option( $this->progress_option_name ) !== $percent_complete ) {
+			do_action( 'boldgrid_feedback_add', 'onboarding_task_completed', $percent_complete, true );
+			update_option( $this->progress_option_name, $percent_complete );
+		}
 	}
 
 	/**

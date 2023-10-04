@@ -332,10 +332,15 @@ class Boldgrid_Inspirations {
 	 *
 	 * @param array $install_options
 	 */
-	public function create_onboarding_tasks( $install_options ) {
+	public function create_onboarding_tasks( $install_options, $config ) {
 		require_once BOLDGRID_BASE_DIR . '/includes/class-boldgrid-inspirations-onboarding-tasks.php';
-		$onboarding_tasks = new Boldgrid_Inspirations_Onboarding_Tasks( $this->get_configs() );
+		require_once BOLDGRID_BASE_DIR . '/includes/class-boldgrid-inspirations-onboarding-progress.php';
+
+		$onboarding_tasks = new Boldgrid_Inspirations_Onboarding_Tasks( $config );
 		$onboarding_tasks->create_tasks( $install_options );
+
+		$progress = new Boldgrid_Inspirations_Onboarding_Progress( $config );
+		$progress->update_percent_complete();
 	}
 
 	/**
@@ -350,6 +355,15 @@ class Boldgrid_Inspirations {
 		// Verify user is logged in.
 		if ( ! is_user_logged_in() || ! current_user_can( 'manage_options' ) ) {
 			return;
+		}
+
+		if ( false === $progress &&
+			empty( get_option( $config['onboarding_tasks_option'] ) ) &&
+			! empty( get_option( 'boldgrid_install_options' ) ) ) {
+
+			$this->create_onboarding_tasks( get_option( 'boldgrid_install_options' ), $config );
+
+			$progress = get_option( $config['onboarding_progress_option'], false );
 		}
 
 		// Verify that there is a valid progress to display.

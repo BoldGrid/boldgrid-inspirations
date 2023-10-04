@@ -255,15 +255,7 @@ class Boldgrid_Inspirations_My_Inspiration {
 		require_once BOLDGRID_BASE_DIR . '/includes/onboarding/class-task-card.php';
 		require_once BOLDGRID_BASE_DIR . '/includes/onboarding/class-task.php';
 
-		$onboarding      = new Boldgrid_Inspirations_Onboarding_Tasks( $this->configs );
-		$install_options = get_option( 'boldgrid_install_options' );
-
-		if (
-			empty( get_option( $this->configs['onboarding_tasks_option'] ) ) &&
-			! empty( $install_options )
-			) {
-			$onboarding->create_tasks( $install_options );
-		}
+		$onboarding = new Boldgrid_Inspirations_Onboarding_Tasks( $this->configs );
 
 		$this->render_header();
 		$this->render_onboarding_cards( $onboarding );
