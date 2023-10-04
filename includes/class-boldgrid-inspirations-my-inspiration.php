@@ -148,11 +148,11 @@ class Boldgrid_Inspirations_My_Inspiration {
 		$instructions       = __(
 			'Congratulations on your new website! Sometimes it can be overwhelming deciding what to do next, so we\'ve prepared a list of tasks you can do to get the most out of Crio
 			and Post and Page Builder. Some of them have already been completed for you! If you\'ve already finished a task, or you wish to skip it, you can mark it complete by
-			clicking on the checkbox to the left of the task.',
+			clicking on the checkbox to the left of the task. Additionally, if you wish to skip all the tasks and mark them all as complete, you can click the button below.',
 			'boldgrid-inspirations'
 		);
 		$completion         = __(
-			'You\'ve completed all of the tasks! If you\'d like to see other things you can do, you can click the "Get More Help" button below.',
+			'You\'ve completed all of the tasks! If you\'d like to see other things you can do, you can view the “Get More Help” section below.',
 			'boldgrid-inspirations'
 		);
 
@@ -163,7 +163,9 @@ class Boldgrid_Inspirations_My_Inspiration {
 				</div>
 				<div class="my-inspirations-title">
 					<h1>BoldGrid Inspirations</h1>
-					<p class="instructions' . ( $complete ? ' hidden' : '' ) . '">' . esc_html( $instructions ) . '</p>
+					<p class="instructions' . ( $complete ? ' hidden' : '' ) . '">' . esc_html( $instructions ) . '
+						<a class="button button-secondary skip-all-tasks">' . esc_html__( 'Skip All Tasks', 'boldgrid-inspirations' ) . '</a>
+					</p>
 					<p class="completion' . ( $complete ? '' : ' hidden' ) . '">' . esc_html( $completion ) . '</p>
 				</div>
 				<div class="my-inspirations-progress">

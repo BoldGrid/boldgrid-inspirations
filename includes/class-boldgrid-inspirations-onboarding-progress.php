@@ -138,6 +138,8 @@ class Boldgrid_Inspirations_Onboarding_Progress {
 
 		$percent_complete = ( $total > 0 ) ? $complete / $total : 0;
 
+		do_action( 'boldgrid_feedback_add', 'onboarding_task_completed', $percent_complete, true );
+
 		update_option( $this->progress_option_name, $percent_complete );
 	}
 
@@ -160,6 +162,11 @@ class Boldgrid_Inspirations_Onboarding_Progress {
 		}
 
 		$task_id = isset( $_POST['task_id'] ) ? sanitize_text_field( wp_unslash( $_POST['task_id'] ) ) : '';
+
+		if ( 'skip_all_tasks' === $task_id ) {
+			$this->skip_all_tasks();
+		}
+
 		$task    = $this->get_task( $task_id );
 
 		if ( ! $task ) {
@@ -169,6 +176,32 @@ class Boldgrid_Inspirations_Onboarding_Progress {
 		$task['task_complete'] = isset( $_POST['task_status'] ) ? (bool) sanitize_text_field( wp_unslash( $_POST['task_status'] ) ) : ! $task['task_complete'];
 
 		$this->update_task( $task );
+
+		wp_send_json_success();
+	}
+
+	/**
+	 * Skip all tasks.
+	 *
+	 * @since SINCEVERSION
+	 */
+	public function skip_all_tasks() {
+		$tasks = get_option( $this->tasks_option_name );
+
+		if ( ! is_array( $tasks ) ) {
+			return;
+		}
+
+		foreach ( $tasks as $key => $task ) {
+			$task['task_complete'] = true;
+			$tasks[ $key ]         = $task;
+		}
+
+		update_option( $this->tasks_option_name, $tasks );
+
+		$this->update_percent_complete();
+
+		do_action( 'boldgrid_feedback_add', 'onboarding_skipped_all_tasks', true, true );
 
 		wp_send_json_success();
 	}

@@ -332,7 +332,6 @@ class Boldgrid_WP_Help_Pointers {
 		 * Loop through each of our pointers.
 		 * If it is assigned to the current screen->id, then add it to $this->pointers
 		 */
-		error_log( json_encode( $this->screen_id ) );
 		foreach ( $this->my_pointers as $ptr ) {
 			if ( $ptr['screen'] == $this->screen_id ) {
 				$pointers[$ptr['id']] = array (

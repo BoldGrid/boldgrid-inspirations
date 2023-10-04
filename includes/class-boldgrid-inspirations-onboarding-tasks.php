@@ -155,7 +155,7 @@ class Boldgrid_Inspirations_Onboarding_Tasks {
 
 		foreach ( $active_tasks as $active_task ) {
 			$task = $this->get_task( $active_task['id'], $active_task['task_complete'] );
-			if ( $task['card_id'] === $card_id ) {
+			if ( ! empty( $task ) && $task['card_id'] === $card_id ) {
 				$tasks_for_card[] = $task;
 			}
 		}

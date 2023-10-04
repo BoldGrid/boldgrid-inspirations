@@ -706,7 +706,6 @@ class Boldgrid_Inspirations_Built {
 	 */
 	public function add_top_menu_item( $top_level ) {
 		$formatted_progress = $this->add_onboarding_progress();
-		error_log( '$formatted_progress: ' . $formatted_progress );
 		add_menu_page(
 			'Inspirations',
 			'Inspirations',

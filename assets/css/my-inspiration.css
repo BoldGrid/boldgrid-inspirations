@@ -49,6 +49,10 @@
     align-items: center;
 }
 
+a.button.skip-all-tasks {
+	margin-top: 10px;
+}
+
 /* My Inspirations Onboarding Cards & Tasks */
 .onboarding-cards {
 	display: flex;
@@ -148,6 +152,13 @@
 	display: none;
 }
 
+.boldgrid-onboarding-task .task-links a::after {
+	content: "\f504";
+	font-family: dashicons;
+	font-size: 13px;
+	margin-left: 0px;
+}
+
 .task-title {
 	display: flex;
 	align-items: center;
@@ -163,6 +174,10 @@
 	grid-column-start: 2;
     justify-self: end;
     float: right;
+}
+
+.task-buttons .button span.dashicons {
+	line-height: 13px;
 }
 
 .boldgrid-onboarding-task .collapse-expand span.dashicons {

@@ -4,7 +4,6 @@ jQuery(document).ready(function($) {
 		var formattedProgress = Math.round( completedDecimal * 100 ) + '%',
 			$progressSpan     = $( '#toplevel_page_boldgrid-inspirations .bginsp-progress' );
 
-		console.log( { $progressSpan } );
 		$progressSpan.html( formattedProgress );
 
 		if ( '100%' === formattedProgress ) {
@@ -43,7 +42,7 @@ jQuery(document).ready(function($) {
 		}
 	};
 
-	var updateTaskStatus = ( $task, isComplete, nonce ) => {
+	var updateTaskStatus = ( taskId, isComplete, nonce ) => {
 		$.ajax( {
 			type: 'post',
 			url: ajaxurl,
@@ -51,7 +50,7 @@ jQuery(document).ready(function($) {
 			data: {
 				action: 'boldgrid_inspirations_update_task',
 				nonce: nonce,
-				task_id: $task.attr( 'id' ),
+				task_id: taskId,
 				task_complete: isComplete
 			}
 		} );
@@ -66,26 +65,26 @@ jQuery(document).ready(function($) {
 			completedDecimal,
 			isComplete;
 
-			console.log( {
-				nonce: $( '.onboarding-nonce' ).data( 'nonce' ),
-			} );
-
 			if ( $target.hasClass( 'button' ) && $task.hasClass( 'complete' ) ) {
 				return;
 			}
 
-			$task.toggleClass( 'complete' );
-
-			isComplete = $task.hasClass( 'complete' );
+			if ( $target.hasClass( 'skip-all-tasks' ) ) {
+				$( '.onboarding-cards .boldgrid-onboarding-task' ).addClass( 'complete' );
+				updateTaskStatus( 'skip_all_tasks', true, nonce );
+			} else {
+				$task.toggleClass( 'complete' );
+				isComplete = $task.hasClass( 'complete' );
+				updateTaskStatus( $task.attr( 'id' ), isComplete, nonce );
+				expandOrCollapse( $task, isComplete );
+			}
 
 			completeTasks    = $( '.boldgrid-onboarding-task.complete' ).length;
 			completedDecimal = completeTasks / totalTasks;
 
 			updateTopbarProgress( completedDecimal );
 			updateProgressBar( completedDecimal );
-			expandOrCollapse( $task, isComplete );
-
-			updateTaskStatus( $task, isComplete, nonce );	
+				
 	};
 
 	var handleClickArrow = ( e ) => {
@@ -99,5 +98,6 @@ jQuery(document).ready(function($) {
 	$( '.boldgrid-onboarding-task .collapse-expand' ).on( 'click', handleClickArrow );
 	$( '.boldgrid-onboarding-task .task-title' ).on( 'click', handleClickArrow );
 	$( '.boldgrid-onboarding-task .task-buttons .button.complete-on-click' ).on( 'click', handleClickCheckbox );
+	$( '.my-inspirations-header .button.skip-all-tasks' ).on( 'click', handleClickCheckbox );
 
 } );
