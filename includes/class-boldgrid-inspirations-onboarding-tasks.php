@@ -177,7 +177,10 @@ class Boldgrid_Inspirations_Onboarding_Tasks {
 	 * @return boolean True if the theme has legacy headers, false otherwise.
 	 */
 	public function has_legacy_headers( $install_options ) {
-		return isset( $install_options['theme_has_cph'] ) && true === $install_options['theme_has_cph'] ? false : true;
+		if ( ! isset( $install_options['theme_has_cph'] ) ) {
+			return false;
+		}
+		return true === $install_options['theme_has_cph'] ? false : true;
 	}
 
 	/**
@@ -190,7 +193,11 @@ class Boldgrid_Inspirations_Onboarding_Tasks {
 	 * @return boolean True if the theme has custom headers, false otherwise.
 	 */
 	public function has_custom_headers( $install_options ) {
-		return isset( $install_options['theme_has_cph'] ) && true === $install_options['theme_has_cph'] ? true : false;
+		if ( ! isset( $install_options['theme_has_cph'] ) ) {
+			return false;
+		}
+
+		return true === $install_options['theme_has_cph'] ? true : false;
 	}
 
 	/**
