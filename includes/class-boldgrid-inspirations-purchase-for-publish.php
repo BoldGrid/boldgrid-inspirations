@@ -995,7 +995,7 @@ class Boldgrid_Inspirations_Purchase_For_Publish extends Boldgrid_Inspirations {
 	/* @formatter:on */
 	public function get_local_publish_cost_data() {
 		// If it's already set, then just return it.
-		if ( isset( $this->local_publish_cost_data ) ) {
+		if ( ! empty( $this->local_publish_cost_data ) ) {
 			return $this->local_publish_cost_data;
 		}
 
@@ -1234,7 +1234,7 @@ class Boldgrid_Inspirations_Purchase_For_Publish extends Boldgrid_Inspirations {
 		}
 
 		// If the data exists, just return it.
-		if ( isset( $this->remote_publish_cost_data ) ) {
+		if ( ! empty( $this->remote_publish_cost_data ) ) {
 			return $this->remote_publish_cost_data;
 		}
 
