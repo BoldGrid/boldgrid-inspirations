@@ -329,7 +329,7 @@ return array(
 			'buttons'         => array(
 				array(
 					'text'  => __( 'Get Started', 'boldgrid-inspirations' ),
-					'url'   => admin_url( 'admin.php?page=w3tc_dashboard' ),
+					'url'   => admin_url( 'admin.php?page=w3tc_setup_guide' ),
 					'class' => 'button-secondary complete-on-click',
 				),
 			),
@@ -433,7 +433,6 @@ return array(
 							return 'https://www.boldgrid.com/central';
 						}
 						$reseller = new \Boldgrid\Library\Library\Menu\Reseller();
-						error_log( json_encode( $reseller->getData() ) );
 						return method_exists( $reseller, 'getAttribute' ) ? $reseller->getAttribute( 'reseller_amp_url' ) : 'https://www.boldgrid.com/central';
 					} )(),
 					'class'  => 'button-secondary',
