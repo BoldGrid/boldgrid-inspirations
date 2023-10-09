@@ -319,6 +319,7 @@ class Boldgrid_Inspirations {
 			), 10, 2
 		);
 
+		// Create Onboarding Tasks when deployment is complete.
 		add_action(
 			'boldgrid_inspirations_deploy_complete',
 			array( $this, 'create_onboarding_tasks' )
@@ -330,9 +331,10 @@ class Boldgrid_Inspirations {
 	 *
 	 * @since 2.8.0
 	 *
-	 * @param array $install_options
+	 * @param array $install_options The install options.
 	 */
 	public function create_onboarding_tasks( $install_options ) {
+		// These are required here to prevent them from being loaded on every page load.
 		require_once BOLDGRID_BASE_DIR . '/includes/class-boldgrid-inspirations-onboarding-tasks.php';
 		require_once BOLDGRID_BASE_DIR . '/includes/class-boldgrid-inspirations-onboarding-progress.php';
 
@@ -343,43 +345,6 @@ class Boldgrid_Inspirations {
 
 		$progress = new Boldgrid_Inspirations_Onboarding_Progress( $config );
 		$progress->update_percent_complete();
-	}
-
-	/**
-	 * Add Onboarding Progress Bar to Admin Bar.
-	 *
-	 * @since 2.8.0
-	 */
-	public function add_onboarding_progress() {
-		$config   = Boldgrid_Inspirations_Config::get_format_configs();
-		$progress = get_option( $config['onboarding_progress_option'], false );
-
-		// Verify user is logged in.
-		if ( ! is_user_logged_in() || ! current_user_can( 'manage_options' ) ) {
-			return;
-		}
-
-		if ( false === $progress &&
-			empty( get_option( $config['onboarding_tasks_option'] ) ) &&
-			! empty( get_option( 'boldgrid_install_options' ) ) ) {
-
-			$this->create_onboarding_tasks( get_option( 'boldgrid_install_options' ) );
-
-			$progress = get_option( $config['onboarding_progress_option'], false );
-		}
-
-		// Verify that there is a valid progress to display.
-		if ( false === $progress ) {
-			return;
-		}
-
-		$progress = round( $progress, 2 );
-
-		$formatted_progress = sprintf( '%.0f%%', (float) $progress * 100 );
-
-		$class = '';
-
-		return $formatted_progress;
 	}
 
 	/**

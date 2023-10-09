@@ -76,7 +76,7 @@ class Boldgrid_Inspirations_Deploy_Api {
 	/**
 	 * Get Build Profile.
 	 *
-	 * @since SINCEVERSION
+	 * @since 2.8.0
 	 *
 	 * @param array $args Array of arguments
 	 *

@@ -397,9 +397,9 @@ class Boldgrid_Inspirations_Deploy {
 	/**
 	 * Has Custom Page Headers
 	 *
-	 * @since 2.8.0
+	 * @since  2.8.0
 	 * @access public
-	 * @var bool
+	 * @var    bool
 	 */
 	public $theme_has_cph = false;
 
@@ -1918,6 +1918,7 @@ class Boldgrid_Inspirations_Deploy {
 		 */
 		$page_set_id = ! empty( $boldgrid_install_options['category_id'] && 36 === $boldgrid_install_options['category_id'] ) ? 34 : 17;
 
+		// I know this seems like a lot of args for a generic build, but the api won't work without them.
 		$build_args = array(
 			'pde'                   => 'false',
 			'sub_cat_id'            => $boldgrid_install_options['subcategory_id'],
@@ -1937,6 +1938,10 @@ class Boldgrid_Inspirations_Deploy {
 		$build_profile = $this->api->get_build_profile( $build_args );
 		$asset_id      = isset( $build_profile['asset_id'] ) ? $build_profile['asset_id'] : null;
 
+		/*
+		 * If there is no asset_id for this theme, delete the option,
+		 * and Inspirations will use the default Crio screenshot
+		 */
 		if ( $asset_id ) {
 			update_option(
 				'boldgrid_site_screenshot',

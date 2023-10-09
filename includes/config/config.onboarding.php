@@ -2,6 +2,14 @@
 // Prevent direct calls.
 require BOLDGRID_BASE_DIR . '/pages/templates/restrict-direct-access.php';
 
+function boldgrid_inspirations_get_premium_url() {
+	if ( ! class_exists( '\Boldgrid\Library\Library\Menu\Reseller' ) ) {
+		return 'https://www.boldgrid.com/central';
+	}
+	$reseller = new \Boldgrid\Library\Library\Menu\Reseller();
+	return method_exists( $reseller, 'getAttribute' ) ? $reseller->getAttribute( 'reseller_amp_url' ) : 'https://www.boldgrid.com/central';
+}
+
 return array(
 	'onboarding_tasks_option'    => 'boldgrid_onboarding_tasks',
 	'onboarding_progress_option' => 'boldgrid_onboarding_progress',
@@ -21,7 +29,7 @@ return array(
 	 *          - text: The text of the button.
 	 *          - url: The URL of the button.
 	 *          - class (optional): String of classes to add to button.
-	 *          - target (optional): The target of the button ( default is '_blank' ).
+	 *          - target (optional): The target of the button ( default is '_self' ).
 	 * - active_callback (optional): The callback function to run to determine if the task is active.
 	 *                               If not provided, the task will always be active.
 	 *
@@ -428,13 +436,7 @@ return array(
 			'buttons'     => array(
 				array(
 					'text'   => __( 'Learn More', 'boldgrid-inspirations' ),
-					'url'    => ( function() {
-						if ( ! class_exists( '\Boldgrid\Library\Library\Menu\Reseller' ) ) {
-							return 'https://www.boldgrid.com/central';
-						}
-						$reseller = new \Boldgrid\Library\Library\Menu\Reseller();
-						return method_exists( $reseller, 'getAttribute' ) ? $reseller->getAttribute( 'reseller_amp_url' ) : 'https://www.boldgrid.com/central';
-					} )(),
+					'url'    => boldgrid_inspirations_get_premium_url(),
 					'class'  => 'button-secondary',
 					'target' => '_blank',
 				),

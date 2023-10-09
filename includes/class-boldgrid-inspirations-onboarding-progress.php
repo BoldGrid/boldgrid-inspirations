@@ -2,10 +2,10 @@
 /**
  * File: boldgrid-inspirations/includes/class-boldgrid-inspirations-onboarding-progress.php
  *
- * @package Boldgrid_Inspirations_Onboarding_Progress
+ * @package   Boldgrid_Inspirations_Onboarding_Progress
  * @copyright BoldGrid.com
- * @version $Id$
- * @author BoldGrid.com <wpb@boldgrid.com>
+ * @version   $Id$
+ * @author    BoldGrid.com <wpb@boldgrid.com>
  */
 
 /**
@@ -168,7 +168,7 @@ class Boldgrid_Inspirations_Onboarding_Progress {
 			$this->skip_all_tasks();
 		}
 
-		$task    = $this->get_task( $task_id );
+		$task = $this->get_task( $task_id );
 
 		if ( ! $task ) {
 			wp_send_json_error( 'invalid or missing task_id' );

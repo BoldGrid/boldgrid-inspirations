@@ -99,6 +99,16 @@ class Boldgrid_Inspirations_Onboarding_Tasks {
 		update_option( $this->configs['onboarding_progress_option'], $complete_tasks / count( $active_tasks ) );
 	}
 
+	/**
+	 * Get Task
+	 *
+	 * @since 2.8.0
+	 *
+	 * @param string  $task_id       The task ID.
+	 * @param boolean $task_complete Whether the task is complete.
+	 *
+	 * @return array The task config array.
+	 */
 	public function get_task( $task_id, $task_complete ) {
 		$available_tasks = $this->configs['available_onboarding_tasks'];
 
@@ -163,6 +173,13 @@ class Boldgrid_Inspirations_Onboarding_Tasks {
 		return $tasks_for_card;
 	}
 
+	/**
+	 * Get Support Tasks Data
+	 *
+	 * @since 2.8.0
+	 *
+	 * @return array An array of support tasks.
+	 */
 	public function get_support_tasks_data() {
 		return $this->configs['available_support_tasks'];
 	}
