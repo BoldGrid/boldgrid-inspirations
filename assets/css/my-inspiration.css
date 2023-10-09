@@ -3,9 +3,9 @@
  */
 .my-inspirations-header {
 	background: #fff;
-    box-shadow: 0 1px 0 #ccd0d4, 0 1px 1px 1px rgba(0,0,0,0.04);
-    min-height: 4em;
-    margin-bottom: 15px;
+	box-shadow: 0 1px 0 #ccd0d4, 0 1px 1px 1px rgba(0,0,0,0.04);
+	min-height: 4em;
+	margin-bottom: 15px;
 	margin-left: -20px;
 }
 
@@ -38,7 +38,7 @@
 	background: 
 		radial-gradient(closest-side, white 79%, transparent 80% 100%),
 		conic-gradient(green var(--percent-complete), #ddd 0 );
-  }
+}
 
 .onboarding-progress-bar span {
 	font-size: 30px;
@@ -46,9 +46,9 @@
 }
 
 .progress {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 a.button.skip-all-tasks {
@@ -56,8 +56,8 @@ a.button.skip-all-tasks {
 }
 
 /*
- * My Inspirations Onboarding Cards & Tasks
- */
+* My Inspirations Onboarding Cards & Tasks
+*/
 .onboarding-cards {
 	display: flex;
 	flex-wrap: wrap;
@@ -67,11 +67,11 @@ a.button.skip-all-tasks {
 
 .boldgrid-onboarding-card {
 	position: relative;
-    width: 440px;
-    border: 1px solid #e5e5e5;
-    box-shadow: 0 1px 1px rgba(0,0,0,.04);
-    background: #fff;
-    box-sizing: border-box;
+	width: 440px;
+	border: 1px solid #e5e5e5;
+	box-shadow: 0 1px 1px rgba(0,0,0,.04);
+	background: #fff;
+	box-sizing: border-box;
 	margin: 10px;
 }
 
@@ -88,7 +88,7 @@ a.button.skip-all-tasks {
 .boldgrid-onboarding-card-title p {
 	font-size: 1.5em;
 	font-weight: 600;
-    margin: 0;
+	margin: 0;
 }
 
 .boldgrid-onboarding-card-description {
@@ -97,21 +97,21 @@ a.button.skip-all-tasks {
 
 .boldgrid-onboarding-card-icon {
 	padding: 20px 0;
-    text-align: center;
-    border-bottom: 1px solid #ddd;
+	text-align: center;
+	border-bottom: 1px solid #ddd;
 }
 
 .boldgrid-onboarding-card-icon span {
 	font-size: 60px;
-    width: 60px;
-    height: 60px;
+	width: 60px;
+	height: 60px;
 	color: var(--card-color);
 }
 
 .boldgrid-onboarding-task {
 	display: grid;
-    grid-gap: 10px;
-    grid-template-columns: 40px 1fr 40px;
+	grid-gap: 10px;
+	grid-template-columns: 40px 1fr 40px;
 	border-bottom: 1px solid #ddd;
 	padding: 5px 0;
 }
@@ -138,12 +138,12 @@ a.button.skip-all-tasks {
 }
 
 .boldgrid-onboarding-task-checkbox span {
-    font-size: 40px;
-    width: 35px;
-    line-height: 30px;
-    height: 35px;
-    color: white;
-    margin-left: -6px;
+	font-size: 40px;
+	width: 35px;
+	line-height: 30px;
+	height: 35px;
+	color: white;
+	margin-left: -6px;
 }
 
 .boldgrid-onboarding-task.collapsed .collapse-expand span.dashicons::before {
@@ -169,15 +169,15 @@ a.button.skip-all-tasks {
 	justify-content: space-between;
 	cursor: pointer;
 	font-size: 1.1em;
-    font-weight: 600;
+	font-weight: 600;
 	padding-top: 6px;
 	margin: 0;
 }
 
 .task-buttons {
 	grid-column-start: 2;
-    justify-self: end;
-    float: right;
+	justify-self: end;
+	float: right;
 }
 
 .task-buttons .button span.dashicons {
@@ -188,7 +188,7 @@ a.button.skip-all-tasks {
 	font-size: 30px;
 	padding: 0 5px;
 	vertical-align: middle;
-    width: 100%;
+	width: 100%;
 }
 
 .boldgrid-onboarding-task:not( .collapsed ) .collapse-expand span.dashicons {
@@ -197,9 +197,9 @@ a.button.skip-all-tasks {
 
 .boldgrid-onboarding-task .collapse-expand {
 	align-self: center;
-    width: 100%;
-    height: 100%;
-    display: flex;
+	width: 100%;
+	height: 100%;
+	display: flex;
 	padding: 5px;
 	cursor: pointer;	
 }
@@ -209,13 +209,13 @@ a.button.skip-all-tasks {
 }
 
 /*
- * My Inspirations Support Cards
- */
+* My Inspirations Support Cards
+*/
 
 .support-cards {
 	background: #fff;
-    box-shadow: 0 1px 0 #ccd0d4, 0 1px 1px 1px rgba(0,0,0,0.04);
-    min-height: 4em;
+	box-shadow: 0 1px 0 #ccd0d4, 0 1px 1px 1px rgba(0,0,0,0.04);
+	min-height: 4em;
 	margin-left: -20px;
 }
 
@@ -261,14 +261,14 @@ a.button.skip-all-tasks {
 
 .boldgrid-support-card-tasks .task-icon .dashicons {
 	font-size: 35px;
-    width: 35px;
-    height: 35px;
-    color: #aaa;
+	width: 35px;
+	height: 35px;
+	color: #aaa;
 }
 
 .boldgrid-support-card-tasks .task-icon .dashicons::before {
 	font-size: 35px;
-    width: 35px;
-    height: 35px;
-    color: #aaa;
+	width: 35px;
+	height: 35px;
+	color: #aaa;
 }

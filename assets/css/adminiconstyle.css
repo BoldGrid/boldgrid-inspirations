@@ -93,9 +93,9 @@
 }
 
 #toplevel_page_boldgrid-inspirations span.bginsp-progress {
-    background: green;
-    padding: 2px 4px;
-    border-radius: 35%;
+	background: green;
+	padding: 2px 4px;
+	border-radius: 35%;
 	color: white;
 	font-weight: 600;
 }
