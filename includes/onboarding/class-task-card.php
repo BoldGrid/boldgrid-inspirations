@@ -108,7 +108,7 @@ class Task_Card {
 				$task_data['card_id'],
 				empty( $task_data['links'] ) ? array() : $task_data['links'],
 				empty( $task_data['buttons'] ) ? array() : $task_data['buttons'],
-				$task_data['task_complete'],
+				$task_data['task_complete']
 			);
 
 			$tasks .= $task->render();

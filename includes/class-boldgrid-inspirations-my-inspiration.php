@@ -234,7 +234,7 @@ class Boldgrid_Inspirations_My_Inspiration {
 				empty( $task_data['links'] ) ? array() : $task_data['links'],
 				empty( $task_data['buttons'] ) ? array() : $task_data['buttons'],
 				null,
-				$task_data['icon'],
+				$task_data['icon']
 			);
 
 			echo wp_kses_post( $task->render() );
