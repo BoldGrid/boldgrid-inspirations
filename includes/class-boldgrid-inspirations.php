@@ -332,9 +332,11 @@ class Boldgrid_Inspirations {
 	 *
 	 * @param array $install_options
 	 */
-	public function create_onboarding_tasks( $install_options, $config ) {
+	public function create_onboarding_tasks( $install_options ) {
 		require_once BOLDGRID_BASE_DIR . '/includes/class-boldgrid-inspirations-onboarding-tasks.php';
 		require_once BOLDGRID_BASE_DIR . '/includes/class-boldgrid-inspirations-onboarding-progress.php';
+
+		$config = Boldgrid_Inspirations_Config::get_format_configs();
 
 		$onboarding_tasks = new Boldgrid_Inspirations_Onboarding_Tasks( $config );
 		$onboarding_tasks->create_tasks( $install_options );
@@ -361,7 +363,7 @@ class Boldgrid_Inspirations {
 			empty( get_option( $config['onboarding_tasks_option'] ) ) &&
 			! empty( get_option( 'boldgrid_install_options' ) ) ) {
 
-			$this->create_onboarding_tasks( get_option( 'boldgrid_install_options' ), $config );
+			$this->create_onboarding_tasks( get_option( 'boldgrid_install_options' ) );
 
 			$progress = get_option( $config['onboarding_progress_option'], false );
 		}
@@ -370,6 +372,8 @@ class Boldgrid_Inspirations {
 		if ( false === $progress ) {
 			return;
 		}
+
+		$progress = round( $progress, 2 );
 
 		$formatted_progress = sprintf( '%.0f%%', (float) $progress * 100 );
 
