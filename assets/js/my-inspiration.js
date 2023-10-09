@@ -1,7 +1,36 @@
 
+/**
+ * File: assets/js/my-inspiration.js
+ * 
+ * This File is loaded on the My Inspirations Page, and
+ * is responsible for dynamic updating of the onboarding progress
+ * 
+ * @since   2.8.0
+ * @package BoldGrid Inspirations
+ * @author  jamesros161
+ */
 jQuery(document).ready(function($) {
+	/**
+	 * Format Progress
+	 * 
+	 * @since 2.8.0
+	 * 
+	 * @param {float} completedDecimal The percentage of tasks completed
+	 * 
+	 * @return {string} The formatted progress
+	 */
+	var formatProgress = ( completedDecimal ) => {
+		return Math.round( completedDecimal * 100 ) + '%';
+	}
+	/**
+	 * Update Topbar Progress
+	 * 
+	 * @since 2.8.0
+	 * 
+	 * @param {float} completedDecimal The percentage of tasks completed
+	 */
 	var updateTopbarProgress = ( completedDecimal ) => {
-		var formattedProgress = Math.round( completedDecimal * 100 ) + '%',
+		var formattedProgress = formatProgress( completedDecimal ),
 			$progressSpan     = $( '#toplevel_page_boldgrid-inspirations .bginsp-progress' );
 
 		$progressSpan.html( formattedProgress );
@@ -14,10 +43,17 @@ jQuery(document).ready(function($) {
 
 	};
 
+	/**
+	 * Update Progress Bar
+	 * 
+	 * @since 2.8.0
+	 *
+	 * @param {float} completedDecimal The percentage of tasks completed
+	 */
 	var updateProgressBar = ( completedDecimal ) => {
 		var $progressBar    = $( '.onboarding-progress-bar' ),
 			$progressText   = $progressBar.find( 'span.percent-complete' ),
-			percentComplete = Math.round( completedDecimal * 100 ) + '%';
+			percentComplete = formatProgress( completedDecimal );
 
 		$progressBar.attr( 'style', '--percent-complete: ' + percentComplete );
 
@@ -32,6 +68,14 @@ jQuery(document).ready(function($) {
 		}
 	};
 
+	/**
+	 * Expand or Collapse Task
+	 * 
+	 * @since 2.8.0
+	 * 
+	 * @param {jQuery} $task       The task element
+	 * @param {boolean} isComplete Whether the task is complete or not
+	 */
 	var expandOrCollapse = ( $task, isComplete ) => {
 		if ( isComplete && ! $task.hasClass( 'collapsed' ) ) {
 			$task.addClass( 'collapsed' );
@@ -42,6 +86,16 @@ jQuery(document).ready(function($) {
 		}
 	};
 
+	/**
+	 * Update Task Status
+	 *  
+	 * @since 2.8.0
+	 *
+	 * @param {string}  taskId     ID of the task
+	 * @param {boolean} isComplete Whether the task is complete or not
+	 * @param {string}  nonce      Nonce for the AJAX request
+	 * @param {jQuery}  $target    Event Target used to redirect the user
+	 */
 	var updateTaskStatus = ( taskId, isComplete, nonce, $target ) => {
 		$.ajax( {
 			type: 'post',
@@ -53,13 +107,20 @@ jQuery(document).ready(function($) {
 				task_id: taskId,
 				task_complete: isComplete
 			}
-		} ).done( function( response ) {
+		} ).done( () => {
 			if ( $target.attr( 'href' ) ) {
 				window.location.href = $target.attr( 'href' );
 			}
 		} );
 	};
 
+	/**
+	 * Handle Click Checkbox
+	 * 
+	 * @since 2.8.0
+	 *
+	 * @param {MouseEvent} e Mouse Click Event
+	 */
 	var handleClickCheckbox = ( e ) => {
 		var $target    = $( e.currentTarget ),
 			$task      = $target.closest( '.boldgrid-onboarding-task' ),
@@ -93,6 +154,13 @@ jQuery(document).ready(function($) {
 				
 	};
 
+	/**
+	 * Handle Click Arrow
+	 *
+	 * @since 2.8.0
+	 *
+	 * @param {MouseEvent} e Mouse Click Event
+	 */
 	var handleClickArrow = ( e ) => {
 		var $target = $( e.currentTarget ),
 			$task   = $target.closest( '.boldgrid-onboarding-task' );
@@ -105,5 +173,4 @@ jQuery(document).ready(function($) {
 	$( '.boldgrid-onboarding-task .task-title' ).on( 'click', handleClickArrow );
 	$( '.boldgrid-onboarding-task .task-buttons .button.complete-on-click' ).on( 'click', handleClickCheckbox );
 	$( '.my-inspirations-header .button.skip-all-tasks' ).on( 'click', handleClickCheckbox );
-
 } );
