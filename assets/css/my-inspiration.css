@@ -1,4 +1,6 @@
-/* My Inspirations Header */
+/* 
+ * My Inspirations Header
+ */
 .my-inspirations-header {
 	background: #fff;
     box-shadow: 0 1px 0 #ccd0d4, 0 1px 1px 1px rgba(0,0,0,0.04);
@@ -53,7 +55,9 @@ a.button.skip-all-tasks {
 	margin-top: 10px;
 }
 
-/* My Inspirations Onboarding Cards & Tasks */
+/*
+ * My Inspirations Onboarding Cards & Tasks
+ */
 .onboarding-cards {
 	display: flex;
 	flex-wrap: wrap;
@@ -204,8 +208,9 @@ a.button.skip-all-tasks {
 	content: "\f347";
 }
 
-/* My Inspirations Support Cards */
-
+/*
+ * My Inspirations Support Cards
+ */
 
 .support-cards {
 	background: #fff;
