@@ -148,8 +148,6 @@ class Boldgrid_Inspirations_Dashboard extends Boldgrid_Inspirations {
 
 		$formatted_progress = sprintf( '%.0f%%', (float) $progress * 100 );
 
-		$class = '';
-
 		return $formatted_progress;
 	}
 

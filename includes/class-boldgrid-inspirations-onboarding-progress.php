@@ -66,6 +66,19 @@ class Boldgrid_Inspirations_Onboarding_Progress {
 	}
 
 	/**
+	 * Get Tasks.
+	 * 
+	 * @since 2.8.0
+	 * 
+	 * @return array The tasks.
+	 */
+	public function get_tasks() {
+		$tasks = get_option( $this->tasks_option_name );
+
+		return is_array( $tasks ) ? $tasks : array();
+	}
+
+	/**
 	 * Get Task.
 	 *
 	 * @since 2.8.0
@@ -75,11 +88,7 @@ class Boldgrid_Inspirations_Onboarding_Progress {
 	 * @return array The task object.
 	 */
 	public function get_task( $task_id ) {
-		$tasks = get_option( $this->tasks_option_name );
-
-		if ( ! is_array( $tasks ) ) {
-			return false;
-		}
+		$tasks = $this->get_tasks();
 
 		foreach ( $tasks as $task ) {
 			if ( $task['id'] === $task_id ) {
@@ -98,11 +107,7 @@ class Boldgrid_Inspirations_Onboarding_Progress {
 	 * @param array $task The task object.
 	 */
 	public function update_task( $task ) {
-		$tasks = get_option( $this->tasks_option_name );
-
-		if ( ! is_array( $tasks ) ) {
-			return;
-		}
+		$tasks = $this->get_tasks();
 
 		foreach ( $tasks as $key => $task_data ) {
 			if ( $task_data['id'] === $task['id'] ) {
@@ -110,9 +115,11 @@ class Boldgrid_Inspirations_Onboarding_Progress {
 			}
 		}
 
-		update_option( $this->tasks_option_name, $tasks );
+		if ( ! empty( $tasks ) ) {
+			update_option( $this->tasks_option_name, $tasks );
 
-		$this->update_percent_complete();
+			$this->update_percent_complete();
+		}
 	}
 
 	/**
@@ -121,14 +128,15 @@ class Boldgrid_Inspirations_Onboarding_Progress {
 	 * @since 2.8.0
 	 */
 	public function update_percent_complete() {
-		$tasks = get_option( $this->tasks_option_name );
-
-		if ( ! is_array( $tasks ) ) {
-			return;
-		}
+		$tasks = $this->get_tasks();
 
 		$complete = 0;
 		$total    = count( $tasks );
+
+		// Prevents a divide by zero if there are no tasks.
+		if ( 0 === $total ) {
+			return;
+		}
 
 		foreach ( $tasks as $task ) {
 			if ( $task['task_complete'] ) {
@@ -187,11 +195,7 @@ class Boldgrid_Inspirations_Onboarding_Progress {
 	 * @since 2.8.0
 	 */
 	public function skip_all_tasks() {
-		$tasks = get_option( $this->tasks_option_name );
-
-		if ( ! is_array( $tasks ) ) {
-			return;
-		}
+		$tasks = $this->get_tasks();
 
 		foreach ( $tasks as $key => $task ) {
 			$task['task_complete'] = true;

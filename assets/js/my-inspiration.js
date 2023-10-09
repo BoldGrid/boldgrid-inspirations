@@ -9,7 +9,7 @@
  * @package BoldGrid Inspirations
  * @author  jamesros161
  */
-jQuery(document).ready(function($) {
+jQuery( document ).ready( function( $ ) {
 	/**
 	 * Format Progress
 	 * 
@@ -22,6 +22,7 @@ jQuery(document).ready(function($) {
 	var formatProgress = ( completedDecimal ) => {
 		return Math.round( completedDecimal * 100 ) + '%';
 	}
+
 	/**
 	 * Update Topbar Progress
 	 * 

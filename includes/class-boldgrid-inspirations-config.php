@@ -80,7 +80,7 @@ class Boldgrid_Inspirations_Config {
 		// Onboarding configs
 		if ( file_exists( $config_dir . '/config.onboarding.php' ) ) {
 			$onboarding_configs = require $config_dir . '/config.onboarding.php';
-			$local_configs = array_merge( $local_configs, $onboarding_configs );
+			$local_configs      = array_merge( $local_configs, $onboarding_configs );
 		}
 
 		// If the user has an api key stored in their database, then set it as the global api_key.
