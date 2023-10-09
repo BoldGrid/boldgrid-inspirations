@@ -670,42 +670,11 @@ class Boldgrid_Inspirations_Built {
 	}
 
 	/**
-	 * Add Onboarding Progress Bar to Admin Bar.
-	 *
-	 * @since 2.8.0
-	 */
-	public function add_onboarding_progress() {
-		$config   = Boldgrid_Inspirations_Config::get_format_configs();
-		$progress = get_option( $config['onboarding_progress_option'], false );
-
-		// Verify user is logged in.
-		if ( ! is_user_logged_in() || ! current_user_can( 'manage_options' ) ) {
-			return;
-		}
-
-		// Verify that there is a valid progress to display.
-		if ( false === $progress ) {
-			return;
-		}
-
-		$formatted_progress = sprintf( '%.0f%%', (float) $progress * 100 );
-
-		$class = '';
-
-		if ( '100%' === $formatted_progress ) {
-			return '';
-		} else {
-			return $formatted_progress;
-		}
-	}
-
-	/**
 	 * Add the top level menui item "Inspirations".
 	 *
 	 * @param unknown $top_level
 	 */
 	public function add_top_menu_item( $top_level ) {
-		$formatted_progress = $this->add_onboarding_progress();
 		add_menu_page(
 			'Inspirations',
 			'Inspirations',
