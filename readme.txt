@@ -35,6 +35,14 @@ The second phase is Customization; tools to transform your website into your vis
 
 == Changelog ==
 
+= 2.8.0 =
+
+Release Date: TBA
+
+* New Feature: Added onboarding checklist to help users get started with Inspirations.
+* New Feature: Theme screenshot now displays the specific Crio theme design chosen [168](https://github.com/BoldGrid/boldgrid-inspirations/issues/168)
+* Bug Fix: Image purchase fails with error 'No local cost data' [#185](https://github.com/BoldGrid/boldgrid-inspirations/issues/185)
+
 = 2.7.6 =
 
 Release Date: July 17th, 2023
