@@ -366,7 +366,7 @@ public function boldgrid_style( $hook ) {
 		'inspirations_page_boldgrid-cart',
 	);
 
-	if ( in_array( $hook, $hooks_to_load_grid ) ) {
+	if ( in_array( preg_replace( '/inspirations-\d*/', 'inspirations', $hook ), $hooks_to_load_grid ) ) {
 		// Thanks To https://github.com/zirafa/bootstrap-grid-only
 		wp_register_style( 'boldgrid_admin',
 			plugins_url(

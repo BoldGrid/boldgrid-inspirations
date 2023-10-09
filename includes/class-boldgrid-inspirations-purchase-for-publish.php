@@ -159,7 +159,7 @@ class Boldgrid_Inspirations_Purchase_For_Publish extends Boldgrid_Inspirations {
 			'inspirations_page_boldgrid-cart',
 			'transactions_page_boldgrid-cart',
 		);
-		if ( in_array( $hook, $cart_hooks ) ) {
+		if ( in_array( preg_replace( '/inspirations-\d*/', 'inspirations', $hook ), $cart_hooks ) ) {
 			wp_register_style( 'boldgrid-cart',
 				plugins_url( '/' . basename( BOLDGRID_BASE_DIR ) . '/assets/css/boldgrid-cart.css' ),
 				array(), BOLDGRID_INSPIRATIONS_VERSION );
