@@ -45,7 +45,7 @@ class Boldgrid_Inspirations_Dashboard_Widget {
 				),
 				[ 'a' => [ 'href' => [] ] ]
 			) . '</p></div>';
-		} elseif ( 1 >= $onboarding_progress ) {
+		} elseif ( 1 > $onboarding_progress ) {
 			$feature->content .= '<div class="notice notice-info inline"><p>' . wp_kses(
 				sprintf(
 					// translators: 1 The opening anchor tag to the Inspirations page, 2 its closing tag.
