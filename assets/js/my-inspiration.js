@@ -130,6 +130,11 @@ jQuery(document).ready(function($) {
 			completedDecimal,
 			isComplete;
 
+			/*
+			 * If the user is clicking a button for a completed task,
+			 * we don't want to proceed to mark it incomplete. That should only
+			 * be done if they manually uncheck a completed item.
+			 */
 			if ( $target.hasClass( 'button' ) && $task.hasClass( 'complete' ) ) {
 				return;
 			}
@@ -139,7 +144,6 @@ jQuery(document).ready(function($) {
 				updateTaskStatus( 'skip_all_tasks', true, nonce, $target );
 			} else {
 				e.preventDefault();
-				console.log( 'defaultPrevented')
 				$task.toggleClass( 'complete' );
 				isComplete = $task.hasClass( 'complete' );
 				updateTaskStatus( $task.attr( 'id' ), isComplete, nonce, $target );
