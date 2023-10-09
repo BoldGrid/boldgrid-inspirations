@@ -121,7 +121,7 @@ class Boldgrid_WP_Help_Pointers {
 				'title'    => esc_html__( 'BoldGrid Inspirations Progress', 'boldgrid-inspirations' ),
 				// translators: 1 opening em tag, 2 closing em tag, 3 opening strong tag, 4 closing strong tag.
 				'content'  => __(
-					'You\'re progress throughought the BoldGrid Inspirations process is displayed here. You can also click on "Inspirations" at any time to return to the checklist.',
+					'Your progress throughout the BoldGrid Inspirations process is displayed here. You can also click on "Inspirations" at any time to return to the checklist.',
 					'boldgrid-inspirations'
 				),
 				'position' => array(
