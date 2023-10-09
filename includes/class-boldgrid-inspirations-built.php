@@ -675,18 +675,11 @@ class Boldgrid_Inspirations_Built {
 	 * @param unknown $top_level
 	 */
 	public function add_top_menu_item( $top_level ) {
-		add_menu_page(
-			'Inspirations',
-			'Inspirations',
-			'manage_options',
-			$top_level,
+		add_menu_page( 'Inspirations', 'Inspirations', 'manage_options', $top_level,
 			array(
 				$this,
 				'inspiration_page',
-			),
-			'dashicons-lightbulb',
-			'21.36'
-		);
+			), 'dashicons-lightbulb', '21.36' );
 	}
 
 	/**
