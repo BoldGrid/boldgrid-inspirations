@@ -205,7 +205,7 @@ class Task {
 
 		foreach ( $this->links as $link ) {
 			$markup .= '<li>
-				<a href="' . esc_url( $link['url'] ) . '" target="_blank" rel="noopener noreferrer">' . 
+				<a href="' . esc_url( $link['url'] ) . '" target="_blank" rel="noopener noreferrer">' .
 				esc_html( $link['text'] ) . ' </a></li>';
 		}
 
