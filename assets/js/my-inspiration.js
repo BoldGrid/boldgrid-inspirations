@@ -42,7 +42,7 @@ jQuery(document).ready(function($) {
 		}
 	};
 
-	var updateTaskStatus = ( taskId, isComplete, nonce ) => {
+	var updateTaskStatus = ( taskId, isComplete, nonce, $target ) => {
 		$.ajax( {
 			type: 'post',
 			url: ajaxurl,
@@ -52,6 +52,10 @@ jQuery(document).ready(function($) {
 				nonce: nonce,
 				task_id: taskId,
 				task_complete: isComplete
+			}
+		} ).done( function( response ) {
+			if ( $target.attr( 'href' ) ) {
+				window.location.href = $target.attr( 'href' );
 			}
 		} );
 	};
@@ -71,11 +75,13 @@ jQuery(document).ready(function($) {
 
 			if ( $target.hasClass( 'skip-all-tasks' ) ) {
 				$( '.onboarding-cards .boldgrid-onboarding-task' ).addClass( 'complete' );
-				updateTaskStatus( 'skip_all_tasks', true, nonce );
+				updateTaskStatus( 'skip_all_tasks', true, nonce, $target );
 			} else {
+				e.preventDefault();
+				console.log( 'defaultPrevented')
 				$task.toggleClass( 'complete' );
 				isComplete = $task.hasClass( 'complete' );
-				updateTaskStatus( $task.attr( 'id' ), isComplete, nonce );
+				updateTaskStatus( $task.attr( 'id' ), isComplete, nonce, $target );
 				expandOrCollapse( $task, isComplete );
 			}
 
