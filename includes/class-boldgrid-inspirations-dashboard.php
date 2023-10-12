@@ -116,9 +116,60 @@ class Boldgrid_Inspirations_Dashboard extends Boldgrid_Inspirations {
 		}
 	}
 
+	/**
+	 * Add Onboarding Progress Bar to Admin Bar.
+	 *
+	 * @since 2.8.0
+	 */
+	public function add_onboarding_progress() {
+		$config   = Boldgrid_Inspirations_Config::get_format_configs();
+		$progress = get_option( $config['onboarding_progress_option'], false );
+
+		// Verify user is logged in.
+		if ( ! is_user_logged_in() || ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		if ( false === $progress &&
+			empty( get_option( $config['onboarding_tasks_option'] ) ) &&
+			! empty( get_option( 'boldgrid_install_options' ) ) ) {
+
+			$this->create_onboarding_tasks( get_option( 'boldgrid_install_options' ) );
+
+			$progress = get_option( $config['onboarding_progress_option'], false );
+		}
+
+		// Verify that there is a valid progress to display.
+		if ( false === $progress ) {
+			return;
+		}
+
+		$progress = round( $progress, 2 );
+
+		$formatted_progress = sprintf( '%.0f%%', (float) $progress * 100 );
+
+		return $formatted_progress;
+	}
+
 	// Rearrange our plugin menu items into single menu item.
 	public function boldgrid_admin_one_menu_add() {
 		! Boldgrid_Inspirations_Config::use_boldgrid_menu() ? remove_menu_page( 'boldgrid-inspirations' ) : false;
+
+		$formatted_progress = $this->add_onboarding_progress();
+
+		/*
+		 * If the formatted_progress hasn't been set yet,
+		 * we don't want to add a blank span.
+		 */
+		if ( ! $formatted_progress ) {
+			$title = 'Inspirations';
+		} else {
+			$title = sprintf(
+				'Inspirations <span class="bginsp-progress %2$s">%1$s</span>',
+				esc_html( $formatted_progress ),
+				'100%' === $formatted_progress ? 'complete' : ''
+			);
+		}
 
 		// Define our menu name.
 		$top_level_menu = 'boldgrid-inspirations';
@@ -126,8 +177,9 @@ class Boldgrid_Inspirations_Dashboard extends Boldgrid_Inspirations {
 		// Add main boldgrid menu.
 		add_menu_page(
 			'Inspirations',
-			'Inspirations',
-			'manage_options', $top_level_menu,
+			$title,
+			'manage_options',
+			$top_level_menu,
 			array(
 				$this,
 				'boldgrid_admin_one_menu_add',

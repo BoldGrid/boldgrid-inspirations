@@ -32,7 +32,8 @@ class Boldgrid_Inspirations_Dashboard_Widget {
 	 * @param  \Boldgrid\Library\Library\Plugin\Plugin The plugin object.
 	 */
 	public function filter_feature( \Boldgrid\Library\Library\Ui\Feature $feature, \Boldgrid\Library\Library\Plugin\Plugin $plugin ) {
-		$feature->icon = '<img src="//repo.boldgrid.com/assets/icon-boldgrid-inspirations-128x128.png" />';
+		$feature->icon       = '<img src="//repo.boldgrid.com/assets/icon-boldgrid-inspirations-128x128.png" />';
+		$onboarding_progress = get_option( 'boldgrid_onboarding_progress' );
 
 		if ( ! Boldgrid_Inspirations_Installed::has_built_site() ) {
 			$feature->content .= '<div class="notice notice-info inline"><p>' . wp_kses(
@@ -43,6 +44,16 @@ class Boldgrid_Inspirations_Dashboard_Widget {
 					'</a>'
 				),
 				[ 'a' => [ 'href' => [] ] ]
+			) . '</p></div>';
+		} elseif ( 1 > $onboarding_progress ) {
+			$feature->content .= '<div class="notice notice-info inline"><p>' . wp_kses(
+				sprintf(
+					// translators: 1 The opening anchor tag to the Inspirations page, 2 its closing tag.
+					__( 'It looks like there is still more you can do with BoldGrid. %1$sClick here to continue%2$s.', 'boldgrid-inspirations' ),
+					'<a href="' . esc_url( admin_url( 'admin.php?page=boldgrid-inspirations' ) ) . '">',
+					'</a>'
+				),
+				array( 'a' => array( 'href' => array() ) )
 			) . '</p></div>';
 		}
 

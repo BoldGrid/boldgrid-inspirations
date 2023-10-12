@@ -318,6 +318,33 @@ class Boldgrid_Inspirations {
 				'filter_allowed_html',
 			), 10, 2
 		);
+
+		// Create Onboarding Tasks when deployment is complete.
+		add_action(
+			'boldgrid_inspirations_deploy_complete',
+			array( $this, 'create_onboarding_tasks' )
+		);
+	}
+
+	/**
+	 * Create Onboarding Tasks
+	 *
+	 * @since 2.8.0
+	 *
+	 * @param array $install_options The install options.
+	 */
+	public function create_onboarding_tasks( $install_options ) {
+		// These are required here to prevent them from being loaded on every page load.
+		require_once BOLDGRID_BASE_DIR . '/includes/class-boldgrid-inspirations-onboarding-tasks.php';
+		require_once BOLDGRID_BASE_DIR . '/includes/class-boldgrid-inspirations-onboarding-progress.php';
+
+		$config = Boldgrid_Inspirations_Config::get_format_configs();
+
+		$onboarding_tasks = new Boldgrid_Inspirations_Onboarding_Tasks( $config );
+		$onboarding_tasks->create_tasks( $install_options );
+
+		$progress = new Boldgrid_Inspirations_Onboarding_Progress( $config );
+		$progress->update_percent_complete();
 	}
 
 	/**

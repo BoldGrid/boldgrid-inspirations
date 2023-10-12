@@ -1,105 +1,274 @@
-/**
- * #.# Main layout.
+/* 
+ * My Inspirations Header
  */
- 
-#post-body {
-	max-width: 1000px;
+.my-inspirations-header {
+	background: #fff;
+	box-shadow: 0 1px 0 #ccd0d4, 0 1px 1px 1px rgba(0,0,0,0.04);
+	min-height: 4em;
+	margin-bottom: 15px;
+	margin-left: -20px;
 }
 
-#wpbody-content #dashboard-widgets #postbox-container-1 { /* The main left. */
-	float: left;
-	width: calc( 66.5% - 7.5px);
+.my-inspirations-container {
+	max-width: 1380px;
+	margin: 0 auto;
+	display: flex;
 }
 
-#wpbody-content #dashboard-widgets #postbox-container-2 { /* The left within the main left. */
-	float:left; width:calc(50% - 7.5px);
+.my-inspirations-container > div {
+	margin: 10px;
 }
 
-#wpbody-content #dashboard-widgets #postbox-container-3 { /* The right within the main left. */
-	float:right; width:calc(50% - 7.5px);
+.theme-screenshot {
+	box-shadow:2px 2px 2px 2px rgba(0,0,0,0.04)
 }
 
-#wpbody-content #dashboard-widgets #postbox-container-4 { /* The main right. */
+.theme-screenshot img {
+	max-width: 250px;
+}
+
+.onboarding-progress-bar {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	background: 
+		radial-gradient(closest-side, white 79%, transparent 80% 100%),
+		conic-gradient(green var(--percent-complete), #ddd 0 );
+}
+
+.onboarding-progress-bar span {
+	font-size: 30px;
+	font-weight: 600;
+}
+
+.progress {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+a.button.skip-all-tasks {
+	margin-top: 10px;
+}
+
+/*
+* My Inspirations Onboarding Cards & Tasks
+*/
+.onboarding-cards {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin-left: -20px;
+}
+
+.boldgrid-onboarding-card {
+	position: relative;
+	width: 440px;
+	border: 1px solid #e5e5e5;
+	box-shadow: 0 1px 1px rgba(0,0,0,.04);
+	background: #fff;
+	box-sizing: border-box;
+	margin: 10px;
+}
+
+.boldgrid-onboarding-card-title {
+	border-bottom: 3px solid var(--card-color);
+}
+
+.boldgrid-onboarding-card-title,
+.boldgrid-onboarding-card-tasks {
+	padding: 10px 10px 15px 10px;
+	min-height: 65px;
+}
+
+.boldgrid-onboarding-card-title p {
+	font-size: 1.5em;
+	font-weight: 600;
+	margin: 0;
+}
+
+.boldgrid-onboarding-card-description {
+	font-size: .95em;
+}
+
+.boldgrid-onboarding-card-icon {
+	padding: 20px 0;
+	text-align: center;
+	border-bottom: 1px solid #ddd;
+}
+
+.boldgrid-onboarding-card-icon span {
+	font-size: 60px;
+	width: 60px;
+	height: 60px;
+	color: var(--card-color);
+}
+
+.boldgrid-onboarding-task {
+	display: grid;
+	grid-gap: 10px;
+	grid-template-columns: 40px 1fr 40px;
+	border-bottom: 1px solid #ddd;
+	padding: 5px 0;
+}
+
+.boldgrid-onboarding-task-checkbox {
+	width: 30px;
+	height: 30px;
+	border: 1px solid #c4c4c4;
+	border-radius: 10%;
+}
+
+.boldgrid-onboarding-task-checkbox:hover {
+	cursor: pointer;
+	background-color: #f4f4f4;
+}
+
+.boldgrid-onboarding-task.complete .boldgrid-onboarding-task-checkbox span.dashicons::before {
+	content: "\f147";
+}
+
+.boldgrid-onboarding-task.complete .boldgrid-onboarding-task-checkbox {
+	background: green;
+	border: 1px solid green;
+}
+
+.boldgrid-onboarding-task-checkbox span {
+	font-size: 40px;
+	width: 35px;
+	line-height: 30px;
+	height: 35px;
+	color: white;
+	margin-left: -6px;
+}
+
+.boldgrid-onboarding-task.collapsed .collapse-expand span.dashicons::before {
+	content: "\f343";
+}
+
+.boldgrid-onboarding-task.collapsed .task-description,
+.boldgrid-onboarding-task.collapsed .task-buttons,
+.boldgrid-onboarding-task.collapsed .task-links {
+	display: none;
+}
+
+.boldgrid-onboarding-task .task-links a::after {
+	content: "\f504";
+	font-family: dashicons;
+	font-size: 13px;
+	margin-left: 0px;
+}
+
+.task-title {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	cursor: pointer;
+	font-size: 1.1em;
+	font-weight: 600;
+	padding-top: 6px;
+	margin: 0;
+}
+
+.task-buttons {
+	grid-column-start: 2;
+	justify-self: end;
 	float: right;
-	width: calc( 33.5% - 7.5px );
 }
 
-#wpbody-content #dashboard-widgets #postbox-container-5,
-#wpbody-content #dashboard-widgets #postbox-container-6 { /* The full width at the bottom of the page. */
+.task-buttons .button span.dashicons {
+	line-height: 13px;
+}
+
+.boldgrid-onboarding-task .collapse-expand span.dashicons {
+	font-size: 30px;
+	padding: 0 5px;
+	vertical-align: middle;
 	width: 100%;
 }
 
-/* The invoice / cache container is most likely to be empty. Avoid ugly UI, hide it if it's empty. */
-#container6-sortables.empty-container {
+.boldgrid-onboarding-task:not( .collapsed ) .collapse-expand span.dashicons {
+	align-self: center;
+}
+
+.boldgrid-onboarding-task .collapse-expand {
+	align-self: center;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	padding: 5px;
+	cursor: pointer;	
+}
+
+.boldgrid-onboarding-task .collapse-expand span.dashicons::before {
+	content: "\f347";
+}
+
+/*
+* My Inspirations Support Cards
+*/
+
+.support-cards {
+	background: #fff;
+	box-shadow: 0 1px 0 #ccd0d4, 0 1px 1px 1px rgba(0,0,0,0.04);
+	min-height: 4em;
+	margin-left: -20px;
+}
+
+.support-cards .boldgrid-onboarding-card-title p,
+.support-cards .boldgrid-onboarding-card-description {
+	max-width: 1360px;
+	margin: 0 auto;
+}
+
+.boldgrid-onboarding-card.full-width {
+	width: auto;
+	border: 0;
+	margin: 15px 0 0 0;
+}
+
+.boldgrid-support-card-tasks {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	max-width: 1380px;
+	margin: 0 auto;
+}
+
+.boldgrid-support-card-tasks .collapse-expand {
 	display: none;
 }
 
-
-/**
- * Postboxes.
- */
-
-.postbox {
-	min-width: unset;
+.boldgrid-support-card-tasks .boldgrid-onboarding-task {
+	width: 33%;
+	box-sizing: border-box;
+	padding: 10px;
+	margin: 10px 0;
+	border-bottom:0px;
 }
 
-#wpbody-content #dashboard-widgets #postbox-container-6 .postbox {
-	width: 303px;
-    display: inline-block;
-    vertical-align: top;
-    margin-right: 27px;
+.boldgrid-support-card-tasks .boldgrid-onboarding-task:first-of-type {
+	border-right: 1px solid #ddd;
 }
 
-
-/**
- * Postbox content.
- */
-
-.myinsp-logo {
-	max-height: 40px;
+.boldgrid-support-card-tasks .boldgrid-onboarding-task:last-of-type {
+	border-left: 1px solid #ddd;
 }
 
-#postbox-container-2 .button:first-of-type {
-	margin-bottom: 5px; /* If "Go to Pages / Posts" buttons stack, ensure there's space between them. */
+.boldgrid-support-card-tasks .task-icon .dashicons {
+	font-size: 35px;
+	width: 35px;
+	height: 35px;
+	color: #aaa;
 }
 
-
-/**
- * Media queries.
- */
-
-/* The point the WordPress dashboard hides the left nav. */
-@media screen and (max-width: 782px) {
-	#wpbody-content #dashboard-widgets #postbox-container-2,
-	#wpbody-content #dashboard-widgets #postbox-container-3 {
-		float: none;
-		width: 100%;
-	}
-}
-
-
-/**
- * #.# Support boxes.
- *
- * These are the support links at the bottom of the page.
- */
-
-.support-boxes li {
-	display: inline-block;
-	background: #f1f1f1;
-	width: 175px;
-	height: 75px;
-	padding: 30px 10px;
-	vertical-align: top;
-	text-align: center;
-}
-
-.support-boxes li:hover {
-	box-shadow: inset 0px 0px 0px 1px #ddd;
-	background: #f8f8f8;
-	cursor: pointer;
-}
-
-#screen-options-wrap .dashicons-editor-help {
-	display: none;
+.boldgrid-support-card-tasks .task-icon .dashicons::before {
+	font-size: 35px;
+	width: 35px;
+	height: 35px;
+	color: #aaa;
 }

@@ -395,6 +395,15 @@ class Boldgrid_Inspirations_Deploy {
 	public $tags_having_background = array( 'div' );
 
 	/**
+	 * Has Custom Page Headers
+	 *
+	 * @since  2.8.0
+	 * @access public
+	 * @var    bool
+	 */
+	public $theme_has_cph = false;
+
+	/**
 	 * External Plugin.
 	 *
 	 * @since 2.7.6
@@ -644,6 +653,7 @@ class Boldgrid_Inspirations_Deploy {
 			'install_blog'          => $this->install_blog,
 			'install_invoice'       => $this->install_invoice,
 			'install_cache'         => $this->install_cache,
+			'theme_has_cph'         => $this->theme_has_cph,
 			'install_timestamp'     => time(),
 		);
 
@@ -1356,12 +1366,6 @@ class Boldgrid_Inspirations_Deploy {
 		$deploy_menus = new \Boldgrid\Inspirations\Deploy\Menus( $pages_in_pageset );
 
 		/*
-		 * If the page has custom page headers, after the pages are created, we need to update the page headers.
-		 * This value starts out as false, and is set to true if we find custom page headers.
-		 */
-		$theme_has_cph = false;
-
-		/*
 		 * This variable will store the original post IDs so that they can be changed in the theme mods
 		 * at a later point.
 		 *
@@ -1531,7 +1535,14 @@ class Boldgrid_Inspirations_Deploy {
 
 					// This will ensure that the theme is marked as having a custom page header ensuring that necessary steps are run later.
 					if ( $term_id && 'template_locations' === $tax_data->taxonomy ) {
-						$theme_has_cph = true;
+						$this->theme_has_cph = true;
+						// This also ensures that the information is passed on to the install options.
+						$this->installed->update_install_options(
+							array_merge(
+								$this->installed->get_install_options(),
+								array( 'theme_has_cph' => true )
+							)
+						);
 					}
 				}
 			}
@@ -1604,7 +1615,7 @@ class Boldgrid_Inspirations_Deploy {
 		 * and make sure all the menu IDs and post IDs match up. For more info
 		 * please refer to the Crio_Premium_Utility Class.
 		 */
-		if ( $theme_has_cph ) {
+		if ( $this->theme_has_cph ) {
 			\Boldgrid\Inspirations\Deploy\Crio_Premium_Utility::set_custom_templates();
 			\Boldgrid\Inspirations\Deploy\Crio_Premium_Utility::set_template_menus();
 		}
@@ -1881,6 +1892,64 @@ class Boldgrid_Inspirations_Deploy {
 		 * may have added a Crio Premium service for the user. Delete license data so it can be refreshed.
 		 */
 		Boldgrid_Inspirations_Update::delete_license();
+
+		// Get a screenshot of the new site.
+		$this->get_screenshot();
+	}
+
+	/**
+	 * Get Screenshot.
+	 *
+	 * Get the cached screenshot associated
+	 * with this theme's generic build.
+	 *
+	 * @since 2.8.0
+	 */
+	public function get_screenshot() {
+		$boldgrid_install_options = $this->installed->get_install_options();
+
+		$api_key_hash  = $this->asset_manager->api->get_api_key_hash();
+		$api_site_hash = $this->asset_manager->api->get_site_hash();
+
+		/**
+		 * All themes except the dreamhost themes have the option of selecting a page set.
+		 * However, we want to pull the screenshot from the cached generic build, so we need
+		 * to ensure the page set is always 'base' (34) DH themes ( category 36 ), or (17) for all others.
+		 */
+		$page_set_id = ! empty( $boldgrid_install_options['category_id'] && 36 === $boldgrid_install_options['category_id'] ) ? 34 : 17;
+
+		// I know this seems like a lot of args for a generic build, but the api won't work without them.
+		$build_args = array(
+			'pde'                   => 'false',
+			'sub_cat_id'            => $boldgrid_install_options['subcategory_id'],
+			'theme_id'              => $boldgrid_install_options['theme_id'],
+			'page_set_id'           => $page_set_id,
+			'theme_version_type'    => 'stable',
+			'page_set_version_type' => 'stable',
+			// The default coin_budget value for generic builds is always 20.
+			'coin_budget'           => '20',
+			'site_hash'             => ! empty( $api_site_hash ) ? $api_site_hash : null,
+			'is_generic'            => 'true',
+			'key'                   => ! empty( $api_key_hash ) ? $api_key_hash : null,
+			'has_blog'              => 'false',
+			'has_invoice'           => 'false',
+		);
+
+		$build_profile = $this->api->get_build_profile( $build_args );
+		$asset_id      = isset( $build_profile['asset_id'] ) ? $build_profile['asset_id'] : null;
+
+		/*
+		 * If there is no asset_id for this theme, delete the option,
+		 * and Inspirations will use the default Crio screenshot
+		 */
+		if ( $asset_id ) {
+			update_option(
+				'boldgrid_site_screenshot',
+				$this->configs['asset_server'] . '/api/asset/get?key=' . $api_key_hash . '&id=' . $asset_id
+			);
+		} else {
+			delete_option( 'boldgrid_site_screenshot' );
+		}
 	}
 
 	/**

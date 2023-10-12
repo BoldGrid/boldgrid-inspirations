@@ -110,6 +110,25 @@ class Boldgrid_WP_Help_Pointers {
 					'align' => 'middle'
 				)
 			),
+			// Onboarding Progress
+			array(
+				// unique id for this pointer
+				'id'       => 'boldgrid_inspirations_onboarding_progress',
+				// this is the page hook we want our pointer to show on
+				'screen'   => 'admin_page_my-inspiration',
+				// the css selector for the pointer to be tied to, best to use ID's
+				'target'   => '#toplevel_page_boldgrid-inspirations',
+				'title'    => esc_html__( 'BoldGrid Inspirations Progress', 'boldgrid-inspirations' ),
+				'content'  => __(
+					'Your progress throughout the BoldGrid Inspirations process is displayed here. You can also click on "Inspirations" at any time to return to the checklist.',
+					'boldgrid-inspirations'
+				),
+				'position' => array(
+					// top, bottom, left, right
+					'edge'  => 'left',
+					'align' => 'middle',
+				),
+			),
 			// Dashboard >> Media >> Library >> Search
 			array (
 				'id'       => 'boldgrid_media_library_image_search_internal_only',
