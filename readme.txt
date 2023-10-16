@@ -4,7 +4,7 @@ Tags: inspiration, customization, build, create, design
 Requires at least: 4.4
 Tested up to: 6.3
 Requires PHP: 5.4
-Stable tag: 2.8.0-rc.1
+Stable tag: 2.8.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,7 +37,7 @@ The second phase is Customization; tools to transform your website into your vis
 
 = 2.8.0 =
 
-Release Date: TBA
+Release Date: October 16th, 2023
 
 * New Feature: Added onboarding checklist to help users get started with Inspirations.
 * New Feature: Theme screenshot now displays the specific Crio theme design chosen [168](https://github.com/BoldGrid/boldgrid-inspirations/issues/168)
