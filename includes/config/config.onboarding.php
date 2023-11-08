@@ -443,5 +443,17 @@ return array(
 			),
 		),
 	),
+	'onboarding_videos'          => array(
+		'ppb' => array(
+			array(
+				'id'    => '8tolMBiKSY4',
+				'title' => 'Getting Started with Sections, Rows, and Columns',
+			),
+			array(
+				'id'    => 'rxCwWhFSL1c',
+				'title' => 'Responsive Device Controls',
+			),
+		),
+	),
 );
 

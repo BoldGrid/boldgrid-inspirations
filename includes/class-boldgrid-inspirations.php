@@ -414,10 +414,30 @@ class Boldgrid_Inspirations {
 		update_site_option( 'boldgrid_inspirations_activated_version', $plugin_data['Version'] );
 		update_site_option( 'boldgrid_inspirations_current_version', $plugin_data['Version'] );
 
+		// Update the Onboarding Videos array.
+		update_site_option( 'boldgrid_onboarding_videos', $this->get_onboarding_videos() );
+
 		require_once BOLDGRID_BASE_DIR . '/includes/class-boldgrid-inspirations-attribution.php';
 		require_once BOLDGRID_BASE_DIR . '/includes/class-boldgrid-inspirations-attribution-page.php';
 
 		Boldgrid_Inspirations_Attribution_Page::on_activate();
+	}
+
+	/**
+	 * Get the Onboarding Videos array.
+	 *
+	 * @since 2.8.0
+	 *
+	 * @return array
+	 */
+	public function get_onboarding_videos() {
+		$config = Boldgrid_Inspirations_Config::get_format_configs();
+
+		if ( isset( $config['onboarding_videos'] ) ) {
+			return $config['onboarding_videos'];
+		} else {
+			return array();
+		}
 	}
 
 	/**
