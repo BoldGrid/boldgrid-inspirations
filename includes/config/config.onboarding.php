@@ -453,6 +453,14 @@ return array(
 				'id'    => 'rxCwWhFSL1c',
 				'title' => 'Responsive Device Controls',
 			),
+			array(
+				'id'    => 'opXxNHOUr8E',
+				'title' => 'How to Drag and Drop',
+			),
+			array(
+				'id'    => 'uDwQKeFe344',
+				'title' => 'Working with Blocks',
+			),
 		),
 	),
 );
