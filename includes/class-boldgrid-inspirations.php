@@ -433,8 +433,16 @@ class Boldgrid_Inspirations {
 	public function get_onboarding_videos() {
 		$config = Boldgrid_Inspirations_Config::get_format_configs();
 
-		if ( isset( $config['onboarding_videos'] ) ) {
-			return $config['onboarding_videos'];
+		$api_call_results = Boldgrid_Inspirations_Api::boldgrid_api_call(
+			$config['ajax_calls']['get-onboarding-videos']
+		);
+
+		if ( 200 !== $api_call_results->status ) {
+			return array();
+		}
+
+		if ( isset( $api_call_results->result->data ) ) {
+			return $api_call_results->result->data;
 		} else {
 			return array();
 		}
