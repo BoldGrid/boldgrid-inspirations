@@ -71,6 +71,9 @@ return array(
 
 		// Preview Server.
 		'get-site-content' => 							'/wpb-maintenance/get-site-content.php',
+
+		// Onboarding.
+		'get-onboarding-videos' =>                      '/api/onboarding/get-videos',
 	),
 	'asset_server' =>									'https://wp-assets.boldgrid.com',
 	'preview_server' =>									'https://wp-preview.boldgrid.com',

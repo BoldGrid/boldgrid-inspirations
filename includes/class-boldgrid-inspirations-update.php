@@ -688,6 +688,9 @@ class Boldgrid_Inspirations_Update {
 		// Update the recorded previous and current versions in WP options.
 		update_site_option( 'boldgrid_inspirations_previous_version', $current_version );
 		update_site_option( 'boldgrid_inspirations_current_version', $live_version );
+
+		// Update the Onboarding Videos array.
+		update_site_option( 'boldgrid_onboarding_videos', Boldgrid_Inspirations::get_onboarding_videos() );
 	}
 
 	/**
