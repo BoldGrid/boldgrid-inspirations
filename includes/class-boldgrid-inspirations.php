@@ -320,7 +320,7 @@ class Boldgrid_Inspirations {
 		);
 
 		// Add the filter to hide BoldGrid Backup notice on 'my-inspiration' page.
-		add_filter( 'boldgrid_backup_post_activate_notice', function( $notice ) {
+		add_filter( 'hide_form_notices', function( $notice ) {
 			if ( ! empty( $_GET['page'] ) && 'my-inspiration' === $_GET['page'] ) {
 				$notice = '';
 			}
