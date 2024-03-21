@@ -66,6 +66,11 @@ class Crio_Premium_Utility {
 	 * word 'main' in the template's menu location name.
 	 */
 	public static function set_template_menus() {
+		$boldgrid_survey = get_option( 'boldgrid_survey' );
+		$dnd_social_menu = isset( $boldgrid_survey['social'] ) &&
+			isset( $boldgrid_survey['social']['do-not-display'] ) &&
+			true === $boldgrid_survey['social']['do-not-display'];
+
 		$templates = get_posts(
 			array(
 				'post_type' => 'crio_page_header',
@@ -82,7 +87,11 @@ class Crio_Premium_Utility {
 			preg_match_all( '/\[boldgrid_component type="wp_boldgrid_component_menu".*\]/', $content, $menus );
 
 			foreach ( $menus[0] as $menu ) {
-				$adjusted_menu = self::adjust_menu_id( $menu, $template->ID );
+				if ( $dnd_social_menu && false !== strpos( $menu, 'social' ) ) {
+					$content = str_replace( $menu, '', $content );
+					continue;
+				}
+				$adjusted_menu = self::adjust_menu_id( $menu, $template->ID, $dnd_social_menu );
 				$content       = str_replace( $menu, $adjusted_menu, $content );
 			}
 
@@ -105,13 +114,9 @@ class Crio_Premium_Utility {
 	 *
 	 * @return string The adjusted menu shortcode.
 	 */
-	public static function adjust_menu_id( $menu, $template_id ) {
+	public static function adjust_menu_id( $menu, $template_id, $dnd_social_menu ) {
 		$crio_premium_menu_locations = get_option( 'crio_premium_menu_locations', array() );
 		$menu_locations = get_theme_mod( 'nav_menu_locations', array() );
-		$boldgrid_survey = get_option( 'boldgrid_survey' );
-		$dnd_social_menu = isset( $boldgrid_survey['social'] ) &&
-			isset( $boldgrid_survey['social']['do-not-display'] ) &&
-			true === $boldgrid_survey['social']['do-not-display'];
 
 		/**
 		 * The menu attributes are url encoded, and contain all kinds of things that get
