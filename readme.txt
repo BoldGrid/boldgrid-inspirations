@@ -37,7 +37,7 @@ The second phase is Customization; tools to transform your website into your vis
 
 = 2.9.1 =
 
-Release Date: Marach 25th, 2024
+Release Date: March 25th, 2024
 
 * Bug Fix: If no social media menu is installed the main menu goes in that spot without styling [181](https://github.com/BoldGrid/boldgrid-inspirations/issues/181)
 
