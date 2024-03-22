@@ -114,7 +114,7 @@ class Crio_Premium_Utility {
 	 *
 	 * @return string The adjusted menu shortcode.
 	 */
-	public static function adjust_menu_id( $menu, $template_id, $dnd_social_menu ) {
+	public static function adjust_menu_id( $menu, $template_id ) {
 		$crio_premium_menu_locations = get_option( 'crio_premium_menu_locations', array() );
 		$menu_locations = get_theme_mod( 'nav_menu_locations', array() );
 

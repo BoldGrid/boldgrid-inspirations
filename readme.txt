@@ -2,9 +2,9 @@
 Contributors: boldgrid, imh_brad, joemoto, rramo012, timph
 Tags: inspiration, customization, build, create, design
 Requires at least: 4.4
-Tested up to: 6.4
+Tested up to: 6.5
 Requires PHP: 5.4
-Stable tag: 2.9.0
+Stable tag: 2.9.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -34,6 +34,12 @@ The second phase is Customization; tools to transform your website into your vis
 3. You will find the Inspirations menu in your WordPress Dashboard / admin panel.
 
 == Changelog ==
+
+= 2.9.1 =
+
+Release Date: Marach 25th, 2024
+
+* Bug Fix: If no social media menu is installed the main menu goes in that spot without styling [181](https://github.com/BoldGrid/boldgrid-inspirations/issues/181)
 
 = 2.9.0 =
 
