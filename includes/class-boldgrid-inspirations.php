@@ -324,6 +324,18 @@ class Boldgrid_Inspirations {
 			'boldgrid_inspirations_deploy_complete',
 			array( $this, 'create_onboarding_tasks' )
 		);
+
+		/*
+		 * WP 6.6 added sanitize_text_field() to the autofocus attribute which breaks it, since
+		 * it is an array not a string. This filter will bypass this.
+		 */
+		add_filter( 'sanitize_text_field', function( $filtered, $str ) {
+			if ( isset( $_REQUEST['autofocus'] ) && $_REQUEST['autofocus'] === $str ) {
+				return $str;
+			} else {
+				return $filtered;
+			}
+		}, 10, 2 );
 	}
 
 	/**
