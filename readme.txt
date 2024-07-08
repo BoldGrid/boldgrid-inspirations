@@ -1,10 +1,10 @@
 === BoldGrid Inspirations ===
-Contributors: boldgrid, imh_brad, joemoto, rramo012, timph
+Contributors: boldgrid, imh_brad, joemoto, rramo012, timph, jamesros161
 Tags: inspiration, customization, build, create, design
 Requires at least: 4.4
-Tested up to: 6.5
+Tested up to: 6.6
 Requires PHP: 5.4
-Stable tag: 2.9.1
+Stable tag: 2.9.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -34,6 +34,12 @@ The second phase is Customization; tools to transform your website into your vis
 3. You will find the Inspirations menu in your WordPress Dashboard / admin panel.
 
 == Changelog ==
+
+= 2.9.2 =
+
+Release Date: July 3rd, 2024
+
+* Bug Fix: WP 6.6 - Inspirations onboarding links to Customizer don’t go to correct panel [#202](https://github.com/BoldGrid/boldgrid-inspirations/issues/202)
 
 = 2.9.1 =
 
