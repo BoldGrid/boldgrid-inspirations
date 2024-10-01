@@ -289,7 +289,7 @@ class Boldgrid_Inspirations {
 		);
 
 		// After plugins have been loaded, load the textdomain.
-		add_action( 'plugins_loaded',
+		add_action( 'after_setup_theme',
 			array(
 				$this,
 				'boldgrid_load_textdomain',

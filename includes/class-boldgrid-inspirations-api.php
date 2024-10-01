@@ -381,7 +381,7 @@ class Boldgrid_Inspirations_Api {
 			}
 
 			// Get the installed plugin data.
-			$plugin_data = get_plugin_data( BOLDGRID_BASE_DIR . '/boldgrid-inspirations.php', false );
+			$plugin_data = get_plugin_data( BOLDGRID_BASE_DIR . '/boldgrid-inspirations.php', false, false );
 
 			$params_array['installed_core_version'] = $plugin_data['Version'];
 
