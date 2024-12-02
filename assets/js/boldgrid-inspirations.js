@@ -1357,7 +1357,10 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 	 * @since 1.2.3
 	 */
 	this.initCategories = function() {
-		var failureMessage, failAction, success_action;
+		var template = wp.template( 'init-categories' ),
+			failureMessage,
+			failAction,
+			success_action;
 
 		// Show a loading message to the user that we're fetching categories.
 		self.$categories.html( Inspiration.fetchingCategories + ' <span class="spinner inline"></span>' );
@@ -1418,12 +1421,47 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 			}
 		};
 
-		self.ajax.ajaxCall(
-			{ inspirations_mode: 'standard' },
-			'get_categories',
-			success_action,
-			failAction
-		);
+		/**
+		 * We are now only going to display the 'default' category on the stable release channel.
+		 *
+		 * Rather than remove the code that fetches categories, we will just hide the categories
+		 * in case we need to revert back to the old behavior, or if we need to display categories
+		 * for development / test releases. This method easily allows for them to be displayed if the
+		 * user has selected a non-stable release channel.
+		 *
+		 * Adding this logic here, rather than inside the 'success_action' callback, also prevents making
+		 * an unnecessary API call to fetch the categories list.
+		 */
+		if ( 'stable' === self.themeReleaseChannel ) {
+			template                = wp.template( 'init-categories' );
+			self.categories         = {};
+			self.categories.default = {
+				subcategories: [
+					{
+						displayOrder: 1,
+						name: 'Default',
+						id: 'default'
+					}
+				]
+			};
+
+			self.$categories.html( template( self.categories ) );
+
+			self.sortCategories( 'data-display-order' );
+
+			self.initThemes();
+
+			$( '#screen-design #categories.left' ).hide();
+			$( '#screen-design #categories.left .sub-category.active' ).hide();
+			$( '#screen-design .right.theme-browser' ).css( 'width', '100%' );
+		} else {
+			self.ajax.ajaxCall(
+				{ inspirations_mode: 'standard' },
+				'get_categories',
+				success_action,
+				failAction
+			);
+		}
 	};
 
 	/**
@@ -1623,6 +1661,11 @@ IMHWPB.InspirationsDesignFirst = function( $, configs ) {
 					defaultBuilds++;
 					self.$themes.append( template( { configs: IMHWPB.configs, build: build } ) );
 					build.isDefault = false;
+				}
+
+				// On the stable release channel, we only display 'default' themes category.
+				if ( 'stable' === self.themeReleaseChannel ) {
+					return;
 				}
 
 				/**

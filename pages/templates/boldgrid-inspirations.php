@@ -1,17 +1,24 @@
 <script type="text/html" id="tmpl-init-categories">
 	<div class="category-filter" ><?php echo __( 'Categories', 'boldgrid-inspirations' ); ?></div>
 
-	<div class="sub-category active" data-display-order="0" >
-		<input type="radio" name="sub-category" checked data-sub-category-id="0" >
+	<div class="sub-category" data-display-order="0" >
+		<input type="radio" name="sub-category" data-sub-category-id="0" >
 		<span class="sub-category-name"><?php echo __( 'All', 'boldgrid-inspirations' ); ?></span>
 	</div>
 
 	<# _.each( data, function( category ) { #>
 		<# _.each( category.subcategories, function( sub_category ) { #>
 			<# if ( ! sub_category.isHiddenFromSidebar ) { #>
-				<div class="sub-category" data-display-order="{{sub_category.displayOrder}}" >
-					<input type="radio" name="sub-category" data-sub-category-id="{{sub_category.id}}"> <span class="sub-category-name">{{sub_category.name}}</span>
-				</div>
+				<# if ( 'default' === sub_category.id ) { #>
+					<div class="sub-category active" data-display-order="{{sub_category.displayOrder}}" >
+						<input type="radio" name="sub-category" checked data-sub-category-id="{{sub_category.id}}">
+						<span class="sub-category-name">{{sub_category.name}}</span>
+					</div>
+				<# } else {#>
+					<div class="sub-category" data-display-order="{{sub_category.displayOrder}}" >
+						<input type="radio" name="sub-category" data-sub-category-id="{{sub_category.id}}"> <span class="sub-category-name">{{sub_category.name}}</span>
+					</div>
+				<# } #>
 			<# } #>
 		<# }); #>
 	<# }); #>
@@ -54,8 +61,7 @@
 		<div class="theme-id-container">
 
 			<h2 class="theme-name" >
-				<span class="sub-category-name">{{data.build.SubCategoryName}} - </span>
-				<span class="name">{{data.build.ThemeName}}</span>
+				<span class="sub-category-name">{{data.build.SubCategoryName}}</span>
 			</h2>
 
 			<div class="theme-actions">
