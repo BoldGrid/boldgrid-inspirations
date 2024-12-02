@@ -320,6 +320,7 @@ IMHWPB.InsertMediaTabManager = function( $ ) {
 
 			// Section Background > Add Image.
 			'[data-type="background"] .add-image-controls,' +
+			'[data-type="background"] .add-hover-image-controls,' +
 
 			// Gutenberg.
 			'.wp-block-image button,' +
