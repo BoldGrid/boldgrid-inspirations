@@ -436,7 +436,7 @@ return array(
 			'buttons'     => array(
 				array(
 					'text'   => __( 'Learn More', 'boldgrid-inspirations' ),
-					'url'    => boldgrid_inspirations_get_premium_url(),
+					'url'    => 'https://support.boldgrid.com/open.php',
 					'class'  => 'button-secondary',
 					'target' => '_blank',
 				),
