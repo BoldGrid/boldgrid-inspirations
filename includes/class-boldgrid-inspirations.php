@@ -87,6 +87,8 @@ class Boldgrid_Inspirations {
 			// Load dependencies.
 			$this->load_dependencies();
 
+			$this->disable_jit_notices();
+
 			// Branding.
 			$branding = new Boldgrid_Inspirations_Branding();
 			$branding->add_hooks();
@@ -106,6 +108,26 @@ class Boldgrid_Inspirations {
 
 		// Marks as loaded.
 		self::$was_loaded = true;
+	}
+
+	/**
+	 * Disable JIT notices.
+	 *
+	 * @since 2.8.0
+	 */
+	public function disable_jit_notices() {
+		add_filter(
+			'doing_it_wrong_trigger_error',
+			function ( $doing_it_wrong, $function_name, $message ) {
+				// if the function is _load_textdomain_just_in_time, return false to prevent the error.
+				if ( '_load_textdomain_just_in_time' === $function_name && false !== strpos( $message, 'boldgrid-inspirations' ) ) {
+					return false;
+				}
+				return $doing_it_wrong;
+			},
+			10,
+			4
+		);
 	}
 
 	/**
