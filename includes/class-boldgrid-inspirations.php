@@ -341,6 +341,15 @@ class Boldgrid_Inspirations {
 			), 10, 2
 		);
 
+		// Add the filter to hide BoldGrid Backup notice on 'my-inspiration' page.
+		add_filter( 'hide_form_notices', function( $notice ) {
+			if ( ! empty( $_GET['page'] ) && 'my-inspiration' === $_GET['page'] ) {
+				$notice = '';
+			}
+		
+			return $notice;
+		}, 10, 1 );
+
 		// Create Onboarding Tasks when deployment is complete.
 		add_action(
 			'boldgrid_inspirations_deploy_complete',
