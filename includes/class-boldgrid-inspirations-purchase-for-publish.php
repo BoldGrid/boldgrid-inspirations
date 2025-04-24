@@ -1333,7 +1333,7 @@ class Boldgrid_Inspirations_Purchase_For_Publish extends Boldgrid_Inspirations {
 		 * Is this image used within shortcode? For example, is image 123 used in a gallery, such as
 		 * [gallery ids='123,456'].
 		 */
-		$regexp = '[\[][^\]]+[\'\", ]' . $attachment_id . '[^0-9]+.*[\]]';
+		$regexp = '[\\\[][^\]]+[\'\", ]' . $attachment_id . '[^0-9]+.*[\]]';
 		$query = '
 			SELECT `ID`
 			FROM ' . $wpdb->posts . '
