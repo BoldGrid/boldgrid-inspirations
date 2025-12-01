@@ -2,7 +2,7 @@
 Contributors: boldgrid, imh_brad, joemoto, rramo012, timph, jamesros161
 Tags: inspiration, customization, build, create, design
 Requires at least: 4.4
-Tested up to: 6.8
+Tested up to: 6.9
 Requires PHP: 5.4
 Stable tag: 2.9.4
 License: GPLv2 or later
