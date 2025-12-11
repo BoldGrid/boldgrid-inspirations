@@ -1333,14 +1333,15 @@ class Boldgrid_Inspirations_Purchase_For_Publish extends Boldgrid_Inspirations {
 		 * Is this image used within shortcode? For example, is image 123 used in a gallery, such as
 		 * [gallery ids='123,456'].
 		 */
-		$regexp = '[\[][^\]]+[\'\", ]' . $attachment_id . '[^0-9]+.*[\]]';
-		$query = '
-			SELECT `ID`
-			FROM ' . $wpdb->posts . '
-			WHERE	`post_status` IN ' . $post_status . ' AND
-					`post_type` IN ("page","post") AND
-					`post_content` REGEXP "' . $regexp . '"
-		';
+		$regexp = '\\[[^\\]]+[\\\'\\", ]' . $attachment_id . '[^0-9]+.*\\]';
+		$query  = $wpdb->prepare(
+			"SELECT `ID`
+			 FROM $wpdb->posts
+			 WHERE `post_status` IN $post_status
+			   AND `post_type` IN ('page','post')
+			   AND `post_content` REGEXP %s",
+			$regexp
+		);
 		$in_shortcode = $wpdb->get_var( $query );
 		if ( ! empty( $in_shortcode ) ) {
 			$this->assets_needing_purchase['by_page_id'][ $in_shortcode ][] = $asset;
