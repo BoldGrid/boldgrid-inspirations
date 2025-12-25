@@ -1024,7 +1024,7 @@ class Boldgrid_Inspirations_Purchase_For_Publish extends Boldgrid_Inspirations {
 	 *
 	 * @since 1.1.4
 	 *
-	 * @return string A string to be used after in IN statement, example: ( 'draft', 'publish' ).
+	 * @return array An array of post status.
 	 */
 	public function get_post_status() {
 		$post_status = array( 'draft', 'publish' );
@@ -1040,9 +1040,6 @@ class Boldgrid_Inspirations_Purchase_For_Publish extends Boldgrid_Inspirations {
 		 * @param array $post_status The default post_status to look within for watermarked images.
 		*/
 		$post_status = apply_filters( 'boldgrid_cart_post_status', $post_status );
-
-		// Implode our array of $post_status to be used alongside an IN statement.
-		$post_status = '( "' . implode( '", "', esc_sql( $post_status ) ) . '" )';
 
 		return $post_status;
 	}
@@ -1334,14 +1331,20 @@ class Boldgrid_Inspirations_Purchase_For_Publish extends Boldgrid_Inspirations {
 		 * [gallery ids='123,456'].
 		 */
 		$regexp = '[\[][^\]]+[\'\", ]' . $attachment_id . '[^0-9]+.*[\]]';
-		$query = '
-			SELECT `ID`
-			FROM ' . $wpdb->posts . '
-			WHERE	`post_status` IN ' . $post_status . ' AND
-					`post_type` IN ("page","post") AND
-					`post_content` REGEXP "' . $regexp . '"
-		';
-		$in_shortcode = $wpdb->get_var( $query );
+		/**
+		 * Previously, we were not using a prepare statement.
+		 * In order to ensure that the prepare statment
+		 * doesn't incorrectly escape the post status array,
+		 * we dynamically create the placeholders now.
+		 */
+		$in_shortcode = $wpdb->get_var(
+			$wpdb->prepare(
+				"SELECT `ID` FROM $wpdb->posts WHERE `post_status` IN ( " .
+				implode( ', ', array_fill( 0, count( $post_status ), '%s' ) ) .
+				" ) AND `post_type` IN ( 'page', 'post' ) AND `post_content` REGEXP %s",
+				array_merge( $post_status, array( $regexp ) )
+			)
+		);
 		if ( ! empty( $in_shortcode ) ) {
 			$this->assets_needing_purchase['by_page_id'][ $in_shortcode ][] = $asset;
 			return true;
@@ -1358,9 +1361,12 @@ class Boldgrid_Inspirations_Purchase_For_Publish extends Boldgrid_Inspirations {
 				WHERE	$wpdb->postmeta.meta_key = '_thumbnail_id' AND
 				$wpdb->postmeta.meta_value = %s AND
 				$wpdb->postmeta.post_id = $wpdb->posts.ID AND
-				$wpdb->posts.post_status IN $post_status AND
-					$wpdb->posts.post_type IN ('page','post')
-						", $attachment_id ) );
+				$wpdb->posts.post_status IN ( " .
+				implode( ', ', array_fill( 0, count( $post_status ), '%s' ) ) .
+				") AND $wpdb->posts.post_type IN ('page','post')",
+				array_merge( array( $attachment_id ), $post_status )
+			)
+		);
 
 		// If we found results, then the image is being used in a page/post.
 		if ( ! empty( $asset_a_featured_image ) ) {
@@ -1450,17 +1456,16 @@ class Boldgrid_Inspirations_Purchase_For_Publish extends Boldgrid_Inspirations {
 
 		if ( 'image' == $asset_type && ! empty( $array_file_names_to_query ) ) {
 			foreach ( $array_file_names_to_query as $file_name_to_query ) {
-
 				// SELECT post_title where post_content like
 				// '%2015/02/google-maps-int-1410976385-pi.jpg%'
 				$query = $wpdb->prepare("
 					SELECT	`ID`
 					FROM	$wpdb->posts
 					WHERE	`post_content` LIKE %s AND
-							`post_status` IN $post_status AND
+							`post_status` IN ( " . implode( ', ', array_fill( 0, count( $post_status ), '%s' ) ) . " ) AND
 							`post_type` IN ('page','post')
 					",
-					'%' . $wpdb->esc_like( $file_name_to_query ) . '%'
+					array_merge( $post_status, array( '%' . $wpdb->esc_like( $file_name_to_query ) . '%' ) )
 				);
 
 				// If we want to exclude any page IDs, exclude them now.
