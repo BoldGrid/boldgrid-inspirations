@@ -96,7 +96,7 @@ class Boldgrid_Inspirations_Stock_Photography extends Boldgrid_Inspirations {
 					'register_boldgrid_connect_search_page'
 				) );
 
-			add_action( 'admin_notices', array (
+			add_action( 'admin_menu', array (
 				$this,
 				'add_dashboard_media_tabs'
 			) );
